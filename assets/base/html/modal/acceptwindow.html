@@ -1,0 +1,52 @@
+<div class="accept-modal-background">
+
+    <div ng-if="!modal.accepted">
+        <div class="accept-modal-header">
+            <h3 class="accept-modal-title">{{'ACCEPTWINDOW__TITLE' | translate}}</h3>
+            <i class="genericon genericon-close modal-close"
+               ng-click="modal.onCancelClick()"
+               uib-tooltip="{{'ACCEPTWINDOW__CANCEL_TOOLTIP' | translate}}"
+               tooltip-placement="left"></i>
+        </div>
+        <div class="accept-modal-body">
+            <div class="accept-modal-body-content">
+                <div class="accept-modal-body-content-question">
+                    <span>{{'ACCEPTWINDOW__QUESTION' | translate}}</span>
+                </div>
+                <div class="accept-modal-body-content-line">
+                    <div class="accept-modal-body-content-line-border">
+                        <div class="accept-modal-body-content-line-in" ng-style="{width: modal.linewidth + '%'}"></div>
+                    </div>
+                </div>
+                <div class="accept-modal-body-content-buttons">
+                    <button class="btn-red-vs accept-modal-body-content-buttons-accept"
+                            ng-disabled="modal.loading"
+                            ng-click="modal.onAcceptClick()">
+                        <span ng-hide="modal.loading">{{'ACCEPT_WINDOW__READY' | translate}}</span>
+                        <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="modal.loading"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="modal.accepted">
+        <div class="accept-modal-header">
+            <h3 class="accept-modal-title">{{'ACCEPTWINDOW__WAITING' | translate}}</h3>
+        </div>
+        <div class="accept-modal-body-accepted">
+            <div class="accept-modal-body-accepted-wait">
+                <i class="fa fa-spin fa-spinner fa-3x"></i>
+            </div>
+            <div class="accept-modal-body-accepted-users">
+                <div class="user"
+                     ng-repeat="i in ::modal.users"
+                     ng-class="{'user_active' : i <= modal.acceptedCount}"></div>
+            </div>
+            <div ng-show="modal.somebodyDecline" class="accept-modal-body-accepted-decline">
+                <span>{{'ACCEPTWINDOW__MATCH_REJECTED' | translate}}</span>
+            </div>
+        </div>
+    </div>
+
+</div>

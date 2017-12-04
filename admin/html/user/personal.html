@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-lg-12">
+        <ul>
+            <li>Имя: {{::vm.userData.user.firstName}}</li>
+            <li>Фамилия: {{::vm.userData.user.lastName}}</li>
+            <li>День рождения: {{::vm.userData.user.birthday | date:'dd.MM.yyyy'}}</li>
+            <li>Телефон: {{::vm.userData.user.phone}}</li>
+            <li>Таймзона: {{::vm.userData.user.tz}}</li>
+        </ul>
+    </div>
+</div>

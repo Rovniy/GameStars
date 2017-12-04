@@ -1,0 +1,59 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'MODAL_WITHDRAWAL_HEADER' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<div class="modal-body modalWithdrawal">
+    <div ng-hide="modal.withdrowSuccess">
+        <form name="form" novalidate>
+            <h3 class="modalWithdrawal-available-amount">{{::modal.max | currencyUnit}}
+                <small>{{'MODAL_WITHDRAWAL_IS_AVAILABLE' | translate}}</small>
+            </h3>
+
+            <span class="modalWithdrawal-msg"
+                  ng-if="modal.bonus > 0"
+                  ng-bind-html="'MODAL_WITHDRAWAL_INFO_1' | translate:modal.translationData"></span>
+
+            <div class="form-group">
+                <div class="input-group" ng-class="{ 'has-error': form.amount.$invalid && form.amount.$dirty }">
+                    <span class="input-group-addon">
+                        <i class="fa fa-fw fa-usd"></i>
+                    </span>
+                    <input type="number" class="form-control"
+                           placeholder="{{'MODAL_WITHDRAWAL_AMOUNT' | translate}}"
+                           name="amount" step="any" min="{{::modal.min / 100}}" max="{{::modal.max / 100}}" required
+                           ng-model="modal.amount"/>
+                </div>
+            </div>
+
+            <hr/>
+
+            <span>{{'MODAL_WITHDRAWAL_LOOK_OPTIONS' | translate}}</span>
+
+            <ul class="modalWithdrawalul">
+                <li>{{'MODAL_WITHDRAWAL_AMOUNT_LESS_10' | translate}}</li>
+                <li>{{'MODAL_WITHDRAWAL_AMOUNT_10_30' | translate}}</li>
+            </ul>
+
+            <span class="modalWithdrawal-msg" ng-bind-html="'MODAL_WITHDRAWAL_INFO_2' | translate"></span>
+
+            <div class="form-group">
+                <button class="btn-red"
+                        ng-click="modal.goWithdrow()"
+                        ng-disabled="form.$invalid || modal.loading ||modal.max/100 < 30">
+                    <span ng-hide="modal.loading"
+                          translate="MODAL_WITHDRAWAL_GOWITHDRAW"
+                          translate-value-amount="{{modal.getAmountLabel()}}"></span>
+                    <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="modal.loading"></i>
+                </button>
+            </div>
+
+            <div class="alert alert-danger" ng-show="modal.withdrowError">
+                <span>{{'MODAL_WITHDRAWAL_ERRROR_WITHDRAW' | translate}}</span>
+            </div>
+        </form>
+    </div>
+
+    <div class="alert alert-success" ng-show="modal.withdrowSuccess">
+        <span>{{'MODAL_WITHDRAWAL_MESSAGE_SUCCESS' | translate}}</span>
+    </div>
+</div>

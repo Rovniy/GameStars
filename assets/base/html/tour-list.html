@@ -1,0 +1,120 @@
+<style>
+    .tour-list td, th{
+        padding-left: 10px;
+    }
+    .tour-list th{
+        cursor: pointer;
+    }
+</style>
+<table ng-controller="TournamentListController as vm" class="tour-list">
+    <thead>
+    <tr>
+        <th >
+        </th>
+        <th >
+            {{'MAIN__SERVER' | translate}}
+        </th>
+        <th ng-click="dateDirect=dateDirect>-1?-1:1; vm.sortTour('startDate', dateDirect)" ng-mouseenter="showDateArrow=true;" ng-mouseleave="showDateArrow=false" class="left-air">
+            {{'MAIN__DATE' | translate}}
+
+            <span ng-show="!showDateArrow" style="opacity: 0">
+                    <i class="fa fa-sort"></i>
+            </span>
+
+            <span ng-show="showDateArrow">
+
+                <span ng-show="!dateDirect">
+                    <i class="fa fa-sort"></i>
+                </span>
+                <i ng-show="dateDirect===1">
+                    <i class="fa fa-caret-up"></i>
+                </i>
+                <i ng-show="dateDirect===-1">
+                    <i class="fa fa-caret-down"></i>
+                </i>
+
+            </span>
+            <!--Дата проведения-->
+        </th>
+        <th ng-click="awardDirect=awardDirect>-1?-1:1; vm.sortTour('awardFund', awardDirect)"  ng-mouseenter="showAwardArrow=true;"  ng-mouseleave="showAwardArrow=false" style="text-align: center!important;" class="left-air">
+            {{'MAIN__PRIZE_FUND' | translate}}
+
+            <span ng-show="!showAwardArrow" style="opacity: 0">
+                <i class="fa fa-sort"></i>
+            </span>
+
+            <span ng-show="showAwardArrow">
+                <span ng-show="!awardDirect">
+                    <i class="fa fa-sort"></i>
+                </span>
+                <span ng-show="awardDirect===1">
+                    <i class="fa fa-caret-up"></i>
+                </span>
+                <span ng-show="awardDirect===-1">
+                    <i class="fa fa-caret-down"></i>
+                </span>
+
+            </span>
+        </th>
+        <th ng-click="buyInDirect=buyInDirect>-1?-1:1; vm.sortTour('buyIn', buyInDirect)" ng-mouseenter="showBuyInArrow=true;" ng-mouseleave="showBuyInArrow=false" class="left-air">
+            {{'MAIN__BUY_IN' | translate}}
+            <span ng-show="!showBuyInArrow" style="opacity: 0">
+                <i class="fa fa-sort"></i>
+            </span>
+              <span ng-show="showBuyInArrow">
+                <span ng-show="!buyInDirect">
+                    <i class="fa fa-sort"></i>
+                </span>
+                <i ng-show="buyInDirect===1">
+                    <i class="fa fa-caret-up"></i>
+                </i>
+                <i ng-show="buyInDirect===-1">
+                    <i class="fa fa-caret-down"></i>
+                </i>
+            </span>
+        </th>
+        <th>
+            {{'MAIN__STATUS' | translate}}
+            <!--Статус-->
+        </th>
+        <th>
+            {{'MAIN__PARTICIPANTS' | translate}}
+        </th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr class="b-tournament-list_tr"  style="cursor: pointer;"
+        ng-repeat="tournament in vm.tournaments"
+        ng-click="goto('/tournament/lol/'+tournament.id)">
+        <td>
+            <img src="/src/img/base/game-icon/lol.png" />
+        </td>
+        <td>
+            {{::tournament.gameRegion.regionName}}
+        </td>
+        <td ng-if="tournament.tournamentClass !== 'SIT_AND_GO'">
+            {{::(tournament.startDate | date:'dd.MM HH:mm')}} - {{::(tournament.endDate | date:'dd.MM HH:mm')}}
+        </td>
+        <td ng-if="tournament.tournamentClass == 'SIT_AND_GO'">
+            {{'TOURNAMENT__START_1000_REGISTERED' | translate}}
+        <td style="text-align: center!important;">
+            {{::(tournament.awardFund | currencyUnit:tournament.awardType)}}
+        </td>
+        <td>
+            {{::(tournament.tournamentType.buyIn | currencyUnit:tournament.tournamentType.buyInType)}}
+        </td>
+        <td>
+            {{tournament.status | matchStatus | translate}}
+            <span ng-if="tournament.status === 'INACTIVE'">{{'TOUR_LIST__REG_START_ON' | translate}} {{::(tournament.regStartDate | date:'dd.MM HH:mm')}}</span>
+        </td>
+        <td>
+            <span ng-show="tournament.status!=='INACTIVE'">
+                {{::(tournament.members || '-')}}
+            </span>
+            <span ng-show="tournament.status =='INACTIVE'">
+                --
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>

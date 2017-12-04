@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'MODAL__JOIN_TOURNAMENT' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+
+<div class="modal-body modal-body-notification text-center">
+    <div ng-bind-html="'MODAL__CAN_USE_BONUS' | translate"></div>
+
+    <div class="row text-uppercase">
+        <div class="col-xs-6">
+            <button class="btn btn-lg btn-block btn-danger btn-flat text-uppercase"
+                    ng-click="$close()">
+                {{'MODAL__CONTINUE_BONUS' | translate}}
+            </button>
+        </div>
+        <div class="col-xs-6">
+            <button class="btn btn-lg btn-block btn-danger btn-flat text-uppercase"
+                    ng-click="modal.openModal('payment.html', 'md')">
+                {{'DEPOSIT_NOW'| translate}}
+            </button>
+        </div>
+    </div>
+</div>

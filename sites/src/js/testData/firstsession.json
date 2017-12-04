@@ -1,0 +1,309 @@
+{
+  "data": [
+    [
+      {
+        "hero1Active":true,
+        "hero1Dis": false,
+        "send1Text":"Hi, noble Player! Good that you are here!",
+        "send1Active": true,
+        "send1Dis": false,
+        "duration": 3
+      },
+      {
+        "hero2Active":true,
+        "hero2Dis": false,
+        "hero1Active":true,
+        "hero1Dis": true,
+        "send1Text":"Hi, noble Player! Good that you are here!",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"Yes-yes, my lantern is waiting for you!",
+        "send2Active": true,
+        "send2Dis": false,
+        "duration": 1
+      },
+      {
+        "duration": 1,
+        "textArray": [
+          {
+            "text":"Hi, Champs! Where am I?",
+            "action": "slide",
+            "id": 1
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"Don’t listen to him, dear %username%. You are here to fight darkness! In FAIR and EQUAL matches!",
+        "send1Active": true,
+        "send1Dis": false,
+        "duration": 4
+      },
+      {
+        "hero2Active":true,
+        "hero2Dis": false,
+        "hero1Active":true,
+        "hero1Dis": true,
+        "send1Text":"Don’t listen to him, dear %username%. You are here to fight darkness! In FAIR and EQUAL matches!",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"Yes – equal! All are equal before me! Bronze and Challenger can die here very easily!",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active":true,
+        "hero2Dis": true,
+        "send2Text":"Yes – equal! All are equal before me! Bronze and Challenger can die here very easily!",
+        "send2Active": true,
+        "send2Dis": true,
+        "hero1Active":true,
+        "hero1Dis": false,
+        "send1Text":"Here you can win money with responsible gamers of your rating!",
+        "send1Active": true,
+        "send1Dis": false,
+        "duration": 4
+      },
+      {
+        "hero1Active":true,
+        "hero1Dis": true,
+        "send1Text":"Here you can win money with responsible gamers of your rating!",
+        "send1Active": true,
+        "send1Dis": true,
+        "hero2Active":true,
+        "hero2Dis": false,
+        "send2Text":"They don’t leave, go AFK or feed so often as in regular LoL matches. I’m watching them!",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 1
+      },
+      {
+        "duration": 1,
+        "textArray": [
+          {
+            "text":"Ok, sounds interesting. I want to try.",
+            "action": "slide",
+            "id": 2
+          },
+          {
+            "text":"Wait, how is it possible?!",
+            "action": "slide",
+            "id": 3
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"Choose your destiny! Glory in tournaments or quick fun in Cash Games.",
+        "send1Active": true,
+        "send1Dis": false,
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": false,
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"Choose your destiny! Glory in tournaments or quick fun in Cash Games.",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"You can win real money in both of them! Like I can win souls everywhere!",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": true,
+        "send2Text":"You can win real money in both of them! Like I can win souls everywhere!",
+        "send2Active": true,
+        "send2Dis": true,
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"So - where do you want to hunt?",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 1
+      },
+      {
+        "duration": 1,
+        "textArray": [
+          {
+            "text":" I’m ready to play long and win big in a tournament!",
+            "action": "link",
+            "id": "/tournaments"
+          },
+          {
+            "text":"I want to have quick result in a single match. Cash game, please",
+            "action": "link",
+            "id": "/cashgames"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"Here all matches are for players of EQUAL skill. No team has an obvious advantage.",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": false,
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"Here all matches are for players of EQUAL skill. No team has an obvious advantage.",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"So matches are longer… More blood… More suffering!",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": true,
+        "send2Text":"So matches are longer… More blood… More suffering!",
+        "send2Active": true,
+        "send2Dis": true,
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"Moreover, players risk their money and every match gives them a chance to win big prizes.",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"Moreover, players risk their money and every match gives them a chance to win big prizes.",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"So you can imagine how they care about the match results! No feeding! No leaving! No more toxic players!",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 4
+      },
+
+      {
+        "hero2Active": true,
+        "hero2Dis": true,
+        "send2Text":"So you can imagine how they care about the match results! No feeding! No leaving! No more toxic players!",
+        "send2Active": true,
+        "send2Dis": true,
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"Moreover, we hunt these dark creatures down and ban them!",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+
+      {
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"Moreover, we hunt these dark creatures down and ban them!",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"Report them immediately! So I can punish them! I’m the Chain Warden, after all!",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 1
+      },
+      {
+        "duration": 1,
+        "textArray": [
+          {
+            "text":"Ok, I’m ready to play!",
+            "action": "link",
+            "id": "/tournaments"
+          },
+          {
+            "text":"What games do you have?",
+            "action": "slide",
+            "id": 2
+          },
+          {
+            "text":"What is StarClient?",
+            "action": "slide",
+            "id": 4
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"StarClient is like an arrow! It swiftly opens matches for you!",
+        "send1Active": true,
+        "send1Dis": false,
+        "hero2Active": true,
+        "hero2Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"StarClient is like an arrow! It swiftly opens matches for you!",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"StarClient is like my lantern! It watches toxic players and forgives nothing.",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": true,
+        "send2Text":"StarClient is like my lantern! It watches toxic players and forgives nothing.",
+        "send2Active": true,
+        "send2Dis": true,
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"StarClient is like a good crossbow! It’ll send results of your matches right to our server!",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 1
+      },
+      {
+        "duration": 1,
+        "textArray": [
+          {
+            "text":"Ok, I’m ready to play.",
+            "action": "close",
+            "id": 0
+          },
+          {
+            "text":"Tell me more about StarClient",
+            "action": "link",
+            "id": "/starclient"
+          }
+        ]
+      }
+    ]
+  ]
+}

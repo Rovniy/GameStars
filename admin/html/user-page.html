@@ -1,0 +1,222 @@
+<div class="page-title">
+    <span class="title">Пользователь GameStars.gg</span>
+    <div class="description">Все данные о конкретном пользователе</div>
+</div>
+<div class="userpage portlet light">
+    <div class="portlet-title">
+        <div class="caption font-green-sharp">
+            <i class="icon-settings font-green-sharp"></i>
+            <span class="caption-subject bold uppercase">Общая информация</span>
+            <span class="caption-helper">Данные об аккаунте</span>
+        </div>
+        <div ng-include="'includes/panel-tools.html'" class="tools">
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="row userpage-info">
+            <div class="col-lg-4 userpage-info-name">
+                <ul>
+                    <li class="userpage-info-name-username">{{vm.userData.user.name}}</li>
+                    <li>Role: {{vm.userData.user.role}}</li>
+                    <li>ID: {{vm.userData.user.id}}</li>
+                    <li>email: {{vm.userData.user.email}}</li>
+                    <li>LastLogin: {{vm.userData.user.lastLogin | date:'dd.MM.yy HH:mm'}}</li>
+                    <!--<li class="userpage-info-name-status" ng-class="stаatusClass">{{vm.userData.userStatus}}</li>-->
+                    <!--todo: status?-->
+                </ul>
+
+            </div>
+
+            <div class="col-lg-2 userpage-info-name">
+                <button type="button" class="btn btn-warning btn-block"
+                        ng-click="rootSet('userId', vm.userData.user.id);modal('sm', 'msg.html'); ">
+                    Сообщение
+                </button>
+
+                <div ng-controller="ModalTemp">
+                    <button type="button" class="btn btn-danger btn-block"
+                            ng-click="modal('md', 'addUserMoney.html', '',vm.userData.user.id)">
+                        Начисления
+                    </button>
+                </div>
+
+                <button type="button" class="btn btn-danger btn-block"
+                        ng-click="vm.openWithdrawalModal()">
+                    Вывод денег
+                </button>
+            </div>
+
+
+            <div class="col-lg-3 userpage-info-cash">
+                <ul>
+                    <li class="userpage-info-cash-sp">
+                        RealPoints (VIP): <strong>{{vm.getUserRealPointsVip()}}</strong>
+                    </li>
+                    <li class="userpage-info-cash-sp">
+                        RealPoints (Bonus): <strong>{{vm.getUserRealPointsBonus()}}</strong>
+                    </li>
+                    <li class="userpage-info-cash-sp">
+                        Winrate: <strong>{{vm.userWinRate}}%</strong>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 userpage-info-reports">
+                <span ng-if="userdata.reports > 0">Репортов: <strong>{{userdata.reports}}</strong></span>
+                <button class="btn btn-lg btn-danger"
+                        ng-hide="banSelected"
+                        ng-disabled="vm.loading"
+                        ng-click="banSelected = true">БАН
+                </button>
+
+                <div ng-show="banSelected">
+                    <input type="text" class="form-control" ng-model="vm.banTimeInterval" placeholder="Время бана (мин.)">
+                    <select class="form-control" ng-modal="vm.banType">
+                        <option value="ACCOUNT">Бан на действия с аккаунтом</option>
+                        <option value="GAME">Бан на конкретную игру</option>
+                        <option value="TOURNAMENT">Бан на игру в турнире</option>
+                    </select>
+
+                    <textarea class="form-control" ng-model="vm.banReason" placeholder="Причина(обязательна)"></textarea>
+
+                    <button class="btn btn-danger" ng-click="vm.ban()">Отправить</button>
+                    <button class="btn btn-success" ng-click="banSelected=false">Назад</button>
+                </div>
+                <div ng-show="vm.banSuccess">Пользователь успешно забанен!</div>
+                <div ng-show="vm.banError">Произошла неизвестная ошибка!</div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row userpage-games">
+            <div class="col-lg-2 userpage-games-game panel"
+                 ng-class="{'panel-added-bg' : userdata.gameLol[0].server, 'panel-nogame-bg' : !userdata.gameLol[0].server }">
+                <img src="img/games/lol.png" alt="LOL">
+                <div class="userpage-games-acord">
+                    <ul ng-if="vm.userData.summonerName">
+                        <li class="accounts-detail"
+                            ng-repeat="row in vm.userData.summonerName | filter:{gameRegion:{gameType: 'LOL'}}">
+                            <ul class="ited-details">
+                                <li>Server: {{row.gameRegion.regionName}}</li>
+                                <li>Name: {{row.name}}</li>
+                                <li>Рейтинг: {{row.rating}} / {{row.realRating}}</li>
+                                <li ng-show="row.active == true">Статус: активный</li>
+                                <li ng-show="row.block == true">Статус: заблокированный</li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                    <i ng-if="!vm.userData.summonerName" class="fa fa-5x fa-expeditedssl"></i>
+                </div>
+            </div>
+            <div class="col-lg-2 userpage-games-game panel"
+                 ng-class="{'panel-added-bg' : userdata.gameCs[0].server, 'panel-nogame-bg' : !userdata.gameCs[0].server }">
+                <img src="img/games/cs.png" alt="CS">
+                <div class="userpage-games-acord">
+                    <ul ng-if="userdata.gameCs[0].server">
+                        <li ng-repeat="account in userdata.gameCs">
+                            <p class="userpage-games-acord-server">{{account.server}}</p>
+                            <p class="userpage-games-acord-summoner">{{account.summoner}}</p>
+                        </li>
+                    </ul>
+                    <i ng-if="!userdata.gameCs[0].server" class="fa fa-5x fa-expeditedssl"></i>
+                </div>
+            </div>
+            <div class="col-lg-2 userpage-games-game panel"
+                 ng-class="{'panel-added-bg' : userdata.gameDota[0].server, 'panel-nogame-bg' : !userdata.gameDota[0].server }">
+                <img src="img/games/dota.png" alt="Dota">
+                <div class="userpage-games-acord">
+                    <ul ng-if="userdata.gameDota[0].server">
+                        <li ng-repeat="account in userdata.gameDota">
+                            <p class="userpage-games-acord-server">{{account.server}}</p>
+                            <p class="userpage-games-acord-summoner">{{account.summoner}}</p>
+                        </li>
+                    </ul>
+                    <i ng-if="!userdata.gameDota[0].server" class="fa fa-5x fa-expeditedssl"></i>
+                </div>
+            </div>
+            <div class="col-lg-2 userpage-games-game panel"
+                 ng-class="{'panel-added-bg' : userdata.gameWot[0].server, 'panel-nogame-bg' : !userdata.gameWot[0].server }">
+                <img src="img/games/wot.png" alt="Wot">
+                <div class="userpage-games-acord">
+                    <ul ng-if="userdata.gameWot[0].server">
+                        <li ng-repeat="account in userdata.gameWot">
+                            <p class="userpage-games-acord-server">{{account.server}}</p>
+                            <p class="userpage-games-acord-summoner">{{account.summoner}}</p>
+                        </li>
+                    </ul>
+                    <i ng-if="!userdata.gameWot[0].server" class="fa fa-5x fa-expeditedssl"></i>
+                </div>
+            </div>
+            <div class="col-lg-2 userpage-games-game panel"
+                 ng-class="{'panel-added-bg' : userdata.gameHots[0].server, 'panel-nogame-bg' : !userdata.gameHots[0].server }">
+                <img src="img/games/hots.png" alt="Hots">
+                <div class="userpage-games-acord">
+                    <ul ng-if="userdata.gameHots[0].server">
+                        <li ng-repeat="account in userdata.gameHots">
+                            <p class="userpage-games-acord-server">{{account.server}}</p>
+                            <p class="userpage-games-acord-summoner">{{account.summoner}}</p>
+                        </li>
+                    </ul>
+                    <i ng-if="!userdata.gameHots[0].server" class="fa fa-5x fa-expeditedssl"></i>
+                </div>
+            </div>
+            <div class="col-lg-2 userpage-games-game panel"
+                 ng-class="{'panel-added-bg' : userdata.gameHs[0].server, 'panel-nogame-bg' : !userdata.gameHs[0].server }">
+                <img src="img/games/hearthstone.png" alt="Hearthstone">
+                <div class="userpage-games-acord">
+                    <ul ng-if="userdata.gameHs[0].server">
+                        <li ng-repeat="account in userdata.gameHs">
+                            <p class="userpage-games-acord-server">{{account.server}}</p>
+                            <p class="userpage-games-acord-summoner">{{account.summoner}}</p>
+                        </li>
+                    </ul>
+                    <i ng-if="!userdata.gameHs[0].server" class="fa fa-5x fa-expeditedssl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="userpage portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <uib-tabset justified="true" active="vm.index">
+                <uib-tab heading="Матчи">
+                    <div class="portlet-body">
+                        <div ng-include="'/html/user/matchs.html'"></div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="Турниры">
+                    <div class="portlet-body">
+                        <div ng-include="'/html/user/tournaments.html'"></div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="Транзакции">
+                    <div class="portlet-body">
+                        <div ng-include="'/html/user/transactions.html'"></div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="Рефералы">
+                    <div class="portlet-body">
+                        <div ng-include="'/html/user/referals.html'"></div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="Репорты">
+                    <div class="portlet-body">
+                        <div ng-include="'/html/user/reports.html'"></div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="Баны">
+                    <div class="portlet-body">
+                        <div ng-include="'/html/user/bans.html'"></div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="Персональная информация">
+                    <div class="portlet-body">
+                        <div ng-include="'/html/user/personal.html'"></div>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+        <div ng-include="'includes/panel-tools.html'" class="tools"></div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,582 @@
+@import (reference) "../config";
+
+.lk-main-dashboard {
+  margin: 0;
+  padding: 0;
+}
+
+.lk-main-dashboard-content {
+  margin: 0;
+  padding: 0;
+  .row {
+    margin: 0;
+  }
+  .avatar-exp-content {
+    float: left;
+    width: 100%;
+    padding: 15px;
+    background: url('/src/img/base/lk/dashboard-bg.jpg') no-repeat center center;
+    background-size: cover;
+
+    @media @retina {
+      background-image: url('/src/img/base/lk/dashboard-bg@2x.jpg');
+    }
+
+    .avatar-exp {
+      width: 600px;
+      margin: 20px auto;
+
+      .avatar-exp-img {
+        padding: 0 0 0 35px;
+      }
+
+      .avatar-bordered {
+        width: 115px;
+        height: 115px;
+        background: url('/src/img/base/lk/avatar-border.png') no-repeat;
+        padding: 2px;
+        position: relative;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+        .level {
+          position: absolute;
+          bottom: 2px;
+          right: 2px;;
+          background: #333;
+          padding: 3px 5px;
+          font: 14px/14px @font-semi;
+          color: #e2cfa4;
+        }
+      }
+      .username {
+        h2 {
+          margin: 0 0 10px 0;
+          font: 32px/32px @font-semi;
+          font-weight: bold;
+          color: #ffe9c8;
+          text-shadow: 3px 1px 3px rgba(0, 0, 0, 1);
+          small {
+            text-transform: uppercase;
+            font: 12px/12px @font-semi;
+            margin: 0 0 0 8px;
+            color: #fff;
+            text-shadow: none;
+          }
+        }
+      }
+      .expirience {
+        .progress-exp-radius {
+          margin: 0;
+          border-radius: 13px;
+          height: 25px;
+          border: 1px solid #a0794c;
+          background: #58442c;
+          padding: 4px;
+          .progress-bar {
+            background: url('/src/img/base/lk/exp-bar-bg.png') repeat-x;
+            height: 16px;
+            border-radius: 8px;
+            line-height: 12px;
+            padding-top: 1px;
+            i {
+              font-style: normal;
+              font: 12px/12px @font-semi;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+    .buttons-doit {
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+  .tabs-game-info {
+    float: left;
+    width: 100%;
+    //height:46px;
+    background: #231c19;
+    border-top: 1px solid #34241b;
+    //border-bottom:2px solid #7e2727;
+    .ng-isolate-scope {
+      ul {
+        border: none;
+        width: 400px;
+        li {
+          opacity: 0.5;
+          a {
+            border-color: transparent;
+            padding: 5px 10px 7px;
+            color: #fff;
+            img {
+              width: 30px;
+              height: 30px;
+            }
+            span {
+
+              font: 14px/14px @font-semi;
+              vertical-align: middle;
+            }
+            &:hover, &:focus {
+              background: url('/src/img/base/lk/games-line-active.png') no-repeat center bottom;
+              outline: 0;
+              a {
+                background: none;
+                outline: 0;
+                border: 1px solid transparent;
+              }
+            }
+          }
+          &:hover, &:focus {
+            opacity: 1;
+          }
+        }
+        .active {
+          opacity: 1;
+          background: url('/src/img/base/lk/games-line-active.png') no-repeat center bottom;
+          a {
+            background: none;
+            border-color: transparent;
+            padding: 5px 10px 7px;
+            color: #fff;
+            &:hover, &:focus {
+              background: url('/src/img/base/lk/games-line-active.png') no-repeat center bottom;
+              outline: 0;
+              a {
+                background: none;
+                outline: 0;
+                border: 1px solid transparent;
+                padding: 5px 10px 7px;
+                color: #fff;
+              }
+            }
+          }
+          &:hover, &:focus {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    .nav-tabs {
+      width: 600px;
+      margin: 0 auto;
+    }
+
+  }
+}
+
+.tab-content-data {
+  float: left;
+  width: 100%;
+  margin: 0;
+  background: #d9d8d8;
+  padding: 15px;
+  text-align: center;
+  .errorTournament {
+    font: 24px/24px @font-semi;
+    text-transform: uppercase;
+    color: #000;
+  }
+}
+
+.data-tournament {
+  width: 750px;
+  background: #f5f3f3;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  margin: 20px auto 0;
+  text-align: left;
+  transition: box-shadow .3s ease;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  > .row {
+    margin: 0;
+  }
+
+  .data-title {
+    margin: 0;
+    height: 30px;
+    border-bottom: 1px solid #d9d8d8;
+    background: #d1732e;
+    color: #fff;
+    .data-game-lol {
+      padding: 0;
+      img {
+        width: 20px;
+        height: 20px;
+        margin: 5px;
+      }
+      span {
+        text-transform: uppercase;
+        color: #fff;
+        font: 14px/14px @font-semi;
+        vertical-align: middle;
+      }
+    }
+    .data-status {
+      padding: 4px 8px 0 0;
+      text-align: right;
+      span {
+        text-transform: uppercase;
+        color: #fff;
+        font: 14px/14px @font-semi;
+      }
+    }
+
+  }
+  .data-body {
+    .data-body-desc {
+      ul {
+        padding: 5px 0 0 0;
+        li {
+          color: #4b4b4b;
+          font: 14px/14px @font-semi;
+          list-style: none;
+          opacity: 1;
+          padding: 5px 0;
+        }
+        .grey {
+          color: #7a7979;
+        }
+      }
+    }
+    .data-body-data {
+      ul {
+        padding: 5px 0 0 0;
+        li {
+          color: #000;
+          font: 14px/14px @font-semi;
+          list-style: none;
+          opacity: 1;
+          padding: 5px 0;
+        }
+      }
+    }
+    .data-body-text {
+      ul {
+        padding: 10px 0 0 0;
+        li {
+          list-style: none;
+          display: inline-block;
+          opacity: 1;
+          text-align: center;
+          padding: 0 15px;
+          h4 {
+            font: 24px/24px @font-semi;
+            font-weight: bold;
+            margin: 0;
+            position: relative;
+            &:after {
+              content: '';
+              position: absolute;
+              display: block;
+              background: url('/src/img/base/icon-points.png') no-repeat;
+              width: 20px;
+              height: 20px;
+              top: 2px;
+              right: -20px;
+
+            }
+          }
+          p {
+            font: 14px/14px @font-semi;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+  .data-billing {
+    margin: 0;
+    .controls-area {
+      float: left;
+      width: 100%;
+      height: 30px;
+      text-align: center;
+      span {
+        font: 14px/14px Open-Sans;
+        list-style: none;
+        opacity: 1;
+        color: #7a7979;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    .list-area {
+      float: left;
+      width: 100%;
+      .table-div {
+        margin: 0;
+        height: auto;
+        max-height: 300px;
+        overflow-y: scroll;
+        table {
+          width: 100%;
+          margin: 0;
+          thead {
+            tr {
+              th {
+                padding: 8px;
+                font-weight: 700;
+                border-top: 0;
+                text-align: center;
+                font: 12px Open-Sans;
+                text-transform: uppercase;
+                line-height: 20px;
+                vertical-align: bottom;
+                border-bottom: 2px solid #ddd;
+              }
+            }
+          }
+          tbody {
+            tr {
+              td {
+                padding: 8px;
+                font-weight: 700;
+                border-top: 0;
+                text-align: center;
+                font: 12px Open-Sans;
+                text-transform: uppercase;
+                line-height: 20px;
+                vertical-align: bottom;
+                border-bottom: 2px solid #ddd;
+              }
+            }
+          }
+        }
+      }
+      .controls {
+        text-align: center;
+        height: 30px;
+        padding: 5px 0 0 0;
+        span {
+          font: 14px/14px Open-Sans;
+          list-style: none;
+          opacity: 1;
+          color: #7a7979;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+  .data-title-orange {
+    background: #d1732e;
+  }
+  .data-title-blue {
+    background: #688dc6;
+  }
+  .data-title-green {
+    background: #6e986a;
+  }
+  .data-title-black {
+    background: #373937;
+  }
+
+}
+
+.data-game {
+  width: 750px;
+  background: #f5f3f3;
+  box-shadow: 0 0 20px 0 rgba(50, 50, 50, 0.75);
+  margin: 20px auto 0;
+  text-align: left;
+  > .row {
+    margin: 0;
+  }
+  .data-title {
+    margin: 0;
+    height: 30px;
+    background: #679363;
+    color: #fff;
+    .data-game-lol {
+      padding: 0;
+      img {
+        width: 20px;
+        height: 20px;
+        margin: 5px;
+      }
+      span {
+        text-transform: uppercase;
+        color: #fff;
+        font: 14px/14px @font-semi;
+        vertical-align: middle;
+      }
+    }
+    .data-status {
+      padding: 4px 8px 0 0;
+      text-align: right;
+      span {
+        text-transform: uppercase;
+        color: #fff;
+        font: 14px/14px @font-semi;
+      }
+    }
+
+  }
+
+  .data-body {
+    .data-body-desc {
+      padding: 5px 1px 5px 5px;
+      width: 19%;
+
+      .hero-avatar {
+        position: relative;
+        width: 90px;
+        float: left;
+        height: 90px;
+
+        span {
+          font: 12px/12px @font-semi;
+          font-weight: bold;
+          position: absolute;
+          color: #fff;
+          bottom: 5px;
+          left: 5px;
+        }
+        img {
+          width: 90px;
+          height: 90px;
+          border: 1px solid #000;
+        }
+      }
+      .hero-spells {
+        float: left;
+        width: 46px;
+        height: 92px;
+        padding: 0 0 0 2px;
+        img {
+          width: 44px;
+          height: 44px;
+        }
+        .first {
+          margin-bottom: 2px;
+        }
+      }
+    }
+    .data-body-data {
+      padding: 5px 0;
+      width: 30%;
+
+      .kda-stat {
+        height: 35px;
+        text-align: center;
+
+        ul {
+          padding: 0;
+          margin: 0;
+          width: 100%;
+
+          li {
+            display: block;
+            text-align: center;
+            float: left;
+            width: 100% / 3;
+
+            span {
+              color: #343434;
+              font: 12px/12px @font-semi;
+              padding: 1px 5px;
+            }
+
+            p {
+              font: 10px/10px @font-semi;
+              text-transform: uppercase;
+              color: #000;
+              padding-top: 5px;
+              margin: 0;
+            }
+
+            .bordered {
+              border: 1px solid #c1c0c0;
+              border-radius: 2px;
+            }
+
+            .border-red {
+              border: 1px solid #a16564;
+            }
+
+          }
+        }
+      }
+      .uss-stat,
+      .uchastie-stat{
+        height: 22px;
+        margin-top: 6px;
+        padding: 0 10px;
+        text-align: center;
+
+        span {
+          display: block;
+          height: 100%;
+          padding-top: 1px;
+          text-transform: uppercase;
+          font: 12px@font-semi;
+          border: 1px solid #c1c0c0;
+          border-radius: 2px;
+        }
+      }
+    }
+    .data-body-text {
+      width: 47.666666%;
+      .data-body-text-decs {
+        float: left;
+        width: 40%;
+        ul {
+          width: 100%;
+          padding: 0;
+          margin: 4px 0 0 0;
+          li {
+            opacity: 1;
+            list-style: none;
+            color: #8f8f8f;
+            font: 14px/14px @font-semi;
+            padding: 8px 0;
+          }
+        }
+      }
+      .data-body-text-data {
+        float: left;
+        width: 60%;
+        ul {
+          width: 100%;
+          padding: 0;
+          margin: 4px 0 0 0;
+          li {
+            opacity: 1;
+            list-style: none;
+            color: #2b2b2b;
+            font: 14px/14px @font-semi;
+            padding: 8px 0;
+            min-height: 30px;
+          }
+        }
+      }
+    }
+  }
+  .data-title-red {
+    background: #824444;
+  }
+  .data-title-black {
+    background: #000;
+  }
+  .data-title-green {
+    background: #6e986a;
+  }
+  .data-title-grey {
+    background: #7f7f7f;
+  }
+  .data-title-orange {
+    background: orangered;
+  }
+}
+

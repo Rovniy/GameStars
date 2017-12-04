@@ -1,0 +1,22 @@
+<table class="table table-hover table-center">
+    <thead>
+    <tr>
+        <th>
+            Всего рефералов
+        </th>
+        <th>
+            Отыгравжих рефералов
+        </th>
+        <th>
+            Можно забрать награду
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{::vm.userData.referalInfo.all}}</td>
+        <td>{{::vm.userData.referalInfo.alreadyPlayed}}</td>
+        <td>{{::vm.userData.referalInfo.potential}}</td>
+    </tr>
+    </tbody>
+</table>

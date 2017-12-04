@@ -1,0 +1,118 @@
+<div class="connect-bg" ng-controller="LkAccountsController as vm">
+    <div class="row connect-games">
+        <div class="row connect-games-buttonAdd">
+            <button class="btn-red"
+                    ng-click="vm.openConnectAccountModal()"
+                    ng-disabled="vm.loading">{{'LK__ADD_ACCOUNT'|translate}}</button>
+        </div>
+        <div class="row connect-games-gameInfo">
+            <div class="col-lg-1 connect-games-gameInfo-icon">
+                <img ng-src="/src/img/base/game-icon/lol.png" alt="lol"/>
+            </div>
+            <div class="col-lg-11 connect-games-gameInfo-title">
+                <div class="row gameTitle">
+                    <span>League of Legends</span>
+                    <i class="fa fa-refresh" uib-tooltip="{{'LK__ADD_ACCOUNT_REFRESH'|translate}}" tooltip-placement="right"
+                       ng-click="vm.refreshAccountData('lol', $event)"></i>
+                </div>
+                <div class="row gameAccountCount">
+                    <span>{{'LK__ACCOUNTS_ADDED' | translate}}: {{vm.accounts['LOL'].length || 0}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row connect-games-gameAccounts" ng-show="vm.accounts['LOL'].length">
+            <ul>
+                <li ng-repeat="account in vm.accounts['LOL'] track by account.id">
+                    <span class="badge" ng-bind="::account.gameRegion.regionName"></span>
+                    <gs-rank-img rank="account.rank"></gs-rank-img>
+                    <span class="summonerName" ng-bind="::account.name"></span>
+                    <i class="fa fa-close" uib-tooltip="{{'LK__ADD_ACCOUNT_DELETE'|translate}}" tooltip-placement="right"
+                       ng-click="vm.deleteGameAccount(account, $event)"></i>
+                    <span class="disabled-label">{{'LK__ACCOUNT_DELETEING' | translate}}</span>
+                </li>
+            </ul>
+        </div>
+        <!------------ HEARTHSTONE --------->
+        <div class="row connect-games-gameInfo">
+            <div class="col-lg-1 connect-games-gameInfo-icon">
+                <img ng-src="/src/img/base/game-icon/hearthstone.png" alt="lol"/>
+            </div>
+            <div class="col-lg-11 connect-games-gameInfo-title">
+                <div class="row gameTitle">
+                    <span>HearthStone</span>
+                    <i class="fa fa-refresh" uib-tooltip="{{'LK__ADD_ACCOUNT_REFRESH'|translate}}" tooltip-placement="right" ng-click="vm.refreshAccountData('hs')"></i>
+                </div>
+                <div class="row gameAccountCount">
+                    <span>{{'LK__ACCOUNTS_ADDED' | translate}}: 0</span>
+                </div>
+            </div>
+        </div>
+        <!----------- WOT --------->
+        <!--<div class="row connect-games-gameInfo">
+            <div class="col-lg-1 connect-games-gameInfo-icon">
+                <img ng-src="/src/img/base/game-icon/wot.png" alt="lol"/>
+            </div>
+            <div class="col-lg-11 connect-games-gameInfo-title">
+                <div class="row gameTitle">
+                    <span>World of Tanks</span>
+                    <i class="fa fa-refresh" uib-tooltip="{{'LK__ADD_ACCOUNT_REFRESH'|translate}}" tooltip-placement="right" ng-click="vm.refreshAccountData('wot')"></i>
+                </div>
+                <div class="row gameAccountCount">
+                    <span>{{'LK__ACCOUNTS_ADDED' | translate}}: 0</span>
+                </div>
+            </div>
+        </div>-->
+        <!----------- DOTA --------->
+        <div class="row connect-games-gameInfo">
+            <div class="col-lg-1 connect-games-gameInfo-icon">
+                <img ng-src="/src/img/base/game-icon/dota.png" alt="lol"/>
+            </div>
+            <div class="col-lg-11 connect-games-gameInfo-title">
+                <div class="row gameTitle">
+                    <span>Dota 2</span>
+                    <i class="fa fa-refresh" uib-tooltip="{{'LK__ADD_ACCOUNT_REFRESH'|translate}}" tooltip-placement="right" ng-click="vm.refreshAccountData('dota')"></i>
+                </div>
+                <div class="row gameAccountCount">
+                    <span>{{'LK__ACCOUNTS_ADDED' | translate}}: 0</span>
+                </div>
+            </div>
+        </div>
+        <!----------- CS --------->
+        <div class="row connect-games-gameInfo">
+            <div class="col-lg-1 connect-games-gameInfo-icon">
+                <img ng-src="/src/img/base/game-icon/csgo.png" alt="lol"/>
+            </div>
+            <div class="col-lg-11 connect-games-gameInfo-title">
+                <div class="row gameTitle">
+                    <span>Counter-Strike: Global Offensive</span>
+                    <i class="fa fa-refresh" uib-tooltip="{{'LK__ADD_ACCOUNT_REFRESH'|translate}}" tooltip-placement="right" ng-click="vm.refreshAccountData('csgo')"></i>
+                </div>
+                <div class="row gameAccountCount">
+                    <span>{{'LK__ACCOUNTS_ADDED' | translate}}: 0</span>
+                </div>
+            </div>
+        </div>
+        <!-------------------------------------------------------------------->
+    </div>
+    <div class="row connect-starclient">
+        <div class="connect-starclient-title">
+            <span>{{'LK__GAME_CLIENT' | translate}}</span>
+        </div>
+        <div class="row starclientLogo">
+            <img src="/src/img/base/starclient-logo.png"/>
+            <h3>{{'LK__CLIENT' | translate}}</h3>
+        </div>
+        <div class="row starclientDesc">
+            <span>{{'LK__GS_APP_NOTIFICATION' | translate}}</span>
+        </div>
+        <div class="row starclientButtons">
+            <div class="btn-group">
+                <a href="/src/misc/SCClient_v6.zip" target="_blank" class="btn btn-lk-default"><i class="fa fa-download"></i> {{'LK__DOWNLOAD' | translate}}</a>
+                <a href="/src/misc/SCClient_v6.zip" target="_blank" class="btn btn-lk-default">{{'LK__MIRROR' | translate}}</a>
+            </div>
+            <a class="starclientButtons_instruction" href="/starclient">{{'LK__INSTRUCTION' | translate}}</a>
+        </div>
+
+    </div>
+
+</div>

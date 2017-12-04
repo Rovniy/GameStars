@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'APP_CANCEL_MODAL__TITLE' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+
+<div class="modal-body text-center">
+    <p class="form-group">{{'APP_CANCEL_MODAL__TEXT' | translate}}</p>
+
+    <div class="row text-uppercase">
+        <div class="col-xs-12">
+            <button class="btn-red btn-block"
+                    ng-click="$close()">
+                {{'APP_CANCEL_MODAL__QUIT' | translate}}
+            </button>
+        </div>
+        <div class="col-xs-12">
+            <button class="btn-red btn-block"
+                    ng-click="$dismiss()">
+                {{'APP_CANCEL_MODAL__READY'| translate}}
+            </button>
+        </div>
+    </div>
+</div>

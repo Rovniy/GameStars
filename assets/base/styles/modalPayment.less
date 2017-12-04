@@ -1,0 +1,197 @@
+.modalPayment {
+  h3 {
+    margin: 0;
+  }
+  .currency {
+    width: 100%;
+    margin: 20px 0 0 0;
+    .item {
+      width: 33%;
+      float: left;
+      text-align: center;
+      button {
+        background: #1e1e26;
+        width: 90%;
+        height: 86px;
+        color: #fff;
+        font: 36px/36px @font-semi;
+        font-weight: bold;
+      }
+      .active {
+        background: #893939;
+        outline: 0;
+      }
+      &:focus, &:hover, &:active, &:visited {
+        outline: 0;
+      }
+    }
+  }
+  .bulletpoints {
+    width: 100%;
+    margin: 20px auto 0;
+    font-size: 14px;
+    input {
+      margin: 0 5px 0 0;
+    }
+  }
+  .allsum {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .text {
+    width: 100%;
+    margin: 20px 0 0 0;
+    span {
+      font: 14px/14px @font-semi;
+    }
+  }
+  .variable {
+    margin-top: 40px;
+
+    .item {
+      display: block;
+      margin: 5px 0;
+      padding: 0 10px;
+      line-height: 60px;
+      width: 100%;
+      text-align: center;
+      background: #1e1e26;
+      vertical-align: middle;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+
+      img {
+        max-width: 100%;
+      }
+
+      &:hover {
+        background: #893939;
+      }
+
+      &[disabled]{
+        background: #b9b9bc;
+
+        &:hover {
+          background: #b9b9bc;
+        }
+      }
+    }
+
+    //.dasactive {
+    //  background: #b9b9bc;
+    //  &:hover {
+    //    background: #b9b9bc;
+    //  }
+    //}
+  }
+  .back {
+    margin: 0 0 20px 0;
+    &:hover {
+      cursor: pointer;
+      color: #893939;
+    }
+  }
+  .card {
+    background: url('/src/img/base/card-bg.png') no-repeat;
+    border-radius: 13px;
+    padding: 30px 40px;
+    height: 200px;
+
+    input {
+      text-transform: uppercase;
+      text-align: center;
+      background: transparent;
+      font: 14px/14px @font-semi;
+      border: none;
+      border-bottom: 1px solid #fff;
+      color: #fff;
+      outline: 0;
+
+      &:focus,
+      &:hover {
+        outline: 0;
+      }
+    }
+
+    .big {
+      width: 100%;
+      input {
+        margin: 10px 0;
+        width: 100%;
+      }
+    }
+    .semi {
+      width: 100%;
+      input {
+        float: left;
+        margin: 10px 0;
+        width: 49.5%;
+      }
+    }
+    .smallarea {
+      width: 100%;
+      margin: 60px 0 0 0;
+      .small {
+        display: inline-block;
+        color: #fff;
+        input {
+          width: 100%;
+        }
+        .mounth {
+          width: 70px;
+        }
+        .year {
+          width: 70px;
+        }
+        .cvn {
+          width: 70px;
+          margin: 0 0 0 20px;
+        }
+      }
+    }
+    .ng-touched.ng-valid {
+      border-bottom-color: green;
+    }
+
+    .ng-touched.ng-invalid,
+    .invalid-exp .ng-touched {
+      border-bottom-color: red;
+    }
+
+  }
+  .buttonArea {
+    text-align: center;
+    margin-top: 20px;
+    .visaButton {
+      background: #893939;
+      color: #fff;
+      font: 14px/14px @font-semi;
+      text-align: center;
+      border: 1px solid #000;
+      text-transform: uppercase;
+      padding: 10px 15px;
+      border-radius: 2px;
+    }
+  }
+  .onerror {
+    margin: 15px 0 0 0;
+    h3 {
+      text-align: center;
+      font: 14px/14px @font-semi;
+      color: darkred;
+    }
+
+  }
+
+  .onsuccess {
+    margin: 15px 0 0 0;
+    h3 {
+      text-align: center;
+      font: 14px/14px @font-semi;
+      color: darkred;
+    }
+
+  }
+
+}

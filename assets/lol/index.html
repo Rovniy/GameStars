@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='gamestar' ng-strict-di>
+@@include('../base/html/includes/head.html', {"title": "GameStars.gg", "version": "130216"})
+
+<body ng-controller="AppController as appCtrl"
+      ng-class="{ 'logged-in': appCtrl.isLoggedIn() }">
+@@include('../base/html/includes/adminmenu.html')
+
+
+<div ng-hide="::appCtrl.hidePreloader" id="waitWs">
+    <img ng-src="/src/img/base/logo.png">
+    <div class="preloader-reloadPage">
+        <span>If screen does not hide after 10 seconds</span>
+        <a onclick="location.reload()">refresh page</a>
+
+        <p ng-show="errorReportShow" style=" padding-top: 4px">
+            <span ng-hide="errorReportSended">if you already refresh page click <a ng-click="appCtrl.errorReport()">this</a></span>
+            <span ng-show="errorReportSended">Thank you!</span>
+        </p>
+    </div>
+</div>
+
+<!-- Start Wrap -->
+<div id="wrap">
+    <!-- include header -->
+    <div id="header" ng-include="'/src/html/header.html'"></div>
+
+    <ng-view autoscroll="true"></ng-view>
+
+    <!-- include footer -->
+    <div id="footer" ng-include="'/src/html/footer.html'"></div>
+    <!-- include footer -->
+</div>
+
+<div ng-include="'/src/html/overlay.html'"></div>
+<div ng-include="'/src/html/firstSession.html'"></div>
+
+</body>
+</html>

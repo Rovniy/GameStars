@@ -1,0 +1,93 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'ISSUE__TITLE' | translate}}</h3>
+    <i class="genericon genericon-close modal-close loginclose" ng-click="$dismiss()"></i>
+</div>
+<form name="issueForm" novalidate class="modal-form" uploader="modal.uploader" type="multipart" enctype="multipart/form-data">
+    <div class="modal-body modal-body-content issue-form" >
+        <div ng-show="!modal.issueSendSuccess && !modal.issueSendFail">
+            <div>
+                <div style="padding-bottom: 0">
+                    <div class="issue-form-title">
+                        <h3>{{'ISSUE__CAUSES' | translate}}</h3>
+                    </div>
+                    <div class="issue-form-title-small">
+                        <span>{{'ISSUE__CAUSES_NOTICE' | translate}}</span>
+                    </div>
+
+                    <div ng-hide="reqSent" >
+                        <div class="issue-form-list form-group ">
+                            <label>
+                                <input type="radio" ng-model="modal.issueCause" value="LEAVER_INGAME" required>
+                                {{'ISSUE__CAUSES_1' | translate}}
+                            </label>
+
+                            <label>
+                                <input type="radio"  ng-model="modal.issueCause" value="FEEDER" required >
+                                {{'ISSUE__CAUSES_2' | translate}}
+                            </label>
+
+                            <label>
+                                <input type="radio" ng-model="modal.issueCause" value="AFK" required >
+                                {{'ISSUE__CAUSES_3' | translate}}
+                            </label>
+
+                            <label>
+                                <input type="radio" ng-model="modal.issueCause" value="SMURFING" required >
+                                {{'ISSUE__CAUSES_4' | translate}}
+                            </label>
+
+                            <label>
+                                <input type="radio" ng-model="modal.issueCause" value="CHEATER" required >
+                                {{'ISSUE__CAUSES_5' | translate}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="b-form-section modal-section issue-form-area">
+                <h3>{{'ISSUE__DETAIL_DEFINITION_TITLE' | translate}}</h3>
+                <textarea placeholder="{{'ISSUE__DETAIL_DEFINITION_NOTICE' | translate}}" ng-model="description" rows="5" cols="40" required max="500"></textarea>
+            </div>
+            <div class="b-form-section modal-well modal-section issue-form-addfile"
+                 nv-file-drop nv-file-over uploader="modal.uploader" over-class="file-over">
+                <div class="file-over-visible">
+                    <i class="fa fa-upload fa-5x"></i>
+                </div>
+
+                <div class="file-over-hidden">
+                    <h3 ng-hide="fileUploaded">{{'ISSUE__ATTACHE_FILES' | translate}}</h3>
+                    <div ng-hide="fileUploaded"  class="upload issue-form-addfile-upload">
+                        <span>{{'ISSUE__ADD_FILE' | translate}}</span>
+                        <input type="file" class="modal__file-upload-btn form-control" multiple required nv-file-select uploader="modal.uploader" />
+                    </div>
+                    <p class="issue-form-upload-text" ng-hide="fileUploaded">{{'ISSUE__ATTACHE_FILES_NOTICE' | translate}}</p>
+                    <div ng-repeat="(key, item) in fileItems">
+                        <div>
+                            <span>{{item._file.name}}</span>
+                        <span ng-click="modal.remove(key)">
+                            <i class="fa fa-times-circle-o"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-section ta-center">
+                <button type="button" id="submit" class="btn-red"
+                        ng-disabled="issueForm.$invalid || modal.loading"
+                        ng-click="modal.issueSubmit()" >
+                    <span ng-hide="modal.loading">{{'ISSUE__SUBMIT' | translate}}</span>
+                    <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="modal.loading"></i>
+                </button>
+            </div>
+            <div ng-show="reqSent" class="ta-center issue-form-ok">
+                {{'ISSUE__SUBMIT' | translate}}
+            </div>
+        </div>
+        <div ng-show="modal.issueSendSuccess" style="padding: 15px">
+            {{'ISSUE__ISSUE_SENT' | translate}}
+        </div>
+        <div ng-show="modal.issueSendFail" style="padding: 15px">
+            {{'ISSUE__ISSUE_FAIL' | translate}}
+        </div>
+    </div>
+</form>

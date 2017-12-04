@@ -1,0 +1,82 @@
+<div class="page-title">
+    <span class="title">Пользователи</span>
+    <div class="description">Список всех пользователей, зарегистрировавшихся на сайте gamestars.gg</div>
+</div>
+<div class="row usersPage">
+    <div class="col-lg-12">
+        <div class="row">
+            <form>
+                <input type="text" placeholder="Поиск пользователей в БД" class="form-control"
+                       ng-model="searchUser"
+                       ng-model-options='{ debounce: 500 }'
+                       ng-change="getPageData()">
+            </form>
+        </div>
+
+        <table class="table table-striped usersPage-table admin-table">
+            <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    <a href="" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                        Имя пользователя
+                        <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+                        <span ng-show="sortType !== 'name'" class="fa fa-sort color-grey"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="" ng-click="sortType = 'email'; sortReverse = !sortReverse">
+                        Почта
+                        <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+                        <span ng-show="sortType !== 'email'" class="fa fa-sort color-grey"></span>
+                    </a>
+                </th>
+                <!--<th>-->
+                <!--<a href="" ng-click="sortType = 'starpoint'; sortReverse = !sortReverse">-->
+                <!--&lt;!&ndash;Starpoints&ndash;&gt;-->
+                <!--<span ng-show="sortType == 'starpoint' && !sortReverse" class="fa fa-caret-down"></span>-->
+                <!--<span ng-show="sortType == 'starpoint' && sortReverse" class="fa fa-caret-up"></span>-->
+                <!--<span ng-show="sortType !== 'starpoint'" class="fa fa-sort color-grey"></span>-->
+                <!--</a>-->
+                <!--</th>-->
+                <th>
+                    <a href="" ng-click="sortType = 'referals'; sortReverse = !sortReverse">
+                        Рефералы(все/уже сыгравшие)
+                        <span ng-show="sortType == 'referals' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'referals' && sortReverse" class="fa fa-caret-up"></span>
+                        <span ng-show="sortType !== 'referals'" class="fa fa-sort color-grey"></span>
+                    </a>
+                </th>
+                <th>
+                    Управление
+                </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="user in users track by user.user.id | orderBy:sortType:sortReverse">
+                <td ng-click="goto('user', user.user.id)">{{::user.user.id}}</td>
+                <td ng-click="goto('user', user.user.id)">{{::user.user.name}}</td>
+                <td>{{::user.user.email}}</td>
+                <!--<td>{{user.user.starpoint||'not found ;('}}</td>-->
+                <td>{{::user.referalInfo.all}}/{{::user.referalInfo.alreadyPlayed}}</td>
+                <td class="func">
+                    <i class="fa fa-2x hover-green fa-envelope-o"
+                       ng-click="rootSet('userId', user.user.id);modal('sm', 'msg.html'); "></i>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+        <div class="pagination_list">
+            <uib-pagination max-size="5" total-items="count" items-per-page="itemsPerPage"
+                            ng-model="currentPage" ng-change="getPageData()">
+            </uib-pagination>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'REFERAL__MESSAGE' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<div class="modal-body">
+    <div class="modal-air">
+        <h4>{{'MATCH__LINK_COPIED_TEXT' | translate}}</h4>
+        <br/>
+        <span ng-bind="::modal.referral_url"></span>
+    </div>
+</div>

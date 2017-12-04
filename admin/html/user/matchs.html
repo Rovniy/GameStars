@@ -1,0 +1,73 @@
+<div class="matchPage">
+<table class="table usersPage-table">
+    <thead>
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            ID
+        </th>
+        <th>
+            Игра
+        </th>
+        <th>
+            Время окончания
+        </th>
+        <th>
+            Тип матча
+        </th>
+        <th>
+             Результат
+        </th>
+        <th>
+            Статус
+        </th>
+        <th>
+            Анализ
+        </th>
+        <th>
+                Комментарии
+        </th>
+    </tr>
+    </thead>
+    <tbody ng-controller="ModalTemp">
+
+    <tr ng-click="openMoreInfo(roll.id, roll.game)" ng-repeat="(key,roll) in vm.statistic.match_statistic | orderBy:sortType:sortReverse | filter:searchMatch">
+        <td ng-bind="::(key+1)"></td>
+        <td ng-bind="::roll.id"></td>
+        <td>
+            <img ng-show="::(roll.gameRegion.gameType == 'LOL')" src="/img/games/lol.png"/>
+        </td>
+        <td>
+            <span ng-if="::roll.completeTime" ng-bind="::(roll.completeTime | date:'dd.MM.yy | H:mm')"></span>
+        </td>
+        <td>
+            <span ng-show="::(roll.currencyType =='TOURNAMENT_POINTS')" ng-bind="::roll.tournament.name"></span>
+            <span ng-show="::(roll.currencyType =='REAL_POINTS')">Игра на деньги</span>
+        </td>
+        <td ng-bind="::(roll.status | matchResult)"></td>
+        <td ng-bind="::(roll.status | matchStatusList)"></td>
+
+        <td class="left">
+            <ul>
+                <li>
+                    <span >Репорты: <span class="green strong" ng-bind="::roll.reports.length"></span></span>
+                    <!--<span ng-show="roll.reportsCount !== 0">Репорты: <span class="red strong">???</span></span>-->
+                </li>
+                <li>
+                    <span ng-show="::(roll.getstatistic == 0)">Статистика: <i class="fa fa-times red"></i></span>
+                    <span ng-show="::(roll.getstatistic !== 0)">Статистика: <i class="fa fa-check-square-o green"></i></span>
+                </li>
+                <li>
+                    <span >SC Reports: <span ng-bind="::(roll.reports | scReports)"></span></span>
+                </li>
+            </ul>
+        </td>
+        <td class="left">
+            <span ng-if="::!roll.comments">---</span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>

@@ -1,0 +1,43 @@
+.modalWithdrawal {
+  text-align: center;
+
+  .modalWithdrawal-available {
+    margin-top: 0;
+  }
+
+  .modalWithdrawal-available-amount {
+    font-size: 24px;
+    margin: 10px;
+  }
+
+  .modalWithdrawal-msg{
+    display: inline-block;
+    margin-bottom: 15px;
+    font-size: 12px;
+  }
+
+  .btn-red {
+    margin-top: 10px;
+  }
+
+  .modalWithdrawalul {
+    text-align: left;
+    padding: 0 0 0 20px;
+    margin: 15px 0;
+    transition: color .5s ease;
+
+    &.has-highlight {
+      color: #aaa;
+    }
+
+    & > li {
+      font-size: 12px;
+
+      &.highlight {
+        color: #000;
+        transition: color .5s ease;
+      }
+    }
+  }
+
+}

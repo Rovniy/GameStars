@@ -1,0 +1,56 @@
+<div class="modal-header modal-header-conacc">
+    <h3 class="modal-title">{{'CONNECT_ACCOUNT__TITLE' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<div class="modal-body modal-body-conacc">
+
+    <uib-tabset>
+        <!-- Первая вкладка -->
+        <uib-tab>
+            <uib-tab-heading>
+                <img alt="LOL" src="/src/img/base/game-icon/lol.png"/>
+            </uib-tab-heading>
+            <div class="modal-body-content modal-body-content-conacc">
+                <form name="connectAccount" ng-submit="modal.sendConnectAccount()" class="ta-center">
+                    <div class="form-group">
+                        <select class="form-control btn btn-default dropdown-toggle"
+                                required
+                                ng-init="modal.regionId = modal.regionId || regionName[0].regionId"
+                                ng-model="modal.regionId"
+                                ng-options="region.regionId as region.regionName for region in ::regionName">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <i class="form-group_icon genericon genericon-user"></i>
+                            <input type="text" class="form-control" placeholder="{{'CONNECT_ACCOUNT__SUMMONER_NAME' | translate}}"
+                                   ng-model="modal.summonerName" required minlength="3" maxlength="24" name="userSendAccount">
+                        </label>
+                    </div>
+                    <button class="btn-red" type='submit' ng-disabled="connectAccount.$invalid">
+                        <span ng-show="!modal.loading">{{'CONNECT_ACCOUNT__BUTTON'|translate}}</span>
+                        <span ng-show="modal.loading"><i class="fa fa-spin fa-spinner"></i></span>
+                    </button>
+                </form>
+                <div class="b-modal-repsonse">
+                    <div class="b-modal-repsonse_error" ng-show="modal.error">
+                        {{modal.error | translate}}
+                    </div>
+                </div>
+            </div>
+        </uib-tab>
+
+
+        <uib-tab ng-repeat="tab in ::modal.tabs" disable="tab.disabled">
+            <uib-tab-heading>
+                <img alt="LOL" ng-src="/src/img/base/game-icon/{{::tab.title}}.png"/>
+            </uib-tab-heading>
+            <div class="modal-body-content modal-body-content-conacc">
+                {{::tab.content}}
+            </div>
+        </uib-tab>
+
+
+    </uib-tabset>
+
+</div>

@@ -1,0 +1,181 @@
+<div ng-controller="LkProfileController as vm">
+    <div class="box-title">
+        <h3>{{'LK__ACC_SOCIAL' | translate}}</h3>
+    </div>
+    <div class="box-content connectSocialAccouns">
+        <div class="social-container ta-center">
+            <div class="social-fb">
+                <button class="btn btn-social btn-facebook" ng-click="vm.externalLogin('facebook', vm.config.currentUrl)">
+                    <span class="fa fa-facebook"></span>
+                    <span ng-show="vm.facebook"><i class="fa fa-check"></i> {{'LK_CONNECT_SOCIAL_CONNECTED'|translate}}</span>
+                    <span ng-show="!vm.facebook">{{'LK_CONNECT_FACEBOOK_ACCOUNT'|translate}}</span>
+                </button>
+            </div>
+            <div class="social-fb">
+                <button class="btn btn-social btn-twitch" ng-click="vm.externalLogin('twitch', vm.config.currentUrl)">
+                    <span class="fa fa-twitch"></span>
+                    <span ng-show="vm.twitch"><i class="fa fa-check"></i> {{'LK_CONNECT_SOCIAL_CONNECTED'|translate}}</span>
+                    <span ng-show="!vm.twitch">{{'LK_CONNECT_TWITCH_ACCOUNT'|translate}}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="box-title">
+        <h3>{{'LK__ACC_INFO' | translate}}</h3>
+    </div>
+    <div class="box-content personalPage">
+        <form name="usernameForm" novalidate>
+            <div class="form-group">
+                <label for="inputMail" class="col-sm-3 control-label">{{'LK__EMAIL' | translate}}</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="inputMail" disabled placeholder="mail@gamestars.gg" value="{{vm.userProfile.userData.email}}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">{{'LK__NICK' | translate}}</label>
+                <div class="col-sm-9" ng-class="{ 'has-error': usernameForm.inputUsername.$invalid }">
+                    <input type="text" class="form-control" name="inputUsername" required
+                           ng-model="vm.inputUsername"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn-red btn-mtop"
+                        ng-click="vm.lkNewUsername()"
+                        ng-show="usernameForm.$dirty"
+                        ng-disabled="usernameForm.$invalid || vm.loading">
+                    <span ng-hide="vm.loading">{{'LK__CHANGE_NICK' | translate}}</span>
+                    <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="vm.loading"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="box-title">
+        <h3>{{'LK__PWD_CHANGING' | translate}}</h3>
+    </div>
+    <div class="box-content personalPage">
+        <div class="form-group">
+            <label for="inputOldPass" class="col-sm-3 control-label">{{'LK__OLD' | translate}}</label>
+            <div class="col-sm-9">
+                <input type="password" class="form-control"  id="inputOldPass" ng-model="inputOldPass" placeholder="{{'LK__OLD_PWD' | translate}}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputNewPass" class="col-sm-3 control-label">{{'LK__NEW' | translate}}</label>
+            <div class="col-sm-9">
+                <input type="password" class="form-control" id="inputNewPass" ng-model="inputNewPass" placeholder="{{'LK__NEW_PWD' | translate}}" />
+            </div>
+            <p ng-show="postSuccess" class="red">{{'LK__PWD_RESTRICTIONS' | translate}}</p>
+        </div>
+        <div class="form-group">
+            <label for="repeatNewPass" class="col-sm-3 control-label">{{'LK__REPEAT' | translate}}</label>
+            <div class="col-sm-9">
+                <input type="password" class="form-control"  id="repeatNewPass" ng-model="repeatNewPass" placeholder="{{'LK__REPEAT_PWD' | translate}}"/>
+            </div>
+            <p ng-show="repeatNewPassError" class="red">{{'LK__PWD_NOT_MATCH' | translate}}</p>
+            <p ng-show="newPassError" class="red">{{newPassError}}</p>
+        </div>
+        <div ng-if="inputNewPass != '' && inputNewPass != null && inputNewPass != ' ' && inputNewPass == repeatNewPass" class="form-group">
+            <button class="btn-red btn-mtop" ng-click="vm.lkNewPass()" ng-disabled="vm.loading">
+                <span ng-hide="vm.loading">{{'LK__CHANGE_PWD' | translate}}</span>
+                <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="vm.loading"></i>
+            </button>
+        </div>
+    </div>
+    <div class="box-title">
+        <h3>{{'LK__PERSONAL_INFO' | translate}}</h3>
+    </div>
+    <div class="box-content personalPage">
+        <div class="form-group">
+            <label for="inputFirstname" class="col-sm-3 control-label">{{'LK__NAME' | translate}}</label>
+            <div class="col-sm-9">
+                <input type="text" ng-model="inputFirstname" class="form-control" id="inputFirstname" placeholder="{{'LK__YOUR_NAME' | translate}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputSecondname" class="col-sm-3 control-label">{{'LK__SURNAME' | translate}}</label>
+            <div class="col-sm-9">
+                <input type="text" ng-model="inputSecondname" class="form-control" id="inputSecondname" placeholder="{{'LK__YOUR_SURNAME' | translate}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputBithday" class="col-sm-3 control-label">{{'LK__BIRTHDAY' | translate}}</label>
+            <div class="col-sm-9">
+               <!-- <input type="date" ng-model="inputBithday" class="form-control" id="inputBithday" >-->
+                <input lang="" type="date" value="{{inputBithday | date:'yyyy-MM-dd':'GMT+0300'}}" class="form-control" id="inputBithday" >
+            </div>
+        </div>
+    </div>
+    <div class="box-title">
+        <h3>{{'LK__CONTACTS' | translate}}</h3>
+    </div>
+    <div class="box-content personalPage">
+        <div class="form-group">
+            <label for="inputPhone" class="col-sm-3 control-label">{{'LK__PHONE' | translate}}</label>
+            <div class="col-sm-9">
+                <input type="text" ng-model="inputPhone" placeholder="+7 (999) 999-99-99" class="form-control" id="inputPhone" value="{{vm.userProfile.userData.phone}}"/>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputCountry" class="col-sm-3 control-label">{{'LK__COUNTRY' | translate}}</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" ng-model="inputCountry" id="inputCountry" placeholder="{{'LK__YOUR_COUNTRY' | translate}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputCity" class="col-sm-3 control-label">{{'LK__CITY' | translate}}</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" ng-model="inputCity" id="inputCity" placeholder="{{'LK__YOUR_CITY' | translate}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPost" class="col-sm-3 control-label">{{'LK__ZIP' | translate}}</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" ng-model="inputPost" id="inputPost" placeholder="265040">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputAdress" class="col-sm-3 control-label">{{'LK__ADRESS' | translate}}</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" ng-model="inputAdress" id="inputAdress" placeholder="{{'LK__ADDR_PLACEHOLDER' | translate}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTimezone" class="col-sm-3 control-label">{{'LK__TIMEZONE' | translate}}</label>
+            <div class="col-sm-9">
+                <select id="inputTimezone" class="form-control" ng-model="vm.inputTimezone">
+                    <option value="GMT-1000">(GMT-10) {{'GMT-10' | translate}}</option>
+                    <option value="GMT-0900">(GMT-9) {{'GMT-9' | translate}}</option>
+                    <option value="GMT-0800">(GMT-8) {{'GMT-8' | translate}}</option>
+                    <option value="GMT-0700">(GMT-7) {{'GMT-7' | translate}}</option>
+                    <option value="GMT-0600">(GMT-6) {{'GMT-6' | translate}}</option>
+                    <option value="GMT-0500">(GMT-5) {{'GMT-5' | translate}}</option>
+                    <option value="GMT-0400">(GMT-4) {{'GMT-4' | translate}}</option>
+                    <option value="GMT-0300">(GMT-3) {{'GMT-3' | translate}}</option>
+                    <option value="GMT-0200">(GMT-2) {{'GMT-2' | translate}}</option>
+                    <option value="GMT-0100">(GMT-1) {{'GMT-1' | translate}}</option>
+                    <option value="GMT+0000">(GMT) {{'GMT' | translate}}</option>
+                    <option value="GMT+0100">(GMT+1) {{'GMT+1' | translate}}</option>
+                    <option value="GMT+0200">(GMT+2) {{'GMT+2' | translate}} </option>
+                    <option value="GMT+0300">(GMT+3) {{'GMT+3' | translate}}</option>
+                    <option value="GMT+0400">(GMT+4) {{'GMT+4' | translate}}</option>
+                    <option value="GMT+0500">(GMT+5) {{'GMT+5' | translate}}</option>
+                    <option value="GMT+0600">(GMT+6) {{'GMT+6' | translate}}</option>
+                    <option value="GMT+0700">(GMT+7) {{'GMT+7' | translate}}</option>
+                    <option value="GMT+0800">(GMT+8) {{'GMT+8' | translate}}</option>
+                    <option value="GMT+0900">(GMT+9) {{'GMT+9' | translate}}</option>
+                    <option value="GMT+1000">(GMT+10) {{'GMT+10' | translate}}</option>
+                    <option value="GMT+1100">(GMT+11) {{'GMT+11' | translate}}</option>
+                    <option value="GMT+1200">(GMT+12) {{'GMT+12' | translate}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+           <button class="btn-red btn-mtop" ng-click="vm.lkSaveMyProfile()" ng-disabled="vm.loading">
+               <span ng-hide="vm.loading">{{'LK__SAVE' | translate}}</span>
+               <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="vm.loading"></i>
+           </button>
+        </div>
+    </div>
+</div>

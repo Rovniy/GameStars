@@ -1,0 +1,498 @@
+.tourList {
+  background: #121416;
+  height: 100%;
+  width: 100%;
+  .row {
+    margin: 0;
+    padding: 0;
+  }
+  .tourList-servers {
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    background: #1c1919;
+    border-bottom: 1px solid #2e2724;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    ul {
+      background: #1b1717;
+      border: 1px solid #292121;
+      height: 38px;
+      margin: 0;
+      padding: 0;
+
+      li {
+        list-style: none;
+        display: inline-block;
+        color: #978766;
+        vertical-align: middle;
+        margin: 0 20px;
+        cursor: pointer;
+
+        &.checked {
+          .text {
+            color: #f2d9a2;
+          }
+
+          .server-checked {
+            display: inline-block;
+          }
+
+          .server-unchecked {
+            display: none;
+          }
+        }
+
+        .server-checked {
+          width: 1em;
+          display: none;
+
+          .fa-circle-o {
+            font-size: 22px;
+            line-height: 37px;
+            vertical-align: middle;
+            color: #443b31;
+          }
+
+          .fa-check {
+            line-height: 37px;
+            font-size: 10px;
+            vertical-align: middle;
+
+          }
+        }
+
+        .server-unchecked {
+          display: inline-block;
+          font-size: 22px;
+          line-height: 37px;
+          vertical-align: middle;
+          color: #443b31;
+        }
+
+        .text {
+          vertical-align: middle;
+          font: 14px/14px @font-main;
+          margin: 3px;
+        }
+      }
+    }
+  }
+  .tourList-controls {
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    padding: 0 10px;
+    background: #101114;
+    border-bottom: 1px solid #2e2724;
+    .col-lg-8 {
+      margin: 0;
+      padding: 0;
+      .tourList-controls-filters {
+        .tourList-controls-filters-title {
+          width: 100%;
+          float: left;
+          padding: 5px 0;
+          text-transform: uppercase;
+          span {
+            color: #f2d9a2;
+            margin: 0 0 0 5px;
+          }
+        }
+        .tourList-controls-filters-change {
+          ul {
+            margin: 0;
+            height: 40px;
+            width: 100%;
+            float: left;
+            padding: 9px 0 0 0;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            li {
+              padding: 9px 0 0 0;
+              border-top: 1px solid #2e2724;
+              color: #978766;
+              display: inline;
+              list-style: none;
+              text-transform: uppercase;
+              span {
+                margin: 0 5px;
+              }
+              &:hover {
+                color: #f2d9a2;
+                cursor: pointer;
+              }
+            }
+            .active {
+              color: #f2d9a2;
+            }
+            .separator {
+              color: #978766;
+              &:hover {
+                color: #978766;
+                cursor: default;
+              }
+            }
+          }
+        }
+      }
+    }
+    .col-lg-4 {
+      margin: 0;
+      padding: 0;
+      .tourList-controls-sortby {
+        text-transform: uppercase;
+        .tourList-controls-sortby-title {
+          width: 100%;
+          float: left;
+          padding: 5px 0;
+          span {
+            color: #f2d9a2;
+            margin: 0 0 0 5px;
+          }
+        }
+        .tourList-controls-sortby-change {
+          ul {
+            margin: 0;
+            height: 40px;
+            width: 100%;
+            float: left;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            padding: 9px 0 0 0;
+            li {
+              padding: 9px 0 0 0;
+              border-top: 1px solid #2e2724;
+              color: #978766;
+              display: inline;
+              list-style: none;
+              span {
+                margin: 0 5px;
+              }
+              .bg-color {
+                color: #101114;
+              }
+              &:hover {
+                color: #f2d9a2;
+                cursor: pointer;
+              }
+            }
+            .active {
+              color: #f2d9a2;
+            }
+            .separator {
+              color: #978766;
+              &:hover {
+                color: #978766;
+                cursor: default;
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+  .tourList-items {
+    margin: 0;
+    display: inline-block;
+    width: 100%;
+    padding: 0 0 20px 0;
+    min-height: 315px;
+
+    .tourList-items-item {
+      margin: 20px 0 0 24px;
+      float: left;
+      width: 200px;
+      height: 275px;
+      background-size: cover;
+      opacity: 1;
+      border: 1px solid #29251f;
+      border-radius: 2px;
+      cursor: pointer;
+
+      &:hover {
+        .tourList-items-item-shadowbg {
+          background: rgba(0, 0, 0, 0);
+          transition: 0.5s;
+        }
+      }
+
+      &.invite-friend-banner {
+        background: url("/src/img/tournaments/lol/invite-friend.jpg") no-repeat;
+        line-height: 1;
+        text-align: center;
+        font-family: @font-main-bold;
+
+        .banner-title{
+          font-size: 16px;
+          padding: 10px 0;
+          text-transform: uppercase;
+          background-color: rgba(0, 0, 0, .7);
+
+          p{
+            color: #fff;
+            margin: 0;
+          }
+        }
+
+        .banner-body{
+          margin-top: 64px;
+          padding: 10px 0;
+          background-color: rgba(0, 0, 0, .7);
+
+          p {
+            font-size: 14px;
+            margin: 0;
+            color: #fff;
+
+            &.large {
+              font-size: 24px;
+              margin: 5px 0;
+            }
+          }
+        }
+
+        .banner-footer{
+          margin-top: 57px;
+          font-size: 19px;
+          text-transform: uppercase;
+          color: #fff;
+        }
+      }
+
+      &.cashgames {
+        background: url('/src/img/tournaments/lol/cashgames.jpg') no-repeat;
+
+        .tourList-items-item-shadowbg {
+          .tourList-items-item-shadowbg-meta {
+            color: #fff;
+            font: 16px/16px @font-main-bold;
+            text-transform: uppercase;
+          }
+          .tourList-items-item-shadowbg-title {
+            padding: 50px 0 0;
+            h3 {
+              padding: 0 20px;
+              color: #fff;
+              text-transform: uppercase;
+              font: 30px/35px @font-main-bold;
+            }
+          }
+          .tourList-items-item-shadowbg-register {
+            padding: 25px 0 10px 0;
+            p {
+              margin: 0 0 2px;
+              font: 18px/18px @font-main-bold;
+              text-transform: uppercase;
+              color: #fff;
+            }
+          }
+        }
+        &:hover {
+          .tourList-items-item-shadowbg {
+            background: rgba(0, 0, 0, 0);
+            transition: 0.5s;
+          }
+        }
+
+      }
+
+      .tourList-items-item-shadowbg {
+        background: rgba(0, 0, 0, 20%);
+        width: 100%;
+        height: 100%;
+        transition: 0.5s;
+        float: left;
+
+        .tourList-items-item-shadowbg-meta {
+          float: left;
+          width: 100%;
+          background: rgba(0, 0, 0, 70%);
+          text-align: center;
+          color: #f2d9a2;
+          font: 14px/14px @font-main;
+          padding: 8px 0;
+          height: 34px;
+
+          .badge-euw {
+            background-color: #ff9900;
+            color: #000;
+            font: 12px/12px @font-main;
+          }
+
+          .badge-nordic {
+            background-color: #398dad;
+            color: #fff;
+            font: 12px/12px @font-main;
+          }
+
+          .badge-ru {
+            background-color: #ad2428;
+            color: #fff;
+            font: 12px/12px @font-main;
+          }
+
+        }
+        .tourList-items-item-shadowbg-title {
+          float: left;
+          width: 100%;
+          height: 84px;
+          text-align: center;
+          padding: 10px 0 0 0;
+          h3 {
+            color: #f9cb65;
+            margin: 0;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+            font: 24px/24px @font-main-bold;
+
+          }
+        }
+        .tourList-items-item-shadowbg-prize {
+          float: left;
+          width: 100%;
+          text-align: center;
+          height: 85px;
+          h4 {
+            color: #f2d9a2;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+            font: 14px/14px @font-main-bold;
+          }
+          hr {
+            content: url('/src/img/base/tour-list-hr.png');
+            margin: 10px 0;
+            padding: 0;
+            height: 1px;
+            width: 100%;
+            border: none;
+          }
+          .award-size {
+            font-size: 40px;
+            line-height: 40px;
+          }
+        }
+        .tourList-items-item-shadowbg-register {
+          float: left;
+          width: 100%;
+          height: 70px;
+          text-align: center;
+          padding: 7px 0 10px 0;
+          background: rgba(0, 0, 0, 70%);
+          border-top: 1px solid #777164;
+          p {
+            margin: 0 0 2px;
+          }
+          .tourList-items-item-shadowbg-register-start {
+            font: 12px/12px @font-main;
+            text-transform: uppercase;
+            color: #f2d9a2;
+          }
+          .tourList-items-item-shadowbg-register-date {
+            font: 22px/22px @font-main;
+            text-transform: uppercase;
+            color: #f2d9a2;
+          }
+          .tourList-items-item-shadowbg-register-part {
+            font: 12px/12px @font-main;
+            text-transform: uppercase;
+            color: #f2d9a2;
+          }
+        }
+      }
+    }
+  }
+  .tournament-banner {
+    margin: 0;
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0;
+    overflow: hidden;
+    img {
+      opacity: 0.8;
+      max-width: 100%;
+      transition: 0.5s;
+    }
+    a {
+      &:hover {
+        img {
+          opacity: 1;
+          -webkit-transform: scale(1.05);
+          -moz-transform: scale(1.05);
+          -o-transform: scale(1.05);
+          transform: scale(1.05);
+        }
+      }
+      &:focus {
+        outline: 0;
+        border: 0;
+      }
+    }
+
+  }
+  .tourList-table {
+    background: #101114;
+    border-top: 1px solid #2e2724;
+    color: #e2cfa4;;
+    margin: 0;
+    display: inline-block;
+    width: 100%;
+    padding: 0 50px 20px 50px;
+    .tour-list {
+      width: 100%;
+      thead {
+        display: table-header-group;
+        vertical-align: middle;
+        border-color: inherit;
+        tr {
+          height: 50px;
+          th {
+            font: 14px/14px @font-main-bold;
+            text-align: center;
+            text-transform: uppercase;
+          }
+        }
+      }
+      tbody {
+        tr {
+          cursor: pointer;
+          td {
+            font: 14px/14px @font-main;
+            text-transform: uppercase;
+            text-align: center;
+            height: 44px;
+          }
+          &:hover {
+            background: rgba(255, 255, 255, .2);
+          }
+        }
+        tr:nth-child(odd) td {
+          background: rgba(255, 255, 255, .1);
+        }
+      }
+    }
+  }
+  .tourList-catName {
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    padding: 0 10px;
+    background: #101114;
+    border-bottom: 1px solid #2e2724;
+    border-top: 1px solid #2e2724;
+    h2 {
+      text-align: center;
+      font: 24px/24px @font-main-bold;
+      color: #e2cfa4;
+      margin: 10px 0 12px 0;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<div class="variable">
+    <div class="row" ng-hide="$ctrl.loading">
+        <div ng-repeat="provider in ::$ctrl._providers"
+             class="col-xs-4"
+             ng-class="$ctrl.getElementClass($index)">
+            <button class="item" ng-click="$ctrl.onClick(provider)" ng-disabled="$ctrl.disabled">
+                <img ng-src="{{::provider.imgUrl}}" />
+            </button>
+        </div>
+    </div>
+
+    <div class="row" ng-show="$ctrl.loading">
+        <div class="col-xs-12 text-center">
+            <i class="fa fa-2x fa-spin fa-spinner"></i>
+        </div>
+    </div>
+
+    <div class="alert alert-danger" ng-show="$ctrl.error">
+        <!-- TODO: error message -->
+        Transaction could not be initiated due to connection problems. Please try again or contact our support under <a href="mailto:info@gamestars.gg">info@gamestars.gg</a>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<!-- start Middle-->
+<div id="middle">
+	<div class="b-top-title">
+		<div class="b-top-substrate_cnt b-top-substrate_cnt__x44 width600 faq_title">
+			<div class="b-title-m b-title-m__mar-bott">
+				{{'FAQ__TITLE' | translate}}
+			</div>
+		</div>
+	</div>
+	<div class="b-gross-brd">
+		<div class="b-gross-brd_cnt">
+			<div class="faqbg">
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<uib-tabset>
+						<uib-tab ng-repeat="part in [{title: 'FAQ__TOURNAMENT_LAWS', qs: [1,2,3,4,5,6,7,8,9,10,11]},
+						{title: 'FAQ__CONDITION', qs: [12, 13,14,15,16]}, {title: 'FAQ__STARCLIENT', qs: [17, 18, 19]},
+						{title: 'FAQ__ORGANIZER', qs: [20, 21]}]">
+							<uib-tab-heading>{{part.title | translate}}</uib-tab-heading>
+
+							<div class="panel-group" id="accordion">
+								<uib-accordion close-others="vm.oneAtATime">
+									<uib-accordion-group ng-repeat="i in part.qs">
+										<uib-accordion-heading>
+												<h4 class="panel-title">
+													<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+														{{'FAQ__QUESTION_' + i | translate}}
+													</a>
+												</h4>
+										</uib-accordion-heading>
+										{{'FAQ__ANSWER_' + i | translate}}
+									</uib-accordion-group>
+								</uib-accordion>
+							</div>
+						</uib-tab>
+					</uib-tabset>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end Middle -->

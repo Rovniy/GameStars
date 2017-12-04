@@ -1,0 +1,196 @@
+.modal-match-info {
+
+  .modal-dialog{
+
+    @media (min-width: 1360px) {
+      width: 1200px;
+    }
+
+    @media (min-width: 1600px) {
+      width: 1400px;
+    }
+
+    .matchModalBody {
+      font-family: "Roboto Condensed",sans-serif;
+      padding:10px;
+      .matchModalBody-title {
+        margin:0;
+        border-bottom:1px solid #292929;
+        [class*="col-"] {
+          margin-bottom:10px;
+        }
+        .matchModalBody-title-logo {
+          text-align:center;
+          img {
+            width:116px;
+          }
+        }
+        .matchModalBody-type {
+          text-align:center;
+          h2 {
+            line-heigth:0.8;
+            small {
+              text-transform: lowercase;
+            }
+          }
+        }
+        .matchModalBody-id {
+          text-align:right;
+          ul {
+            padding:0;
+            li {
+              list-style: none;
+              font-size:15px;
+            }
+          }
+        }
+      }
+      .matchModalBody-data {
+        margin:0;
+        padding-top:10px;
+        border-bottom:1px solid #292929;
+        [class*="col-"] {
+          margin-bottom:10px;
+        }
+        .data-playersCount {
+          text-align:center;
+          span {
+            font-size:50px;
+          }
+        }
+        .data-bit {
+          text-align:center;
+          .data-bit-title {
+            font-size:18px;
+          }
+          .data-bit-count {
+            font-size:32px;
+            font-weight:bold;
+          }
+        }
+        .data-matchtime {
+          text-align:center;
+          .data-matchtime-title {
+            font-size:18px;
+          }
+          .data-matchtime-count {
+            font-size:32px;
+            font-weight:bold;
+          }
+        }
+        .data-reports {
+          text-align:center;
+          .data-reports-title {
+            font-size:18px;
+          }
+          .data-reports-count {
+            font-size:32px;
+            font-weight:bold;
+          }
+        }
+        .data-analytic {
+          ul {
+            li {
+              span {
+                font-size:16px;
+              }
+            }
+          }
+        }
+        .data-comments {
+          text-align:left;
+        }
+      }
+      .tablePlayers {
+        text-align:center;
+        margin:0;
+        .tablePlayers-team1 {
+          h3 {
+            background:#e5fbff;
+          }
+          margin:0;
+          table {
+            text-align:center;
+            margin:0;
+            tr {
+              th {
+                text-align:center;
+                vertical-align:middle;
+                font-size:14px;
+              }
+              td {
+                padding:3px;
+                text-align:center;
+                vertical-align:middle;
+                font-size:14px;
+                &:hover {
+                  background: #b9d5d7!important;
+                }
+                .reportsView {
+                  padding:5px 25px;
+                }
+              }
+              .img_avatar_hero {
+                img {
+                  width:30px;
+                  height:30px;
+                }
+              }
+              .btn {
+                margin:0;
+              }
+              .userNamefixedWidth {
+                width:180px;
+              }
+            }
+          }
+        }
+        .tablePlayers-team2 {
+          h3 {
+            background:#fff2f2;
+          }
+          margin:0;
+          table {
+            text-align:center;
+            margin:0;
+            tr {
+              th {
+                text-align:center;
+                vertical-align:middle;
+                font-size:14px;
+              }
+              td {
+                padding:3px;
+                text-align:center;
+                vertical-align:middle;
+                font-size:14px;
+                &:hover {
+                  background: #b9d5d7!important;
+                }
+              }
+              .img_avatar_hero {
+                img {
+                  width:30px;
+                  height:30px;
+                }
+              }
+              .btn {
+                margin:0;
+              }
+            }
+          }
+        }
+
+      }
+      .changeMatch {
+        text-align:center;
+        margin:0;
+      }
+      .punishment {
+        margin:0;
+        padding:0 50px;
+        text-align:center;
+      }
+    }
+  }
+}

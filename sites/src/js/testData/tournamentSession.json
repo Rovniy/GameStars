@@ -1,0 +1,294 @@
+{
+  "data": [
+    [
+      {
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"Good to see you in this tournament, noble hunter!",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": false,
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"Good to see you in this tournament, noble hunter!",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"Be the winner you always wanted to be!",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": true,
+        "send2Text":"Be the winner you always wanted to be!",
+        "send2Active": true,
+        "send2Dis": true,
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"Don’t forget - in each match you make bet with chips.",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"Don’t forget - in each match you make bet with chips.",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"I like bets. They are like DEATH! Bets make all players equal.",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": true,
+        "send2Text":"I like bets. They are like DEATH! Bets make all players equal.",
+        "send2Active": true,
+        "send2Dis": true,
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"Bets are growing during the tournament. And matches become more challenging and risky!",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"Bets are growing during the tournament. And matches become more challenging and risky!",
+        "send1Active": true,
+        "send1Dis": true,
+
+        "hero2Active": true,
+        "hero2Dis": false,
+        "send2Text":"Yeah… More blood and emotions!",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 1
+      },
+      {
+        "duration": 1,
+        "textArray": [
+          {
+            "text":"Ok, I’m ready to play.",
+            "action": "close",
+            "id": 0
+          },
+          {
+            "text":"Tell me more about the tournament rules ",
+            "action": "slide",
+            "id": 1
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"3 main things about tournaments: SoloQ, bets on your own victory and fair prizes due to your rating in their ladders.",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": false,
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"3 main things about tournaments: SoloQ, bets on your own victory and fair prizes due to your rating in their ladders.",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"You play only with gamers of your skill level! So bet smart and get bigger prizes than pros!",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": true,
+        "send2Text":"You play only with gamers of your skill level! So bet smart and get bigger prizes than pros!",
+        "send2Active": true,
+        "send2Dis": true,
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"The more chips you have - the higher in the ladder you are - the bigger prize you get!",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "duration": 1,
+        "textArray": [
+          {
+            "text":"Got it! I want to play!",
+            "action": "slide",
+            "id": 2
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"You place a bet and then we look for a good company for you.",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": false,
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"You place a bet and then we look for a good company for you.",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"When we find a team for you - just accept the match. And rip your enemies apart!",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": true,
+        "send2Text":"When we find a team for you - just accept the match. And rip your enemies apart!",
+        "send2Active": true,
+        "send2Dis": true,
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"You meet your noble teammates on this site and then go to the LoL client using the tournament code shown in the GameStars lobby.",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"You meet your noble teammates on this site and then go to the LoL client using the tournament code shown in the GameStars lobby.",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"If you win - your bet is doubled, if you lose - your bet is taken away from your stack.",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": true,
+        "send2Text":"If you win - your bet is doubled, if you lose - your bet is taken away from your stack.",
+        "send2Active": true,
+        "send2Dis": true,
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"Don’t worry! We’ve got you covered. Your first victory would be doubled, your first defeat - reduced by half.",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 1
+      },
+      {
+        "duration": 1,
+        "textArray": [
+          {
+            "text":"Start the fight!",
+            "action": "close",
+            "id": 0
+          },
+          {
+            "text":"How can I get extra chips? ",
+            "action": "slide",
+            "id": 3
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"When you enter a tournament you receive 1000 chips to make your crusade easier.",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": false,
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"When you enter a tournament you receive 1000 chips to make your crusade easier.",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"1000! I need a month to collect as many souls!",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": true,
+        "send2Text":"1000! I need a month to collect as many souls!",
+        "send2Active": true,
+        "send2Dis": true,
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"Also you can buy additional chips during a tournament by pressing REBUY CHIPS button.",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"Also you can buy additional chips during a tournament by pressing REBUY CHIPS button.",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"Some players do it to save themselves from defeat.",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 1
+      },
+      {
+        "duration": 1,
+        "textArray": [
+          {
+            "text":"Ok, I’m ready to play.",
+            "action": "close",
+            "id": 0
+          },
+          {
+            "text":"I want to read the tournament rules",
+            "action": "link",
+            "id": "/tournament-rules"
+          }
+        ]
+      }
+    ]
+  ]
+}

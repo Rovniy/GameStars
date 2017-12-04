@@ -1,0 +1,38 @@
+<div class="b-main_news-list" ng-controller="NewsMainController as vm">
+    <div class="b-news-list clearfix">
+        <!--b-main-nav_item-->
+        <div class="b-news-element"
+             ng-repeat="news in ::vm.news"
+             ng-style="{ 'background-image': 'url(' + news.viewUrl + ')' }"
+             ng-click="vm.openNews(news)">
+            <div class="b-news-element__content">
+                <div class="b-news-element__content-text">
+                    <div class="b-news-element__header">
+                        <span ng-bind="::news.title"></span>
+                    </div>
+                    <div class="b-news-element__text">
+                        <span ng-bind="::news.message"></span>
+                    </div>
+                </div>
+                <div class="b-news-element__content-info">
+                    <div class="b-news-element__info">
+                        <i class="fa fa-heart fa-fw"></i>
+                        <p ng-bind="::news.like_count"></p>
+                    </div>
+                    <div class="b-news-element__info">
+                        <i class="fa fa-eye fa-fw"></i>
+                        <p ng-bind="::news.view_count"></p>
+                    </div>
+                    <div class="b-news-element__info">
+                        <i class="fa fa-commenting fa-fw"></i>
+                        <p ng-bind="::news.reply_count"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="b-news-btn">
+        <a class="btn-red" ng-href="{{::vm.config.newsUrl}}">{{'MAIN__ALL_NEWS' | translate}}</a>
+    </div>
+</div>

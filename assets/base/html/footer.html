@@ -1,0 +1,38 @@
+<!-- start Footer -->
+<div class="container-fluid">
+    <audio id="MusicReady" src="/src/misc/main_theme.mp3" preload="none"></audio>
+    <audio id="matchDestroyed" src="/src/misc/matchDestroyed.mp3" preload="none"></audio>
+    <div class="container">
+        <div class="menuAndPartners">
+            <div class="left-side">
+                <ul>
+                    <li><a track-event-by-click track-category="click" track-action="footer_menu_cashgames" href="/cashgames">{{'PUBLIC__MATCHES_TITLE' | translate}}</a></li>
+                    <li><a track-event-by-click track-category="click" track-action="footer_menu_tournaments" href="/tournaments">{{'LK__TOURNAMENTS' | translate}}</a></li>
+                    <li><a track-event-by-click track-category="click" track-action="footer_menu_tournaments" href="{{::vm.config.newsUrl}}">{{'PUBLIC__NEWS_TITLE' | translate}}</a></li>
+                </ul>
+            </div>
+            <div class="right-side">
+                <span>Our partners:</span>
+                <img src="/src/img/lol/index/partner1.png">
+                <img src="/src/img/lol/index/partner2.png">
+                <img src="/src/img/lol/index/partner3.png">
+            </div>
+        </div>
+        <div class="menuSemi">
+            <ul>
+                <li><a track-event-by-click track-category="click" track-action="footer_menu_cashgames" href="/reviews">{{'FOOTER__REVIEWS' | translate}}</a></li>
+                <li><a track-event-by-click track-category="click" track-action="footer_menu_tournaments" href="/halloffame">{{'FOOTER__HALL_OF_FAME' | translate}}</a></li>
+                <li><a track-event-by-click track-category="click" track-action="footer_menu_tournaments" href="/tournament-rules">{{'FOOTER__RULES' | translate}}</a></li>
+                <li><a track-event-by-click track-category="click" track-action="footer_menu_tournaments" href="/privacypolicy">{{'PRIVATE_POLICY' | translate}}</a></li>
+                <li><a track-event-by-click track-category="click" track-action="footer_menu_tournaments" href="/rules">{{'FOOTER__ARGEEMENT' | translate}}</a></li>
+            </ul>
+        </div>
+        <div class="contacts">
+            <span>+356 355 00 757 | info@gamestars.gg | GS Global ltd, Vincenti Buildings, 28/19 (Suite 1723) Strait Street, Valletta, Malta, VLT 1432<br/>© 2016 GS Global ltd. All rights reserved. Core version {{appCtrl.config.version}}</span>
+        </div>
+        <div class="copy">
+            <span>GAMESTARS ISN'T ENDORSED BY RIOT GAMES AND DOESN'T REFLECT THE VIEWS OR OPINIONS OF RIOT GAMES OR ANYONE OFFICIALLY INVOLVED IN PRODUCING OR MANAGING LEAGUE OF LEGENDS.LEAGUE OF LEGENDS AND RIOT GAMES ARE TRADEMARKS OR REGISTERED TRADEMARKS OF RIOT GAMES, INC. LEAGUE OF LEGENDS © RIOT GAMES, INC</span>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,202 @@
+<!-- start Middle-->
+<div id="middle">
+    <div class="b-gross-brd">
+        <div class="b-gross-brd_cnt bg-black">
+            <div class="row cashGames">
+                <div class="controlPanel" ng-class="{'opacityZeroVife' : !vm.isPlayBtnActive()}">
+                    <div class="cashGames-intro">
+                        <div class="cashGames-intro__left">
+                            <h1>{{'MATCH__CASHGAME' | translate}}</h1>
+                            <p>{{'MATCH__INFO' | translate}}</p>
+                            <ul>
+                                <li>{{'MATCH__INFO_1' | translate}}</li>
+                                <li>{{'MATCH__INFO_2' | translate}}</li>
+                                <li>{{'MATCH__INFO_3' | translate}}</li>
+                            </ul>
+                        </div>
+                        <div class="cashGames-intro__right">
+                            <!--<div class="banner-bg" ng-click="vm.openPaymentModal()">-->
+                                <!--<div class="banner-bg-shadow"></div>-->
+                                <!--<div class="banner-title">-->
+                                    <!--<p class="title-top">{{'MATCH__BANNER_1' | translate}}</p>-->
+                                    <!--<div class="banner-title-stripe">-->
+                                        <!--<p>{{'MATCH__BANNER_2' | translate}}</p>-->
+                                        <!--<h2>{{'MATCH__BANNER_3' | translate}}</h2>-->
+                                    <!--</div>-->
+                                    <!--<p class="title-bottom">{{'MATCH__BANNER_4' | translate}}</p>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <div class="banner-bg">
+                                <a style="display:block; width:333px; height:270px" href="https://business.facebook.com/gamestarsgg/photos/a.1088400997920493.1073741828.1030049677088959/1135827669844492/?type=3&theater" target="_blank"></a>
+                            </div>
+
+                            <p class="banner-bottom-text" ng-bind-html="'MATCH__BANNER_BOTTOM' | translate"></p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="gameSelector clearfix">
+                        <div class="buttons-selector">
+                            <div class="selector">
+                                <div ng-repeat="(key,row) in ::vm.cashConfig">
+                                    <button id="cashgames-btn-teamcount-{{::row.teamCount}}" class="btn btn-primary"
+                                            ng-class="{'nonmargin' : key == 0}"
+                                            ng-disabled="row.teamCount == '1'"
+                                            ng-model="vm.models.modelType"
+                                            uib-btn-radio="{{::row}}">
+                                        <span>{{::row.teamCount}}x{{::row.teamCount}}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="typebox">
+                            <div class="part bet">
+                                <h3>BET</h3>
+                                <div class="selector">
+                                    <ul>
+                                        <li ng-repeat="row in ::vm.models.modelBetType.bet">
+                                            <button id="cashgames-btn-bet-{{::row}}" class="btnSelector"
+                                                    ng-model="vm.models.modelBet"
+                                                    uib-btn-radio="{{::row}}">
+                                                <span>$ {{::row}}</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="part queue">
+                                <h3>QUEUE TYPE</h3>
+                                <div class="selector">
+                                    <ul>
+                                        <li ng-repeat="row in ::vm.models.modelType.queue">
+                                            <button id="cashgames-btn-queue-{{::row}}" class="btnSelector"
+                                                    ng-model="vm.models.modelQueue"
+                                                    ng-disabled="row == 'premade' || row == 'team'"
+                                                    uib-btn-radio="'{{::row}}'">{{row}}
+                                            </button>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-show="!vm.isPlayBtnActive()" disabled="disable" class="disabler"></div>
+                </div>
+
+                <div class="row row-server-buttons">
+                    <div class="col-xs-4 col-server-buttons">
+                        <div class="game-button" ng-hide="vm.showCancelButton() && vm.isActiveRegion('EUW')">
+                            <button id="cashgames-btn-apply-EUW" class="btn-join-blue btn-block"
+                                    ng-disabled="!vm.isPlayBtnActive() || vm.loading"
+                                    ng-click="vm.onApplyClick('EUW')">
+                                <span ng-hide="vm.loading === 'EUW'">{{'PLAY_ON' | translate:'{ server: "EU WEST" }'}}</span>
+                                <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="vm.loading === 'EUW'"></i>
+                            </button>
+                        </div>
+                        <div class="game-button" ng-show="vm.showCancelButton() && vm.isActiveRegion('EUW')">
+                            <button id="cashgames-btn-cancel-EUW" class="btn-join-red btn-block"
+                                    ng-click="vm.destroyCashGame()">
+                                {{'CANCEL_SEARCH' | translate}}
+                            </button>
+                        </div>
+
+                        <div class="counter-search">
+                            <h3>There are</h3>
+                            <h2 id="cashgames-counter-EUW" class="counter" ng-bind="vm.countPlayers['EUW'] || 0"></h2>
+                            <h4>Players searching</h4>
+                            <h4>for similar match</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 col-server-buttons">
+                        <div class="game-button" ng-hide="vm.showCancelButton() && vm.isActiveRegion('EUNE')">
+                            <button id="cashgames-btn-apply-EUNE" class="btn-join-yellow btn-block"
+                                    ng-disabled="!vm.isPlayBtnActive() || vm.loading"
+                                    ng-click="vm.onApplyClick('EUNE')">
+                                <span ng-hide="vm.loading === 'EUNE'" ng-bind-html="'PLAY_ON' | translate:'{ server: \'EU NORDIC & EAST\' }'"></span>
+                                <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="vm.loading === 'EUNE'"></i>
+                            </button>
+                        </div>
+                        <div class="game-button" ng-show="vm.showCancelButton() && vm.isActiveRegion('EUNE')">
+                            <button id="cashgames-btn-cancel-EUNE" class="btn-join-red btn-block"
+                                    ng-click="vm.destroyCashGame()">
+                                {{'CANCEL_SEARCH' | translate}}
+                            </button>
+                        </div>
+
+                        <div class="counter-search">
+                            <h3>There are</h3>
+                            <h2 id="cashgames-counter-EUNE" class="counter" ng-bind="vm.countPlayers['EUNE'] || 0"></h2>
+                            <h4>Players searching</h4>
+                            <h4>for similar match</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 col-server-buttons">
+                        <div class="game-button" ng-hide="vm.showCancelButton() && vm.isActiveRegion('NA')">
+                            <button id="cashgames-btn-apply-NA" class="btn-join-red btn-block"
+                                    ng-disabled="!vm.isPlayBtnActive() || vm.loading"
+                                    ng-click="vm.onApplyClick('NA')">
+                                <span ng-hide="vm.loading === 'NA'">{{'PLAY_ON' | translate:'{ server: "NORTH AMERICA" }'}}</span>
+                                <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="vm.loading === 'NA'"></i>
+                            </button>
+                        </div>
+                        <div class="game-button" ng-show="vm.showCancelButton() && vm.isActiveRegion('NA')">
+                            <button id="cashgames-btn-cancel-NA" class="btn-join-red btn-block"
+                                    ng-click="vm.destroyCashGame()">
+                                {{'CANCEL_SEARCH' | translate}}
+                            </button>
+                        </div>
+
+                        <div class="counter-search">
+                            <h3>There are</h3>
+                            <h2 id="cashgames-counter-NA" class="counter" ng-bind="vm.countPlayers['NA'] || 0"></h2>
+                            <h4>Players searching</h4>
+                            <h4>for similar match</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="b-tour-chatarea">
+                <div class="b-tour-chatarea-title">
+                    <span>{{'CHAT' | translate}}</span>
+                </div>
+                <div ng-controller="chatSystem as vm" class="b-tour-chatarea-chat">
+                    <div id="cashGamesChatArea" class="b-tour-chatarea-chat-area">
+                        <div class="b-tour-chatarea-chat-area-msg"
+                             ng-repeat="row in generalChatMsg | filter: {room_id : vm.chatID}">
+                            <span class="date">[{{row.date | date:'HH:mm:ss'}}]</span>
+                            <a href class="from"
+                               ng-class="{'myMsg': row.sender == userProfile.userData.name}">{{row.sender}}</a>
+                            <span class="msg">: {{row.text}}</span>
+                        </div>
+                    </div>
+                    <div class="b-tour-chatarea-chat-chat-submit">
+                        <form>
+                            <input type="text" placeholder="{{'MATCH__INOUT_YOUR_MSG_PLACEHOLDER' | translate}}"
+                                   ng-disabled="sendingMsg || !userProfile"
+                                   ng-model="inputCashGamesChatMsg"/>
+                            <button id="tournament-chat-btn-submit" class="btn-grey-sm" type="submit"
+                                    ng-hide="sendingMsg"
+                                    ng-disabled="!userProfile"
+                                    ng-click="msgManager('group_general', inputCashGamesChatMsg, 'CHAT_MESSAGE');inputCashGamesChatMsg ='';vm.sendingMsg = true">
+                                {{'MATCH__INOUT_YOUR_SEND_MSH_BTN_CAPTION' | translate}}
+                            </button>
+                            <button ng-show="sendingMsg" type="submit" disabled="disabled" class="btn-grey-sm"><i class="fa fa-spin fa-spinner"></i></button>
+                        </form>
+                    </div>
+                </div>
+                </div>
+
+            <div class="cashgame-banner row">
+                <a href="/referal">
+                    <img src="/src/img/invite-friend-cashgame.jpg">
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end Middle -->

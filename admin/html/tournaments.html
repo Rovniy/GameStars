@@ -1,0 +1,112 @@
+<div class="page-title">
+    <span class="title">Список турниров</span>
+    <div class="description">Актуальные турниры во всех статусах</div>
+</div>
+<div class="row ta-center">
+    <a href="/tournament/create" class="btn btn-success">Создать новый турнир</a>
+</div>
+<div class="row">
+    <table class="table table-hover ta-center admTourList">
+        <thead>
+        <tr class="ta-center">
+            <th class="ta-center">Id</th>
+            <th class="ta-center">Игра</th>
+            <th class="ta-center">
+                {{'MAIN__SERVER' | translate}}
+            </th>
+            <th class="ta-center left-air">
+                <a href ng-click="vm.onSortClick('startDate')">
+                    {{'MAIN__DATE' | translate}}
+                    <span class="fa fa-caret-up" ng-show="vm.sortType === 'startDate'"
+                          ng-class="{ 'fa-caret-up': vm.sortReverse, 'fa-caret-down': !vm.sortReverse }"></span>
+                    <span class="fa fa-sort" ng-show="vm.sortType !== 'startDate'"></span>
+                </a>
+            </th>
+            <th class="ta-center left-air">
+                НАЗВАНИЕ
+            </th>
+            <th class="ta-center left-air">
+                <a href ng-click="vm.onSortClick('awardFund')">
+                    {{'MAIN__PRIZE_FUND' | translate}}
+                    <span class="fa fa-caret-up" ng-show="vm.sortType === 'awardFund'"
+                          ng-class="{ 'fa-caret-up': vm.sortReverse, 'fa-caret-down': !vm.sortReverse }"></span>
+                    <span class="fa fa-sort" ng-show="vm.sortType !== 'awardFund'"></span>
+                </a>
+            </th>
+            <th class="ta-center left-air">
+                {{'MAIN__BUY_IN' | translate}}
+            </th>
+            <th class="ta-center">
+                {{'MAIN__STATUS' | translate}}
+                <!--Статус-->
+            </th>
+            <th class="ta-center">
+                {{'MAIN__PARTICIPANTS' | translate}}
+            </th>
+            <th class="ta-center">
+                Отображение
+            </th>
+            <th class="ta-center">
+                Теги
+            </th>
+            <th class="ta-center">
+                Controls
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="tournament in vm.tournaments track by tournament.id" class="b-tournament-list_tr ta-center"
+            style="cursor: pointer;">
+            <td class="ta-center">
+                {{::tournament.id}}
+            </td>
+            <td class="ta-center">
+                <img src="/src/img/base/game-icon/lol.png"/>
+            </td>
+            <td class="ta-center">
+                {{::tournament.gameRegion.regionName}}
+            </td>
+            <td class="ta-center">
+                {{::tournament.startDate | date:'dd.MM HH:mm'}} - {{::tournament.endDate | date:'dd.MM HH:mm'}}
+            </td>
+            <td class="ta-center">
+                {{::tournament.name}}
+            </td>
+            <td class="ta-center">
+                {{::tournament.awardFund | transaction:tournament.awardType}}
+            </td>
+            <td class="ta-center">
+                <span>{{::tournament.defaultBuyIn.value | transaction:tournament.defaultBuyIn.currencyType}}</span>
+            </td>
+            <td class="ta-center">
+                {{::tournament.status | matchStatus}}
+                <span ng-if="tournament.status==='PRE_REG'||tournament.status==='INACTIVE'">{{tournament.regStartDate | date:'dd.MM HH:mm'}}</span>
+                <!--<span ng-if="tournament.status==='POST_REG'">{{tournament.regEndDate|date:'dd.MM HH:mm'}}</span>-->
+            </td>
+            <td class="ta-center">
+            <span ng-show="::(tournament.status !== 'INACTIVE')">
+                {{ ::(tournament.activeMembers || '-')}}
+            </span>
+            </td>
+            <td class="ta-center">
+                <span ng-if="::tournament.active">Открыт</span>
+                <span ng-if="::!tournament.active">Скрыт</span>
+            </td>
+            <td class="ta-center">
+                {{ ::tournament.tags}}
+            </td>
+            <td class="ta-center">
+                <a ng-href="/tournament/{{::tournament.id}}" class="btn btn-info">Info</a>
+                <a ng-href="/tournament/edit/{{::tournament.id}}" class="btn btn-danger">Edit</a>
+                <a ng-href="/tournament/create/{{::tournament.id}}" class="btn btn-default">Clone</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="row" ng-if="::vm.pagination">
+    <uib-pagination max-size="5" total-items="vm.pagination.total_row_count" items-per-page="vm.perPage"
+                    boundary-links="true"
+                    ng-model="vm.page" ng-change="vm.loadTournaments()">
+    </uib-pagination>
+</div>

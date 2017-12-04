@@ -1,0 +1,283 @@
+.btn-lk-default {
+  color: #fff;
+  background: #65686f;
+  border: 0;
+  border-radius: 4px;
+  font-family: @font-semi;
+  margin-top: 20px;
+  text-transform: uppercase;
+  &:hover, &:focus {
+    background: #1c1817;
+    color: #fff;
+    border: none;
+    outline: none;
+  }
+}
+
+.btn-lk-transparent {
+  color: #f6e0c0;
+  background: transparent;
+  border: 2px solid #a58051;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-family: @font-semi;
+  margin-top: 20px;
+  padding: 5px 30px;
+  &:hover, &:focus {
+    background: transparent;
+    color: #fbdeba;
+    border: 2px solid #e9d0b0;
+    outline: none;
+  }
+}
+
+.btn-lk-main-big {
+  color: #fff;
+  background: #381e20;
+  border: none;
+  border-radius: 1px;
+  text-transform: uppercase;
+  font-family: @font-semi;
+  margin: 15px 0 0 0;
+  padding: 10px 30px;
+  &:hover, &:focus {
+    background: #75281b;
+    color: #fff;
+    border: none;
+    outline: none;
+  }
+}
+
+.btn-refresh {
+  color: #fff;
+  background: #7e2626;
+  border: none;
+  height: 17px;
+  border-radius: 9px;
+  text-transform: uppercase;
+  font: 10px/5px @font-semi;
+  padding: 5px 9px;
+  outline: none;
+  &:hover, &:focus, &:active, &:link {
+    background: #a93434;
+    color: #fff;
+    border: 0;
+    outline: 0;
+  }
+}
+
+.buttons-doit-margin {
+  margin: 0 10px;
+}
+
+.border-top-one-red {
+  border-top: 2px solid #7e2727 !important;
+}
+
+.lk {
+  background: #151618;
+  width: 1200px;
+  margin: 0 auto;
+  height: auto;
+  .lk-sidebar {
+    background: #151618;
+    padding: 0;
+    .sidebar-title {
+      background: #551a1a;
+      position: relative;
+      margin: 0 0 1px 0;
+      text-align: left;
+      width: 100%;
+      height: 42px;
+      border-left: 3px solid #999;
+      h3 {
+        color: #afafaf;
+        text-transform: uppercase;
+        margin: 0;
+        padding: 15px 11px;
+        font: 12px/12px @font-semi;
+        &:hover {
+          color: #fff;
+        }
+      }
+      i {
+        position: absolute;
+        color: #fff;
+        top: 13px;
+        right: 11px;
+      }
+      a {
+        outline: 0;
+        color: inherit;
+        &:hover, &:focus {
+          text-decoration: none;
+          border: 0;
+          outline: 0;
+        }
+      }
+      &:hover {
+        border-left: 3px solid darkred;
+      }
+    }
+    .activeMain {
+      h3 {
+        color: #fff;
+      }
+      border-left: 3px solid darkred;
+      text-decoration: none;
+      outline: 0;
+    }
+    > .disable {
+      background: #3b1212;
+      h3 {
+        color: #636363;
+        &:hover {
+          color: #636363;
+          cursor: no-drop;
+        }
+      }
+      &:hover {
+        border-left: 3px solid #999;
+        cursor: no-drop;
+      }
+    }
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        border-left: 3px solid #999;
+        margin: 0 0 1px 0;
+        list-style: none;
+        &:hover {
+          border-left: 3px solid darkred;
+        }
+        a {
+          display: block;
+          width: 100%;
+          height: 100%;
+          color: #afafaf;
+          outline: 0;
+          div {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            width: 30px;
+            height: 40px;
+            padding-top: 10px;
+            background: #18191b;
+            border-right: 1px solid #000;
+            i {
+            }
+          }
+          span {
+            margin: 0 0 0 10px;
+            text-transform: uppercase;
+            font: 10px/10px @font-semi;
+          }
+          &:hover, &:focus {
+            text-decoration: none;
+            color: #fff;
+            outline: 0;
+          }
+        }
+      }
+      .active {
+        border-left: 3px solid darkred;
+        a {
+          color: #fff;
+        }
+      }
+      .disable {
+        a {
+          cursor: no-drop;
+          color: #333;
+          &:hover, &:focus {
+            color: #333;
+            text-decoration: none;
+          }
+        }
+        &:hover {
+          border-left: 3px solid #999;
+        }
+      }
+      li:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  .lk-content {
+    padding: 0;
+    background: #d9d8d8;
+    min-height: 288px;
+
+    .box-title {
+      float: left;
+      background: #1c1817;
+      margin: 0;
+      width: 100%;
+      height: 42px;
+      border-bottom: 3px solid #7e2626;
+      position: relative;
+      text-align: center;
+      padding: 13px 0 0 0;
+      border-top: 2px solid #1c1817;
+
+      &:after {
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        content: '';
+        border: 8px solid transparent;
+        border-top: 8px solid #7e2626;
+      }
+
+      h3 {
+        color: #fff;
+        text-transform: uppercase;
+        margin: 0;
+        padding: 0;
+        font: 12px/12px @font-semi;
+      }
+    }
+
+    .box-content {
+      float: left;
+      font-family: @font-semi;
+      padding: 10px;
+      margin: 20px 0 10px 0;
+      height: 100%;
+      width: 100%;
+
+      .form-group {
+        width: 500px;
+        margin: 0 auto;
+
+        label {
+          margin: 6px 0 5px 0;
+          text-align: right;
+        }
+
+        input.form-control {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+.personalPage {
+  text-align: center;
+}
+
+.connectSocialAccouns {
+  .social-container {
+    .social-fb {
+      display:inline-block;
+    }
+    .btn-social {
+      margin:10px;
+    }
+  }
+}

@@ -1,0 +1,123 @@
+<div class="page-title">
+    <span class="title">Пользователи в очереди</span>
+    <div class="description">Список пользователей, стоящих в очереди подборы игр</div>
+</div>
+<div class="row ta-center form-group">
+    <button class="btn btn-success"
+            ng-click="vm.getApplications()"
+            ng-disabled="vm.loading">
+        <span>Обновить список очереди</span> <i class="fa fa-spin fa-spinner" ng-show="vm.loading"></i>
+    </button>
+</div>
+<div class="row" ng-controller="ModalTemp">
+    <uib-tabset justified="true">
+        <uib-tab heading="Турнирная очередь">
+            <div class="form-group" ng-repeat="(key, region) in vm.applications.TOURNAMENT_POINTS track by key">
+                <h4 ng-bind="::key"></h4>
+                <table class="table ta-center table-striped">
+                    <thead>
+                    <tr>
+                        <th class="ta-center">#</th>
+                        <th class="ta-center">ID турнира</th>
+                        <th class="ta-center">Пользователь</th>
+                        <th class="ta-center">Ставка</th>
+                        <th class="ta-center">Рейтинг</th>
+                        <th class="ta-center">Режим поиска</th>
+                        <th class="ta-center">Статус</th>
+                        <th class="ta-center">Время постановки в очередь</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="app in region._arr track by app.id">
+                        <td ng-bind="$index + 1"></td>
+                        <td ng-bind="::app._tournamentId"></td>
+                        <td><a class="green" ng-href="/user/{{::app.userId}}" ng-bind="::app.userId"></a></td>
+                        <td>{{::app.actualBid | currencyUnit:app.currencyType}}</td>
+                        <td ng-bind="::app.rating"></td>
+                        <td>
+                            <span ng-show="::app.dirty">Поиск в каше</span>
+                            <span ng-show="::!app.dirty">Обычный поиск</span>
+                        </td>
+                        <td>
+                            <span ng-show="::(app.status === 'PREPARE')">Поиск матча</span>
+                        </td>
+                        <td>{{::app.createTime | date:'H:mm:ss / dd.MM.yy'}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </uib-tab>
+        <uib-tab heading="Очередь на Starpoints">
+            <div class="form-group" ng-repeat="(key, region) in vm.applications.STAR_POINTS track by key">
+                <h4 ng-bind="::key"></h4>
+                <table class="table ta-center table-striped">
+                    <thead>
+                    <tr>
+                        <th class="ta-center">#</th>
+                        <th class="ta-center">Пользователь</th>
+                        <th class="ta-center">Ставка</th>
+                        <th class="ta-center">Рейтинг</th>
+                        <th class="ta-center">Режим поиска</th>
+                        <th class="ta-center">Статус</th>
+                        <th class="ta-center">Время постановки в очередь</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="app in region._arr track by app.id">
+                        <td ng-bind="$index + 1"></td>
+                        <td><a class="green" ng-href="/user/{{::app.userId}}" ng-bind="::app.userId"></a></td>
+                        <td>{{::app.actualBid | currencyUnit:app.currencyType}}</td>
+                        <td ng-bind="::app.rating"></td>
+                        <td>
+                            <span ng-show="::app.dirty">Поиск в каше</span>
+                            <span ng-show="::!app.dirty">Обычный поиск</span>
+                        </td>
+                        <td>
+                            <span ng-show="::(app.status === 'PREPARE')">Поиск матча</span>
+                        </td>
+                        <td>{{::app.createTime | date:'H:mm:ss / dd.MM.yy'}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </uib-tab>
+        <uib-tab heading="Очередь в CashGames">
+            <div class="form-group" ng-repeat="(key, region) in vm.applications.REAL_POINTS track by key">
+                <h4 ng-bind="::key"></h4>
+                <table class="table ta-center table-striped">
+                    <thead>
+                    <tr>
+                        <th class="ta-center">#</th>
+                        <th class="ta-center">Пользователь</th>
+                        <th class="ta-center">Ставка</th>
+                        <th class="ta-center">Рейтинг</th>
+                        <th class="ta-center">Режим поиска</th>
+                        <th class="ta-center">Статус</th>
+                        <th class="ta-center">Время постановки в очередь</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="app in region._arr track by app.id">
+                        <td ng-bind="$index + 1"></td>
+                        <td><a class="green" ng-href="/user/{{::app.userId}}" ng-bind="::app.userId"></a></td>
+                        <td>
+                            <span ng-bind="::(app.actualBid || app.actualBidBonus) | currencyUnit:app.currencyType"></span>
+                            (<span ng-bind="::(app.actualBidBonus ? 'BONUS' : 'VIP')"></span>)
+                        </td>
+                        <td ng-bind="::app.rating"></td>
+                        <td>
+                            <span ng-show="::app.dirty">Поиск в каше</span>
+                            <span ng-show="::!app.dirty">Обычный поиск</span>
+                        </td>
+                        <td>
+                            <span ng-show="::(app.status === 'PREPARE')">Поиск матча</span>
+                        </td>
+                        <td>{{::app.createTime | date:'H:mm:ss / dd.MM.yy'}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+
+</div>

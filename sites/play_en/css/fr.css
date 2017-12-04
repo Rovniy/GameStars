@@ -1,0 +1,104 @@
+.navbar-main {
+    margin-left: 114px;
+}
+.navbar-main li {
+    margin-right: 37px;
+}
+.navbar-right {
+    margin: 0 48px 0 0;
+}
+
+.fixed-counter .join button {
+    width: 189px;
+}
+
+.registration .deadline h3 {
+    margin-left: 7px;
+}
+.registration .counter {
+    margin-left: -9px;
+}
+.registration .participate {
+    margin-left: 71px;
+}
+.registration .capabilities h4 {
+    margin-left: 22px;
+}
+.registration .capabilities .item:first-child .left {
+    margin-left: 20px;
+}
+
+#register-form .input-checkbox label, #register-form .input-checkbox span {
+    display: block;
+}
+#register-form .input-checkbox label {
+    float: left;
+}
+#register-form .input-checkbox span {
+    display: block;
+    line-height: 20px;
+    margin-left: 44px;
+}
+
+.popup-form .form-header h3.ident {
+    margin-left: -29px;
+}
+
+@media (max-width: 991px) {
+    .registration .participate {
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-main {
+        margin: auto;
+    }
+    .navbar-right {
+        margin: auto;
+    }
+    .navbar .navbar-header {
+        width: 45%;
+    }
+    .navbar-right {
+        margin-top: 15px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .navbar-main {
+        margin-left: 10px;
+    }
+    .navbar-main li {
+        margin-right: 27px;
+    }
+    .navbar-right {
+        margin: 0;
+    }
+    
+    .fixed-counter .text {
+        margin-left: -10px;
+        max-width: 230px;
+    }
+    .fixed-counter .text h4 {
+        text-align: left;
+    }
+    .fixed-counter .join {
+        margin-left: -6px;
+    }
+    .fixed-counter .join button {
+        width: 149px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .registration .deadline h2 {
+        font-size: 44px;
+    }
+    .registration .capabilities .row > div:first-child {
+        width: 37.33333333%;
+    }
+    .registration .capabilities .row > div:nth-child(2) {
+        width: 29.33333333%;
+    }
+}

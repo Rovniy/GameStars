@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'PAYMENT__BUY_SP' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<div class="modal-body modalPayment">
+    <div ng-hide="payVisa">
+        <div class="ta-center" ng-show="!showFakePaymentMethodSorry">
+            <h3>{{'PAYMENT__YOU_BUY' | translate}}</h3>
+            <hr/>
+            <h2>{{allSP}} Starpoints</h2>
+            <h4>{{sp}} SP + {{sp*bonus}} bonus SP</h4>
+            <hr/>
+            <h2>{{'LK__FOR' | translate}} ${{cost}}</h2>
+        </div>
+
+        <gs-payment providers="paypal, epg, psc, realpoints" amount="cost * 100" purchase-type="STAR_POINTS"
+                    on-submit="goPayFromModal(provider)" on-success="onSuccess()"></gs-payment>
+
+        <div ng-show="!onSuccess && !showFakePaymentMethods && !showFakePaymentMethodSorry">
+            <div style="font-size: 16px; text-align: center; margin: 40px 0 0 0;">
+                <a href ng-click="goOtherPaymentsMethods()">{{ 'EXPERIMENT_OTHER_PAYMENT_METHODS' | translate }}</a>
+            </div>
+        </div>
+
+        <div ng-show="!onSuccess && showFakePaymentMethods && !showFakePaymentMethodSorry" class="row variable">
+            <div class="col-xs-4 col-xs-offset-4">
+                <div ng-hide="pending" class="item" ng-click="goPayFromModal({ type: 'FAKE_SKRILL' })">
+                    <img ng-src="/src/img/payments/skrill.png" />
+                </div>
+            </div>
+        </div>
+
+        <!--<div ng-show="showFakePaymentMethodSorry" style="margin: 20px 0 0 0; line-height: 24px;">-->
+            <!--{{ 'EXPERIMENT_FAKE_PAYMENTS_METHODS' | translate }}-->
+
+            <!--<div class="shop-buy-button" style="text-align: center; margin: 20px 0 0 0;">-->
+                <!--<button onclick="carrotquest.open()" class="btn-red tryBuySpButton ng-binding">{{ 'EXPERIMENT_CONTACT_SUPPORT' | translate }}</button>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    </div>
+</div>

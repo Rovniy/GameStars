@@ -1,0 +1,202 @@
+<div class="box-title">
+    <h3>{{'LK__MY_MATCHES' | translate}}</h3>
+</div>
+<div ng-controller="MatchesPageController" class="box-content">
+    <h2 ng-show="!matchsData" class="ta-center errorTournament">{{'LK__NOT_PLAYED_MATCH' | translate}}</h2>
+
+    <div ng-repeat="row in ::matchsData | filter: row.statistic != null">
+
+        <div ng-if="::(row.status === 'CREATED' || row.status === 'STARTED' || row.status === 'FINISHED')" class="data-game">
+            <div class="row data-title data-title-grey">
+                <div class="col-lg-10 data-game-lol">
+                    <img ng-src="/src/img/base/game-icon/{{ ::(row.gameType | lowercase) }}.png"/>
+                    <span ng-show="::(row.status === 'CREATED')">{{'LK__MATCH_CREATED' | translate}}</span>
+                    <span> - {{ ::row.regionName }}</span>
+                    <span ng-show="::(row.status === 'PREPARE')">{{'LK__MATCH_PREPARE' | translate}}</span>
+                    <span ng-if="::row.tournamentName"> - {{ ::row.tournamentName }}</span>
+                    <span> - {{ ::(row.createTime | date:'dd.MM.yy HH:mm') }}</span>
+                </div>
+                <div class="col-lg-2 data-status">
+                    <span ng-bind="::(row.bid | transaction:row.currencyType)"></span>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="::(row.status === 'COMPLETED' || row.status === 'HAVE_GOT_STATISTIC')" class="data-game">
+            <div class="row data-title" ng-class="::{ 'data-title-green': row.isWin, 'data-title-red': !row.isWin }">
+                <div class="col-lg-10 data-game-lol">
+                    <img ng-src="/src/img/base/game-icon/{{ ::(row.gameType | lowercase) }}.png"/>
+                    <span ng-show="::row.isWin == true">{{'MATCH_RESULT__VICTORY' | translate}}</span>
+                    <span ng-show="::row.isWin == false">{{'MATCH_RESULT__DEFEAT' | translate}}</span>
+                    <span> - {{ ::row.regionName }}</span>
+                </div>
+                <div class="col-lg-2 data-status">
+                    <span ng-show="::(row.gain >= 0)">+{{ ::(row.gain | transaction:row.currencyType) }}</span>
+                    <span ng-show="::(row.gain < 0)">{{ ::(row.gain | transaction:row.currencyType) }}</span>
+                </div>
+            </div>
+            <div class="row data-body">
+                <div class="col-lg-3 data-body-desc">
+                    <div class="hero-avatar">
+                        <img ng-src="/src/img/lol/heroes/{{ ::row.statistic.championId }}.png"/>
+                        <span ng-bind="::getLevel(row)"></span>
+                    </div>
+                    <div class="hero-spells">
+                        <img class="first" ng-src="/src/img/lol/heroesSpells/{{ ::getSpell1(row) }}.png"/>
+                        <img ng-src="/src/img/lol/heroesSpells/{{ ::getSpell2(row) }}.png"/>
+                    </div>
+
+                </div>
+                <div class="col-lg-3 data-body-data">
+                    <div class="kda-stat">
+                        <ul>
+                            <li>
+                                <span class="bordered" ng-bind="::getKills(row)"></span>
+                                <p>{{'LK__KILLS' | translate}}</p>
+                            </li>
+                            <li>
+                                <span class="bordered border-red" ng-bind="::getDeaths(row)"></span>
+                                <p>{{'LK__DEATH' | translate}}</p>
+                            </li>
+                            <li>
+                                <span class="bordered" ng-bind="::row.statistic.stats.assists"></span>
+                                <p>{{'LK__ASSISTANCE' | translate}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uss-stat">
+                        <span>{{'LK__KDA' | translate}} {{ ::((getKills(row) + row.statistic.stats.assists) / getDeaths(row) | number:2) }} : 1</span>
+                    </div>
+                    <div class="uchastie-stat">
+                        <span>{{'LK__PART_IN_KILLS' | translate}} {{ ::((getKills(row) + row.statistic.stats.assists) / 15 * 100 | number:0) }} %</span>
+                    </div>
+
+                </div>
+                <div class="col-lg-6 data-body-text">
+                    <div class="data-body-text-decs">
+                        <ul>
+                            <li>{{'LK__MATCH_TYPE' | translate}}:</li>
+                            <li>{{'LK__START_DATE' | translate}}:</li>
+                            <li>{{'LK__DURATION' | translate}}:</li>
+                        </ul>
+                    </div>
+                    <div class="data-body-text-data">
+                        <ul>
+                            <li ng-if="!row.tournamentName">CashGame</li>
+                            <li ng-if="row.tournamentName" ng-bind="::row.tournamentName"></li>
+                            <li ng-bind="::(row.createTime | date:'dd.MM.yy HH:mm')"></li>
+                            <li ng-bind="::row.duration | duration"></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div ng-if="::(row.status === 'COMPLETED_WITH_VIOLATION')" class="data-game">
+            <div class="row data-title" ng-class="::{ 'data-title-green': row.isWin, 'data-title-red': !row.isWin }">
+                <div class="col-lg-10 data-game-lol">
+                    <img ng-src="/src/img/base/game-icon/{{ ::(row.gameType | lowercase) }}.png"/>
+                    <span ng-show="::row.isWin == true">{{'MATCH_RESULT__VICTORY' | translate}}</span>
+                    <span ng-show="::row.isWin == false">{{'MATCH_RESULT__DEFEAT' | translate}}</span>
+                    <span> - {{'LK__WITH_VIOLATIONS' | translate}}</span>
+                    <span> - {{ ::row.regionName }}</span>
+                </div>
+                <div class="col-lg-2 data-status">
+                    <span ng-show="row.gain >= 0">+{{ ::(row.gain | transaction:row.currencyType) }}</span>
+                    <span ng-show="row.gain < 0">{{ ::(row.gain|transaction:row.currencyType) }}</span>
+                </div>
+            </div>
+            <div class="row data-body">
+                <div class="col-lg-3 data-body-desc">
+                    <div class="hero-avatar">
+                        <img ng-src="/src/img/lol/heroes/{{ ::row.statistic.championId }}.png"/>
+                        <span ng-bind="::getLevel(row)"></span>
+                    </div>
+                    <div class="hero-spells">
+                        <img class="first" ng-src="/src/img/lol/heroesSpells/{{ ::getSpell1(row) }}.png"/>
+                        <img ng-src="/src/img/lol/heroesSpells/{{ ::getSpell2(row) }}.png"/>
+                    </div>
+
+                </div>
+                <div class="col-lg-3 data-body-data">
+                    <div class="kda-stat">
+                        <ul>
+                            <li>
+                                <span class="bordered" ng-bind="::getKills(row)"></span>
+                                <p>{{'LK__KILLS' | translate}}</p>
+                            </li>
+                            <li>
+                                <span class="bordered border-red" ng-bind="::getDeaths(row)"></span>
+                                <p>{{'LK__DEATH' | translate}}</p>
+                            </li>
+                            <li>
+                                <span class="bordered" ng-bind="::row.statistic.stats.assists"></span>
+                                <p>{{'LK__ASSISTANCE' | translate}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uss-stat">
+                        <span>{{'LK__KDA' | translate}} {{ ::((getKills(row) + row.statistic.stats.assists) / getDeaths(row) | number:2) }} : 1</span>
+                    </div>
+                    <div class="uchastie-stat">
+                        <span>{{'LK__PART_IN_KILLS' | translate}} {{ ::((getKills(row) + row.statistic.stats.assists) / 15 * 100 | number:0) }} %</span>
+                    </div>
+
+                </div>
+                <div class="col-lg-6 data-body-text">
+                    <div class="data-body-text-decs">
+                        <ul>
+                            <li>{{'LK__MATCH_TYPE' | translate}}:</li>
+                            <li>{{'LK__START_DATE' | translate}}:</li>
+                            <li>{{'LK__DURATION' | translate}}:</li>
+                        </ul>
+                    </div>
+                    <div class="data-body-text-data">
+                        <ul>
+                            <li ng-bind="::row.tournamentName"></li>
+                            <li ng-bind="::row.createTime | date:'dd.MM.yy HH:mm'"></li>
+                            <li ng-bind="::row.duration | duration"></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div ng-if="::(row.status === 'NOT_FOUND_STAT' || row.status === 'NOT_MATCHED' || row.status === 'BAD_RESULT')" class="data-game">
+            <div class="row data-title data-title-orange">
+                <div class="col-lg-10 data-game-lol">
+                    <img ng-src="/src/img/base/game-icon/{{ ::(row.gameType | lowercase) }}.png"/>
+                    <span ng-show="::(row.status === 'NOT_FOUND_STAT')">{{'LK__STAT_NOT_FOUND' | translate}}</span>
+                    <span ng-show="::(row.status === 'NOT_MATCHED')">{{'LK__MATCH_NOT_STARTED' | translate}}</span>
+                    <span ng-show="::(row.status === 'BAD_RESULT')">{{'LK__BAD_STAT' | translate}}</span>
+                    <span> - {{ ::row.regionName }}</span>
+                    <span ng-if="::row.tournamentName"> - {{ ::row.tournamentName }}</span>
+                    <span> - {{ ::(row.createTime | date:'dd.MM.yy HH:mm') }}</span>
+                </div>
+                <div class="col-lg-2 data-status">
+                    <span ng-bind="::(row.bid | transaction:row.currencyType)"></span>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="::(row.status === 'CANCELED')" class="data-game">
+            <div class="row data-title data-title-black">
+                <div class="col-lg-10 data-game-lol">
+                    <img ng-src="/src/img/base/game-icon/{{ ::(row.gameType | lowercase) }}.png"/>
+                    <span ng-show="row.status=='CANCELED'">{{'LK__MATCH_CANCELED' | translate}}</span>
+                    <span> - {{ ::row.regionName }}</span>
+                    <span ng-if="::row.tournamentName"> - {{ ::row.tournamentName }}</span>
+                    <span> - {{ ::(row.createTime | date:'dd.MM.yy HH:mm') }}</span>
+                </div>
+                <div class="col-lg-2 data-status">
+                    <span ng-bind="::(row.bid | transaction:row.currencyType)"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

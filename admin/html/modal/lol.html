@@ -1,0 +1,213 @@
+<div ng-controller="lolController" class="matchModalBody">
+    <div ng-hide="hideLoadAnimation" class="ta-center mar449">
+        <i class="fa fa-spin fa-spinner fa-5x"></i>
+    </div>
+    <div ng-show="hideLoadAnimation">
+        <!--хедер-->
+        <div class="row matchModalBody-title">
+            <div class="col-lg-2 matchModalBody-title-logo">
+                <img src="/img/games/lol.png"/>
+            </div>
+            <div class="col-lg-6 matchModalBody-type">
+                <a ng-show="matchInfo.currencyType == 'STAR_POINTS'" href="javascript:void(0)">
+                    <h2>Игра на Starpoints</h2>
+                </a>
+                <a ng-show="matchInfo.currencyType == 'TOURNAMENT_POINTS'" href="javascript:void(0)">
+                    <h2>Игра в турнире <br/>
+                        <small ng-bind="matchInfo.tournament.name"></small>
+                    </h2>
+                </a>
+            </div>
+            <div class="col-lg-4 matchModalBody-id">
+                <ul>
+                    <li class="bold" ng-bind="matchInfo.id"></li>
+                    <li ng-bind="matchInfo.status|matchStatus"></li>
+                    <li ng-bind="matchInfo.createTime | date:'dd.MM.yyyy | H:mm'"></li>
+                </ul>
+            </div>
+        </div>
+        <!-- средний хедер-->
+        <div class="row matchModalBody-data">
+            <div class="col-lg-3 data-playersCount">
+                <!--<h2>Игра</h2>-->
+                <span ng-bind="matchInfo.matchCommands[0].matchApplications.length"></span>х<span ng-bind="matchInfo.matchCommands[1].matchApplications.length"></span>
+            </div>
+            <div class="col-lg-3 data-bit">
+                <span class="data-bit-title">Ставка:</span><br/>
+                <span class="data-bit-count">
+                    <span ng-bind="(allTeamBid(0) + allTeamBid(1)) | transaction:matchInfo.currencyType"></span>
+                </span>
+            </div>
+            <div class="col-lg-3 data-matchtime">
+                <span class="data-matchtime-title">Время игры:</span><br/>
+                <span class="data-matchtime-count">{{ matchInfo.duration ? (matchInfo.duration | toMins) : 'Неизвестно' }}</span>
+            </div>
+            <div class="col-lg-3 data-reports">
+                <span class="data-reports-title">Репортов:</span><br/>
+                <span class="data-reports-count" ng-bind="::gameInfo.reports.length"></span>
+            </div>
+        </div>
+        
+        <!--нижний хедер-->
+        <div class="row matchModalBody-data">
+            <div class="col-lg-3 data-analytic">
+                <ul>
+                    <li>
+                        <span>Статистика: <i class="fa fa-check-square-o" ng-class="::{ green: gameInfo.statistic }"></i></span>
+                        <!--<span ng-show="roll.reportsCount !== 0">Репорты: <span class="red strong">{{roll.reportsCount}}</span>-->
+                    </li>
+                    <li>
+                        <!-- todo: старклиент-->
+                        <!--<span>StarClient: <i class="fa fa-check-square-o" ng-class="{green: gameInfo.statistic?1:0}"></i></span>-->
+                        <span ng-show="roll.reportsCount !== 0">Репорты: <span class="red strong" ng-bind="::gameInfo.reports.length"></span></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-9 data-comments">
+                <!--<span>Комментарии ??????</span>-->
+            </div>
+        </div>
+        <div class="row tablePlayers"
+             ng-repeat="(matchCommandIndex, matchCommand) in ::matchInfo.matchCommands track by matchCommand.id">
+            <div class="row tablePlayers-team1">
+                <h3>
+                    <i class="green" ng-if="::matchCommand.win">WINNER </i>
+                    <i class="red" ng-if="::!matchCommand.win">LOSER </i>
+                     - (
+                    <span ng-bind="::commandSumPar(matchCommand, 'championsKilled')"></span>
+                    /
+                    <span ng-bind="::commandSumPar(matchCommand, 'numDeaths')"></span>
+                    /
+                    <span ng-bind="::commandSumPar(matchCommand, 'assists')"></span>
+                    ) - gold:
+                    <span ng-bind="commandSumPar(matchCommand, 'goldEarned')"></span>
+                    - opgg: <span ng-bind="::mmr(matchCommand)"></span>
+                    / gs: <span ng-bind="::ourRating(matchCommand)"></span>
+                </h3>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ник</th>
+                            <th>герой</th>
+                            <th>K/D/A</th>
+                            <th>ставка</th>
+                            <th>репорты</th>
+                            <th>УСС</th>
+                            <th>% участия</th>
+                            <th>урон</th>
+                            <th>крипстат</th>
+                            <th>золото</th>
+                            <th>LvL</th>
+                            <th>opgg</th>
+                            <th>gs</th>
+                            <th>наказания</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--------------------- START ---------------->
+                        <tr ng-repeat="matchApplication in ::matchCommand.matchApplications track by matchApplication.id">
+                            <!--#-->
+                            <td ng-bind="::($index + 1)"></td>
+                            <!--ник-->
+                            <td class="userNamefixedWidth">
+                                <a target="_blank" ng-href="/user/{{::matchApplication.user.id}}" ng-bind="matchApplication.user.name"></a>
+                            </td>
+                            <!--avatar-->
+                            <td class="img_avatar_hero">
+                                <img ng-src="/src/img/lol/heroes/{{::getUserData(matchApplication).championId}}.png">
+                            </td>
+                            <!--k/d/a-->
+                            <td>
+                                <span ng-bind="::getKills(matchApplication)"></span>
+                                /
+                                <span ng-bind="::getDeaths(matchApplication)"></span>
+                                /
+                                <span ng-bind="::getStat(matchApplication).assists"></span>
+                            </td>
+                            <!--Ставка-->
+                            <td>
+                                <span ng-bind="::(matchApplication.actualBid || matchApplication.actualBonusBid) | currencyUnit:matchInfo.currencyType"></span>
+                                <span ng-if="::(matchInfo.currencyType === 'REAL_POINTS')">
+                                    (<span ng-bind="::(matchApplication.actualBonusBid ? 'BONUS' : 'VIP')"></span>)
+                                </span>
+                            </td>
+                            <!--Репорты-->
+                            <td>
+                                <a class="reportsView"
+                                   uib-popover-template="'/html/modal/reportPopover.html'"
+                                   popover-placement="right"
+                                   ng-bind="::getReportsByUserId(matchApplication.user.id).length"></a>
+                            </td>
+                            <!--УСС-->
+                            <td ng-class="::{feederDetect: adk(matchApplication) < 1}"
+                                ng-bind="::(adk(matchApplication) | decimal)"></td>
+                            <!--Битвы-->
+                            <td ng-class="::{feederDetect: murders(matchCommand, matchApplication) < 20}"
+                                ng-bind="::(murders(matchCommand, matchApplication) | decimal)"></td>
+                            <!--Урон-->
+                            <td ng-class="::{ feederDetect: getStat(matchApplication).totalDamageDealtToChampions < commandSumPar(matchCommand, 'totalDamageDealtToChampions') / (matchCommand.matchApplications.length+1)}"
+                                ng-bind="::getStat(matchApplication).totalDamageDealtToChampions"></td>
+                            <!--Крипстат-->
+                            <td ng-class="::{ feederWarn: isPenultimateAndLaggingBehindOthers(matchCommand, 'minionsKilled', $index), feederDetect: getStat(matchApplication).minionsKilled < commandSumPar(matchCommand, 'minionsKilled') / (matchCommand.matchApplications.length + 1) }"
+                                ng-bind="::(getStat(matchApplication).minionsKilled + getStat(matchApplication).neutralMinionsKilled)"></td>
+                            <!--Золото-->
+                            <td ng-class="::{ feederDetect: isMinCommandValue(matchCommand, matchApplication, 'goldEarned') }"
+                                ng-bind="::getStat(matchApplication).goldEarned"></td>
+                            <!--LvL-->
+                            <td ng-class="::{ feederDetect: isMinCommandValue(matchCommand, matchApplication, 'level') }"
+                                ng-bind="::getLevel(matchApplication)"></td>
+                            <td ng-bind="::matchApplication.gameAccount.realRating"></td>
+                            <td ng-bind="::matchApplication.rating"></td>
+                            <!--Управление-->
+                            <td ng-hide="matchInfo.status === 'COMPLETED_WITH_VIOLATION'">
+                                <input type="checkbox"
+                                       ng-hide="selectedUserViolate[matchApplication.user.id]"
+                                       ng-model="selectedUsers[matchCommandIndex * commandLen + $index]" />
+                                <span class="red strong"
+                                      ng-show="selectedUserViolate[matchApplication.user.id]"
+                                      ng-bind="selectedUserViolate[matchApplication.user.id]"></span>
+                            </td>
+                            <td ng-show="matchInfo.status === 'COMPLETED_WITH_VIOLATION'">
+                                <span class="red strong"
+                                      ng-show="selectedUserViolate[matchApplication.user.id]"
+                                      ng-bind="selectedUserViolate[matchApplication.user.id]"></span>
+                            </td>
+                        </tr>
+                    <!---------------------------- END ------------------------>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr/>
+        <!--панель с действиями-->
+        <div ng-hide="matchInfo.status == 'COMPLETED_WITH_VIOLATION'" class="row changeMatch">
+            <button class="btn btn-warning" ng-click="punishSelected=true;">Наказать юзера </button>
+            <button class="btn btn-danger" ng-click="cancel()">Отменить матч <i ng-show="cancelSuccess" class="fa fa-3x fa-check-circle-o"></i></button>
+            <button class="btn btn-success"
+                    ng-hide="valArr.length == 0"
+                    ng-click="postPunish()">
+                Матч прошел модерацию <i ng-show="punished" class="fa fa-3x fa-check-circle-o"></i>
+            </button>
+        </div>
+        <div ng-show="matchInfo.status == 'COMPLETED_WITH_VIOLATION'" class="row changeMatch">
+            <h4 class="ts-center">Матч уже отредактирован модератором %adminname%</h4>
+        </div>
+        <div class="row punishment">
+        <div ng-show="punishSelected">
+            <form class="form-inline" role="form">
+                <input id="reason" type="text" placeholder="Причина наказания" ng-model="reason" class="form-control"/>
+                <select ng-model="violationType" class="form-control">
+                    <!--<option value="СOLLUSION" selected>Нечестная игра</option>-->
+                    <option value="LEAVER_INGAME" selected>Ливак</option>
+                    <option value="AFK">AFK</option>
+                    <option value="FEEDER">Фиддер</option>
+                    <!--<option value="CHEATER">Читтер</option>-->
+                </select>
+                <button class="btn btn-primary" ng-click="punish()">Наказать</button>
+            </form>
+        </div>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,500 @@
+@import (reference) "config";
+
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+.button-variant(@color; @background; @border) {
+  color: @color;
+  background-color: @background;
+  border-color: @border;
+
+  &:focus,
+  &.focus {
+    color: @color;
+    background-color: darken(@background, 10%);
+    border-color: darken(@border, 25%);
+  }
+  &:hover {
+    color: @color;
+    background-color: darken(@background, 10%);
+    border-color: darken(@border, 12%);
+  }
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    color: @color;
+    background-color: darken(@background, 10%);
+    border-color: darken(@border, 12%);
+
+    &:hover,
+    &:focus,
+    &.focus {
+      color: @color;
+      background-color: darken(@background, 17%);
+      border-color: darken(@border, 25%);
+    }
+  }
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &:hover,
+    &:focus,
+    &.focus {
+      background-color: @background;
+      border-color: @border;
+    }
+  }
+
+  .badge {
+    color: @background;
+    background-color: @color;
+  }
+}
+
+// Button sizes
+.button-size(@padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius) {
+  padding: @padding-vertical @padding-horizontal;
+  font-size: @font-size;
+  line-height: @line-height;
+  border-radius: @border-radius;
+}
+
+.btn-social(@color-bg, @color: #fff) {
+  background-color: @color-bg;
+  .button-variant(@color, @color-bg, rgba(0, 0, 0, .2));
+}
+
+.btn-twitch {
+  .btn-social(#6441A5);
+}
+
+.btn-flat {
+  border-radius: 0;
+
+  &.btn-danger {
+    border: none;
+    background: #a71508 none;
+  }
+}
+
+.btn-mtop {
+  margin-top: 15px !important;
+}
+
+// Красная кнопка
+.btn-red {
+  font: 13px @font-semi;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: repeating-linear-gradient(to top, #b31a1b, #c32c2b) #bb2323 0 0; /* Old browsers */
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  font-weight: 300;
+  min-width: 196px;
+  height: 48px;
+  padding: 14px 35px;
+  margin: 5px;
+  display: inline-block;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 80%);
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: repeating-linear-gradient(to top, #a80001, #d72322) #bf1111 0 0; /* Old browsers */
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+  }
+
+  &[disabled],
+  &.disabled {
+    cursor: not-allowed;
+    color: #bcbcbc;
+    opacity: 0.7;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: repeating-linear-gradient(to top, #464646, #626262) #565656 0 0; /* Old browsers */
+
+    &:hover {
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      outline: none;
+      background: repeating-linear-gradient(to top, #464646, #626262) #565656 0 0; /* Old browsers */
+    }
+  }
+}
+
+.btn-green {
+  font: 13px/13px @font-semi;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: linear-gradient(180deg, #309a06, #0f6700);
+  border: 1px solid rgba(255,255,255,0.45);
+  font-weight: 300;
+  min-width: 196px;
+  height: 48px;
+  padding: 14px 35px;
+  margin: 5px;
+  display: inline-block;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 80%);
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: linear-gradient(180deg, #309a06, darken(#0f6700, 5%));
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+  }
+
+  &[disabled],
+  &.disabled {
+    cursor: not-allowed;
+    color:#bcbcbc;
+    opacity:0.7;
+    border: 1px solid rgba(255,255,255,0.45);
+    background: linear-gradient(to top, #464646, #626262);
+
+    &:hover {
+      border: 1px solid rgba(255,255,255,0.45);
+      text-decoration: none;
+      outline: none;
+      background: linear-gradient(to top, #464646, #626262);
+    }
+  }
+}
+
+// Зеленая кнопка ребая фишек в турнире
+.btn-rebuy {
+  font: 13px/13px @font-semi;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: repeating-linear-gradient(to top, #117900, #2f9905) #bb2323 0 0; /* Old browsers */
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-weight: 300;
+  min-width: 196px;
+  height: 48px;
+  padding: 14px 35px;
+  margin: 5px;
+  display: inline-block;
+  color: rgba(255, 255, 255, 1);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 80%);
+  vertical-align: middle;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: repeating-linear-gradient(to top, #0f6800, #2f9905) #bf1111 0 0; /* Old browsers */
+    text-decoration: none;
+    outline: none;
+  }
+
+  &[disabled],
+  &.disabled {
+    cursor: not-allowed;
+    color: rgba(255, 255, 255, 0.65) !important;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: repeating-linear-gradient(to top, rgba(106, 106, 106, 0.4), rgba(148, 148, 148, 0.4)) rgba(106, 106, 106, 0.4) 0 0; /* Old browsers */
+
+    &:hover {
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      text-decoration: none;
+      outline: none;
+      background: repeating-linear-gradient(to top, rgba(106, 106, 106, 0.4), rgba(148, 148, 148, 0.4)) rgba(106, 106, 106, 0.4) 0 0; /* Old browsers */
+    }
+  }
+
+  i {
+    margin:0 5px 0 0;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 50%);
+  }
+}
+
+.btn-rebuy-magic {
+  font: 13px/13px @font-semi;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: linear-gradient(0deg, #a63ea3, #0877ba);
+  font-weight: 300;
+  min-width: 196px;
+  height: 48px;
+  padding: 14px 35px;
+  margin: 5px;
+  display: inline-block;
+  color:rgba(255,255,255,1);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 80%);
+  vertical-align:middle;
+
+  border: 1px solid #9792ca;
+  border-top-color: #c581c3;
+  border-bottom-color: #5fa7d3;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: linear-gradient(0deg, darken(#a63ea3, 5%), #0877ba);
+    text-decoration: none;
+    outline: none;
+  }
+
+  &[disabled],
+  &.disabled {
+    cursor: not-allowed;
+    color:rgba(255,255,255,0.65)!important;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: linear-gradient(to top, rgba(106,106,106,0.4), rgba(148,148,148,0.4) ) rgba(106,106,106,0.4) 0 0; /* Old browsers */
+
+    &:hover {
+      border: 1px solid rgba(255,255,255,0.35);
+      text-decoration: none;
+      outline: none;
+      background: linear-gradient(to top, rgba(106,106,106,0.4), rgba(148,148,148,0.4) ) rgba(106,106,106,0.4) 0 0; /* Old browsers */
+    }
+  }
+
+  i {
+    margin: 0 5px 0 0;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 50%);
+  }
+}
+
+.btn-invite-friend {
+  font: 13px/14px @font-semi;
+  margin: 0 0 2px 0;
+  background: repeating-linear-gradient(to top, #117900, #2f9905) #bb2323 0 0; /* Old browsers */
+  color: rgba(255, 255, 255, 1);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 80%);
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: repeating-linear-gradient(to top, #0f6800, #2f9905) #bf1111 0 0; /* Old browsers */
+  }
+
+  &[disabled],
+  &.disabled {
+    background: repeating-linear-gradient(to top, rgba(106, 106, 106, 0.5), rgba(148, 148, 148, 0.5)) rgba(106, 106, 106, 0.5) 0 0; /* Old browsers */
+
+    &:hover {
+      background: repeating-linear-gradient(to top, rgba(106, 106, 106, 0.5), rgba(148, 148, 148, 0.5)) rgba(106, 106, 106, 0.5) 0 0; /* Old browsers */
+    }
+  }
+
+  i {
+    margin: 0 0 0 5px;
+    font-size: 16px;
+    vertical-align: top;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 50%);
+  }
+}
+
+// Красная кнопка
+.btn-index {
+  font: 15px/22px @font-semi;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: url('/src/img/lol/index/btn-index.png') #e37a72 0 0; /* Old browsers */
+  border: 0;
+  font-weight: 300;
+  border-radius: 0;
+  width: 351px;
+  height: 54px;
+  padding: 16px;
+  margin: 0;
+  display: inline-block;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 50%);
+  text-align: center;
+  &:hover, &:active, &.zeroclipboard-is-hover {
+    background: url('/src/img/lol/index/btn-index.png') #e37a72 0 -54px; /* Old browsers */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+  }
+  &:focus {
+    background: url('/src/img/lol/index/btn-index.png') #e37a72 0 -54px; /* Old browsers */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+  }
+}
+
+.btn-red-small {
+  .gold-color;
+
+  font-family: @font-main;
+  font-size: 15px;
+  text-transform: uppercase;
+  line-height: 34px;
+  background: url('@{src-url}/img/@{dir}/small-red-btn.png') no-repeat 0 0;
+  width: 160px;
+  height: 34px;
+  border: 0;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: 0 -41px;
+    text-decoration: none;
+    color: #e6d5b3;
+    outline: none;
+  }
+  &[disabled] {
+    filter: grayscale(0.5);
+    cursor: not-allowed;
+    .gold-color;
+    &:hover {
+      background-position: 0 1px;
+    }
+  }
+}
+
+.btn-red-vs {
+  font-family: @font-main;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #e9e9e9;
+  line-height: 15px;
+  background: url('@{src-url}/img/@{dir}/btn-red-vs.png') no-repeat 0 0;
+  width: 99px;
+  height: 28px;
+  border: 0;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  &:hover, &:active, &:focus {
+    background-position: 0 -38px;
+    text-decoration: none;
+    color: #ffffff;
+    outline: none;
+  }
+  &[disabled] {
+    filter: grayscale(0.5);
+    cursor: not-allowed;
+    .gold-color;
+    &:hover {
+      background-position: 0 0;
+    }
+  }
+}
+
+.btn-grey-sm {
+  font-family: @font-main;
+  font-size: 15px;
+  text-transform: uppercase;
+  line-height: 15px;
+  background: url('@{src-url}/img/@{dir}/btn-grey-md.png') no-repeat 0 0;
+  width: 115px;
+  height: 32px;
+  border: 0;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  color: #c3c3c4;
+  &:hover, &:active, &:focus {
+    background-position: 0 -42px;
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+  }
+  &[disabled] {
+    filter: grayscale(0.5);
+    cursor: not-allowed;
+    .gold-color;
+    &:hover {
+      background-position: 0 0;
+    }
+  }
+}
+
+.btn-blue-vs {
+  font-family: @font-main;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #e9e9e9;
+  line-height: 15px;
+  background: url('@{src-url}/img/@{dir}/btn-blue-vs.png') no-repeat 0 0;
+  width: 99px;
+  height: 28px;
+  border: 0;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  &:hover, &:active, &:focus {
+    background-position: 0 -38px;
+    text-decoration: none;
+    color: #ffffff;
+    outline: none;
+  }
+  &[disabled] {
+    filter: grayscale(0.5);
+    cursor: not-allowed;
+    .gold-color;
+    &:hover {
+      background-position: 0 0;
+    }
+  }
+}
+
+.button-gradient(@top, @bottom) {
+  display: inline-block;
+  background: linear-gradient(to bottom, @top, @bottom);
+  border-radius: 0;
+  border: 1px solid #7f7f7f;
+  font-weight: 300;
+  //min-width: 196px;
+  //height: 48px;
+  padding: 14px 10px;
+  font: 12px @font-semi;
+  line-height: 14px;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .8);
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: linear-gradient(to bottom, darken(@top, 1%), darken(@bottom, 8%));
+  }
+
+  &[disabled],
+  &.disabled {
+    cursor: not-allowed;
+    color: #bcbcbc;
+    opacity: 0.7;
+    background: linear-gradient(to top, #464646, #626262);
+
+    &:hover {
+      background: linear-gradient(to top, #464646, #626262);
+    }
+  }
+}
+
+.btn-join-blue{
+  .button-gradient(#2e69c1, #1d51b1);
+}
+
+.btn-join-yellow{
+  .button-gradient(#c1842e, #e07400);
+  &:hover, &:focus {
+    outline:none;
+  }
+}
+
+.btn-join-red{
+  .button-gradient(#c12e30, #b11d22);
+}

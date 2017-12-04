@@ -1,0 +1,85 @@
+<div class="page-title">
+    <span class="title">Подробные данные о турнире</span>
+    <a target="_blank" ng-href="{{::vm.downloadXml}}" class="pull-right btn btn-danger" style="margin:0 5px;">Выгрузить список участников</a>
+    <a target="_blank" ng-href="{{::vm.statistic_one}}" class="pull-right btn btn-info" style="margin:0 5px;">Вся аналитики</a>
+    <a target="_blank" ng-href="{{::vm.statistic_two}}" class="pull-right btn btn-success" style="margin:0 5px;">Статистика по матчам</a>
+    <a target="_blank" ng-href="{{::vm.statistic_three}}" class="pull-right btn btn-warning" style="margin:0 5px;">Статистика по игрокам</a>
+    <div class="description">Параметры и список участников</div>
+</div>
+<div ng-controller="ModalTemp" class="portlet light">
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 class="ta-center">Всего матчей: {{::vm.stat.all}} | сыграло больше 1 матча: {{::vm.stat.played_1}} чел. | больше 3 матчей: {{::vm.stat.played_3}} | больше 5 матчей: {{::vm.stat.played_5}}</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="form-group">
+                <button id="tournament-finish" class="btn btn-warning btn-block"
+                        ng-click="vm.onFinishClick()"
+                        ng-disabled="!vm.canFinish || vm.onFinishClick.loading">
+                    Завершить <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="vm.onFinishClick.loading"></i>
+                </button>
+                <div class="alert alert-danger" ng-show="vm.onFinishClick.error" ng-bind="vm.onFinishClick.error"></div>
+                <div class="alert alert-success" ng-show="::vm.processed">Расчет по турниру уже произведен</div>
+            </div>
+
+            <div class="form-group">
+                <button id="tournament-cancel" class="btn btn-danger btn-block"
+                        ng-click="vm.onCancelClick()"
+                        ng-disabled="!vm.canCancel || vm.onCancelClick.loading">
+                    Отменить <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="vm.onCancelClick.loading"></i>
+                </button>
+                <div class="alert alert-danger" ng-show="vm.onCancelClick.error" ng-bind="vm.onCancelClick.error"></div>
+                <div class="alert alert-success" ng-show="vm.onCancelClick.success">Турнир отменен</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 class="ta-center">Список участников</h3>
+            <table id="players-table" class="table table-hover table-va">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Имя пользователя</th>
+                    <th>Почта</th>
+                    <th>Ранг</th>
+                    <th>Фишки</th>
+                    <th>Матчей</th>
+                    <th>Статус</th>
+                    <th>Buy-in status</th>
+                    <th>Выигрыш</th>
+                    <th>Управление</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="player in ::vm.players track by player.userId" ng-class="{ 'danger': player.disqualified }">
+                    <td ng-bind="::($index + 1)"></td>
+                    <td>
+                        <a ng-href="/user/{{::player.userId}}" ng-bind="::player.name"></a>
+                    </td>
+                    <td ng-bind="::player.email"></td>
+                    <td>
+                        <span ng-bind="::player.rank | playerRank"></span>
+                    </td>
+                    <td ng-bind="::player.stackCount"></td>
+                    <td ng-bind="::player.matchCount"></td>
+                    <td ng-bind="::player.status"></td>
+                    <td ng-bind="::player.buyInUserStatus"></td>
+                    <td ng-bind="::(player.award || '')"></td>
+                    <td>
+                        <fieldset ng-disabled="player.disqualified">
+                            <button class="btn btn-success" ng-click="modal('md', 'addUserMoney.html', '',player.userId)">Начисления</button>
+                            <button class="btn btn-danger" ng-click="vm.disqualify(player)">Исключить</button>
+                        </fieldset>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

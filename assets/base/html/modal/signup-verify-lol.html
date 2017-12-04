@@ -1,0 +1,124 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'HEADER__SIGN_UP' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<form name="signUpForm" novalidate>
+    <div class="modal-body "  style="padding-bottom: 10px">
+        <div class="modal-air">
+
+            <div ng-hide="modalSendComplate">
+                <div class="modal-body-content">
+                    <fieldset ng-disabled="loading">
+                        <div class="form-group form-group__required" ng-class="{ 'has-error' :  (signUpForm.signupEmail.$invalid-pattern) && (signUpForm.signupEmail.$dirty) }">
+                            <label class="control-label">
+                                <i class="form-group_icon genericon genericon-mail"></i>
+                                <input tabindex='1' type="email" class="form-control" placeholder="{{'PUBLIC__EMAIL_PLACEHOLDER' | translate}}"
+                                       name='signupEmail'
+                                       ng-model="signupEmail"
+                                       validate-email required />
+                            </label>
+                            <div class="form-group_message-error">
+                                {{'SIGN_UP__INPUT_CORRECT_EMAIL' | translate}}
+                            </div>
+                        </div>
+
+                        <div class="form-group form-group__required" ng-class="{ 'has-error' :  (signUpForm.signupPass.$invalid-pattern) && (signUpForm.signupPass.$dirty) }">
+                            <label class="control-label">
+                                <i class="form-group_icon genericon genericon-key"></i>
+                                <input tabindex='2' type="password" class="form-control" placeholder="{{'PUBLIC__PASSWORD_PLACEHOLDER' | translate}}" minlength="8"  maxlength="16"  ng-model="signupPass" name='signupPass' required>
+                            </label>
+
+                            <div class="form-group_message-error">
+                                {{'SIGN_UP__INPUT_CORRECT_PASS' | translate}}
+                            </div>
+                        </div>
+
+                        <div ng-show="signupPass">
+
+                            <div class="form-group form-group__required">
+                                <label class="control-label">
+                                    <i class="form-group_icon genericon"><img src="/src/img/icon-lol-logo.png" style="margin: -10px 0 0 0"></i>
+                                    <!-- {{'PUBLIC__LOGIN_PLACEHOLDER' | translate}} -->
+                                    <input tabindex='3' type="text" maxlength="16" class="form-control" placeholder="{{'CONNECT_ACCOUNT__SUMMONER_NAME' | translate}}" ng-model="signupLogin" name='signupLogin' required>
+                                </label>
+                                <div class="form-group_message-error">
+                                    <!-- @todo error message -->
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <select class="form-control btn btn-default dropdown-toggle"
+                                        required
+                                        ng-init="regionId = regionId || regionName[0].regionId"
+                                        ng-model="regionId"
+                                        ng-options="region.regionId as region.regionName for region in ::regionName">
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group form-checkbox" ng-class="{ 'has-error' :  (signUpForm.acceptRules.$invalid) && (signUpForm.acceptRules.$dirty) }">
+                            <label style="display: inline-block">
+                                <input tabindex='4' type="checkbox" checked="checked" required ng-model="acceptRules" ng-init="acceptRules = true" name="acceptRules">
+                                <i class="form-checkbox_pseudo-checkbox genericon genericon-checkmark"></i>
+                    <span class="form-checkbox_text">
+                        <!--Я согласен с-->
+                        {{'SIGN_UP__I_AGREE_WITH' | translate}}
+                        <a href="/rules" target="_blank" class="form-checkbox_text">
+                            {{'SIGN_UP__TERMS_OF_USE' | translate}}
+                            <!--условиями пользования-->
+                        </a>
+                    </span>
+                            </label>
+
+                            <div class="form-group_message-error">
+                                {{'SIGN_UP__YOU_MAST_ACCEPT_CONDITIONS' | translate}}
+                                <!--Для продолжения вы должны принять условия-->
+                            </div>
+
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="complate-buttons ta-center">
+                    <button autofocus tabindex='5' class="btn-red"
+                            ng-disabled="!signUpForm.$valid || loading"
+                            ng-click="signup(1)">
+                        <span ng-hide="loading">{{'SIGN_UP__SIGN_UP_BTN_CAPTION' | translate}}</span>
+                        <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="loading"></i>
+                    </button>
+                </div>
+
+                <a style="font-size: 14px; margin: 20px 0 0 100px; display: block;" href="" ng-click="cancelAndLoginShow()">Already registered?</a>
+            </div>
+
+            <div class="center ta-center">
+
+                <div class="openSans" ng-show="modalSendComplate">
+                    <!--Спасибо за регистрацию!-->
+                    {{'SIGN_UP__THANK_YOU_FOR_REG' | translate}}<br/>
+                    <h3><b>{{'SIGN_UP__WE_SENT_EMAIL' | translate}}</b></h3><br/>
+                    {{'SIGN_UP__CHECK_SPAM' | translate}}<br/><br/>
+                    (Bitte überprüfen Sie Ihre E-Mail)<br/>
+                    (Молимо прегледајте Е-пошту)<br/>
+                    (Vă rugăm să verificați email-ul)<br/>
+                </div>
+
+                <div  ng-show="modalSendError" class="modal-message-error">
+                    {{errorMsg | translate}}
+                </div>
+
+                <div class="center" ng-show="status == 500||status == 502">
+                    {{'SIGN_UP__SERVER_ERROR_MSG' | translate}}
+                    <!--На сервере произошла ошибка, приносим свои извинения.-->
+                    <br/>
+                    {{'SIGN_UP__REFER_TO_ADMIN_MSG' | translate}}
+                    <!--Пожалуйста, обратитесь к администрации сайта.-->
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</form>

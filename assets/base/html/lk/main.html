@@ -1,0 +1,48 @@
+<div ng-controller="LkMainController" class="row lk-main-dashboard">
+    <div class="lk-main-dashboard-content">
+        <div class="avatar-exp-content">
+             <div class="row avatar-exp">
+                <div class="col-sm-3 avatar-exp-img">
+                    <div class="avatar-bordered">
+                        <img ng-src="{{getAvatarUrl()}}"/>
+                        <span class="level">{{getUserProfile().level}}</span>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="username">
+                        <h2>{{getUserProfile().userData.name}} <small>{{'LK__LEVEL' | translate}} {{getUserProfile().level}}</small></h2>
+                    </div>
+                    <div class="expirience">
+                        <uib-progressbar ng-if="getUserProfile().userData.experience > 0" class="progress-exp-radius" max="maxExp" value="getUserProfile().userData.experience" type="danger">
+                            <i>{{persentExp}}%</i>
+                        </uib-progressbar>
+                        <uib-progressbar ng-if="getUserProfile().userData.experience == 0" class="progress-exp-radius" max="100" value="100" type="danger">
+                            <i>{{'LK__PLAY_1_MATCH' | translate}}</i>
+                        </uib-progressbar>
+                    </div>
+                    <div class="expirience">
+                        <!-- ТУТ БУДУТ ДОСТИЖЕНИЯ -->
+                    </div>
+                </div>
+             </div>
+            <div class="row buttons-doit">
+                <button class="btn btn-lk-transparent buttons-doit-margin" ng-click="openPaymentModal()">{{'LK__ADD_FOUNDS' | translate}}</button>
+                <a href="/referal" class="btn btn-lk-transparent buttons-doit-margin" >{{'LK__REFER_FRIEND' | translate}}</a>
+                <button class="btn btn-lk-transparent buttons-doit-margin" ng-click="openPromoCodeModal()">{{'LK__PROMO_CODE' | translate}}</button>
+            </div>
+        </div>
+        <div class="row tabs-game-info">
+            <uib-tabset>
+                <uib-tab select="reLoadTournaments(row)" ng-repeat="row in ::mainPageTabs">
+                    <uib-tab-heading>
+                        <img alt="{{::row}}" ng-src="/src/img/base/game-icon/{{::row}}.png"/>
+                        <span ng-if="row == 'all'">{{'LK__ALL_GAMES' | translate}}</span>
+                    </uib-tab-heading>
+                    <div ng-include="'/src/html/lk/main-tables.html'"></div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+    </div>
+
+
+</div>

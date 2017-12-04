@@ -1,0 +1,699 @@
+<div class="page-title" ng-show="vm.isNew">
+    <span class="title">Создание нового турнира</span>
+    <div class="description">Настройка и создание нового турнира</div>
+</div>
+<div class="page-title" ng-show="!vm.isNew">
+    <span class="title">Редактирование турнира</span>
+    <div class="description">Настройка и редактирование турнира</div>
+</div>
+<form class="portlet light form-horizontal" name="form" novalidate>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 col-md-2"> <!-- required for floating -->
+                <!-- Nav tabs -->
+                <ul id="tournament-tabs" class="nav nav-tabs tabs-left">
+                    <li class="active"><a href="#main" data-toggle="tab"><i class="fa fa-bolt"></i> Основные</a></li>
+                    <li><a href="#awards" data-toggle="tab"><i class="fa fa-trophy"></i> Награды</a></li>
+                    <li><a href="#settings" data-toggle="tab"><i class="fa fa-sliders"></i> Настройки</a></li>
+                    <li><a href="#blinds" data-toggle="tab"><i class="fa fa-balance-scale"></i> Блайнды</a></li>
+                    <li><a href="#rebuys" data-toggle="tab"><i class="fa fa-dollar"></i> Ребаи</a></li>
+                    <li><a href="#buy-ins" data-toggle="tab"><i class="fa fa-user-plus"></i> Бай ин</a></li>
+                    <li><a href="#description" data-toggle="tab"><i class="fa fa-file-word-o"></i> Описание</a></li>
+                    <li><a href="#cover" data-toggle="tab"><i class="fa fa-th-large"></i> Обложка</a></li>
+                    <li><a href="#innerImg" data-toggle="tab"><i class="fa fa-picture-o"></i> Изображение турнира</a></li>
+                </ul>
+            </div>
+
+            <div class="col-xs-8">
+                <!-- Tab panes -->
+                <div class="tab-content">
+
+                    <div class="tab-pane active" id="main">
+                        <div class="form-group" ng-class="{ 'has-error': form.name.$invalid && form.name.$touched }">
+                            <label class="col-sm-2 control-label">Название турнира</label>
+                            <div class="col-sm-10">
+                                <input id="tournament-name" class="form-control" type="text" name="name"
+                                       ng-model="vm.tour.name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Приз</label>
+                            <div class="col-sm-10">
+                                <input id="tournament-awardFund" class="form-control" type="number" ng-model="vm.tour.awardFund">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Тип приза</label>
+                            <div class="col-sm-10">
+                                <select id="tournament-awardType" class="form-control"
+                                        ng-model="vm.tour.awardType"
+                                        ng-options="type.id as type.name for type in ::vm.awardTypes">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Класс турнира</label>
+                            <div class="col-sm-10">
+                                <select id="tournament-tournamentClass" class="form-control"
+                                        ng-model="vm.tour.tournamentClass"
+                                        ng-options="class.id as class.name for class in ::vm.tourClasses">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': form.timezone.$invalid && form.timezone.$touched }">
+                            <label class="col-sm-2 control-label">Таймзона</label>
+                            <div class="col-sm-10">
+                                <select id="tournament-timeZone" class="form-control" name="timezone"
+                                        ng-model="vm.tour.timeZone" required
+                                        ng-options="tz.id as tz.label for tz in ::vm.timezones"></select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': form.regStartDate.$invalid && form.regStartDate.$touched }">
+                            <label class="col-sm-2 control-label">Cтарт регистрации</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <input id="tournament-regStartDate" type="text" class="form-control" name="regStartDate"
+                                           datetime-picker is-open="form.regStartDate.isOpen"
+                                           ng-model="vm.regStartDate" required />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="form.regStartDate.isOpen = true">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NORMAL -->
+                        <div ng-show="vm.tour.tournamentClass === 'NORMAL'">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Cтарт турнира</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <input id="tournament-startDate" type="text" class="form-control" name="startDate"
+                                               datetime-picker is-open="form.startDate.isOpen"
+                                               ng-model="vm.startDate" required />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="form.startDate.isOpen = true">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Конец регистрации</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <input id="tournament-regEndDate" type="text" class="form-control" name="regEndDate"
+                                               datetime-picker is-open="form.regEndDate.isOpen"
+                                               ng-model="vm.regEndDate" required />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="form.regEndDate.isOpen = true">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Конец турнира</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <input id="tournament-endDate" type="text" class="form-control" name="endDate"
+                                               datetime-picker is-open="form.endDate.isOpen"
+                                               ng-model="vm.endDate" required />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="form.endDate.isOpen = true">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Время начала турнира</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-beginTime" class="form-control" type="time" step="1"
+                                           ng-model="vm.tour.beginTime" gs-date-to-time>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Время окончания турнира</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-endTime" class="form-control" type="time" step="1"
+                                           ng-model="vm.tour.endTime" gs-date-to-time>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Количество призов</label>
+                            <div class="col-sm-10">
+                                <input id="tournament-awardCount" class="form-control" type="number"
+                                       ng-model="vm.tour.awardCount">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': form.gameRegion.$invalid && form.gameRegion.$touched }">
+                            <label class="col-sm-2 control-label">Регион</label>
+                            <div class="col-sm-10">
+                                <select id="tournament-gameRegion-id" class="form-control" name="gameRegion"
+                                        ng-model="vm.tour.gameRegion.id" required
+                                        ng-options="region.id as region.regionName for region in ::vm.regions">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Отображение</label>
+                            <div class="col-sm-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="tournament-active" type="checkbox" ng-model="vm.tour.active"/>
+                                        Видимый пользователями (active)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Теги</label>
+                            <div class="col-sm-10">
+                                <textarea id="tournament-tagsTextArea" class="form-control" style="margin-bottom:10px;" placeholder="Через запятую"
+                                          ng-model="vm.tagsTextArea"></textarea>
+                                <span class="label label-primary tagsBanges"
+                                      ng-repeat="item in vm.tour.tags track by $index"
+                                      ng-click="vm.deleteSomeTag($index)">#{{item}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="awards">
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">awardComputing</label>
+                                <div class="col-sm-10">
+                                    <select id="tournament-awardComputing" class="form-control"
+                                            ng-model="vm.tour.awardComputing"
+                                            ng-options="item.id as item.name for item in ::vm.awardComputings"></select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Тип</label>
+                                <div class="col-sm-10">
+                                    <select id="tournament-awardsType" class="form-control"
+                                            ng-model="vm.awardsType"
+                                            ng-options="type.id as type.name for type in ::vm.awardsTypes"></select>
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+
+                        <div ng-show="vm.awardsType === 'list'">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Приз</label>
+                                    <div class="col-sm-10">
+                                        <input id="tournament-award-value" class="form-control" type="number"
+                                               ng-model="award_value">
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{ 'has-error': award_fromPos > award_toPos }">
+                                    <label class="col-sm-2 control-label">Позиция с</label>
+                                    <div class="col-sm-2">
+                                        <input id="tournament-award-position-from" class="form-control" type="number"
+                                               ng-model="award_fromPos" step="1" min="1" />
+                                    </div>
+                                    <label class="col-sm-1 control-label">По</label>
+                                    <div class="col-sm-2">
+                                        <input id="tournament-award-position-to" class="form-control" type="number"
+                                               ng-model="award_toPos" step="1" min="1" />
+                                    </div>
+                                </div>
+                                <div class="ta-center">
+                                    <button id="btn-add-award" class="btn btn-primary"
+                                            ng-disabled="!award_fromPos || !award_toPos || award_fromPos > award_toPos"
+                                            ng-click="vm.addAward()">Добавить</button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <h3 class="ta-center">Награды</h3>
+                                <table id="award-table" class="table table-striped">
+                                    <tr>
+                                        <th>Величина награды</th>
+                                        <th>Позиция "с"</th>
+                                        <th>Позиция "по"</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr ng-repeat="row in vm.awardsList">
+                                        <td>{{::row.award}}</td>
+                                        <td>{{::row.fromPos}}</td>
+                                        <td>{{::row.toPos}}</td>
+                                        <td>
+                                            <a href ng-click="vm.removeAward($index)">удалить</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row" ng-show="vm.awardsType === 'description'">
+                            <div class="form-group"
+                                 ng-repeat="lang in ::vm.languages">
+                                <label class="col-sm-2 control-label">Описание({{::lang}}):</label>
+                                <div class="col-sm-10">
+                                    <textarea id="tournament-awardText-{{::lang}}" rows="10" cols="80" class="form-control"
+                                              ng-model="vm.awardText.award_text[lang]"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane" id="settings">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Мин. уровень</label>
+                            <div class="col-sm-9">
+                                <input id="tournament-settings-minAccountLevel" class="form-control" type="number"
+                                       ng-model="vm.tour.tournamentSettings.minAccountLevel">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Макс. уровень</label>
+                            <div class="col-sm-9">
+                                <input id="tournament-settings-maxAccountLevel" class="form-control" type="number"
+                                       ng-model="vm.tour.tournamentSettings.maxAccountLevel">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Мин. рейтинг</label>
+                            <div class="col-sm-9">
+                                <input id="tournament-settings-minAccountRating" class="form-control" type="number"
+                                       ng-model="vm.tour.tournamentSettings.minAccountRating">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Макс. рейтинг</label>
+                            <div class="col-sm-9">
+                                <input id="tournament-settings-maxAccountRating" class="form-control" type="number"
+                                       ng-model="vm.tour.tournamentSettings.maxAccountRating">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Мин. кол-во игроков для увеличения призового фонда</label>
+                            <div class="col-sm-9">
+                                <input id="tournament-settings-bonusJoinMinActiveMembers" class="form-control" type="number"
+                                       ng-model="vm.tour.tournamentSettings.bonusJoinMinActiveMembers">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Увелчние призового фонда за вступление игрока</label>
+                            <div class="col-sm-9">
+                                <input id="tournament-settings-bonusJoinAdditionSum" class="form-control" type="number"
+                                       ng-model="vm.tour.tournamentSettings.bonusJoinAdditionSum">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Увеличени призового фонда за ребай</label>
+                            <div class="col-sm-9">
+                                <input id="tournament-settings-bonusRebuyAdditionSum" class="form-control" type="number"
+                                       ng-model="vm.tour.tournamentSettings.bonusRebuyAdditionSum">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">bonusRebuyMinActiveMembers</label>
+                            <div class="col-sm-9">
+                                <input id="tournament-settings-bonusRebuyMinActiveMembers" class="form-control" type="number"
+                                       ng-model="vm.tour.tournamentSettings.bonusRebuyMinActiveMembers">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">StarClient</label>
+                            <div class="col-sm-9">
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="tournament-settings-checkDesktopClient" type="checkbox"
+                                               ng-model="vm.tour.tournamentSettings.checkDesktopClient"/>
+                                        играть только со  StarClient
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" ng-hide="vm.tour.tournamentClass === 'NORMAL'">
+                            <div class="panel panel-info">
+                                <div class="panel-heading"><strong>SIT'N'GO</strong></div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Мин. кол-во участников для начала турнира</label>
+                                        <div class="col-sm-9">
+                                            <input id="tournament-settings-startMemberCount" class="form-control" type="number"
+                                                   ng-model="vm.tour.tournamentSettings.startMemberCount">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Планируемая задержка старта</label>
+                                        <div class="col-sm-9">
+                                            <input id="tournament-settings-startDelay" class="form-control" type="number"
+                                                   ng-model="vm.tour.tournamentSettings.startDelay">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Планируемые длительность турнира</label>
+                                        <div class="col-sm-9">
+                                            <input id="tournament-settings-duration" class="form-control" type="number"
+                                                   ng-model="vm.tour.tournamentSettings.duration">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Планируемая задержка до конца регистрации</label>
+                                        <div class="col-sm-9">
+                                            <input id="tournament-settings-endRegDelay" class="form-control" type="number"
+                                                   ng-model="vm.tour.tournamentSettings.endRegDelay">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">qualifyMinMatch</label>
+                                        <div class="col-sm-9">
+                                            <input id="tournament-settings-qualifyMinMatch" class="form-control" type="number"
+                                                   ng-model="vm.tour.tournamentSettings.qualifyMinMatch">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="blinds">
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">info</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-blind-info" class="form-control" type="text" ng-model="blind_info" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">fromMinutes</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-blind-fromMinutes" class="form-control" type="number" ng-model="blind_fromMinutes" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">duration</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-blind-duration" class="form-control" type="number" ng-model="blind_duration">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">min</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-blind-min" class="form-control" type="number" ng-model="blind_min">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">maxRatio</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-blind-maxRation" class="form-control" type="number" ng-model="blind_maxRatio">
+                                </div>
+                            </div>
+
+                            <div class="ta-center">
+                                <button id="btn-add-blind" class="btn btn-primary" ng-click="vm.addBlind()">Добавить</button>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="row">
+                            <h3 class="ta-center">Блайнды</h3>
+                            <table id="blinds-table" class="table table-striped">
+                                <tr>
+                                    <th>min</th>
+                                    <th>maxRatio</th>
+                                    <th>info</th>
+                                    <th>fromMinutes</th>
+                                    <th>duration</th>
+                                    <th></th>
+                                </tr>
+                                <tr ng-repeat="row in vm.tour.blinds">
+                                    <td>{{::row.min}}</td>
+                                    <td>{{::row.maxRatio}}</td>
+                                    <td>{{::row.info}}</td>
+                                    <td>{{::row.fromMinutes}}</td>
+                                    <td>{{::row.duration}}</td>
+                                    <td>
+                                        <a href ng-click="vm.removeBlind($index)">удалить</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="rebuys">
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Доступен</label>
+                                <div class="col-sm-10">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="tournament-rebuy-active" type="checkbox" ng-model="rebuy_active"/>
+                                            Доступен
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Тип</label>
+                                <div class="col-sm-10">
+                                    <select id="tournament-rebuy-rebuyType" class="form-control"
+                                            ng-model="rebuy_rebuyType"
+                                            ng-options="type.id as type.name for type in ::vm.rebuyTypes">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Тип валюты</label>
+                                <div class="col-sm-10">
+                                    <select id="tournament-rebuy-rebuyCurrency" class="form-control"
+                                            ng-model="rebuy_rebuyCurrency"
+                                            ng-options="type.id as type.name for type in ::vm.awardTypes">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">fromMinutes</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-rebuy-fromMinutes" class="form-control" type="number" ng-model="rebuy_fromMinutes">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">duration</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-rebuy-duration" class="form-control" type="number" ng-model="rebuy_duration">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Кол-во ребаев</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-rebuy-quantity" class="form-control" type="number" ng-model="rebuy_quantity">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Кол-во фишек</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-rebuy-amount" class="form-control" type="number" ng-model="rebuy_amount">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Стоимость</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-rebuy-cost" class="form-control" type="number" ng-model="rebuy_cost">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">stackLimit</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-rebuy-stackLimit" class="form-control" type="number" ng-model="rebuy_stackLimit">
+                                </div>
+                            </div>
+
+                            <div class="ta-center">
+                                <button id="btn-add-rebuy" class="btn btn-primary" ng-click="vm.addRebuy()">Добавить</button>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="row">
+                            <h3 class="ta-center">Ребаи</h3>
+                            <table id="rebuys-table" class="table table-striped">
+                                <tr>
+                                    <th>active</th>
+                                    <th>кол-во ребаев</th>
+                                    <th>кол-во фишек</th>
+                                    <th>стоимость</th>
+                                    <th>fromMinutes</th>
+                                    <th>duration</th>
+                                    <th>тип ребая</th>
+                                    <th>тип валюты</th>
+                                    <th>stackLimit</th>
+                                    <th></th>
+                                </tr>
+                                <tr ng-repeat="row in vm.tour.tournamentRebuys">
+                                    <td>{{::row.active}}</td>
+                                    <td>{{::row.quantity}}</td>
+                                    <td>{{::row.amount}}</td>
+                                    <td>{{::row.cost}}</td>
+                                    <td>{{::row.fromMinutes}}</td>
+                                    <td>{{::row.duration}}</td>
+                                    <td>{{::row.rebuyType}}</td>
+                                    <td>{{::row.rebuyCurrency}}</td>
+                                    <td>{{::row.stackLimit}}</td>
+                                    <td>
+                                        <a href ng-click="vm.removeRebuy($index)">удалить</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="buy-ins">
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Default</label>
+                                <div class="col-sm-10">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="tournament-buyin-default" type="checkbox" ng-model="buyin_default"/>
+                                            Бай-ин по умолчанию
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Кол-во фишек</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-buyin-stack" class="form-control" type="number" ng-model="buyin_stack" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Валюта</label>
+                                <div class="col-sm-10">
+                                    <select id="tournament-buyin-currencyType" class="form-control"
+                                            ng-model="buyin_currencyType"
+                                            ng-options="type.id as type.name for type in ::vm.awardTypes">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Стоимость</label>
+                                <div class="col-sm-10">
+                                    <input id="tournament-buyin-value" class="form-control" type="number" ng-model="buyin_value">
+                                </div>
+                            </div>
+
+                            <div class="ta-center">
+                                <button id="btn-add-buyin" class="btn btn-primary" ng-click="vm.addBuyIn()">Добавить</button>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="row">
+                            <h3 class="ta-center">Бай-ин</h3>
+                            <table id="buyins-table" class="table table-striped">
+                                <tr>
+                                    <th>default</th>
+                                    <th>фишки</th>
+                                    <th>валюта</th>
+                                    <th>стоимость</th>
+                                    <th></th>
+                                </tr>
+                                <tr ng-repeat="row in vm.tour.buyIns">
+                                    <td>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"
+                                                       ng-model="row.isDefault"
+                                                       ng-change="vm.onBuyInDefaultChange(row)"/>
+                                                Бай-ин по умолчанию
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>{{::row.stack}}</td>
+                                    <td>{{::row.currencyType}}</td>
+                                    <td>{{::row.value}}</td>
+                                    <td>
+                                        <a href ng-click="vm.removeBuyIn($index)">удалить</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="description">
+                        <div id="tournament-description-{{::lang}}" class="form-group"
+                             ng-repeat="lang in ::vm.languages">
+                            <label class="col-sm-2 control-label">Описание({{::lang}}):</label>
+                            <div class="col-sm-10">
+                                <textarea id="description-{{::lang}}" rows="10" cols="80" class="form-control">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane ta-center cover-selector" id="cover">
+                        <h3 class="ta-center">Обложка турнира (200px x 275px) *.jpg</h3>
+                        <hr/>
+                        <img id="img-cover-{{::row}}"
+                             ng-repeat="row in ::vm.coversImgData"
+                             ng-src="/src/img/tournaments/lol/{{::row}}-cover.jpg"
+                             ng-class="{ 'active' : row == vm.tour.coverPictureId}"
+                             ng-click="vm.tour.coverPictureId = row" />
+                    </div>
+
+                    <div class="tab-pane ta-center cover-selector" id="innerImg">
+                        <h3 class="ta-center">Изображение внутри турнира (437px x 348px) *.png</h3>
+                        <img id="img-background-{{::row}}"
+                             ng-repeat="row in ::vm.tourImgData"
+                             ng-src="/src/img/tournaments/lol/{{::row}}.png"
+                             ng-class="{ 'active' : row == vm.tour.backgroundPictureId}"
+                             ng-click="vm.tour.backgroundPictureId = row" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <hr />
+            <div class="ta-center">
+                <button id="btn-save" class="btn btn-info"
+                        ng-click="vm.save()"
+                        ng-disabled="!vm.isFormValid() || vm.loading">
+                    <span>Сохранить</span> <i class="fa fa-spin fa-spinner" ng-show="vm.loading"></i>
+                </button>
+            </div>
+            <div>
+                <div id="tournament-alert-error" ng-show="vm.error">
+                    <div class="alert alert-danger" ng-bind="vm.error"></div>
+                </div>
+                <div id="tournament-alert-success" ng-show="vm.success">
+                    <div class="alert alert-success">Турнир сохранен!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

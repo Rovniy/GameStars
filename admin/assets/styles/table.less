@@ -1,0 +1,36 @@
+.admin-table tr:hover{
+  background: grey !important;
+  cursor: pointer;
+}
+
+.application {
+  table {
+    counter-reset: rowNumber-1;
+  }
+
+  table tr {
+    counter-increment: rowNumber;
+  }
+
+  table tr td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+  }
+}
+
+.table{
+  &.table-va {
+    th, td {
+      vertical-align: middle;
+    }
+  }
+
+  .btn{
+    margin: 0;
+
+    & + .btn {
+      margin-left: 5px;
+    }
+  }
+}

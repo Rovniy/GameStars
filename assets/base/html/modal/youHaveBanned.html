@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'ALERT__ACTION_VIOLATION' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<div class="modal-body">
+    <div class="text-center">
+        <h3>{{'ALERT__TOURNAMENT_RESTRICTION_BANNED' | translate}}</h3>
+        <h4 ng-if="modal.resolve">{{modal.resolve | translate}}</h4>
+        <h4 ng-if="modal.reason">{{modal.reason}}</h4>
+        <h4>{{'BAN__TIME' | translate}} {{modal.timer}}</h4>
+    </div>
+</div>

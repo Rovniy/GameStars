@@ -1,0 +1,95 @@
+{
+  "data": [
+    [
+      {
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"You lost? Never mind! Even world champions lose sometimes.",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": false,
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"You lost? Never mind! Even world champions lose sometimes.",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"And when they do… I take their souls!",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": true,
+        "send2Text":"And when they do… I take their souls!",
+        "send2Active": true,
+        "send2Dis": true,
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"Silence, monster! Don’t worry, dear player. You still have chances to win a big prize!",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": false,
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"Silence, monster! Don’t worry, dear player. You still have chances to win a big prize!",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"But how?",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": true,
+        "send2Text":"But how?",
+        "send2Active": true,
+        "send2Dis": true,
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"You can make a bigger bet. It’ll allow you to do a big leap up the ladder.",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"You can make a bigger bet. It’ll allow you to do a big leap up the ladder.",
+        "send1Active": true,
+        "send1Dis": true,
+        "hero2Active": true,
+        "hero2Dis": false,
+        "send2Text":"Chin up and show the fight!",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 1
+      },
+      {
+        "duration": 1,
+        "textArray": [
+          {
+            "text":"Thank you, champs!",
+            "action": "close",
+            "id": "0"
+          }
+        ]
+      }
+    ]
+    ]
+}

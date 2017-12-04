@@ -1,0 +1,16 @@
+<div class="sendMsgform" ng-controller="msg">
+    <h3 >Отправка уведомления</h3>
+    <div class="content">
+        <form class="form"  ng-controller="msg">
+            <div class="input-group">
+                <textarea class="textarea form-control" rows="4" placeholder="Введи сообщению для пользователя" ng-model="message"></textarea>
+            </div>
+
+            <button class="btn btn-primary" ng-click="sendMsg()">Отправить</button>
+
+            <div ng-show="msgSended&&msgSendSuccess">Уведомление успешно отправлено</div>
+            <div ng-show="msgSended&&msgSendError">Ошибка отправки уведомдения</div>
+
+        </form>
+    </div>
+</div>

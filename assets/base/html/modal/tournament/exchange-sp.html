@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'LK__REBUY' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<div class="modal-body">
+    <div  class="modal-body-content rebuyTournamentChips ta-center">
+        <h3 class="youcan ta-center">{{'LK__YOU_CAN_REBUY' | translate}}</h3>
+        <h3 class="howmany">
+            {{::modal.rebuy.amount}}
+            <small>{{'LK__CHIPS' | translate}}</small>
+        </h3>
+        <hr/>
+        <h2 class="cost">
+            <small>{{'LK__FOR' | translate}}</small>
+            {{::modal.rebuy.cost | transaction:modal.rebuy.rebuyCurrency}}
+        </h2>
+        <h4 class="times" ng-if="modal.rebuy.quantity !== 0">{{::modal.rebuy.quantity}} {{'LK__TIMES' | translate}}</h4>
+        <h4 class="times" ng-if="modal.rebuy.quantity == 0">{{'LK__TIMES_UNLIMITED' | translate}}</h4>
+        <button class="btn-red"
+                track-event-by-click track-category="tournament" track-action="modal.rebuy"
+                ng-disabled="modal.loading"
+                ng-click="modal.rebuyTourChips()">
+            <span ng-hide="modal.loading">{{'LK__REBUY_CHIPS' | translate}}</span>
+            <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="modal.loading"></i>
+        </button>
+
+    </div>
+</div>

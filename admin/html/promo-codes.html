@@ -1,0 +1,115 @@
+<div class="page-title">
+    <span class="title">Промо-коды</span>
+    <div class="description">Список всех промо-кодов и создание новых</div>
+</div>
+<div class="row promo-codes">
+    <div class="row">
+        <div class="col-lg-6">
+            <form class="form-horizontal" name="form" novalidate>
+                <div class="form-group" ng-class="{ 'has-error': form.code.$invalid && form.code.$touched }">
+                    <label for="form-code" class="col-sm-2 control-label">Код</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="form-code" placeholder="Промо-код" name="code"
+                               ng-model="vm.newPromoCode.code"
+                               ng-pattern="/^[a-zA-Z0-9\._\-\@]+$/" required />
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': form.itemId.$invalid && form.itemId.$touched }">
+                    <label for="form-itemId" class="col-sm-2 control-label">Тип</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="form-itemId" name="itemId"
+                                ng-model="vm.newPromoCode.itemId"
+                                ng-options="item.id as item.description for item in ::vm.promoItems"
+                                required>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': form.quantity.$invalid && form.quantity.$touched }">
+                    <label for="form-quantity" class="col-sm-2 control-label">Quantity</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="form-quantity" name="quantity"
+                               ng-model="vm.newPromoCode.quantity"
+                               min="1" required />
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': form.useCount.$invalid && form.useCount.$touched }">
+                    <label for="form-useCount" class="col-sm-2 control-label">Кол-во применений</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="form-useCount" name="useCount"
+                               ng-model="vm.newPromoCode.useCount"
+                               min="1" required />
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': form.expireTime.$invalid && form.expireTime.$touched }">
+                    <label for="form-expireTime" class="col-sm-2 control-label">Годен до</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input id="form-expireTime" type="text" class="form-control" name="expireTime"
+                                   datetime-picker is-open="form.expireTime.isOpen"
+                                   ng-model="vm.newPromoCode.expireTime" gs-date-to-ms />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="form.expireTime.isOpen = true">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button id="btn-save" type="button" class="btn btn-primary"
+                                ng-click="vm.save()"
+                                ng-disabled="form.$invalid || vm.loading">
+                            Создать
+                        </button>
+                    </div>
+                </div>
+                <div class="alert alert-danger" ng-show="vm.error">
+                    <span ng-bind="vm.error"></span>
+                </div>
+                <div class="alert alert-success" ng-show="vm.success">
+                    <span>Промо-код создан</span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="row">
+            <table id="promo-codes-table" class="table table-striped table-hover table-center">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Код</th>
+                    <th>Quantity</th>
+                    <th>Кол-во применений</th>
+                    <th>Тип</th>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Дата создания</th>
+                    <th>Годен до</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="row in vm.promoCodes track by row.id">
+                    <td ng-bind="::($index + 1 + (vm.page - 1) * vm.perPage)"></td>
+                    <td ng-bind="::row.code"></td>
+                    <td ng-bind="::row.quantity"></td>
+                    <td ng-bind="::row.useCount"></td>
+                    <td ng-bind="::row.item.itemType.name"></td>
+                    <td ng-bind="::row.item.name"></td>
+                    <td ng-bind="::row.item.description"></td>
+                    <td ng-bind="::row.createTime | date:'dd.MM.yy HH:mm'"></td>
+                    <td ng-bind="::row.expireTime | date:'dd.MM.yy HH:mm'"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row" ng-if="::vm.pagination">
+            <uib-pagination max-size="5" boundary-links="true" total-items="vm.pagination.total_row_count"
+                            items-per-page="vm.perPage" ng-model="vm.page"
+                            ng-change="vm.loadPromoCodes()">
+            </uib-pagination>
+        </div>
+    </div>
+</div>

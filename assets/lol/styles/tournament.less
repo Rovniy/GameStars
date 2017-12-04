@@ -1,0 +1,1258 @@
+@import (reference) "config";
+
+@war-panel-width: 1160px;
+@war-panel-height: 366px;
+@war-panel-top-height: 64px;
+@war-panel-bottom-height: 94px;
+@war-column-center-width: 400px;
+
+.tournament-details {
+  position: relative;
+
+  .b-tour-img {
+    position: absolute;
+    top: 0;
+    left: -400px;
+    z-index: 2;
+  }
+
+  .counter-search {
+    margin-bottom: 20px;
+    text-align: center;
+
+    h2 {
+      margin: 10px 0 10px 0;
+      color: #f9cb65;
+      text-transform: uppercase;
+      font: 50px/50px @font-main;
+      font-weight: bold;
+    }
+
+    h3 {
+      margin: 0 0 10px 0;
+      color: #dec794;
+      text-transform: uppercase;
+      font: 16px/16px @font-main;
+    }
+
+    h4 {
+      margin: 0 0 5px 0;
+      color: #dec794;
+      text-transform: uppercase;
+      font: 14px/14px @font-main;
+    }
+  }
+
+  .b-top-substrate.height-auto {
+    height: auto;
+
+    .b-action-tourn {
+      height: 470px;
+    }
+  }
+}
+
+.b-war-panel {
+  margin: 14px auto;
+  width: @war-panel-width;
+  height: @war-panel-height;
+  background-image: linear-gradient(90deg, rgba(185, 4, 5, .35), rgba(0, 0, 0, .35), rgba(48, 157, 0, .35));
+  position: relative;
+
+  &:after,
+  &:before {
+    content: ' ';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    z-index: 1;
+  }
+  &:before {
+    top: 0;
+    height: @war-panel-top-height;
+  }
+  &:after {
+    bottom: 0;
+    height: @war-panel-bottom-height;
+  }
+
+  & > .b-war-column {
+    float: left;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+
+    &.b-war-column__center {
+      width: @war-column-center-width;
+
+      .column-content {
+        .column-title {
+          font-size: 25px;
+        }
+
+        .column-body {
+          height: 208px!important;
+
+          .body-prize {
+            text-transform: uppercase;
+
+            .body-prize-sum {
+              font-size: 64px;
+              font-family: @font-main-bold;
+              line-height: 1;
+            }
+            .body-prize-title {
+              font-size: 18px;
+              font-family: @roboto-bold;
+
+              &.title-bottom {
+                display: none;
+
+                .b-war-panel__has-buttons&{
+                  display: inline-block;
+                }
+              }
+
+              &.title-top {
+                .b-war-panel__has-buttons&{
+                  display: none;
+                }
+              }
+            }
+          }
+
+          .body-chips {
+            margin-top: 40px;
+            position: relative;
+
+            .b-war-panel__has-buttons& {
+              display: none;
+            }
+
+            .body-chips-left {
+              float: left;
+              width: 50%;
+              text-align: right;
+              padding-right: 20px;
+            }
+
+            .body-chips-right {
+              float: left;
+              width: 50%;
+              text-align: left;
+              padding-left: 20px;
+            }
+
+            .body-chips-sum {
+              font-family: @roboto-bold;
+              font-size: 37px;
+              line-height: 1;
+            }
+
+            .body-chips-title {
+              font-family: @roboto-regular;
+              font-size: 14px;
+              padding: 0 10px;
+            }
+
+            .sum-devider{
+              position: absolute;
+              font-size: 37px;
+              top: 0;
+              left: 50%;
+              line-height: 34px;
+              transform: translateX(-50%);
+            }
+          }
+        }
+      }
+    }
+
+    &.b-war-column__left {
+      width: (@war-panel-width - @war-column-center-width) / 2;
+
+      .column-content {
+        float: right;
+
+        .img-circle {
+          border-color: #a31e1d;
+          box-shadow: 0 0 40px 0 rgba(165, 32, 30, .6);
+        }
+      }
+    }
+
+    &.b-war-column__right {
+      width: (@war-panel-width - @war-column-center-width) / 2;
+
+      .column-content {
+        float: left;
+
+        .img-circle {
+          border-color: #088a06;
+          box-shadow: 0 0 40px 0 rgba(15, 127, 10, .6);
+        }
+      }
+    }
+
+    .column-content {
+      .gold-color;
+      text-align: center;
+      height: 100%;
+
+      p {
+        margin: 0;
+      }
+
+      .column-title {
+        font-family: @font-main-bold;
+        font-size: 33px;
+        height: @war-panel-top-height;
+
+        & > p {
+          line-height: @war-panel-top-height;
+        }
+      }
+
+      .b-war-panel__has-buttons& {
+        .column-body {
+          height: @war-panel-height - @war-panel-top-height - 125px;
+
+          .img-circle-container {
+            padding-top: 10px;
+          }
+        }
+      }
+
+      .column-body {
+        height: @war-panel-height - @war-panel-top-height - @war-panel-bottom-height;
+        position: relative;
+
+        .column-body-center {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 100%;
+        }
+
+        .img-circle-container{
+          height: 100%;
+          padding-top: 24px;
+
+          & > .img-circle {
+            border-width: 6px;
+            border-style: solid;
+            width: 157px;
+            height: 157px;
+          }
+        }
+      }
+
+      .b-war-panel__has-buttons& {
+        .column-footer {
+          height: 125px;
+
+          .button-container {
+            padding-top: 0;
+
+            .btn-red,
+            .btn-green{
+              display: inline-block;
+            }
+          }
+        }
+      }
+
+      .column-footer {
+        font-family: @roboto-bold;
+        text-transform: uppercase;
+        height: @war-panel-bottom-height;
+
+        .button-container {
+          height: 100%;
+          padding-top: 18px;
+
+          .participants-num {
+            font-family: @roboto-bold;
+            font-size: 33px;
+            line-height: 1;
+          }
+
+          .participants-title {
+            font-family: @roboto-bold;
+            font-size: 15px;
+            line-height: 30px;
+          }
+
+          .btn-red,
+          .btn-green{
+            display: none;
+            border-radius: 4px;
+            border: none;
+            height: 39px;
+            padding: 0;
+            margin: 10px 0 0 0;
+            min-width: 177px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.b-action-tourn {
+  height: 100%;
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+}
+
+.b-action-tourn .b-title-s {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+// Характеристики турнира
+.b-action-tourn_features {
+  background: url('@{src-url}/img/@{dir}/features-match-bg.png') 50% 0 no-repeat;
+  width: 607px;
+  min-height: 77px;
+  margin: 0 auto 12px;
+  padding: 14px 40px 0;
+  position: relative;
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  &__x4 {
+    width: 800px;
+    background-size: 100% auto;
+    .b-action-tourn_features_item {
+      width: 25%;
+    }
+  }
+  &__art-pick3 {
+    &:before {
+      content: '';
+      background: url('@{src-url}/img/@{dir}/art-pick03.png') no-repeat;
+      width: 560px;
+      height: 348px;
+      display: block;
+      position: absolute;
+      top: -75px;
+      left: -270px;
+      z-index: -1;
+      background-size: auto 100%;
+      transform: rotateY(-180deg);
+    }
+  }
+}
+
+.b-action-tourn_features_item {
+  font-family: @font-main-bold;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 33.33%;
+  float: left;
+}
+
+.b-action-tourn_features_item_head {
+  font-size: 14px;
+  .gold-color;
+}
+
+.b-action-tourn_features_item_val {
+  font-size: 38px;
+  .gold-color;
+  text-transform: lowercase;
+  &__long {
+    font-size: 22px;
+    white-space: nowrap;
+    line-height: 58px;
+  }
+}
+
+// Ставка
+.b-selection-rates {
+  width: 295px;
+  height: 122px;
+  margin: 0 auto;
+}
+
+.b-selection-rates_title {
+  font-family: @font-main-bold;
+  font-size: 15px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  .gold-color;
+}
+
+.b-selection-rates_exchange-sp {
+  font-size: 14px;
+  text-transform: uppercase;
+  margin: 0 auto;
+  background: url('@{src-url}/img/@{dir}/get-points-bg.png') no-repeat 50% 50%;
+  height: 18px;
+  line-height: 18px;
+  top: -8px;
+  position: relative;
+  cursor: pointer;
+  background-size: 100% auto;
+  .gold-color;
+  &:hover {
+    .gold-light-color;
+  }
+}
+
+// Окончание регистрации
+.b-action-tourn_end-enter {
+  font-family: @font-main-bold;
+  text-transform: uppercase;
+  .gold-color;
+}
+
+.b-action-tourn_end-enter_title {
+  font-size: 14px;
+}
+
+.b-action-tourn_end-enter_timer {
+  font-size: 38px;
+  margin-bottom: 14px;
+  .whenOneThouthen {
+    font-size: 24px;
+  }
+}
+
+.b-action-tourn-button-cover {
+  display: inline-block;
+  padding: 1px;
+}
+
+// timer
+.timer-cell {
+  font-size: 11px;
+  text-align: center;
+  display: inline-block;
+  .gold-color;
+  vertical-align: top;
+}
+
+.timer-cell_value {
+  font-size: 38px;
+  height: 54px;
+}
+
+.timer-cell__seporator {
+  font-size: 38px;
+}
+
+.b-conditions-tour {
+  background: url('@{src-url}/img/@{dir}/conditions-tour-bg.jpg') no-repeat;
+  height: 335px;
+  padding-top: 5px;
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  & > div {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.b-conditions-tour_subtitle {
+  font-family: @font-main-bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  text-align: center;
+  height: 44px;
+  line-height: 44px;
+  .gold-color;
+}
+
+.b-conditions-tour_structure {
+  background: url('@{src-url}/img/@{dir}/structure-bg.png');
+  width: 268px;
+  height: 100%;
+  float: left;
+}
+
+// Структура турнира
+.b-conditions-tour_structure_max-date-rate {
+  height: 72px;
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  p {
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+}
+
+.b-conditions-tour_structure_max-date-rate_head {
+  font-family: @font-main-bold;
+  font-size: 11px;
+  text-transform: uppercase;
+  float: left;
+  margin: 17px 8px 0;
+  .gold-color;
+}
+
+.b-conditions-tour_structure_max-date-rate_head_title {
+  font-size: 16px;
+}
+
+.b-conditions-tour_structure_max-date-rate_time {
+  font-family: @font-main-bold;
+  font-size: 10px;
+  text-transform: uppercase;
+  float: left;
+  text-align: center;
+  .gold-color;
+  &:last-child {
+    margin-left: 14px;
+  }
+}
+
+.b-conditions-tour_structure_max-date-rate_time_number {
+  font-size: 33px;
+  line-height: 32px;
+  margin-top: 12px;
+  text-align: center;
+}
+
+.b-conditions-tour_structure_list {
+  width: 236px;
+  margin-left: 20px;
+}
+
+.b-conditions-tour_structure_list_head {
+  font-family: @font-main-bold;
+  height: 38px;
+  .gold-color;
+}
+
+.b-conditions-tour_structure_list_head_title {
+  font-size: 16px;
+  line-height: 38px;
+  text-align: center;
+  text-transform: uppercase;
+  float: left;
+  width: 50%;
+}
+
+.b-conditions-tour_structure_list {
+  font-family: @font-main;
+  font-size: 17px;
+  line-height: 26px;
+  color: #d8c6a8;
+  position: relative;
+  user-select: none;
+  .swiper-container {
+    height: 119px;
+    margin-top: 30px;
+  }
+  .swiper-slide {
+    border-top: 1px solid rgba(107, 83, 75, 0.73);
+    border-bottom: 1px solid rgba(107, 83, 75, 0.73);
+    height: 29px;
+    span {
+      display: inline-block;
+      width: 150px;
+      padding-left: 20px;
+      margin-right: 22px;
+      white-space: nowrap;
+    }
+  }
+  .swiper-slide__current {
+    background: rgba(81, 27, 20, 0.49);
+  }
+  .swiper-button-prev {
+    width: 100%;
+    height: 29px;
+    top: 60px;
+    left: 0;
+    background: url('@{src-url}/img/@{dir}/swiper-nav.png') no-repeat 50% -34px;
+    cursor: pointer;
+    &:hover {
+      background-position: 50% 10px;
+    }
+  }
+  .swiper-button-next {
+    width: 100%;
+    height: 29px;
+    top: auto;
+    bottom: -25px;
+    left: 0;
+    background: url('@{src-url}/img/@{dir}/swiper-nav.png') no-repeat 50% -34px;
+    transform: rotateX(-180deg);
+    cursor: pointer;
+    &:hover {
+      background-position: 50% 10px;
+    }
+  }
+}
+
+.b-conditions-tour_structure__non-enter {
+  .b-conditions-tour_subtitle {
+    font-size: 24px;
+  }
+  .b-conditions-tour_structure_max-date-rate {
+    font-family: @font-main-bold;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 18px;
+    .gold-color;
+  }
+  .b-conditions-tour_structure_max-date-rate_region {
+    font-size: 14px;
+  }
+}
+
+.b-conditions-tour_structure_max-date-rate_head__active {
+  font-family: @font-main-bold;
+  text-transform: uppercase;
+  float: none;
+  margin: 0;
+  text-align: center;
+  padding-top: 20px;
+  font-size: 24px;
+  .gold-color;
+}
+
+// Призовой фонд
+.b-conditions-tour_prize-fund {
+  background: url('@{src-url}/img/@{dir}/prize-fund-bg.png') no-repeat;
+  width: 275px;
+  height: 100%;
+  float: right;
+}
+
+.b-action-tourn-button-cover {
+  display: inline-block;
+  padding: 1px;
+}
+
+.b-conditions-tour_prize-fund_number {
+  font-family: @font-main-bold;
+  font-size: 38px;
+  line-height: 52px;
+  text-align: center;
+  margin-bottom: 47px;
+  .gold-color;
+}
+
+.b-conditions-tour_prize-fund_info {
+  font-size: 14px;
+  color: #e1cfaf;
+  line-height: 40px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  i {
+    width: 12px;
+    height: 12px;
+    background: url('@{src-url}/img/@{dir}/icon-info.png') no-repeat;
+    display: inline-block;
+    margin-left: 6px;
+    position: relative;
+    top: 1px;
+    cursor: pointer;
+    &:hover {
+      filter: saturate(2);
+    }
+  }
+}
+
+.b-conditions-tour_prize-fund_place {
+  .gold-color;
+  font-family: @font-main-bold;
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+
+  a{
+    .gold-color;
+    .fa {
+      padding-left: 5px;
+    }
+  }
+}
+
+.b-conditions-tour_prize-fund_place_number {
+  font-size: 38px;
+  line-height: 40px;
+}
+
+.b-conditions-tour_prize-fund_place_unlim {
+  font-size: 26px;
+  line-height: 30px;
+  padding-top: 12px;
+}
+
+.b-conditions-tour_prize-fund_without_swiper {
+  position: relative;
+
+  .swiper-container {
+    width: 200px;
+    height: 78px;
+    margin-top: 24px;
+  }
+}
+
+.b-conditions-tour_prize-fund_swiper {
+  position: relative;
+
+  .swiper-container {
+    width: 220px;
+    height: 78px;
+    margin-top: 24px;
+  }
+
+  .swiper-slide {
+    font-size: 16px;
+    color: #d8c6a8;
+
+    span {
+      //display: inline-block;
+      width: 38%;
+      text-align: center;
+    }
+  }
+  .swiper-button-prev {
+    width: 100%;
+    height: 24px;
+    top: 0;
+    left: 0;
+    background: url('@{src-url}/img/@{dir}/swiper-nav.png') no-repeat 50% -37px;
+    cursor: pointer;
+    &:hover {
+      background-position: 50% 7px;
+    }
+  }
+  .swiper-button-next {
+    width: 100%;
+    height: 24px;
+    top: auto;
+    bottom: -18px;
+    left: 0;
+    background: url('@{src-url}/img/@{dir}/swiper-nav.png') no-repeat 50% -37px;
+    transform: rotateX(-180deg);
+    cursor: pointer;
+    &:hover {
+      background-position: 50% 7px;
+    }
+  }
+}
+
+// Условия турнира
+.b-conditions-tour_rules {
+  width: 596px;
+  float: left;
+}
+
+.b-conditions-tour_rules_cnt {
+  width: 524px;
+  margin: 0 auto;
+  ul {
+    text-align:justify;
+  }
+}
+
+.b-conditions-tour_rules_title {
+  font-size: 37px;
+  text-align: center;
+  margin: 8px 0 4px;
+  padding-bottom: 5px;
+  .gold-color;
+}
+
+.b-conditions-tour_rules_link {
+  text-align: center;
+  a {
+    font-size: 14px;
+    text-transform: uppercase;
+    .gold-light-color;
+    &:hover {
+      .gold-color;
+    }
+  }
+}
+
+.b-conditions-tour_rules ul {
+  //padding-left: 10px;
+  line-height: 28px;
+}
+
+.b-conditions-tour_rules {
+  font-family: @font-main;
+  font-size: 18px;
+  color: #d8c6a8;
+  margin-bottom: 8px;
+  line-height: 20px;
+
+}
+
+.b-conditions-tour_rules li {
+
+}
+
+// Турнирный стэк
+.b-tour-stack {
+  background: url('@{src-url}/img/@{dir}/tour-stack-bg.jpg') no-repeat;
+  height: 125px;
+  position: relative;
+  z-index: 2;
+  .b-action-tourn_features {
+    background: 0 0;
+    padding: 2px 0 0 0;
+    width: 380px;
+    text-align: center;
+  }
+  .b-action-tourn_features_item_val {
+    line-height: 38px;
+    margin-bottom: 4px;
+  }
+  .boxer {
+    float: left;
+    width: 49%;
+  }
+  .boxer-rebuy {
+    .b-action-tourn_features_item {
+      width: 100%;
+    }
+
+  }
+}
+
+.b-tour-stack_title {
+  font-family: @font-main-bold;
+  font-size: 20px;
+  text-transform: uppercase;
+  text-align: center;
+  background: url('@{src-url}/img/@{dir}/tour-stack-title.png') bottom center no-repeat;
+  padding: 8px 0 14px 0;
+  line-height: normal;
+  .gold-color;
+}
+
+.b-tour-stack_title_t-icon {
+  background: url('@{src-url}/img/@{dir}/tour-icon.png') no-repeat;
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.b-tour-stack_title_info {
+  background: url('@{src-url}/img/base/icon-info2.png') no-repeat;
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 6px;
+  background-size: cover;
+  position: relative;
+  top: -1px;
+  cursor: pointer;
+  &:hover {
+    filter: saturate(3);
+  }
+}
+
+.b-tour-stack_modal-list-info {
+  list-style: none;
+  padding: 0 10px;
+  li {
+    line-height: 16px;
+    margin-bottom: 10px;
+  }
+}
+
+// Чаты в турнире
+.b-tour-chatarea {
+  width: 100%;
+  z-index: 2;
+  .b-tour-chatarea-title {
+    font: 20px/20px @font-main-bold;
+    text-align: center;
+    padding: 10px;
+    text-shadow: 1px 0 5px #000;
+    color: #f2cb78;
+    background: #272730;
+    background: -webkit-linear-gradient(top, #272730 0, #15151d 100%);
+    background: linear-gradient(to bottom, #272730 0, #15151d 100%);
+    span {
+      text-transform: uppercase;
+    }
+  }
+  .b-tour-chatarea-chat {
+    background: #1f1f29;
+    .b-tour-chatarea-chat-area {
+      width: 100%;
+      max-height: 137px;
+      height: 137px;
+      display: block;
+      overflow-y: scroll;
+      background: rgb(48, 49, 57);
+      background: -webkit-linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+      background: -o-linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+      background: -ms-linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+      background: linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+      .b-tour-chatarea-chat-area-msg {
+        width: 100%;
+        min-height: 12px;
+        padding: 1px 10px 1px 10px;
+        line-height: 1;
+        a {
+          font: 14px/14px @font-main-bold;
+          color: #fcde9d;
+        }
+        span {
+          color: #fff;
+        }
+        .myMsg {
+          color: #34F3ED;
+        }
+      }
+    }
+    .b-tour-chatarea-chat-chat-submit {
+      width: 100%;
+      height: 53px;
+      border: 0;
+      background: #151620;
+      padding: 9px 0 0 10px;
+      border-top: 1px solid #262730;
+      input {
+        width: 990px;
+        border: 2px solid #23252c;
+        border-radius: 5px;
+        color: #5b5b5b;
+        padding: 4px 9px;
+        font-size: 16px;
+        &:focus {
+          outline: 0;
+          border: 2px solid #23252c;
+        }
+      }
+      button {
+
+        margin-left: 11px;
+      }
+    }
+  }
+
+}
+
+// Таблица рейтинга
+.b-rating-table {
+  position: relative;
+  z-index: 2;
+  table {
+    border: none;
+    margin-bottom: 0;
+    thead {
+      th {
+        font-size: 20px;
+        text-align: center;
+        vertical-align: middle;
+        width: 20%;
+        height: 43px;
+        border: none;
+        background: rgb(39, 39, 48);
+        background: -moz-linear-gradient(top, rgba(39, 39, 48, 1) 0%, rgba(21, 21, 29, 1) 100%);
+        background: -webkit-linear-gradient(top, rgba(39, 39, 48, 1) 0%, rgba(21, 21, 29, 1) 100%);
+        background: linear-gradient(to bottom, rgba(39, 39, 48, 1) 0%, rgba(21, 21, 29, 1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#272730', endColorstr='#15151d', GradientType=0);
+        .gold-color;
+        .b-tour-stack_title_info {
+          opacity: 0.8;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    tbody {
+      td {
+        font-size: 20px;
+        text-align: center;
+        color: #232329;
+        height: 62px;
+        border: none;
+        vertical-align: middle;
+        padding: 0;
+        position: relative;
+        background: #efeff0;
+        border-bottom: 1px solid #999999;
+        &:first-child {
+          font-size: 0;
+          text-align: left;
+        }
+      }
+      tr:nth-child(odd) td {
+        background: #f7f7f7;
+      }
+      tr.tr-current-user {
+        td {
+          background: #fafaff;
+          .b-rating-table_number {
+            background: #29293a;
+          }
+          .b-current-user-points_vip {
+            & > img {
+              margin-top: 2px;
+            }
+          }
+          &:after {
+            display: none;
+          }
+        }
+        & + tr td:before {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 9px;
+          background: url('@{src-url}/img/@{dir}/table-second-row-gr.png') repeat-x;
+        }
+      }
+      tr:last-child {
+        td:after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.b-rating-table_number {
+  font-size: 28px;
+  text-align: center;
+  display: inline-block;
+  width: 90px;
+  height: 100%;
+  border-right: 1px solid #999;
+  background: #1f1f29;
+  vertical-align: middle;
+  .gold-color;
+}
+
+.b-rating-table_number_count {
+  font-size: 22px;
+  text-align: center;
+  display: inline-block;
+  width: 90px;
+  height: 100%;
+  border-right: 1px solid #999;
+  background: #1f1f29;
+  vertical-align: middle;
+  .gold-color;
+}
+
+.b-rating-table_number_count__me {
+  font-size: 22px;
+  text-align: center;
+  display: inline-block;
+  width: 90px;
+  height: 100%;
+  border-right: 1px solid #999;
+  background: #29293a;
+  vertical-align: middle;
+  .gold-color;
+}
+
+.b-rating-table_number_cnt {
+  line-height: 62px;
+}
+
+.b-rating-table_name {
+  font-size: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  width: 170px;
+}
+
+.b-rating-table_emblem {
+  img {
+    height: 48px;
+  }
+}
+
+.b-rating-table_footer {
+  height: 21px;
+  background: rgb(39, 39, 48);
+  position: relative;
+  background: -moz-linear-gradient(top, rgba(39, 39, 48, 1) 0%, rgba(21, 21, 29, 1) 100%);
+  background: -webkit-linear-gradient(top, rgba(39, 39, 48, 1) 0%, rgba(21, 21, 29, 1) 100%);
+  background: linear-gradient(to bottom, rgba(39, 39, 48, 1) 0%, rgba(21, 21, 29, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#272730', endColorstr='#15151d', GradientType=0);
+}
+
+.b-rating-table_footer_btn-more {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  margin-left: -55px;
+  display: inline-block;
+  background: url('@{src-url}/img/@{dir}/table-bth-more.png') no-repeat;
+  width: 111px;
+  height: 25px;
+  cursor: pointer;
+  &:hover {
+    background-position: 0px -80px;
+  }
+}
+
+.greycolor {
+  color: grey;
+}
+
+.table-time-hover {
+  table {
+    .wait-hover-tr {
+      &:hover {
+        background: #4c4c4c;
+      }
+    }
+  }
+}
+
+.tournament-join-modal {
+  .currency {
+
+    .btn {
+      background: #1e1e26;
+      height: 86px;
+      color: #fff;
+      font: 36px/36px @font-semi;
+      font-weight: bold;
+      outline: 0;
+
+      &.active {
+        background: #893939;
+        outline: 0;
+      }
+    }
+  }
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+}
+
+.b-action-tourn_addon {
+  position: absolute;
+  bottom: -16px;
+  right: -202px;
+  width: 202px;
+  height: 263px;
+  font-family: @font-main-bold;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 16px;
+
+  &.addon-active {
+    background: url("/src/img/banner-addon-active.png") no-repeat;
+    cursor: pointer;
+
+    & > .addon-block-1 {
+      height: 67px;
+      padding-top: 14px;
+      margin-left: 68px;
+      font-family: "Roboto Condensed", @font-semi;
+
+      & > span {
+        font-size: 11px;
+        font-weight: bold;
+        line-height: 1;
+      }
+
+      & > .time {
+        font-size: 28px;
+        line-height: 20px;
+        margin: 0;
+      }
+    }
+
+    & > .addon-block-3 {
+      font-size: 60px;
+      font-family: @font-main-bold;
+      line-height: 65px;
+    }
+
+    & > .addon-block-4 {
+      font-size: 14px;
+      font-family: @font-main-bold;
+      line-height: 26px;
+    }
+
+    & > .addon-block-5 {
+      font-size: 12px;
+      font-family: "Roboto Condensed", @font-semi;
+      text-align: left;
+      margin-top: 8px;
+      margin-left: 18px;
+    }
+  }
+
+  &.addon-inactive{
+    cursor:pointer;
+    background: url("/src/img/banner-addon-inactive.png") no-repeat;
+
+    & > .addon-block-1 {
+      font-size: 12px;
+      font-family: "Roboto Condensed", @font-semi;
+      font-weight: bold;
+      line-height: 1.4;
+      margin-left: 28px;
+      padding:5px 0 0 0;
+      height:42px;
+
+      & > span {
+        font-size: 10px;
+        font-weight: bold;
+        line-height: 1;
+      }
+
+      .noneTransform {
+        text-transform: none;
+      }
+    }
+
+    & > .addon-block-2 {
+      font-size: 12px;
+      font-family: "Roboto Condensed", @font-semi;
+      line-height: 24px;
+    }
+
+    & > .addon-block-3 {
+      font-size: 60px;
+      font-family: @font-main-bold;
+      line-height: 66px;
+    }
+
+    & > .addon-block-4 {
+      font-size: 14px;
+      font-family: @font-main-bold;
+      line-height: 26px;
+    }
+
+    & > .addon-block-5 {
+      font-size: 14px;
+      font-family: "Roboto Condensed", @font-semi;
+      text-align: left;
+      margin-top: 14px;
+      margin-left: 20px;
+    }
+  }
+}

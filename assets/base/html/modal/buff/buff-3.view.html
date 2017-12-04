@@ -1,0 +1,9 @@
+<img class="modal-bg" src="/src/img/buff/buff_3.png" style="bottom: 0; left: -320px;" />
+<div class="modal-header text-center">
+    <h3 class="modal-title" ng-bind-html="'BUFF__TITLE_' + buffId | translate"></h3>
+</div>
+<div class="modal-body text-center">
+    <div class="buf-text" ng-bind-html="'BUFF__TEXT_' + buffId | translate:data"></div>
+
+    <button class="btn btn-danger btn-flat" ng-click="$close()">{{'BUFF__GOT_IT' | translate}}</button>
+</div>

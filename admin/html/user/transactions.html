@@ -1,0 +1,29 @@
+<div>
+    <table ng-controller="ModalTemp" class="table table-center table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Время создания</th>
+            <th>Событие</th>
+            <th>Повод</th>
+            <th>Статус</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in vm.transactions track by item.transactionId">
+            <td>
+                <a class="green underline" href ng-if="::item.matchRoomId"
+                   ng-click="openMoreInfo(item.matchRoomId, 'lol')">{{::item.transactionId}}</a>
+                <span ng-if="::!item.matchRoomId">{{::item.transactionId}}</span>
+            </td>
+            <td>{{::item.createTime | date:'dd.MM.yyyy | H:mm'}}</td>
+            <td>{{::item.deltaValue | transaction :item.currencyType: item.action}} ({{::item.valueType}})</td>
+            <td>{{::item.event | event}}</td>
+            <td>{{::item.status | tStatus}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <uib-pagination max-size="5" boundary-links="true" items-per-page="vm.perPageTransactionPage"
+                    ng-model="vm.currentTransPage" total-items="1000"
+                    ng-change="vm.getUserTransactionsData()"></uib-pagination>
+</div>

@@ -1,0 +1,63 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'HEADER__LOGIN'|i18n}}</h3>
+    <i class="genericon genericon-close modal-close loginclose" ng-click="cancel()"></i>
+</div>
+<form name="loginForm" novalidate>
+    <div class="modal-body" >
+        <div class="modal-air">
+            <div ng-hide="modalSendComplate" class="animate-hide modal-body-content">
+                <div ng-show="Badloginpass">
+                    {{'LOGIN__INCORRECT_LOGIN_OR_PASS_ERROR'|i18n}}
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' :  (loginForm.loginEmail.$invalid-pattern) && (loginForm.loginEmail.$dirty) }">
+                    <label class="control-label ">
+                        <i class="form-group_icon genericon genericon-mail"></i>
+                        <input type="email" class="form-control loginemail" placeholder={{'PUBLIC__EMAIL_PLACEHOLDER'|i18n}} ng-model="loginEmail" name='loginEmail' required ng-pattern="EMAIL_REGEXP">
+                    </label>
+                    <div class="form-group_message-error">
+                        {{'LOGIN__INPUT_CORRECT_EMAIL'|i18n}}
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error' :  (loginForm.loginPass.$invalid-pattern) && (loginForm.loginPass.$dirty) }">
+                    <label class="control-label">
+                        <i class="form-group_icon genericon genericon-key"></i>
+                        <input type="password" class="form-control" placeholder="{{'PUBLIC__PASSWORD_PLACEHOLDER'|i18n}}"  ng-model="loginPass" minlength="8" maxlength="16"  name='loginPass' required>
+                    </label>
+                    <div class="form-group_message-error">
+                        {{'LOGIN__INPUT_CORRECT_PASS'|i18n}}
+                    </div>
+
+                    <div ng-controller='ModalTemp'>
+                        <a id="to_restore_pass" href="javascript:;;" ng-click="modal('md', 'reminder.html'); cancel(); ">{{'LOGIN__RESTORE_PASSWORD'|i18n}}</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="complate-buttons" ng-hide="modalSendComplate">
+                <button  class="issue__submit-btn btn-red-md modal__btn-red loginsubmit-but" ng-click="checkLogin = true" ng-hide="loginForm.$valid">{{'LOGIN__LOGIN_BTN_CAPTION'|i18n}}</button>
+                <button id="login" class="issue__submit-btn btn-red-md modal__btn-red loginsubmit-but" type="submit" ng-click="login()" ng-show="loginForm.$valid" ng-disabled="loginBtnDisable">{{'LOGIN__LOGIN_BTN_CAPTION'|i18n}}</button>
+            </div>
+            <div class="ta-center" ng-show="modalSendComplate">
+                {{'LOGIN__SUCCESS_AND_REDIRECT_MSG'|i18n}}<br/>GAMESTARS.GG
+            </div>
+            <div class="ta-center" ng-show="modalSendError == 'UserUnverifiedException'">
+                {{'LOGIN__VERIFICATION_NEED_MSG'|i18n}}
+
+            </div>
+            <div class="ta-center" ng-show="status === 400">
+                <!--UserNotFoundException-->
+                {{'LOGIN__LOGIN_OR_PASS_WRONG'|i18n}}
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+</form>

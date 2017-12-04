@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'LK__MODAL_PROMO_CODE_TITLE' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<div class="modal-body">
+    <div class="modal-body-content">
+        <form name="form" class="text-center" novalidate>
+            <div class="form-group" ng-class="{ 'has-error': form.promoCode.$invalid && form.promoCode.$touched }">
+                <label class="control-label">
+                    <span class="form-group_icon">
+                        <i class="fa fa-fw fa-gift"></i>
+                    </span>
+                    <input class="form-control" type="text" name="promoCode"
+                           placeholder="{{'LK__MODAL_PROMO_CODE_PLACEHOLDER' | translate}}"
+                           ng-model="modal.code"
+                           required
+                           ng-pattern="/^[a-zA-Z0-9\._\-\@]+$/" />
+                </label>
+            </div>
+            <div class="form-group" ng-if="modal.error">
+                <div class="alert alert-danger">{{modal.error | translate}}</div>
+            </div>
+            <button class="btn-red"
+                    ng-disabled="form.$invalid || modal.loading"
+                    ng-click="modal.submit()">
+                <span ng-hide="modal.loading">{{'LK__MODAL_PROMO_CODE_SUBMIT' | translate}}</span>
+                <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="modal.loading"></i>
+            </button>
+        </form>
+    </div>
+</div>

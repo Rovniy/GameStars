@@ -1,0 +1,31 @@
+<div class="page-title">
+    <span class="title">Ррейтинг пользователей нашей платформы</span>
+    <div class="description">Лучшие по показателю winrate</div>
+</div>
+<div class="row panels">
+    <table class="table table-striped usersPage-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>userID</th>
+                <th>Имя пользователя</th>
+                <th ng-click="vm.sortBy = 'winRate'">Матчей всего</th>
+                <th>Выиграл \ проиграл</th>
+                <th ng-click="vm.sortBy = 'winRate'">Winrate</th>
+            </tr>
+        </thead>
+        <tbody ng-controller="ModalTemp">
+        <tr ng-repeat="(key,row) in vm.ratingData track by row.userId | orderBy: 'winRate'">
+            <td ng-bind="key + 1"></td>
+            <td ng-bind="row.userId"></td>
+            <td ng-bind="row.name"></td>
+            <td ng-bind="row.wonGames + row.lostGames"></td>
+            <td>
+                <span class="green">{{row.wonGames}}</span> / <span class="red">{{row.lostGames}}</span>
+            </td>
+            <td>{{row.winRate.toFixed(2)*100}}%</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

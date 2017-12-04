@@ -1,0 +1,16 @@
+<div ng-controller="LkShopDevicesController">
+    <div class="box-title">
+        <h3>{{'LK__DEVICES' | translate}}</h3>
+    </div>
+    <div class="row shopDevices-content">
+        <div ng-repeat="row in shopItemsDevices" class="col-lg-4 shop-item">
+            <h3 class="shop-item-total">{{row.title}}</h3>
+            <p class="shop-item-sp-bonus">{{row.category}}</p>
+            <img class="img-thumbnail" src="/src/img/shop/{{row.category}}/{{row.img}}.jpg"/>
+            <p class="shop-item-cost"> ${{row.cost}}</p>
+            <div class="shop-buy-button">
+                <button ng-click="showTemNoty(row)" class="btn-red">{{'LK__PURCHASE' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

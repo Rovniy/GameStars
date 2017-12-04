@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'MODAL__NO_MONEY_BONUS_REBUY_TITLE'| translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<div class="modal-body">
+    <div class="ta-center">
+        <p>{{'MODAL__NO_MONEY_BONUS_REBUY_TEXT' | translate}}</p>
+        <p>{{'MODAL__YOU_HAVE_BONUS' | translate}}{{modal.balanceBonus | currencyUnit}}</p>
+        <p>{{'MODAL__YOU_NEED' | translate}}{{modal.youNeed | currencyUnit}}</p>
+
+        <button ng-click="modal.openPaymentModal()" class="btn-red" style="margin-top: 10px;">
+            {{'MODAL__DEPOSIT'| translate}}
+        </button>
+    </div>
+</div>

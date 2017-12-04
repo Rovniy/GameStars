@@ -1,0 +1,121 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'HEADER__SIGN_UP' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<form name="signUpForm" novalidate>
+    <div class="modal-body"  style="padding-bottom: 10px">
+
+        <div ng-hide="modalSendComplate">
+            <div class="modal-body-content">
+                <fieldset ng-disabled="loading">
+                    <div class="form-group form-group__required" ng-class="{ 'has-error' :  (signUpForm.signupEmail.$invalid-pattern) && (signUpForm.signupEmail.$dirty) }">
+                        <label class="control-label">
+                            <i class="form-group_icon genericon genericon-mail"></i>
+                            <input tabindex='1' type="email" class="form-control" placeholder="{{'PUBLIC__EMAIL_PLACEHOLDER' | translate}}"
+                                   name='signupEmail'
+                                   ng-model="signupEmail"
+                                   validate-email required />
+                        </label>
+                        <div class="form-group_message-error">
+                            {{'SIGN_UP__INPUT_CORRECT_EMAIL' | translate}}
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group__required" ng-class="{ 'has-error' :  (signUpForm.signupPass.$invalid-pattern) && (signUpForm.signupPass.$dirty) }">
+                        <label class="control-label">
+                            <i class="form-group_icon genericon genericon-key"></i>
+                            <input tabindex='2' type="password" class="form-control" placeholder="{{'PUBLIC__PASSWORD_PLACEHOLDER' | translate}}" minlength="8"  maxlength="16"  ng-model="signupPass" name='signupPass' required>
+                        </label>
+
+                        <div class="form-group_message-error">
+                            {{'SIGN_UP__INPUT_CORRECT_PASS' | translate}}
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group__required" ng-class="{ 'has-error' :  (signUpForm.signupLogin.$invalid-pattern) && (signUpForm.signupLogin.$dirty) }">
+                        <label class="control-label">
+                            <i class="form-group_icon genericon genericon-user"></i>
+                            <input tabindex='3' type="text" maxlength="16" class="form-control"  placeholder="{{'PUBLIC__LOGIN_PLACEHOLDER' | translate}}" ng-model="signupLogin" name='signupLogin' required>
+                        </label>
+                        <div class="form-group_message-error">
+                            {{'SIGN_UP__INPUT_CORRECT_LOGIN' | translate}}
+                        </div>
+                    </div>
+
+                    <div class="form-group form-checkbox" ng-class="{ 'has-error' :  (signUpForm.acceptRules.$invalid) && (signUpForm.acceptRules.$dirty) }">
+                        <label style="display: inline-block">
+                            <input tabindex='4' type="checkbox" required ng-model="acceptRules" name="acceptRules">
+                            <i class="form-checkbox_pseudo-checkbox genericon genericon-checkmark"></i>
+                <span class="form-checkbox_text">
+                    <!--Я согласен с-->
+                    {{'SIGN_UP__I_AGREE_WITH' | translate}}
+                    <a href="/rules" target="_blank" class="form-checkbox_text">
+                        {{'SIGN_UP__TERMS_OF_USE' | translate}}
+                        <!--условиями пользования-->
+                    </a>
+                </span>
+                        </label>
+
+                        <div class="form-group_message-error">
+                            {{'SIGN_UP__YOU_MAST_ACCEPT_CONDITIONS' | translate}}
+                            <!--Для продолжения вы должны принять условия-->
+                        </div>
+
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="complate-buttons ta-center">
+                <button tabindex='5' class="btn-red" autofocus
+                        ng-disabled="!signUpForm.$valid || loading"
+                        ng-click="signup()">
+                    <span ng-hide="loading">{{'SIGN_UP__SIGN_UP_BTN_CAPTION' | translate}}</span>
+                    <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="loading"></i>
+                </button>
+            </div>
+
+            <a href style="font-size: 14px; text-align:center; margin: 20px 0 0 0; display: block" ng-click="cancelAndLoginShow()">{{"MODAL_I_ALREADY_REGISTER"|translate}}</a>
+        </div>
+
+        <div class="center ta-center">
+
+            <div class="openSans" ng-show="modalSendComplate">
+                <!--Спасибо за регистрацию!-->
+                {{'SIGN_UP__THANK_YOU_FOR_REG' | translate}}<br/>
+                <h3><b>{{'SIGN_UP__WE_SENT_EMAIL' | translate}}</b></h3><br/>
+                {{'SIGN_UP__CHECK_SPAM' | translate}}<br/><br/>
+                (Bitte überprüfen Sie Ihre E-Mail)<br/>
+                (Молимо прегледајте Е-пошту)<br/>
+                (Vă rugăm să verificați email-ul)<br/>
+            </div>
+
+            <div  ng-show="modalSendError" class="modal-message-error">
+                {{errorMsg | translate}}
+            </div>
+
+            <div class="center" ng-show="status == 500||status == 502">
+                {{'SIGN_UP__SERVER_ERROR_MSG' | translate}}
+                <!--На сервере произошла ошибка, приносим свои извинения.-->
+                <br/>
+                {{'SIGN_UP__REFER_TO_ADMIN_MSG' | translate}}
+                <!--Пожалуйста, обратитесь к администрации сайта.-->
+            </div>
+
+        </div>
+
+        <hr />
+
+        <!--<div class="social-container ta-center">-->
+            <!--<button class="btn btn-social-icon btn-facebook" ng-click="modal.externalLogin('facebook')" track-event-by-click track-category="social" track-action="signup-fb">-->
+                <!--<span class="fa fa-facebook"></span>-->
+                <!--&lt;!&ndash;<span translate="LOGIN__WITH" translate-value-name="Facebook"></span>&ndash;&gt;-->
+            <!--</button>-->
+
+            <!--<button class="btn btn-social-icon btn-twitch"  ng-click="modal.externalLogin('twitch')" track-event-by-click track-category="social" track-action="signup-tw">-->
+                <!--<span class="fa fa-twitch"></span>-->
+                <!--&lt;!&ndash;<span translate="LOGIN__WITH" translate-value-name="Twitch"></span>&ndash;&gt;-->
+            <!--</button>-->
+        <!--</div>-->
+
+    </div>
+</form>

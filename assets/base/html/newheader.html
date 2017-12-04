@@ -1,0 +1,204 @@
+<!-- start Header -->
+<div class="v-align" ng-controller="HeaderController as vm">
+    <div class="b-section row v-align">
+        <div class="b-header_col-left">
+            <a ng-href="//{{::vm.config.mainUrl}}/" class="b-logo">
+                <img src="/src/img/base/logo.png" alt="gamestar" />
+            </a>
+
+            <span class="b-header_list-game" uib-dropdown>
+                <a href id="simple-dropdown" class="b-header_list-game_button" uib-dropdown-toggle>
+                    <img ng-show="::(vm.config.template === 'root')" src="/src/img/base/game-icon/games.png" alt="gamestar" />
+                    <img ng-show="::(vm.config.template === 'lol')" src="/src/img/base/game-icon/lol.png" alt="gamestar" />
+                    <img ng-show="::(vm.config.template === 'hs')" src="/src/img/base/game-icon/hearthstone.png" alt="gamestar" />
+                    <img ng-show="::(vm.config.template === 'wot')" src="/src/img/base/game-icon/wot.png" alt="gamestar" />
+                    <img ng-show="::(vm.config.template === 'dota')" src="/src/img/base/game-icon/dota.png" alt="gamestar" />
+                    <img ng-show="::(vm.config.template === 'cs')" src="/src/img/base/game-icon/csgo.png" alt="gamestar" />
+                </a>
+                <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown" uib-dropdown-menu>
+                    <li ng-class="{'active': vm.config.template === 'lol'}">
+                        <a ng-show="::vm.config.game.lol" ng-href="//lol.{{::vm.config.mainUrl}}/">
+                            <div class="b-header_list-game_img-cnt">
+                                <img src="/src/img/base/game-icon/lol.png" width="36" height="36"/>
+                            </div>
+                            <span class="b-header_list-game_text">League of Legends</span>
+                        </a>
+                        <a ng-show="::!vm.config.game.lol" href>
+                            <div class="b-header_list-game_img-cnt">
+                                <img src="/src/img/base/game-icon/lol_grey.png" width="36" height="36"/>
+                            </div>
+                            <span class="b-header_list-game_text">League of Legends</span>
+                        </a>
+                    </li>
+                    <li ng-class="::{'active': vm.config.template === 'hs'}">
+                        <a ng-show="::vm.config.game.hs" ng-href="//hs.{{::vm.config.mainUrl}}/">
+                            <div class="b-header_list-game_img-cnt">
+                                <img src="/src/img/base/game-icon/hearthstone.png" width="36" height="36"/>
+                            </div>
+                            <span class="b-header_list-game_text">Hearthstone</span>
+                        </a>
+                        <a ng-show="::!vm.config.game.hs" href>
+                            <div class="b-header_list-game_img-cnt">
+                                <img src="/src/img/base/game-icon/hearthstone_grey.png" width="36" height="36"/>
+                            </div>
+                            <span class="b-header_list-game_text">Hearthstone</span>
+                        </a>
+                    </li>
+                    <!--<li ng-class="::{'active': vm.config.template === 'wot'}">
+                        <a ng-show="vm.config.game.wot" href="//wot.{{vm.config.mainUrl}}/">
+                            <div class="b-header_list-game_img-cnt">
+                                <img src="/src/img/base/game-icon/wot.png" width="36" height="36">
+                            </div>
+                            <span class="b-header_list-game_text">World of Tanks</span>
+                        </a>
+                        <a ng-show="::!vm.config.game.wot" href>
+                            <div class="b-header_list-game_img-cnt">
+                                <img src="/src/img/base/game-icon/wot_grey.png" width="36" height="36">
+                            </div>
+                            <span class="b-header_list-game_text">World of Tanks</span>
+                        </a>
+                    </li>-->
+                    <li ng-class="::{'active': vm.config.template === 'dota'}">
+                        <a ng-show="vm.config.game.dota" ng-href="//dota.{{::vm.config.mainUrl}}/">
+                            <div class="b-header_list-game_img-cnt">
+                                <img src="/src/img/base/game-icon/dota.png" width="36" height="36">
+                            </div>
+                            <span class="b-header_list-game_text">Dota 2</span>
+                        </a>
+                        <a ng-show="::!vm.config.game.dota" href>
+                            <div class="b-header_list-game_img-cnt">
+                                <img src="/src/img/base/game-icon/dota_grey.png" width="36" height="36">
+                            </div>
+                            <span class="b-header_list-game_text">Dota 2</span>
+                        </a>
+                    </li>
+                    <li ng-class="::{'active': vm.config.template == 'cs'}">
+                        <a ng-show="::vm.config.game.cs" ng-href="//cs.{{::vm.config.mainUrl}}/">
+                            <div class="b-header_list-game_img-cnt">
+                                <img src="/src/img/base/game-icon/csgo.png" width="36" height="36">
+                            </div>
+                            <span class="b-header_list-game_text">Counter-Strike: <br/> Global Offensive</span>
+                        </a>
+                        <a ng-show="::!vm.config.game.cs" href>
+                            <div class="b-header_list-game_img-cnt">
+                                <img src="/src/img/base/game-icon/csgo_grey.png" width="36" height="36">
+                            </div>
+                            <span class="b-header_list-game_text">Counter-Strike: <br/> Global Offensive</span>
+                        </a>
+                    </li>
+                </ul>
+            </span>
+
+            <div class="b-top-menu">
+
+                <!--Раскментировать после правки стилей-->
+                <a track-event-by-click track-category="click" track-action="top_menu_matches" href="/cashgames" class="b-top-menu_link">{{'PUBLIC__MATCHES_TITLE' | translate}}</a>
+                <a track-event-by-click track-category="click" track-action="top_menu_tournaments" href="/tournaments" class="b-top-menu_link">{{'PUBLIC__TOURNAMENTS_TITLE' | translate}}</a>
+
+                <!-- Середина для поиска матча-->
+                <div ng-if="vm.getUserProfile()" class="b-top-menu_reserve">
+                    <div ng-controller='FindTheGameNowController as vm'>
+                        <div ng-if="vm.isTimerVisible()" class="b-top-menu_reserve-box">
+                            <div class="b-top-menu_reserve-box-find">
+                                <span class="b-top-menu_reserve-box-find-desc">{{'HEADER__SEARCH_MATCH' | translate}}</span>
+                                <a href class="b-top-menu_reserve-box-find-close" ng-click="vm.disapply()"></a>
+                            </div>
+                            <!--<div class="b-top-menu_reserve-box-find-bottom">
+                                <span class="b-top-menu_reserve-box-find-desc">RU 5x5 100SP SOLO</span>
+                            </div>-->
+                            <div class="b-top-menu_reserve-box-find-bottom">
+                                <div class="b-top-menu_reserve-box-was">
+                                    <span class="title">{{'HEADER__EXPIRED' | translate}}:</span>
+                                    <span class="countmin" ng-bind="vm.getTimerValue()"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end Середина для поиска матча -->
+
+                <a track-event-by-click track-category="click" track-action="top_menu_news" ng-href="{{::vm.config.newsUrl}}" class="b-top-menu_link">{{'PUBLIC__NEWS_TITLE' | translate}}</a>
+                <!--                <a href="#" data-elevio-module="articles" track-event-by-click track-category="click" track-action="top_menu_support" class="b-top-menu_link"
+                                   ng-if="vm.getUserProfile()">{{'PUBLIC__SUPPORT_TITLE' | translate}}</a>-->
+                <span class="b-top-menu_link b-top-menu_link__none-active">|</span>
+                <span class="b-header_list-lang" uib-dropdown>
+                    <a href id="simple-dropdown-lang" uib-dropdown-toggle>
+                        <img  class="b-top-menu_lang" ng-src="/src/img/base/languages/lang_{{ vm.getCurrentLanguage() }}.png">
+                    </a>
+                    <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown-lang"
+                        uib-dropdown-menu>
+                        <li ng-repeat="lang in ::vm.config.languages" ng-if="lang !== appCtrl.getLanguage()">
+                            <img ng-click="vm.setLanguage(lang)" class="b-top-menu_lang" ng-src="/src/img/base/languages/lang_{{ ::lang }}.png">
+                        </li>
+                    </ul>
+                </span>
+            </div>
+        </div>
+        <div class="b-header_col-right">
+
+            <div class="b-header_col-right-enter-buttons" ng-hide="vm.getUserProfile()">
+                <a track-event-by-click track-category="click" track-action="top_menu_login" class="b-header_col-right-enter-buttons-enter" href ng-click="vm.openLoginModal()">{{'HEADER__LOGIN' | translate}}</a>
+                <span>/</span>
+                <a track-event-by-click track-category="click" track-action="top_menu_signup" class="b-header_col-right-enter-buttons-reg" href ng-click="vm.openSignupModal()" >{{'HEADER__SIGN_UP' | translate}}</a>
+            </div>
+
+            <div class="b-user-bar pull-right"
+                 ng-show="vm.getUserProfile()"
+                 ng-mouseleave="vm.showVipInfo = false">
+
+                <div class="b-user-bar_ava">
+                    <i class="ava-img-small i-avatar" ng-class="vm.getAvatarClass()" ng-click="vm.toggleAvatars()"></i>
+                    <span class="b-user-bar_rating" ng-bind="vm.getUserProfile().level"></span>
+                    <div class="change-avatar-header" ng-show="vm.isAvatarsVisible">
+                        <ul>
+                            <li ng-repeat="id in ::vm.avatars">
+                                <i class="i-avatar avatar-{{::id}}" ng-click="vm.selectAvatar(id)"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="b-user-bar_info" >
+                    <div class="b-user-bar_info_top clearfix">
+                        <div class="b-user-bar_info_name" style="cursor: pointer;" ng-click="vm.openConnectAccountModal()">
+                            <span>{{vm.getUserProfile().userData.name}}</span>
+                        </div>
+                        <div class="b-user-bar_info_points" ng-mouseenter="vm.showVipInfo = vm.isVipStatus()">
+                            <span class="b-user-bar_info_points_vip" ng-show="vm.isVipStatus()">
+                                <img src="/src/img/icon-vip.png" />
+                            </span>
+                            <span class="b-user-bar_info_points_item icon-points">
+                                <i class="fa fa-dollar"></i> {{vm.getUserRealpoints()}}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="btn-group b-user-bar_info_bottom" >
+                        <a href="/lk/payments" class="btn b-user-bar_info_buy"><i class="fa fa-cart-arrow-down"></i></a>
+                        <a href="/lk/main" class="btn b-user-bar_info_lk"><i class="fa fa-user"></i></a>
+                        <!--<button class="btn b-user-bar_info_star"></button>-->
+                        <button class="btn b-user-bar_info_exit" ng-click="vm.logout()"><i class="fa fa-sign-out"></i></button>
+                    </div>
+                </div>
+
+                <div class="b-user-bar_balance"
+                     ng-if="vm.isVipStatus()"
+                     ng-show="vm.showVipInfo">
+                    <div class="balance-row">
+                        <a href="/bonus-faq" uib-tooltip="{{'LK__BONUS_DESCRIPTION' | translate}}" tooltip-placement="right" tooltip-append-to-body="true"><i class="fa fa-fw fa-info-circle"></i></a>
+                        <span>{{'HEADER__VIP_BALANCE' | translate}}</span>
+                        <strong>{{vm.getUserRealpointsVip() | currencyUnit}}</strong>
+                    </div>
+                    <hr />
+                    <div class="balance-row">
+                        <a href="/bonus-faq" uib-tooltip="{{'LK__BONUS_DESCRIPTION' | translate}}" tooltip-placement="right" tooltip-append-to-body="true"><i class="fa fa-fw fa-info-circle"></i></a>
+                        <span>{{'HEADER__BONUS_BALANCE' | translate}}</span>
+                        <strong>{{vm.getUserRealpointsBonus() | currencyUnit}}</strong>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Header -->

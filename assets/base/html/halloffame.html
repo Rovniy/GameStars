@@ -1,0 +1,25 @@
+<div id="middle">
+    <!-- start Middle-->
+    <div ng-controller="HallOfFamesController as vm" class="b-gross-brd">
+        <div class="b-gross-brd_cnt">
+            <div class="row halloffames">
+                <div class="item" ng-repeat="row in ::vm.halloffames">
+                    <div class="photo">
+                        <img class="mainPhoto" ng-src="/src/img/halloffame/{{::row.img}}.jpg"/>
+                        <div class="meta">
+                            <h3>{{::row.username}}</h3>
+                            <h4>{{::row.server}}</h4>
+                        </div>
+                        <div class="rank">
+                            <img ng-src="/src/img/ranking/emblem-{{::row.rank}}.png"/>
+                        </div>
+                        <div class="game">
+                            <img ng-src="/src/img/base/game-icon/lol.png"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Middle -->
+</div>

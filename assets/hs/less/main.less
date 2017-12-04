@@ -1,0 +1,424 @@
+// grid
+.b-grid-col{
+  padding-top: 6px;
+  &:after{
+    content: '';
+    clear: both;
+    display: block;
+  }
+}
+.b-grid-col_x1{
+  width: 403px;
+}
+.b-grid-col_x2{
+  width: 794px;
+  margin-right: 3px;
+}
+.b-grid-col_x3{
+  width: 1200px;
+}
+.b-grid-col_y1{
+  height: 238px;
+  border:1px solid #473421;
+  float: left;
+  margin-bottom: 4px;
+}
+.b-grid-col_y2{
+  height: 480px;
+  border:1px solid #473421;
+  float: left;
+}
+
+// Main page
+.p-main{
+  //padding-bottom:10px;
+}
+
+.b-main-nav{
+  height: 492px;
+}
+.b-main-nav_item{
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-size: 102% auto;
+  transition: background-size 0.2s linear;
+  cursor: pointer;
+  outline: none;
+  &:before{
+    content: '';
+    display: block;
+    position: absolute;
+    top:0; right:0; bottom:0; left:0;
+    background: rgba(35, 35, 35, 0.17);
+    transition: opacity 0.2s linear;
+  }
+  &:hover{
+    background-size: 100% auto ;
+    &:before{
+      opacity: 0;
+    }
+  }
+}
+.b-main-nav_item_text{
+  width: 100%; height: 65px;
+  text-transform: uppercase;
+  padding-left: 20px;
+  padding-top: 4px;
+  position: absolute;
+  bottom:0; left: 0;
+  background: rgba(71, 52, 33, 0.61);
+  z-index: 2;
+  text-align:left;
+}
+.b-main-nav_item_title{
+  font-family: @font-main-bold;
+  font-size: 24px;
+  color:#fff;
+}
+.b-main-nav_item_subtitle{
+  font-size: 14px;
+  .gold-light-color;
+}
+.b-main-nav_item__big{
+  .b-main-nav_item_text{
+    height: 90px;
+    padding-top: 14px;
+    padding-left: 26px;
+  }
+  .b-main-nav_item_title{
+    font-size: 37px;
+    line-height: 38px;
+  }
+  .b-main-nav_item_subtitle{
+    font-family: @font-main-bold;
+    font-size: 25px;
+  }
+}
+
+.b-main-block{
+  background:url('/src/img/hs/bg-lol-main.png') no-repeat 50% 0;
+  background-size: 100%;
+  background-position: 0 2px;
+  padding-bottom:1px;
+  .b-section{
+      top:0; left:0;
+  }
+}
+.b-main-block_title{
+  font-family: @font-main-bold;
+  font-size:37px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 540px;
+  margin: 0 auto;
+  .gold-color;
+}
+
+
+// Таблица список турниров
+.b-main_tournament-list{
+  width: 950px;
+  margin: 0 auto 30px;
+  border-spacing:0;
+  .gold-light-color;
+  table{
+    width: 100%;
+    thead{
+      th{
+        font-family: @font-main;
+        font-size: 22px;
+        text-transform: uppercase;
+        text-align: center;
+        height: 44px;
+        color:#000;
+        &:nth-child(4), &:nth-child(2){
+          text-align: left;
+        }
+      }
+    }
+    tbody{
+      tr:nth-child(odd){
+        background: rgba(157,117,74,30%)
+      }
+      tr:nth-child(even){
+        background: rgba(202,170,136,30%)
+      }
+      tr:hover {
+        background: rgba(157,117,74,50%)
+      }
+
+      td{
+        font-family: @font-main;
+        font-size: 20px;
+        text-transform: uppercase;
+        text-align: center;
+        height: 44px;
+        color:#27396a;
+        &:nth-child(4), &:nth-child(2){
+          text-align: left;
+        }
+        &:nth-child(5) {
+          padding-top:5px;
+        }
+      }
+
+
+
+    }
+  }
+}
+.b-tournament-list_tr{
+  &:hover {
+    background: rgba(167, 127, 81, 0.5);
+
+  }
+}
+.b-main_tournament-list_add{
+  font-family: @font-main-bold;
+  font-size: 17px;
+  width: 31px;
+  height: 31px;
+  content:'';
+  display: inline-block;
+  background: url('/src/img/hs/main_tour_plus.png') no-repeat;
+  line-height: 18px;
+  cursor: pointer;
+  transition: 0.5s;
+  &:hover {
+    transform: scale(1.2);
+    transition: 0.5s;
+  }
+}
+
+.b-main_hide-section{
+  font-family: @font-main-bold;
+  font-size: 40px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #27396a;
+  height: 90px;
+  padding-top:15px;
+  background: url('/src/img/hs/title_bg.png') no-repeat center center;
+  //margin-bottom: 20px;
+}
+
+
+// swiper
+.b-banner-swiper{
+}
+.b-banner-swiper .swiper-button-prev{
+  top: 0; left: 0; right: auto; bottom: 90px;
+  width: 70px; height: auto;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.2);
+  pointer-events: all !important;
+  &:before{
+    font-size: 70px;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.b-banner-swiper .swiper-button-next{
+  top: 0; left: auto; right: 0; bottom: 90px;
+  width: 70px; height: auto;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.2);
+  pointer-events: all !important;
+  &:before{
+    font-size: 70px;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+//chat
+.b-chatMessage{
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  min-height: 50px;
+  max-height: 200px;
+  overflow: auto;
+  p{
+    padding: 10px;
+  }
+}
+.carousel-main {
+  position:relative;
+}
+.carousel-control-main-left {
+  left:0;
+  right:auto;
+}
+.carousel-control-main-right {
+  left:auto;
+  right:0;
+}
+.carousel-control-main {
+  margin:0;
+  bottom:0;
+  opacity:1;
+  position:absolute;
+  top:0;
+  width:10%;
+  height:86.5%;
+  opacity:0.6;
+  outline:0;
+  span {
+    position:absolute;
+    top:50%;
+    left:40%;
+    font-size:70px;
+    color:#fff;
+  }
+  &:hover {
+    opacity:1;
+    outline:0;
+    border:0;
+  }
+  &:focus {
+    outline:0;
+    border:0;
+  }
+  &:active {
+    outline:0;
+    border:0;
+  }
+}
+.b-main-invite-friend-div {
+  a {
+    &:focus {
+      outline:0;
+    }
+  }
+}
+
+
+.b-section-news-block {
+  margin: 0 auto;
+  width:950px;
+  position: relative;
+  &:after {
+    position: absolute;
+    content: " ";
+    width: 1187px;
+    height: 48px;
+    top:269px;
+    left:-118px;
+    background: url('/src/img/hs/news-bg.png') no-repeat top center;
+    z-index:-10;
+  }
+  .b-main_hide-section-vorgen {
+    position:absolute;
+    top:-120px;
+    left:-180px;
+  }
+  .b-main_hide-section-troll {
+    position: absolute;
+    top:-120px;
+    right:-150px;
+  }
+  .b-section-news {
+    .b-section-news-data {
+      ul {
+        margin:0;
+        padding:0;
+        text-align:center;
+        li {
+          text-align:left;
+          display:inline-block;
+          .b-section-news-data-item {
+            cursor:pointer;
+            width:305px;
+            padding-left:23px;
+            background: url('/src/img/hs/news-new-bg.png') no-repeat 0 0;
+            &:hover {
+              background: url('/src/img/hs/news-new-bg.png') no-repeat 0 -312px;
+            }
+            .image {
+              padding-top:23px;
+            }
+            .title {
+              padding-left:8px;
+              h3 {
+                margin:0;
+                color:#27396a;
+                font:20px @font-main;
+              }
+
+            }
+            .text {
+              padding: 0 31px 0 8px;
+              span {
+                font:14px @font-main;
+              }
+            }
+            .meta {
+              padding: 0 40px 0 8px;
+              display:block;
+              height:46px;
+              .meta-detail {
+                display:inline-block;
+                float:right;
+                padding-left:15px;
+                ul {
+                  li {
+                    display: list-item;
+                    list-style:none;
+                    text-align:center;
+                    line-height:0.8;
+                    i {
+                      color:#27396a;
+                    }
+                    span {
+                      color:#27396a;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .b-section-news-button {
+      text-align:center;
+      .b-section-news-button-btn {
+        display: block;
+        padding-top:6px;
+        width:207px;
+        height:40px;
+        background: url('/src/img/hs/news-button.png') no-repeat 0 0;
+        color:#fff;
+        border:0;
+        text-transform: uppercase;
+        margin:30px auto;
+        font:18px @font-main;
+        text-decoration: none;
+        outline: none;
+        &:hover {
+          background: url('/src/img/hs/news-button.png') no-repeat 0 -40px;
+          text-decoration: none;
+        }
+        &:focus {
+          outline: none;
+          border:0;
+        }
+      }
+
+    }
+  }
+}

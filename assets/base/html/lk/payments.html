@@ -1,0 +1,156 @@
+<div class="payments" ng-controller="LkPaymentsController as vm">
+    <div class="payments-title text-center">
+        <span>{{'LK__ACCOUNT_AND_PAYMENT_METHODS' | translate}}</span>
+    </div>
+    <div class="row payments-content">
+        <div class="col-xs-6 payments-user-data">
+
+            <div class="row">
+                <div class="col-xs-5">
+                    <div class="data-title">{{'LK__STATUS' | translate}}</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="data-value">{{ vm.isVipStatus() ? 'LK__VIP_PLAYER' : 'LK__REGULAR_PLAYER' | translate}}</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-5">
+                    <div class="data-title">{{'LK__VIP_ACCOUNT' | translate}}</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="data-value">{{vm.getUserRealpointsVip() | currencyUnit}}</div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="data-btn">
+                        <span class="fa-stack fa-lg"
+                              ng-click="vm.openPaymentModal()"
+                              uib-tooltip="{{'PAYMENT__DEPOSITING' | translate}}"
+                              tooltip-placement="right" tooltip-append-to-body="true">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-plus fa-stack-1x"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-5">
+                    <div class="data-title">{{'LK__BONUS_ACCOUNT' | translate}}</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="data-value">{{vm.getUserRealpointsBonus() | currencyUnit}}</div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="data-btn">
+                        <a href="/bonus-faq">
+                            <span class="fa-stack fa-lg"
+                                  uib-tooltip="{{'LK__BONUS_DESCRIPTION' | translate}}"
+                                  tooltip-placement="right" tooltip-append-to-body="true">
+                                <i class="fa fa-square-o fa-stack-2x"></i>
+                                <i class="fa fa-question fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-5">
+                    <div class="data-title">{{'LK__AVAILABLE' | translate}}</div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="data-value">{{vm.myGainValue | currencyUnit}}</div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="data-btn">
+                        <span class="fa-stack fa-lg"
+                              ng-click="vm.openWithdrawalModal()"
+                              uib-tooltip="{{'MODAL_WITHDRAWAL_HEADER' | translate}}"
+                              tooltip-placement="right" tooltip-append-to-body="true">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-sign-out fa-stack-1x"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xs-6"></div>
+
+    </div>
+
+    <!-- Бонусы -->
+    <div class="payments-title">
+        <span>{{'LK__BONUS_LIST' | translate}}</span>
+        <span ng-show="vm.loadingBonuses"><i class="fa fa-fw fa-refresh fa-spin"></i></span>
+        <button class="btn-refresh"
+                ng-click="vm.loadBonuses()"
+                ng-hide="vm.loadingBonuses">
+            {{'LK__REFRESH' | translate}}
+        </button>
+    </div>
+    <div class="payments-content">
+        <table ng-if="vm.bonuses.length" class="table">
+            <thead>
+            <tr>
+                <th>{{'PAYMENT__BONUS_NAME' | translate}}</th>
+                <th>{{'PAYMENT__BONUS_TOTAL' | translate}}</th>
+                <th>{{'PAYMENT__BONUS_DATE' | translate}}</th>
+                <th>
+                    {{'PAYMENT__BONUS_PROGRESS' | translate}}
+                    <a href="/bonus-faq"><i class="fa fa-fw fa-question-circle"></i></a>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in vm.bonuses track by row.id" ng-init="progress = vm.calcProgress(row)">
+                <td>Bonus</td>
+                <td>{{::row.count | currencyUnit:row.currencyType}}</td>
+                <td>{{::row.createdTime | date:'dd.MM.yyyy | HH:mm'}}</td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-info" ng-style="::{ 'width': progress + '%' }">
+                            <span ng-show="::(progress >= 10)">{{::progress + '%'}}</span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <h3 ng-if="!vm.bonuses.length" class="ta-center payments-content-myTransactions">{{'LK__NO_BONUSES' | translate}}</h3>
+    </div>
+
+    <!-- Транзакции -->
+    <div class="payments-title">
+        <span>{{'LK__TRANSACTION_LIST' | translate}}</span>
+        <span ng-show="vm.loadingTransactions"><i class="fa fa-fw fa-refresh fa-spin"></i></span>
+        <button class="btn-refresh"
+                ng-click="vm.loadTransactions()"
+                ng-hide="vm.loadingTransactions">
+            {{'LK__REFRESH' | translate}}
+        </button>
+    </div>
+    <div class="payments-content">
+        <table ng-if="vm.transactions.length" class="table">
+            <thead>
+            <tr>
+                <th>{{'PAYMENT__CREATION_TIME' | translate}}</th>
+                <th>{{'PAYMENT__EVENT' | translate}}</th>
+                <th>{{'PAYMENT__REASON' | translate}}</th>
+                <th>{{'PAYMENT__STATUS' | translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in vm.transactions track by row.transactionId">
+                <td>{{::row.createTime | date:'dd.MM.yyyy | H:mm'}}</td>
+                <td>{{::row.deltaValue | transaction:row.currencyType:row.action}}</td>
+                <td>{{row.event | event | translate}}</td>
+                <td>{{row.status | tStatus | translate}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <h3 ng-if="!vm.transactions.length" class="ta-center payments-content-myTransactions">{{'LK__NO_TRANSACTIONS' | translate}}</h3>
+    </div>
+</div>

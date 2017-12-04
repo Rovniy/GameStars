@@ -1,0 +1,110 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'HEADER__SIGN_UP'|i18n}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="cancel()"></i>
+</div>
+<form name="signUpForm" novalidate>
+    <div class="modal-body ">
+
+        <div class="modal-air">
+
+            <div ng-hide="modalSendComplate" class="animate-hide modal-body-content">
+                <div class="form-group form-group__required" ng-class="{ 'has-error' :  (signUpForm.signupEmail.$invalid-pattern) && (signUpForm.signupEmail.$dirty) }">
+                    <label class="control-label">
+                        <i class="form-group_icon genericon genericon-mail"></i>
+                        <input type="email" class="form-control" placeholder={{'PUBLIC__EMAIL_PLACEHOLDER'|i18n}} ng-model="signupEmail" name='signupEmail' required ng-pattern="EMAIL_REGEXP">
+                    </label>
+                    <div class="form-group_message-error">
+                        {{'SIGN_UP__INPUT_CORRECT_EMAIL'|i18n}}
+                    </div>
+                </div>
+
+                <div class="form-group form-group__required" ng-class="{ 'has-error' :  (signUpForm.signupPass.$invalid-pattern) && (signUpForm.signupPass.$dirty) }">
+                    <label class="control-label">
+                        <i class="form-group_icon genericon genericon-key"></i>
+                        <input type="password" class="form-control" placeholder={{'PUBLIC__PASSWORD_PLACEHOLDER'|i18n}} minlength="8"  maxlength="16"  ng-model="signupPass" name='signupPass' required>
+                    </label>
+
+                    <div class="form-group_message-error">
+                        {{'SIGN_UP__INPUT_CORRECT_PASS'|i18n}}
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group form-group__required" ng-class="{ 'has-error' :  (signUpForm.signupLogin.$invalid-pattern) && (signUpForm.signupLogin.$dirty) }">
+                    <label class="control-label">
+                        <i class="form-group_icon genericon genericon-user"></i>
+                        <input type="text" maxlength="16" class="form-control"  placeholder={{'PUBLIC__LOGIN_PLACEHOLDER'|i18n}} ng-model="signupLogin" name='signupLogin' required>
+                    </label>
+                    <div class="form-group_message-error">
+                        {{'SIGN_UP__INPUT_CORRECT_LOGIN'|i18n}}
+                    </div>
+                </div>
+
+                <div class="form-group form-checkbox" ng-class="{ 'has-error' :  (signUpForm.acceptRules.$invalid) && (signUpForm.acceptRules.$dirty) }">
+                    <label style="display: inline-block">
+                        <input type="checkbox" required ng-model="acceptRules" name="acceptRules">
+                        <i class="form-checkbox_pseudo-checkbox genericon genericon-checkmark"></i>
+                    <span class="form-checkbox_text">
+                        <!--Я согласен с-->
+                        {{'SIGN_UP__I_AGREE_WITH'|i18n}}
+                        <a href="/#/rules" target="_blank" class="form-checkbox_text">
+                            {{'SIGN_UP__TERMS_OF_USE'|i18n}}
+                            <!--условиями пользования-->
+                        </a>
+                    </span>
+                    </label>
+
+                    <div class="form-group_message-error">
+                        {{'SIGN_UP__YOU_MAST_ACCEPT_CONDITIONS'|i18n}}
+                        <!--Для продолжения вы должны принять условия-->
+                    </div>
+
+                </div>
+            </div>
+            <div class="complate-buttons" ng-hide="modalSendComplate">
+                <button class="btn-red-md issue__submit-btn" ng-disabled="!signUpForm.$valid"  ng-click="signup();checkSignup = true">{{'SIGN_UP__SIGN_UP_BTN_CAPTION'|i18n}}</button>
+
+                <!--<button class="btn-red-md" ng-click="checkSignup = true" ng-hide="signUpForm.$valid">{{'SIGN_UP__SIGN_UP_BTN_CAPTION'|i18n}}</button>-->
+                <!--<button class="btn-red-md" type="submit" ng-click="signup()" ng-show="signUpForm.$valid" ng-disabled="signupBtnDisable">{{'SIGN_UP__SIGN_UP_BTN_CAPTION'|i18n}}</button>-->
+            </div>
+
+
+
+            <div class="center">
+
+                <div ng-show="modalSendComplate">
+                    {{'SIGN_UP__THANK_YOU_FOR_REG'|i18n}}
+                    <!--Спасибо за регистрацию!-->
+                    <br/>{{'SIGN_UP__WE_SENT_EMAIL'|i18n}}<br/>
+                    {{'SIGN_UP__CHECK_SPAM'|i18n}}
+                    <br/>{{'SIGN_UP__CONNECT_WITH_SUPPORT'|i18n}}
+                </div>
+                <div  ng-show="(errorType==='UserExistException')||(errorName==='Name already taken')">
+                    <!--&lt;!&ndash;todo: заменить 'login used' на настоящую ошибку&ndash;&gt;-->
+                    <!--&lt;!&ndash;Email или Логин уже используются&ndash;&gt;-->
+                    {{'SIGN_UP__EMAIL_OR_LOGIN_ALREADY_USED'|i18n}}
+                </div>
+
+                <div ng-show="nameParseErr&&typeParseErr">
+                    {{'CONNECT_ACCOUNT__ERROR'|i18n}}
+                </div>
+
+                <div class="center" ng-show="status == 500||status == 502">
+                    {{'SIGN_UP__SERVER_ERROR_MSG'|i18n}}
+                    <!--На сервере произошла ошибка, приносим свои извинения.-->
+                    <br/>
+                    {{'SIGN_UP__REFER_TO_ADMIN_MSG'|i18n}}
+                    <!--Пожалуйста, обратитесь к администрации сайта.-->
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+</form>

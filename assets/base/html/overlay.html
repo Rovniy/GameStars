@@ -1,0 +1,575 @@
+<div ng-if="userProfile" ng-controller="OverlayController">
+    <audio id="pToPChatMsg" src="/src/misc/p2pChatMsg.mp3" preload="none"></audio>
+    <div class="overlay">
+        <div class="activeArea">
+            <ul class="menu">
+                <li track-event-by-click track-category="click" track-action="tab_friends" ng-click="showFriends = !showFriends; showOverlayNoty = false" ng-class="{'active' : showFriends == true}">
+                    <span class="ulItem">
+                        <!--<span class="badge">4</span>-->
+                        <i class="fa fa-users"></i>
+                        <span>{{'FRIENDS' | translate}}</span>
+                    </span>
+                </li>
+                <li track-event-by-click track-category="click" track-action="tab_chats" class="disabled">
+                     <span class="ulItem">
+                         <!--<span class="badge">4</span>-->
+                        <i class="fa fa-comments"></i>
+                        <span>{{'CHATS' | translate}}</span>
+                    </span>
+                </li>
+                <li track-event-by-click track-category="click" track-action="tab_notifications">
+                     <span ng-click="showNoties()" class="ulItem">
+                        <span ng-if="systemNoty.length > 0" ng-bind="systemNoty.length" class="badge"></span>
+                        <i ng-if="systemNoty.length == 0" class="fa fa-exclamation-triangle"></i>
+                        <span>{{'NOTICES' | translate}}</span>
+                    </span>
+                </li>
+            </ul>
+            <div class="indicatorWS" ng-class="{'indicatorWS-ok': wsOpenDetect()}"></div>
+
+        </div>
+        <div class="noticeArea">
+            <ul ng-controller="chatSystem" class="noticeArea-ul">
+                <!--<li class="noticeArea-ul-li openChat">-->
+                <li ng-repeat="row in senders track by $index" class="noticeArea-ul-li newMsg ng-animate-disabled" ng-class="{'openChat' : showChatArea==true && chatId == row.id}">
+                    <div class="cursorPointer">
+                        <div class="noticeArea-ul-li-div" ng-click="showChatArea = !showChatArea; chatId = row.id">
+                            <span ng-bind="row.userName"></span>
+                        </div>
+                        <div class="noticeArea-ul-li-div-close">
+                            <i ng-click="delChat(row.id);" class="fa fa-close pull-right"></i>
+                        </div>
+                    </div>
+                    <div ng-show="showChatArea && chatId == row.id" class="noticeArea-chatArea">
+                        <div class="noticeArea-chatArea-controls">
+                            <span class="nickname" ng-bind="row.userName"></span>
+                            <i ng-click="showChatArea = false" class="fa fa-minus-square-o toCollapse pull-right"></i>
+                        </div>
+                        <div class="noticeArea-chatArea-chat" id="{{row.id}}">
+                            <div ng-repeat="msg in row.msgs track by $index" class="noticeArea-chatArea-chat-msg">
+                                <span class="msgTime">[{{msg.date | date:'HH:mm:ss'}}]</span>
+                                <span class="msgNick" ng-class="{'msgMy': msg.sender_name == userProfile.userData.name}"> {{msg.sender_name}}:</span>
+                                <span class="msgText" ng-bind="msg.text"></span>
+                            </div>
+                        </div>
+                        <div class="noticeArea-chatArea-input">
+                            <form>
+                                <input ng-model="pearToPearAreaMsgInput" type="text"/>
+                                <button class="hidden" ng-click="msgManager(appCtrl.config.p2pChats.prefix, pearToPearAreaMsgInput, appCtrl.config.p2pChats.type, row.id); pearToPearAreaMsgInput = ''" type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="friendlist" ng-show="showFriends && !showSearchUser" >
+        <div class="controlsArea">
+                <i ng-click="changeStatus()" class="fa fa-circle" ng-class="getStatusClass(getMyStatus())"></i>
+                <span ng-click="changeStatus()">{{getMyStatus()}}</span>
+            <i ng-click="showFriends = false" class="fa fa-minus-square-o toCollapse pull-right"></i>
+        </div>
+        <div class="channelsArea" ng-scrollbar scrollbar-x="false" scrollbar-y="false" scrollbar-config="{show:true, autoResize: true, dragSpeed: 1.2, color: 'rgba(255,255,255,.6)'}">
+                <div class="channelItem">
+                    <div class="channelControlsArea">
+                        <span class="channelName">{{'FRIENDS' | translate}}</span>
+                        <span class="channelName pull-right">( {{countOnlineFriends()}} / {{countFriends()}} )</span>
+                    </div>
+                    <div class="friendArea">
+                        <ul class="friendListing">
+                            <li ng-repeat="(key, row) in friendsArray | filter:'FRIEND' track by row.userId" class="friendItem">
+                                <div class="friendItemDiv">
+                                    <div class="friendItemDiv-controls" ng-dblclick="createChat(row.userId, row.name)" ng-click="showMoreInfo = true; getUserInfo(row.userId, key)" track-event-by-click track-category="click" track-action="chat_friend">
+                                        <div class="friendAvatarArea">
+                                            <div class="avatar">
+                                                <i class="i-avatar avatar-{{::row.avatarId}}"></i>
+                                                <div class="friendLevelArea">
+                                                    <span class="level" ng-bind="::row.level"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="friendMetaArea">
+                                            <div class="username">
+                                                <span ng-bind="::row.name"></span>
+                                            </div>
+                                            <div class="moodStatus">
+                                                <span>Status coming soon...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="friendControlsArea">
+                                        <i ng-click="createChat(row.userId, row.name)" class="sendMsg fa fa-comments"></i>
+                                        <i class="fa fa-circle" ng-class="getStatusClass(getUserStatus(row.userId))"></i>
+                                    </div>
+                                    <div ng-show="showMoreInfo == true && keyValue == key" class="moreInfoAboutUser">
+                                        <div class="moreUserInfo-meta-doit">
+                                            <!--<i  class="fa fa-user"></i>-->
+                                            <i ng-show="humanData.relation !== 'FRIEND'" class="fa fa-plus" ng-click="sendInvite(humanData.userId)" track-event-by-click track-category="click" track-action="chat_friend_add"></i>
+                                            <i class="fa fa-comments" ng-click="createChat(humanData.userId, humanData.name); showMoreInfo = false" track-event-by-click track-category="click" track-action="chat_friend_chat"></i>
+                                            <!--<i class="fa fa-folder-open"></i>-->
+                                            <i class="fa fa-ban" track-event-by-click track-category="click" track-action="chat_friend_ban"></i>
+                                            <i ng-show="humanData.relation == 'FRIEND'" class="fa fa-user-times" ng-click="deleteFriend(humanData.userId)" track-event-by-click track-category="click" track-action="chat_friend_remove"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="channelItem" ng-if="countNewFriends() !== 0">
+                    <div class="channelControlsArea">
+                        <span class="channelName">{{'FRIEND_REQ' | translate}}</span>
+                        <span class="channelName pull-right">( {{countNewFriends()}} )</span>
+                    </div>
+                    <div class="friendArea">
+                        <ul class="friendListing">
+                            <li ng-repeat="(key,row) in friendsArray | filter: 'REQUEST' track by row.userId" class="friendItem">
+                                <div class="friendItemDiv">
+                                    <div class="friendItemDiv-controls">
+                                        <div class="friendAvatarArea">
+                                            <div class="avatar">
+                                                <i class="i-avatar avatar-{{::row.avatarId}}"></i>
+                                                <div class="friendLevelArea">
+                                                    <span class="level" ng-bind="row.level"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="friendMetaArea">
+                                            <div class="username">
+                                                <span ng-bind="row.name"></span>
+                                            </div>
+                                            <div ng-if="row.direction == 'TO'" class="moodStatus">
+                                                <a href ng-click="acceptFriend(row.userId)">Принять</a>
+                                                <a href ng-click="declineFriend(row.userId)">Отклонить</a>
+                                            </div>
+                                            <div ng-if="row.direction == 'FROM'" class="moodStatus">
+                                                <a href ng-click="declineFriend(row.userId)">Отменить заявку</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="overlayNotyList" ng-show="showOverlayNotyList">
+        <div class="controlsArea">
+            <span>My notice</span>
+            <i ng-click="showOverlayNotyList = false" class="fa fa-minus-square-o toCollapse pull-right"></i>
+        </div>
+        <div class="noticeItems">
+            <div ng-click="openSystemNoty(key, row)" ng-repeat="(key,row) in systemNoty" class="item">
+                <p ng-if="::(row.type === 'inviteFriend')" class="title"><i class="fa fa-user-plus color-green" ></i> {{::row.data.name}} {{'NOTY_YOU_INVITE_TO_FRIEND'| translate}}</p>
+                <p ng-if="::(row.type === 'declinedFriend')" class="title"><i class="fa fa-user-times color-red"></i> {{::row.data.name}} {{'NOTY_YOU_DEL_YOU_FROM_FRIEND'|translate}}</p>
+                <p ng-if="::(row.type === 'acceptedFriend')" class="title"><i class="fa fa-hand-peace-o color-green"></i> {{::row.data.name}} {{'NOTY_YOU_ACCEPTED_TO_FRIEND'|translate}}</p>
+                <p ng-if="::(row.type === 'cookiesNoty')" class="title"><i class="fa fa-exclamation-triangle color-orange"></i> Notification about cookies</p>
+                <p ng-if="::(row.type === 'system_noty')" class="title"><i class="fa fa-exclamation-triangle color-red"></i>{{::row.data}}</p>
+                <p ng-if="::(row.type === 'register_noty')" class="title"><i class="fa fa-exclamation-triangle color-red"></i>Registration</p>
+                <p ng-if="::(row.type === 'socketBan')" class="title"><i class="fa fa-exclamation-triangle color-red"></i>New ban</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="searchArea" ng-show="showFriends" >
+        <div class="searchAreaControlsArea">
+            <span class="searchAreaName">{{'SEARCH_FRIEND' | translate}}</span>
+            <i ng-show="showSearchUser" ng-click="showSearchUser = false; searchFriend = ''; searchArray = []" class="fa fa-times pull-right"></i>
+        </div>
+        <div class="form-group">
+            <form>
+                <input class="form-control" type="text" placeholder="Nick / Email"
+                       ng-model="searchFriend"
+                       ng-model-options='{ debounce: 500 }'
+                       ng-change="searchUserInput()" />
+                <button type="submit" ng-click="searchUserInput()"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <div ng-show="showSearchUser" class="searchResult">
+            <ul class="searchResult-friendListing">
+                <li ng-repeat="(key, row) in searchArray track by $index" class="searchResult-friendItem">
+                    <div class="searchResult-friendItemDiv">
+                        <div class="searchResult-friendItemDiv-controls" ng-click="showMoreInfo = !showMoreInfo || keyValue != key; showMoreInfo && getUserInfo(row.userId, key)" track-event-by-click track-category="click" track-action="founded_friend">
+                            <div class="searchResult-friendAvatarArea">
+                                <div class="searchResult-avatar">
+                                    <i class="i-avatar avatar-{{row.avatarId}}"></i>
+                                    <div class="searchResult-friendLevelArea">
+                                        <span class="searchResult-level" ng-bind="row.level"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="searchResult-friendMetaArea">
+                                <div class="searchResult-username">
+                                    <span ng-bind="row.name"></span>
+                                </div>
+                                <div class="searchResult-moodStatus">
+                                    <span>Status coming soon...</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="searchResult-friendControlsArea">
+                            <i ng-click="createChat(row.userId, row.name)" class="sendMsg fa fa-comments"></i>
+                        </div>
+                        <div ng-show="showMoreInfo == true && keyValue == key" class="searchResult-moreInfoAboutUser">
+                            <div class="searchResult-moreUserInfo">
+                                <div class="searchResult-moreUserInfo-avatar-area">
+                                    <div class="searchResult-moreUserInfo-avatar-area-div">
+                                        <i class="i-avatar avatar-lg avatar-{{humanData.avatarId}}"></i>
+                                        <div class="searchResult-moreUserInfo-avatar-level">
+                                            <span>{{humanData.level}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="searchResult-moreUserInfo-meta">
+                                    <div class="searchResult-moreUserInfo-meta-name">
+                                        <span ng-bind="humanData.name"></span>
+                                    </div>
+                                    <div class="searchResult-moreUserInfo-meta-mood">
+                                        <p>Some status</p>
+                                    </div>
+                                    <div class="searchResult-moreUserInfo-meta-doit">
+                                        <!--<i  class="fa fa-user"></i>-->
+                                        <i ng-show="!sendInviteOk && humanData.relation !== 'FRIEND'" class="fa fa-plus" ng-click="sendInviteOk = true; sendInvite(humanData.userId)" track-event-by-click track-category="click" track-action="chat_friend_add"></i>
+                                        <i ng-show="sendInviteOk" style="cursor:default" class="fa fa-check color-green"></i>
+                                        <i class="fa fa-comments" ng-click="createChat(humanData.userId, humanData.name); showMoreInfo = false" track-event-by-click track-category="click" track-action="chat_friend_chat"></i>
+                                        <!--<i class="fa fa-folder-open"></i>-->
+                                        <i class="fa fa-ban"></i>
+                                        <i ng-show="humanData.relation == 'FRIEND'" class="fa fa-user-times" ng-click="deleteFriend(humanData.userId)" track-event-by-click track-category="click" track-action="chat_friend_remove"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="overlayNoty" ng-show="showOverlayNoty" >
+        <div class="overlayNoty-controls">
+            <span ng-if="overlayNotyClass == 'inviteFriend' || overlayNotyClass == 'acceptedFriend' || overlayNotyClass == 'declinedFriend'">{{'FRIENDSHIP' | translate}}</span>
+            <span ng-if="overlayNotyClass == 'cookiesNoty'">{{'ACCEPT_COOKIES' | translate}}</span>
+            <span  ng-if="openedNotyData.type == 'system_noty'">System noty</span>
+            <span  ng-if="openedNotyData.type == 'socketBan'">Ban info</span>
+            <i ng-click="showOverlayNoty = false" class="fa fa-minus-square-o pull-right"></i>
+        </div>
+        <div class="overlayNoty-body">
+            <div ng-if="openedNotyData.type == 'inviteFriend'" class="overlayNoty-inviteFriend">
+                <h3 ng-bind="openedNotyData.data.name"></h3>
+                <h4>{{'INVITES_YOU_TO_FRIENDS' | translate}}</h4>
+                <div class="overlayNoty-inviteFriend-buttons">
+                    <button ng-click="acceptFriend(openedNotyData.data.id)" class="overlayNoty-inviteFriend-button-ok">{{'ACCEPT' | translate}}</button>
+                    <button ng-click="declineFriend(openedNotyData.data.id)" class="overlayNoty-inviteFriend-button-none">{{'DISMISS' | translate}}</button>
+                </div>
+            </div>
+            <div ng-if="openedNotyData.type == 'acceptedFriend'" class="overlayNoty-acceptedFriend">
+                <h3 ng-bind="openedNotyData.data.name"></h3>
+                <h4>{{'ACCEPTED_YOUR_INVITE' | translate}}</h4>
+                <div class="overlayNoty-inviteFriend-buttons">
+                    <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE_OK'| translate}} =)</button>
+                </div>
+            </div>
+            <div ng-if="openedNotyData.type == 'declinedFriend'" class="overlayNoty-acceptedFriend">
+                <h3 ng-bind="openedNotyData.data.name"></h3>
+                <h4>{{'DECLINE_YOUR_INVITE' | translate}}</h4>
+                <div class="overlayNoty-inviteFriend-buttons">
+                    <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE_OK'| translate}} =(</button>
+                </div>
+            </div>
+            <div ng-if="openedNotyData.type == 'cookiesNoty'" class="overlayNoty-acceptedFriend">
+                <h4>{{'COOKIES_NOTIFICATION' | translate}}</h4>
+                <div class="overlayNoty-inviteFriend-buttons">
+                    <button ng-click="setCookies()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE_OK'| translate}}</button>
+                </div>
+            </div>
+            <div ng-if="openedNotyData.type == 'register_noty'" class="overlayNoty-acceptedFriend">
+                <h4 ng-bind-html="openedNotyData.data|translate"></h4>
+                <div class="overlayNoty-inviteFriend-buttons">
+                    <button ng-click="setCookies()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE_OK'| translate}}</button>
+                </div>
+            </div>
+            <div ng-if="openedNotyData.type == 'system_noty'" class="overlayNoty-acceptedFriend">
+                <h4 ng-bind="systemNoty[0].data"></h4>
+                <div class="overlayNoty-inviteFriend-buttons">
+                    <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                </div>
+            </div>
+            <div ng-if="openedNotyData.type == 'newBanan'" class="overlayNoty-acceptedFriend">
+                <h3>{{'NOTY_YOU_GOT_BANNED' | translate}}</h3>
+                <h4>{{'NOTY_YOU_HAVE_NEW_BAN' | translate}}</h4>
+                <h4>{{'NOTY_YOU_BAN_TIME'| translate}} {{openedNotyData.data.expire_time*1000 | date:'HH:mm:ss':'UTC'}}</h4>
+                <div class="overlayNoty-inviteFriend-buttons">
+                    <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                </div>
+            </div>
+            <!--------------------------------------------- Сообщения по сокету о бане -------------------------------------->
+                <!--------------------- Пользователю, которому было вынесено наказание ------------------>
+            <div ng-if="openedNotyData.type == 'socketBan' && openedNotyData.data.users_group == 'Offender'" class="overlayNoty-acceptedFriend">
+                <!-- Если ливнул из окна подтверждения -->
+                <div ng-show="openedNotyData.data.violation_type == 'LEAVER_MATCHED_WINDOW'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You were banned for {{openedNotyData.data.expire_time}} minutes from queueing on GameStars. It happened because you’ve exited your queue twice in a row. Please, don’t do it again.</p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если ливнул из лобби -->
+                <div ng-show="openedNotyData.data.violation_type == 'LEAVER_PORTAL'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You are a leaver!
+                        <br/>You are banned for 5 minutes and your bet is taken {{openedNotyData.data.money_count}}. It’ll be divided between the other 9 players in this lobby evenly.
+                        </br>Please, don’t do it again.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если ливнул из лобби клиента игры-->
+                <div ng-show="openedNotyData.data.violation_type == 'LEAVER_LOBBY'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You are a leaver!
+                        <br/>You are banned for 5 minutes and your bet is taken {{openedNotyData.data.money_count}}. It’ll be divided between the other 9 players in this lobby evenly.<br/>
+                        Please, don’t do it again.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если был фидер -->
+                <div ng-show="openedNotyData.data.violation_type == 'FEEDER'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You are a feeder!
+                        <br/>You are banned for 3 hours and your bet is taken at double rate {{openedNotyData.data.money_count}}. 200% of it will be divided between the other players of your team evenly.
+                        <br/>Please, don’t do it again.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если был афк -->
+                <div ng-show="openedNotyData.data.violation_type == 'AFK'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You were AFK!
+                        <br/>You are banned for 3 hours and your bet is taken at 1,5 rate {{openedNotyData.data.money_count}}. 150% of it will be divided between the other players of your team evenly.
+                        <br/>Please, don’t do it again.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если ливнул из игры -->
+                <div ng-show="openedNotyData.data.violation_type == 'LEAVER_INGAME'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You are a leaver!
+                        <br/>You are banned for 3 hours and your bet is taken at 1,5 rate {{openedNotyData.data.money_count}}. 150% of it will be divided between the other players of your team evenly.
+                        <br/>Please, don’t do it again.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если читерил -->
+                <div ng-show="openedNotyData.data.violation_type == 'CHEATER'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You are a cheater!
+                        <br/>You are banned for 3 months. After that you can’t play in tournaments with a prize pool more than $100 for another 3 months.
+                        <br/>Please, don’t do it again.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если читерил -->
+                <div ng-show="openedNotyData.data.violation_type == 'CHEATER'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You are a cheater!
+                        <br/>You are banned for 3 months. After that you can’t play in tournaments with a prize pool more than $100 for another 3 months.
+                        <br/>Please, don’t do it again.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+
+            </div>
+                <!--------------------- Пользователям, которые оставили репорты (команда нарушителя) ------------------>
+            <div ng-if="openedNotyData.type == 'socketBan' && openedNotyData.data.users_group == 'ReportersFromOffenderTeam'" class="overlayNoty-acceptedFriend">
+                <!-- Если ливнул из лобби -->
+                <div ng-show="openedNotyData.data.violation_type == 'LEAVER_PORTAL'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You’ve reported {{openedNotyData.data.reported_name}} for leaving from a GameStars lobby. This player was punished. He was banned for 5 minutes and his bet was taken {{openedNotyData.data.money_count}}. It’ll be divided between the other 9 players in this lobby (including you) evenly</p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если ливнул из лобби клиента игры-->
+                <div ng-show="openedNotyData.data.violation_type == 'LEAVER_LOBBY'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You’ve reported {{openedNotyData.data.reported_name}} for leaving from/ not entering a LoL client lobby. This player was punished. He was banned for 5 minutes and his bet was taken {{openedNotyData.data.money_count}}. It’ll be divided between the other 9 players in this lobby (including you) evenly.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если был фидер -->
+                <div ng-show="openedNotyData.data.violation_type == 'FEEDER'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You’ve reported {{openedNotyData.data.reported_name}} for feeding. This player was punished. He was banned for 3 hours and his bet was taken at double rate {{openedNotyData.data.money_count}}. Double amount of his bet will be divided among your team (including you) evenly.
+                        <br/>The total bet pool is decreased by the amount of his bet.
+                        <br/>Hence winnings in this match are also decreased. We hope that we’ll stop all feeders with your help!
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если был афк -->
+                <div ng-show="openedNotyData.data.violation_type == 'AFK'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You’ve reported {{openedNotyData.data.reported_name}} for being AFK. This player was punished. He was banned for 3 hours and his bet was taken at 1,5 rate {{openedNotyData.data.money_count}}. 150% of his bet will be divided among your team (including you) evenly.
+                        <br/>The total bet pool is decreased by the amount of his bet.
+                        <br/>Hence winnings in this match are also decreased. We hope that we’ll stop all feeders with your help!
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если ливнул из игры -->
+                <div ng-show="openedNotyData.data.violation_type == 'LEAVER_INGAME'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You’ve reported {{openedNotyData.data.reported_name}} for leaving your match. This player was punished. He was banned for 3 hours and his bet was taken at 1,5 rate {{openedNotyData.data.money_count}}. 150% of his bet will be divided among your team (including you) evenly.
+                        <br/>The total bet pool is decreased by the amount of his bet.
+                        <br/>Hence winnings in this match are also decreased. We hope that we’ll stop all feeders with your help!
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если читерил -->
+                <div ng-show="openedNotyData.data.violation_type == 'CHEATER'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You’ve reported {{openedNotyData.data.reported_name}} for cheating. This player was punished. He was banned for 3 months. After that he can’t play in tournaments with a prize pool more than $100 for another 3 months.
+                        <br/>We hope that we’ll stop all cheaters with your help!
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+            </div>
+                <!--------------------- Пользователям, которые оставили репорты (команда противников) ------------------>
+            <div ng-if="openedNotyData.type == 'socketBan' && openedNotyData.data.users_group == 'ReportersFromAnotherTeam'" class="overlayNoty-acceptedFriend">
+                <!-- Если был фидер -->
+                <div ng-show="openedNotyData.data.violation_type == 'FEEDER'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You’ve reported {{openedNotyData.data.reported_name}} for feeding. This player was punished. He was banned for 3 hours and his bet was taken at double rate {{openedNotyData.data.money_count}}. Double amount of his bet will be divided among his team evenly.
+                        <br/>The total bet pool is decreased by the amount of his bet.
+                        <br/>Hence winnings in this match are also decreased. We hope that we’ll stop all feeders with your help!
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если был афк -->
+                <div ng-show="openedNotyData.data.violation_type == 'AFK'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You’ve reported {{openedNotyData.data.reported_name}} for being AFK. This player was punished. He was banned for 3 hours and his bet was taken at 1,5 rate {{openedNotyData.data.money_count}}. 150% of his bet will be divided among his team evenly.
+                        <br/>The total bet pool is decreased by the amount of his bet.
+                        <br/>Hence winnings in this match are also decreased. We hope that we’ll stop all such people with your help!
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если ливнул из игры -->
+                <div ng-show="openedNotyData.data.violation_type == 'LEAVER_INGAME'">
+                    <p>Dear {{openedNotyData.data.user_name}}! You’ve reported {{openedNotyData.data.reported_name}} for leaving your match. This player was punished. He was banned for 3 hours and his bet was taken at 1,5 rate {{openedNotyData.data.money_count}}. 150% of his bet will be divided among his team evenly.
+                        <br/>The total bet pool is decreased by the amount of his bet.
+                        <br/>Hence winnings in this match are also decreased. We hope that we’ll stop all leavers with your help!
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+            </div>
+                <!--------------------- Пользователям, которые пострадали в матче (команда нарушителя) ------------------>
+            <div ng-if="openedNotyData.type == 'socketBan' && openedNotyData.data.users_group == 'VictimsFromOffenderTeam'" class="overlayNoty-acceptedFriend">
+                <!-- Если ливнул из лобби -->
+                <div ng-show="openedNotyData.data.violation_type == 'LEAVER_PORTAL'">
+                    <p>Dear {{openedNotyData.data.user_name}}! Unfortunately, {{openedNotyData.data.reported_name}} left your GameStars lobby.  This player was punished. He was banned for ХХ minutes and his bet was taken {{openedNotyData.data.money_count}}. It’ll be divided between the other 9 players in this lobby (including you) evenly.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если ливнул из лобби клиента игры-->
+                <div ng-show="openedNotyData.data.violation_type == 'LEAVER_LOBBY'">
+                    <p>Dear {{openedNotyData.data.user_name}}! Unfortunately, {{openedNotyData.data.reported_name}} left / didn’t entered your LoL client lobby.  This player was punished. He was banned for 5 minutes and his bet was taken {{openedNotyData.data.money_count}}. It’ll be divided between the other 9 players in this lobby (including you) evenly.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если был фидер -->
+                <div ng-show="openedNotyData.data.violation_type == 'FEEDER'">
+                    <p>Dear {{openedNotyData.data.user_name}}! Unfortunately, {{openedNotyData.data.reported_name}} fed the enemy team in your match.  He was banned for 3 hours and his bet was taken at double rate {{openedNotyData.data.money_count}}. Double amount of his bet will be divided among your team (including you) evenly.
+                        <br/>The total bet pool is decreased by the amount of his bet. Hence winnings in this match are also decreased.
+                        <br/>We are trying very hard to prevent such things from happening. Please, report violators of our rules as soon as you can.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если был афк -->
+                <div ng-show="openedNotyData.data.violation_type == 'AFK'">
+                    <p>Dear {{openedNotyData.data.user_name}}! Unfortunately, {{openedNotyData.data.reported_name}} was AFK in your match.  He was banned for 3 hours and his bet was taken at 1,5 rate {{openedNotyData.data.money_count}}. 150% of his bet will be divided among your team (including you) evenly.
+                        <br/>The total bet pool is decreased by the amount of his bet. Hence winnings in this match are also decreased.
+                        <br/>We are trying very hard to prevent such things from happening. Please, report violators of our rules as soon as you can.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если ливнул из игры -->
+                <div ng-show="openedNotyData.data.violation_type == 'LEAVER_INGAME'">
+                    <p>Dear {{openedNotyData.data.user_name}}! Unfortunately, {{openedNotyData.data.reported_name}} left your match.  He was banned for 3 hours and his bet was taken at 1,5 rate {{openedNotyData.data.money_count}}. 150% of his bet will be divided among your team (including you) evenly.
+                        <br/>The total bet pool is decreased by the amount of his bet. Hence winnings in this match are also decreased.
+                        <br/>We are trying very hard to prevent such things from happening. Please, report violators of our rules as soon as you can.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если читерил -->
+                <div ng-show="openedNotyData.data.violation_type == 'CHEATER'">
+                    <p>Dear {{openedNotyData.data.user_name}}! Unfortunately, {{openedNotyData.data.reported_name}} cheated in your match. He was banned for 3 months. After that he can’t play in tournaments with a prize pool more than $100 for another 3 months.
+                        <br/>We are trying very hard to prevent such things from happening. Please, report violators of our rules as soon as you can.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+            </div>
+                <!--------------------- Пользователям, которые пострадали в матче ( команда, в которой не было нарушителя) ------------------>
+            <div ng-if="openedNotyData.type == 'socketBan' && openedNotyData.data.users_group == 'VictimsFromOtherTeam'" class="overlayNoty-acceptedFriend">
+                <!-- Если был фидер -->
+                <div ng-show="openedNotyData.data.violation_type == 'FEEDER'">
+                    <p>Dear {{openedNotyData.data.user_name}}! Unfortunately, {{openedNotyData.data.reported_name}} fed the enemy team in your match.  He was banned for 3 hours and his bet was taken at double rate {{openedNotyData.data.money_count}}. Double amount of his bet will be divided among his team evenly.
+                        <br/>The total bet pool is decreased by the amount of his bet. Hence winnings in this match are also decreased.
+                        <br/>We are trying very hard to prevent such things from happening. Please, report violators of our rules as soon as you can.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если был афк -->
+                <div ng-show="openedNotyData.data.violation_type == 'AFK'">
+                    <p>Dear {{openedNotyData.data.user_name}}! Unfortunately, {{openedNotyData.data.reported_name}} was AFK in your match.  He was banned for 3 hours and his bet was taken at 1,5 rate {{openedNotyData.data.money_count}}. 150% of his bet will be divided among his team evenly.
+                        <br/>The total bet pool is decreased by the amount of his bet. Hence winnings in this match are also decreased.
+                        <br/>We are trying very hard to prevent such things from happening. Please, report violators of our rules as soon as you can.
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+                <!-- Если ливнул из игры -->
+                <div ng-show="openedNotyData.data.violation_type == 'LEAVER_INGAME'">
+                    <p>Dear {{openedNotyData.data.user_name}}! Unfortunately, {{openedNotyData.data.reported_name}} left your match.  He was banned for 3 hours and his bet was taken at 1,5 rate {{openedNotyData.data.money_count}}. 150% of his bet will be divided among his team evenly.
+                        <br/>The total bet pool is decreased by the amount of his bet. Hence winnings in this match are also decreased.
+                        <br/>We are trying very hard to prevent such things from happening. Please, report violators of our rules as soon as you can.
+
+                    </p>
+                    <div class="overlayNoty-inviteFriend-buttons">
+                        <button ng-click="closeSystemNoty()" class="overlayNoty-inviteFriend-button-none">{{'NOTY_CLOSE'| translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

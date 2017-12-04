@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'WAR__JOIN_ERROR_TITLE' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<div class="modal-body text-center">
+    <p translate="WAR__JOIN_ERROR_TEXT"
+       translate-value-name1="{{modal.team1.name}}"
+       translate-value-name1="{{modal.team2.name}}"></p>
+
+    <div class="form-group">
+        <button class="btn-red"
+                ng-click="$close('join')"
+                translate="WAR__JOIN_ERROR_JOIN"
+                translate-value-name="{{modal.team2.name}}">
+        </button>
+    </div>
+    <div class="form-group">
+        <button class="btn-red"
+                ng-click="$close('remind')"
+                translate="WAR__JOIN_ERROR_REMIND"
+                translate-value-name="{{modal.team1.name}}"
+                uib-tooltip="{{'WAR__JOIN_ERROR_REMIND_TOOLTIP' | translate}}"
+                tooltip-placement="top">
+        </button>
+    </div>
+</div>

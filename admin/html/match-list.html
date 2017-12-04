@@ -1,0 +1,193 @@
+<div class="page-title">
+    <span class="title">Матчи</span>
+    <div class="description">Список всех матчей, проходивших на платформе gamestars.gg</div>
+</div>
+<div class="row select-game text-center">
+    <div class="col-xs-2">
+        <a href="/matches/lol/">
+            <img src="img/games/lol.png"/>
+        </a>
+    </div>
+    <div class="col-xs-2">
+        <a href="/matches/hs/">
+            <img src="img/games/hearthstone.png"/>
+        </a>
+    </div>
+    <div class="col-xs-2">
+        <a href="/matches/wot/">
+            <img src="img/games/wot.png"/>
+        </a>
+    </div>
+    <div class="col-xs-2">
+        <a href="/matches/dota/">
+            <img src="img/games/dota.png"/>
+        </a>
+    </div>
+    <div class="col-xs-2">
+        <a href="/matches/cs/">
+            <img src="img/games/cs.png"/>
+        </a>
+    </div>
+    <div class="col-xs-2">
+        <a href="/matches/hots/">
+            <img src="img/games/hots.png"/>
+        </a>
+    </div>
+</div>
+<div class="row matchPage">
+    <div class="col-lg-12">
+        <form class="form-inline" name="filter" novalidate>
+            <fieldset ng-disabled="vm.loading">
+                <div class="form-group"
+                     ng-class="{ 'has-error': vm.completeTimeFrom && vm.completeTimeTo && vm.completeTimeFrom > vm.completeTimeTo }">
+                    <label for="filter-completeTimeFrom">Начало</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="filter-completeTimeFrom" name="completeTimeFrom"
+                               datetime-picker is-open="filter.completeTimeFrom.isOpen" required gs-date-to-ms
+                               ng-model="vm.completeTimeFrom" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="filter.completeTimeFrom.isOpen = true">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group"
+                     ng-class="{ 'has-error': vm.completeTimeFrom && vm.completeTimeTo && vm.completeTimeFrom > vm.completeTimeTo }">
+                    <label for="filter-completeTimeTo">Конец</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="filter-completeTimeTo" name="completeTimeTo"
+                               datetime-picker is-open="filter.completeTimeTo.isOpen" required gs-date-to-ms
+                               ng-model="vm.completeTimeTo" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="filter.completeTimeTo.isOpen = true">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <select class="form-control"
+                            ng-model="vm.status"
+                            ng-options="status.id as status.name for status in ::vm.statusList">
+                        <option value="">Статус матча</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select class="form-control"
+                            ng-model="vm.server"
+                            ng-options="server.regionId as server.regionName for server in ::vm.serverList">
+                        <option value="">Сервер</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select class="form-control"
+                            ng-model="vm.reportsCreatedBy"
+                            ng-options="report.id as report.name for report in ::vm.reportsList">
+                        <option value="">Чей репорт</option>
+                    </select>
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="vm.verified">
+                        VERIFIED
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary"
+                            ng-click="vm.loadMatchList()"
+                            ng-hide="vm.loading">Применить</button>
+                    <i class="fa fa-spin fa-spinner fa-2x" ng-show="vm.loading"></i>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-lg-12">
+    <!--<div class="row">-->
+    <!--<div class="col-lg-10">-->
+    <!--<uib-pagination max-size="5" boundary-links="true" total-items="spisok.pagination.total_row_count"-->
+    <!--items-per-page="perPage" ng-model="currentPage"-->
+    <!--ng-change="getPageData()"></uib-pagination>-->
+    <!--</div>-->
+    <!--<div class="col-lg-2 ta-right">-->
+    <!--<button class="btn btn-success" ng-click="showMatchFilters = !showMatchFilters">Фильры</button>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <table class="table table-striped usersPage-table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Игра</th>
+            <th>Сервер</th>
+            <th>
+                <a href ng-click="vm.onSortClick('createTime')">
+                    Время окончания
+                            <span class="fa fa-caret-up" ng-show="vm.sortType === 'createTime'"
+                                  ng-class="{ 'fa-caret-up': vm.sortReverse, 'fa-caret-down': !vm.sortReverse }"></span>
+                    <span class="fa fa-sort" ng-show="vm.sortType !== 'createTime'"></span>
+                </a>
+            </th>
+            <th>Тип матча</th>
+            <th>Результат</th>
+            <th>Статус</th>
+            <th>Анализ</th>
+            <th>Комментарии</th>
+        </tr>
+        </thead>
+        <tbody ng-controller="ModalTemp">
+
+        <tr ng-click="openMoreInfo(match.id, match.game)"
+            ng-repeat="match in vm.matches track by match.id">
+            <td ng-bind="::($index + 1 + (vm.page - 1) * vm.perPage)"></td>
+            <td ng-bind="::match.id"></td>
+            <td>
+                <img ng-show="::(match.gameRegion.gameType === 'LOL')" src="/img/games/lol.png"/>
+            </td>
+            <td ng-bind="::match.gameRegion.regionName"></td>
+            <td>
+                <span ng-if="::match.createTime" ng-bind="::(match.createTime | date:'dd.MM.yy | H:mm')"></span>
+            </td>
+            <td>
+                <span ng-bind="::match.currencyType"></span>
+            </td>
+            <td ng-bind="::match.status | matchResult"></td>
+            <td ng-bind="::match.status | matchStatus"></td>
+
+            <td class="left">
+                <ul>
+                    <li>
+                        <span>Репорты: <span class="green strong" ng-bind="::match.reports.length"></span></span>
+                        <!--<span ng-show="match.reportsCount !== 0">Репорты: <span class="red strong">???</span></span>-->
+                    </li>
+                    <li>
+                                <span>
+                                    Статистика: <i class="fa" ng-class="::(match.getstatistic ? 'fa-times red' : 'fa-check-square-o green')"></i>
+                                </span>
+                    </li>
+                    <li>
+                        <span>SC Reports: {{::match.reports | scReports}}</span>
+                    </li>
+                </ul>
+            </td>
+            <td class="left">
+                <span ng-show="::!match.comments">---</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+    <div class="col-lg-12" ng-if="::vm.pagination">
+        <uib-pagination max-size="5" boundary-links="true" total-items="vm.pagination.total_row_count"
+                        items-per-page="vm.perPage" ng-model="vm.page" ng-change="vm.loadMatchList()">
+        </uib-pagination>
+    </div>
+</div>

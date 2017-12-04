@@ -1,0 +1,213 @@
+.firstSession {
+  position:fixed;
+  z-index:999999;
+  width:100%;
+  height:100%;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background: rgba(0,0,0,0.9);
+  .firstSession-main {
+    position:relative;
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+    .window {
+      position:absolute;
+      left:50%;
+      top:50%;
+      margin:-219px 0 0 -417px;
+      padding:25px;
+      width:833px;
+      height:437px;
+      background: url('/src/img/lol/firstsession/window-bg.png') no-repeat;
+      color:#fff;
+      .closer {
+        position:absolute;
+        right:-30px;
+        top:-20px;
+        border-radius:50%;
+        background: #181821;
+        color:#999;
+        width:27px;
+        height:27px;
+        border:1px solid #22232b;
+        opacity:0.8;
+        cursor:pointer;
+        text-align:center;
+        i {
+          line-height:25px;
+        }
+        &:hover {
+          opacity:2;
+          color:#fff;
+        }
+      }
+      .fist-hero {
+        position:absolute;
+        left:23px;
+        top:19px;
+        bottom:0;
+        right:0;
+        img {
+          position:absolute;
+          left:0;
+          top:0;
+          width:425px;
+          height:359px;
+          opacity:0.4;
+        }
+        .current {
+          opacity:1;
+        }
+        .dialog {
+          left:220px;
+          top:35px;
+          padding:8px 10px 10px 42px;
+          background: url('/src/img/lol/firstsession/first-dialog-decor-non.png') no-repeat;
+          background-size: cover;
+        }
+        .active {
+          background: url('/src/img/lol/firstsession/first-dialog-decor.png') no-repeat;
+          background-size: cover;
+        }
+      }
+      .second-hero {
+        position:absolute;
+        left:0;
+        top:19px;
+        bottom:0;
+        right:23px;
+        img {
+          position:absolute;
+          right:0;
+          top:0;
+          width:399px;
+          height:358px;
+          opacity:0.4;
+        }
+        .current {
+          opacity:1;
+        }
+        .dialog {
+          top:150px;
+          right:250px;
+          padding:8px 42px 10px 10px;
+          background: url('/src/img/lol/firstsession/second-dialog-decor-non.png') no-repeat;
+          background-size: cover;
+        }
+        .active {
+          background: url('/src/img/lol/firstsession/second-dialog-decor.png') no-repeat;
+          background-size: cover;
+        }
+      }
+      .dialog-window {
+        position:absolute;
+        width:243px;
+        min-height:66px;
+        border-radius:8px;
+        color:#666;
+        p {
+          font:16px/16px @font-main-bold;
+          text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.9);
+          padding:0;
+          margin:0;
+        }
+      }
+      .active {
+        background: rgba(143,43,24,0.86);
+        color:#fff;
+      }
+      .user-msg {
+        position:absolute;
+        left:25px;
+        right:25px;
+        bottom:20px;
+        height:95px;
+        background: rgba(0,0,0,0.5);
+        padding:20px 60px 0;
+        ul {
+          padding:0;
+          li {
+            list-style:none;
+            cursor:pointer;
+            padding:1px;
+            .fa-stack {
+              height:17px;
+              width:17px;
+              vertical-align: middle;
+              .fa-stack-2x {
+                color:#fff;
+                font-size:17px;
+                line-height: 17px;
+              }
+              .fa-stack-1x {
+                color:#fff;
+                font-size:9px;
+                line-height: 16px;
+              }
+            }
+            span {
+              color: #999;
+              font:15px/15px @font-semi;
+              text-decoration: underline;
+              vertical-align: middle;
+            }
+            .text {
+              margin:0 0 0 10px;
+            }
+            &:hover {
+              span {
+                color: #fff;
+              }
+              .fa-stack {
+                .fa-stack-1x {
+                  color:#a7321c;
+                  font-size:9px;
+                  line-height: 16px;
+                }
+              }
+            }
+          }
+          .selected {
+            cursor:default;
+            span {
+              color: #e8e8e8;
+            }
+            .fa-stack {
+              .fa-stack-1x {
+                color:#a7321c;
+              }
+            }
+          }
+          .disable {
+            cursor:default;
+            span {
+              color: #666;
+            }
+            .fa-stack {
+              .fa-stack-2x {
+                color:#666;
+              }
+              .fa-stack-1x {
+                color:#666;
+              }
+            }
+            &:hover {
+              span {
+                color: #666;
+              }
+              .fa-stack {
+                .fa-stack-1x {
+                  color:#666;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

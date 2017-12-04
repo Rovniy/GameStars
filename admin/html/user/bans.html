@@ -1,0 +1,36 @@
+<div>
+    <div class="form-group">
+        <button class="btn btn-lg btn-success"
+                ng-disabled="vm.loading"
+                ng-click="vm.removeBan()">Снять все баны</button>
+    </div>
+    <div class="form-group">
+        <span class="alert alert-success" ng-show="vm.banRemoveSuccess">Пользователь успешно раззабанен!</span>
+        <span class="alert alert-danger" ng-show="vm.banRemoveError">Произошла неизвестная ошибка!</span>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Создатель</th>
+                <th>Дата создания</th>
+                <th>Дата завершения</th>
+                <th>Тип бана</th>
+                <th>Тип нарушения</th>
+                <th>Описание</th>
+            </tr>
+            </thead>
+        <tbody ng-controller="ModalTemp">
+
+            <tr  ng-repeat="ban in vm.banList track by ban.id">
+                <td ng-bind="::($index + 1)"></td>
+                <td ng-bind="::ban.createdBy"></td>
+                <td ng-bind="::ban.createTime | date:'dd.MM.yy HH:mm'"></td>
+                <td ng-bind="::ban.expireTime | date:'dd.MM.yy HH:mm'"></td>
+                <td ng-bind="::ban.type"></td>
+                <td ng-bind="::ban.violationType"></td>
+                <td ng-bind="::ban.reason"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

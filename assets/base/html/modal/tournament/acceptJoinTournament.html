@@ -1,0 +1,9 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'MODAL_JOIN_TOURNAMENT_TITLE' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<div class="modal-body modalWithdrawal">
+    <h3>{{'MODAL_JOIN_TOURNAMENT_TEXT1' | translate}} ${{modal.amount}}</h3>
+    <!--<h3>{{'MODAL_JOIN_TOURNAMENT_REALLY' | translate}}</h3>-->
+    <button id="tournament-modal-btn-join" class="btn-red" ng-click="$close()">{{'MODAL_JOIN_TOURNAMENT_BUTTON'|translate}}</button>
+</div>

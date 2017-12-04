@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='gamestar' >
+@@include('../base/html/includes/head.html', {"title": "GameStars.gg", "version": "130216"})
+
+<body ng-controller="allPage">
+    @@include('../base/html/includes/adminmenu.html')
+
+    <div ng-hide="hidePreloader" id="waitWs"><img ng-src="/src/img/base/logo.png"></div>
+
+    <!-- Start Wrap -->
+    <div id="wrap" ng-controller="ModalTemp">
+
+        <!-- include header -->
+        <div ng-include="'/src/html/header.html'"></div>
+
+        <ng-view autoscroll="true"></ng-view>
+
+    <!-- include footer -->
+    <div ng-include="'/src/html/footer.html'"></div>
+    <!-- include footer -->
+    </div>
+
+    @@include('../base/html/includes/typeform.html')
+    @@include('../base/html/includes/carrotquest.html', {"cqId": "2465-0d0406f20d88d2ec953db943828"})
+    @@include('../base/html/includes/googleanalitics.html', {"goId": "UA-71359457-1"})
+    @@include('../base/html/includes/yandex.html', {"yaId": "34208580"})
+    </body>
+</html>

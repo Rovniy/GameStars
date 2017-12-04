@@ -1,0 +1,52 @@
+<div class="adminmenu"
+     ng-controller="AdminMenuController as vm"
+     ng-show="vm.isAdmin()">
+    <ul>
+        <li class="adminmenu_admin" uib-tooltip="Панель администрирования" tooltip-placement="right">
+            <a ng-href="{{::vm.config.adminUrl}}">
+                <i class="fa fa-2x fa-fw fa-star"></i>
+            </a>
+        </li>
+
+        <li class="adminmenu_admin">
+            <div class="btn-group" uib-dropdown>
+                <a href><i type="button" class="fa fa-2x fa-fw fa-cogs" style="color:#333" uib-dropdown-toggle></i></a>
+                <ul class="dropdown-menu" uib-dropdown-menu>
+                    <li role="menuitem"><a href ng-click="vm.test_matchCreated()">Лобби сформировано</a></li>
+                    <li role="menuitem"><a href ng-click="vm.test_matchStarted()">Матч начался</a></li>
+                    <li role="menuitem"><a href ng-click="vm.test_matchEnded()">Матч завершен</a></li>
+                    <li role="menuitem"><a href ng-click="vm.test_matchCanceled()">Матч отменен</a></li>
+                    <li role="menuitem"><a href ng-click="vm.test_matchResult(true)">Результаты получены (победа)</a></li>
+                    <li role="menuitem"><a href ng-click="vm.test_matchResult(false)">Результаты получены (поражение)</a></li>
+                    <li role="menuitem"><a href ng-click="vm.test_matchCanceled()">Закрыть</a></li>
+                    <li class="divider"></li>
+                    <li role="menuitem"><a href ng-click="vm.test_tournament('PRE_REG')">Турнир (регистрация открыта)</a></li>
+                    <li role="menuitem"><a href ng-click="vm.test_tournament('POST_REG')">Турнир (поздняя регистрация)</a></li>
+                    <li role="menuitem"><a href ng-click="vm.test_tournament('START')">Турнир (стартовал)</a></li>
+                    <li role="menuitem"><a href ng-click="vm.test_tournament('FINISH')">Турнир (завершен)</a></li>
+                    <li class="divider"></li>
+                    <li role="menuitem"><a href ng-click="vm.showBuff('2X_WIN')">Баф 2X_WIN</a></li>
+                    <li role="menuitem"><a href ng-click="vm.showBuff('2X_WIN', true)">Баф 2X_WIN ACTIVATE</a></li>
+                    <li role="menuitem"><a href ng-click="vm.showBuff('STAR_POINTS')">Баф STAR_POINTS</a></li>
+                    <li role="menuitem"><a href ng-click="vm.showBuff('REAL_POINTS')">Баф REAL_POINTS</a></li>
+                    <li role="menuitem"><a href ng-click="vm.showBuff('FREE_BUY_IN')">Баф FREE_BUY_IN</a></li>
+                    <li role="menuitem"><a href ng-click="vm.showBuff('FREE_BUY_IN', true)">Баф FREE_BUY_IN ACTIVATE</a></li>
+                    <li role="menuitem"><a href ng-click="vm.showBuff('2X_LESS_LOSE')">Баф 2X_LESS_LOSE</a></li>
+                    <li role="menuitem"><a href ng-click="vm.showBuff('2X_LESS_LOSE', true)">Баф 2X_LESS_LOSE ACTIVATE</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="adminmenu_admin">
+            <div class="btn-group" uib-dropdown>
+                <a href><i type="button" class="fa fa-2x fa-film " style="color:#333" uib-dropdown-toggle></i></a>
+                <ul class="dropdown-menu" uib-dropdown-menu>
+                    <li role="menuitem"><a href="" ng-click="vm.animationStart('firstSession')">Мультик первой сессии</a></li>
+                    <li role="menuitem"><a href="" ng-click="vm.animationStart('firstJoin')">Мультик вступления в турнир</a></li>
+                    <li role="menuitem"><a href="" ng-click="vm.animationStart('firstWin')">Мультик парвого выигрыша</a></li>
+                    <li role="menuitem"><a href="" ng-click="vm.animationStart('firstLose')">Мультик первого поражения</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+

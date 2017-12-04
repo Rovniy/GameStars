@@ -1,0 +1,90 @@
+<div class="row lk">
+    <div class="col-lg-2 lk-sidebar">
+        <div ng-class="{'activeMain' : params.page==='main'}" class="sidebar-title">
+            <a href="/lk/main">
+             <h3>{{'LK__DASHBOARD' | translate}}</h3>
+            </a>
+        </div>
+        <ul>
+            <li ng-class="{'active' : params.page==='profile'}">
+                <a href="/lk/profile">
+                    <div>
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <span>{{'LK__PROFILE' | translate}}</span>
+                </a>
+            </li>
+            <li ng-class="{'active' : params.page==='accounts'}">
+                <a href="/lk/accounts">
+                    <div>
+                        <i class="fa fa-cog"></i>
+                    </div>
+                    <span>{{'LK__GAME_SETTINGS' | translate}}</span>
+                </a>
+            </li>
+            <li ng-class="{'active' : params.page==='payments'}">
+                <a href="/lk/payments">
+                    <div>
+                        <i class="fa fa-dollar"></i>
+                    </div>
+                    <span>{{'LK__BILLING' | translate}}</span>
+                </a>
+            </li>
+            <li ng-class="{'active' : params.page==='matches'}">
+                <a href="/lk/matches">
+                    <div>
+                        <i class="fa fa-gamepad"></i>
+                    </div>
+                    <span>{{'LK__MY_MATCHES' | translate}}</span>
+                </a>
+            </li>
+            <li ng-class="{'active' : params.page==='tournaments'}">
+                <a href="/lk/tournaments">
+                    <div>
+                        <i class="fa fa-trophy"></i>
+                    </div>
+                    <span>{{'LK__MY_TOURNAMENTS' | translate}}</span>
+                </a>
+            </li>
+            <li ng-class="{'active' : params.page==='streams'}" class="disable">
+                <a href="">
+                    <div>
+                        <i class="fa fa-rss"></i>
+                    </div>
+                    <span>{{'LK__STREAM_SETTINGS' | translate}}</span>
+                </a>
+            </li>
+        </ul>
+        <div ng-class="{'activeMain' : params.page==='teams'}" class="disable sidebar-title">
+            <a href="">
+                <h3>{{'LK__TEAMS' | translate}}</h3>
+            </a>
+        </div>
+        <div class="sidebar-title">
+            <a href="javascript:;;">
+                <h3>{{'LK__SHOP' | translate}}</h3>
+            </a>
+        </div>
+        <ul>
+            <!--<li ng-class="{'active' : params.page==='starpoints'}">-->
+                <!--<a href="/lk/starpoints">-->
+                    <!--<div>-->
+                        <!--<i class="fa fa-dollar"></i>-->
+                    <!--</div>-->
+                    <!--<span>{{'LK__STARPOINTS' | translate}}</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <li ng-class="{'active' : params.page==='devices'}">
+                <a href="/lk/devices">
+                    <div>
+                        <i class="fa fa-desktop"></i>
+                    </div>
+                    <span>{{'LK__DEVICES' | translate}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-lg-10 lk-content" ng-if="loggedIn">
+        <div class="content" ng-include="'/src/html/lk/' + params.page + '.html'"></div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+.issue-form {
+  .issue-form-title {
+    h3 {
+      text-align:center;
+      margin:0 0 10px 0;
+    }
+  }
+  .issue-form-title-small {
+    text-align:center;
+    margin:0 0 10px 0;
+    span {
+      font:18px/18px @font-semi;
+    }
+  }
+  .issue-form-list {
+    margin:0;
+    label {
+      font:14px/25px @font-semi;
+      font-weight: 700;
+    }
+  }
+  .issue-form-area {
+    h3 {
+      text-align:center;
+      margin:0 0 10px 0;
+    }
+    textarea {
+      max-width:100%;
+      padding:8px;
+      font:14px/14px @font-semi;
+
+    }
+  }
+  .issue-form-addfile {
+
+    &.file-over{
+      border: 2px dashed #CACACA;
+      color: #999;
+      text-align: center;
+
+      .file-over-hidden{
+        display: none;
+      }
+      .file-over-visible{
+        display: block;
+      }
+    }
+
+    h3 {
+      text-align:center;
+      margin:0 0 10px 0;
+    }
+
+    input {
+      display:none;
+    }
+
+    .issue-form-addfile-upload {
+      cursor:pointer;
+      margin:auto;
+
+      &:hover {
+        background: darkred;
+      }
+    }
+
+    .file-over-visible{
+      display: none;
+    }
+  }
+  .issue-form-upload-text {
+    font:14px/14px @font-semi;
+    text-align:center;
+    margin:10px;
+  }
+
+}

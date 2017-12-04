@@ -1,0 +1,205 @@
+<!-- start Middle-->
+<div id="middle" class="referal">
+
+    <div class="b-top-substrate">
+        <div class="b-top-substrate_cnt b-top-substrate_cnt__x80">
+            <div class="b-title-s">
+                <!--Реферальная программа-->
+                {{'REFERAL__TITLE' | translate}}
+            </div>
+            <div class="hr-gold hr-gold__between-title">
+            </div>
+            <div class="b-title-m b-title-m__mar-bott" ng-bind-html="'REFERAL__INVITE_FRIEND' | translate">
+            </div>
+            <h3>{{'REFERAL_BANNER__TEXT4'|translate}} <span>http://{{vm.refResult.referral_url}}</span></h3>
+            <button id="copyReferal" class="btn-red" ng-disabled="!vm.btnGetReferal">{{'REFERAL__GET_LINK' | translate}}</button>
+            <div class="b-referal-button-div-left">
+                <button ng-click="vm.shareLinkToNetwork()" class="btn-rebuy btn-invite-friend play-button-tournament">
+                    {{'REFEAL_INTIVE_FRIENT_FROM_NETWORK' | translate}}  <i class="fa fa-facebook-official"></i>
+                </button>
+            </div>
+            <!--<div class="fb-share-button" data-href="https://lol.gamestars.gg/src/lang/'+appCtrl.getLanguage().getLanguage()+'/fb.html" data-layout="button" data-mobile-iframe="true"></div>-->
+        </div>
+    </div>
+
+    <!-- <div class="referal-banner">
+         <div class="referal-banner-body">
+             <h2>{{'REFERAL_BANNER__TEXT1' | translate}}</h2>
+             <p>{{'REFERAL_BANNER__TEXT2' | translate}}</p>
+             <p>{{'REFERAL_BANNER__TEXT3' | translate}}</p>
+         </div>
+     </div>-->
+
+    <div class="b-gross-brd">
+        <div class="b-gross-brd_cnt">
+            <!-- start Список наград -->
+            <ul class="b-list-honors">
+                <!--b-list-honors_item__complate-->
+                <li tooltip-placement="top" uib-tooltip="{{'REFERAL__AWARD_NOTICE' | translate}}" class="b-list-honors_item" ng-class="{ 'b-list-honors_item__complate' : vm.refResult.referral_bonus.potential >= 5 }">
+                    <div class="b-list-honors_item_cnt">
+                        <div class="b-list-honors_item_img">
+                            <img src="/src/img/base/honor-01.png" alt=""/>
+                        </div>
+                        <div class="b-list-honors_item_name">
+                            {{'REFERAL__BRONZE' | translate}}
+                            <!--Бронза-->
+                        </div>
+                        <div class="b-list-honors_item_condition">
+                            {{'REFERAL__INVITE_5_FRIENDS' | translate}}
+                            <!--Пригласи 5 друзей-->
+                        </div>
+                        <div class="b-list-honors_item_price">
+                            {{'REFERAL__INVITE_5_FRIENDS_MONEY' | translate}}
+                        </div>
+                    </div>
+                </li>
+                <li tooltip-placement="top" uib-tooltip="{{'REFERAL__AWARD_NOTICE' | translate}}"  class="b-list-honors_item" ng-class="{ 'b-list-honors_item__complate' : vm.refResult.referral_bonus.potential >= 10 }">
+                    <div class="b-list-honors_item_cnt">
+                        <div class="b-list-honors_item_img">
+                            <img src="/src/img/base/honor-02.png" alt=""/>
+                        </div>
+                        <div class="b-list-honors_item_name">
+                            <!--Серебро-->
+                            {{'REFERAL__SILVER' | translate}}
+                        </div>
+                        <div class="b-list-honors_item_condition">
+                            {{'REFERAL__INVITE_10_FRIENDS' | translate}}
+
+                        </div>
+                        <div class="b-list-honors_item_price">
+                            {{'REFERAL__INVITE_10_FRIENDS_MONEY' | translate}}
+                        </div>
+                    </div>
+                </li>
+                <li tooltip-placement="top" uib-tooltip="{{'REFERAL__AWARD_NOTICE' | translate}}"  class="b-list-honors_item" ng-class="{ 'b-list-honors_item__complate' : vm.refResult.referral_bonus.potential >= 15 }">
+                    <div class="b-list-honors_item_cnt">
+                        <div class="b-list-honors_item_img">
+                            <img src="/src/img/base/honor-03.png" alt=""/>
+                        </div>
+                        <div class="b-list-honors_item_name">
+                            <!--Золото-->
+                            {{'REFERAL__GOLD' | translate}}
+                        </div>
+                        <div class="b-list-honors_item_condition">
+                            {{'REFERAL__INVITE_15_FRIENDS' | translate}}
+                        </div>
+                        <div class="b-list-honors_item_price">
+                            {{'REFERAL__INVITE_15_FRIENDS_MONEY' | translate}}
+                        </div>
+                    </div>
+                </li>
+                <li tooltip-placement="top" uib-tooltip="{{'REFERAL__AWARD_NOTICE' | translate}}"  class="b-list-honors_item" ng-class="{ 'b-list-honors_item__complate' : vm.refResult.referral_bonus.potential >= 30 }">
+                    <div class="b-list-honors_item_cnt">
+                        <div class="b-list-honors_item_img">
+                            <img src="/src/img/base/honor-04.png" alt=""/>
+                        </div>
+                        <div class="b-list-honors_item_name">
+                            <!--Платина-->
+                            {{'REFERAL__PLATINUM' | translate}}
+                        </div>
+                        <div class="b-list-honors_item_condition">
+                            <!--Пригласи 30 друзей-->
+                            {{'REFERAL__INVITE_30_FRIENDS' | translate}}
+                        </div>
+                        <div class="b-list-honors_item_price">
+                            {{'REFERAL__INVITE_30_FRIENDS_MONEY' | translate}}
+                        </div>
+                    </div>
+                </li>
+                <li tooltip-placement="top" uib-tooltip="{{'REFERAL__AWARD_NOTICE' | translate}}"  class="b-list-honors_item" ng-class="{ 'b-list-honors_item__complate' : vm.refResult.referral_bonus.potential >= 50 }">
+                    <div class="b-list-honors_item_cnt">
+                        <div class="b-list-honors_item_img">
+                            <img src="/src/img/base/honor-05.png" alt=""/>
+                        </div>
+                        <div class="b-list-honors_item_name">
+                            <!--Алмаз-->
+                            {{'REFERAL__DIAMOND' | translate}}
+                        </div>
+                        <div class="b-list-honors_item_condition">
+                            {{'REFERAL__INVITE_50_FRIENDS' | translate}}
+                        </div>
+                        <div class="b-list-honors_item_price">
+                            {{'REFERAL__INVITE_50_FRIENDS_MONEY' | translate}}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <!-- end Список наград -->
+
+            <!-- start Таблица -->
+            <div class="b-table-type">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th style="width: 50%">
+                            <!--Статистика-->
+                            {{'REFERAL__STATISTICS' | translate}}
+                        </th>
+                        <th style="width: 25%">
+                            <!--Имя игрока-->
+                            {{'REFERAL__USERNAME' | translate}}
+                        </th>
+                        <th>
+                            <!--Боёв-->
+                            {{'REFERAL__MATCH_QUANTITY' | translate}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="b-referal-statistic">
+                                <div class="b-referal-statistic_rules">
+                                    {{'REFERAL__CONTENT' | translate}}
+                                </div>
+                                <div class="b-referal-statistic_result">
+                                    <div class="b-referal-statistic_result_col">
+                                        <div class="b-referal-statistic_result_col_title">
+                                            {{'REFERAL__YOUR_PRIZE' | translate}}
+                                            <!--Ваша награда-->
+                                        </div>
+                                        <div class="b-referal-statistic_result_col_res">
+                                            {{ (vm.refResult.referral_bonus.bonus || '---') | currencyUnit}}
+                                        </div>
+                                    </div>
+                                    <div class="b-referal-statistic_result_col">
+                                        <div class="b-referal-statistic_result_col_title">
+                                            <!--Активных друзей-->
+                                            {{'REFERAL__ACTIVE_FRIENDS' | translate}}
+                                        </div>
+                                        <div tooltip-placement="right" uib-tooltip="{{'REFERAL__ACTIVE_FRIENDS_TOOLTIP' | translate}}" class="b-referal-statistic_result_col_res">
+                                            {{vm.refResult.referral_bonus.potential || 0}} / {{vm.refResult.referral_bonus.all || 0}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn-red-small"
+                                            ng-disabled="vm.loading"
+                                            ng-click="vm.getReferalBonus()"
+                                            ng-show="vm.refResult.referral_bonus.bonus > 0">{{'REFERAL__TAKE_AWARD' | translate}}</button>
+                                </div>
+                            </div>
+                        </td>
+                        <td colspan="2">
+                            <div class="b-list-referal-friends">
+                                <ul class="b-list-referal-friends_cnt">
+
+                                    <li class="b-list-referal-friends_item"
+                                        ng-class="{ 'b-list-referal-friends_item__non-active' : refUsers.used == false }"
+                                        ng-repeat="refUsers in vm.refResult.referrers">
+                                        <div class="b-list-referal-friends_name" ng-bind="::refUsers.name"></div>
+                                        <div class="b-list-referal-friends_number" ng-bind="::refUsers.matchCount"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- end Таблица-->
+        </div>
+    </div>
+
+</div>
+<!-- end Middle -->

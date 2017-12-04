@@ -1,0 +1,177 @@
+@import (reference) "config";
+
+@font-face{
+  font-family:"BeaufortforLOL-Bold";
+  src: url("@{src-url}/fonts/lol/BeaufortforLOL-Bold.eot?#iefix");
+  src: url("@{src-url}/fonts/lol/BeaufortforLOL-Bold.eot?#iefix") format("eot"),
+  url("@{src-url}/fonts/lol/BeaufortforLOL-Bold.woff") format("woff"),
+  url("@{src-url}/fonts/lol/BeaufortforLOL-Bold.ttf") format("truetype"),
+  url("@{src-url}/fonts/lol/BeaufortforLOL-Bold.svg#") format("svg");
+  font-weight:400;
+  font-style:normal;
+}
+
+@font-face{
+  font-family:"BeaufortforLOL";
+  src: url("@{src-url}/fonts/lol/BeaufortforLOL-Regular.eot?#iefix");
+  src: url("@{src-url}/fonts/lol/BeaufortforLOL-Regular.eot?#iefix") format("eot"),
+  url("@{src-url}/fonts/lol/BeaufortforLOL-Regular.woff") format("woff"),
+  url("@{src-url}/fonts/lol/BeaufortforLOL-Regular.ttf") format("truetype"),
+  url("@{src-url}/fonts/lol/BeaufortforLOL-Regular.svg#") format("svg");
+  font-weight:400;
+  font-style:normal;
+}
+
+@src-url: '/src'; //Адрес сервера хранения данных
+@dir: 'promo';
+@font-main: "BeaufortforLOL"; //Шрифт по умолчанию
+@font-main-bold: "BeaufortforLOL-Bold"; //Жирный шрифт по умолчанию
+@font-semi: "Open-Sans"; //Дополнительный строгий шрифт
+
+
+html, body {
+  margin:0;
+  padding:0;
+  line-height: 1;
+  background: #040605 url('/src/img/promo/bg.jpg') no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+body {
+  position:relative;
+}
+
+#wrap {
+  display:block;
+  width:100%;
+  height:675px;
+  float:left;
+  margin:0;
+  padding:115px 0 0 0;
+  min-height:0;
+  .cntr {
+    margin:0 auto;
+    width:400px;
+    .logo {
+      float:left;
+      width:100%;
+      height:55px;
+      text-align:center;
+      img {
+        width:370px;
+      }
+    }
+    .forma {
+      float:left;
+      width:400px;
+      height:465px;
+      margin:40px 0 0 0;
+      background: url('/src/img/promo/forma.png') no-repeat;
+      padding:40px 70px;
+      h1 {
+        margin:0 0 15px 0;
+        text-align:center;
+        padding:0;
+        font:18px/18px @font-main-bold;
+        color:#fff;
+        text-transform: uppercase;
+      }
+      form {
+        .input-group {
+          width:100%;
+          margin-top:8px;
+          .input-group-addon {
+            width:35px;
+            background:#9f9f9f;
+            color:#646464;
+            padding:0;
+            border:2px solid #23252c;
+            border-right:1px solid #23252c;
+          }
+          input {
+            border:2px solid #23252c;
+            border-left:1px solid #23252c;
+            font:12px/12px @font-semi;
+            color:#000;
+          }
+          select {
+            border:2px solid #23252c;
+            border-left:1px solid #23252c;
+            font:12px/12px @font-semi;
+            color:#000;
+          }
+        }
+        .error {
+          .input-group-addon {
+            border:2px solid #c3001c;
+            border-right:1px solid #c3001c;
+          }
+          input {
+            border:2px solid #c3001c;
+            border-left:1px solid #c3001c;
+          }
+        }
+        .form-group {
+          .checkbox {
+            padding:0 0 0 3px;
+            label {
+              font:12px/20px @font-semi;
+              color:#fff;
+              a {
+                text-decoration: underline;
+                color:#fff;
+                &:hover {
+                  color:red;
+                }
+              }
+            }
+          }
+        }
+        .button {
+          display:block;
+          margin:0 auto;
+          width:254px;
+          height:54px;
+          border:2px solid #23252c;
+          border-radius:5px;
+          background: linear-gradient(to top, #bf001f, #d50211);
+          font:16px/16px @font-semi;
+          color:#fff;
+          text-transform: uppercase;
+          text-shadow: 1px 1px 1px #000;
+          &:hover, &:focus {
+            outline:0;
+            border:2px solid #23252c;
+            border-radius:5px;
+            background: linear-gradient(to top, #bf001f, #e90011);
+          }
+        }
+        .errorArea {
+          text-align:center;
+          padding:3px 0 0 0;
+          .errorText {
+            color:red;
+            font:12px/12px @font-semi;
+          }
+        }
+
+      }
+    }
+  }
+
+}
+.disclamer {
+  float:left;
+  display:block;
+  margin:200px 0 0 0;
+  width:100%;
+  .container {
+    text-align:center;
+    p {
+      font:8px/12px @font-semi;
+      color:#d5c092;
+      text-transform: uppercase;
+    }
+  }
+}
+

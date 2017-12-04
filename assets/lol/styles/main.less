@@ -1,0 +1,1130 @@
+//Анимация мигания кнопки
+@-webkit-keyframes miganie {
+  from {
+    -webkit-box-shadow: -1px -1px 17px 0px rgba(246, 233, 0, 1);
+    -moz-box-shadow: -1px -1px 17px 0px rgba(246, 233, 0, 1);
+    box-shadow: -1px -1px 17px 0px rgba(246, 233, 0, 1);
+  }
+  to {
+    -webkit-box-shadow: -1px -1px 17px 0px rgba(246, 233, 0, 0.6);
+    -moz-box-shadow: -1px -1px 17px 0px rgba(246, 233, 0, 0.6);
+    box-shadow: -1px -1px 17px 0px rgba(246, 233, 0, 0.6);
+  }
+}
+@keyframes miganie {
+  from {
+    -webkit-box-shadow: -1px -1px 17px 0px rgba(246, 233, 0, 1);
+    -moz-box-shadow: -1px -1px 17px 0px rgba(246, 233, 0, 1);
+    box-shadow: -1px -1px 17px 0px rgba(246, 233, 0, 1);
+  }
+  to {
+    -webkit-box-shadow: -1px -1px 17px 0px rgba(246, 233, 0, 0.6);
+    -moz-box-shadow: -1px -1px 17px 0px rgba(246, 233, 0, 0.6);
+    box-shadow: -1px -1px 17px 0px rgba(246, 233, 0, 0.6);
+  }
+}
+#scrollArea {
+  height: 100%;
+  overflow: auto;
+}
+
+#bottom {
+  display: block;
+}
+
+
+.index-page {
+  min-height:1000px;
+  background: url('/src/img/lol/index/bg.jpg');
+  .container-fluid {
+    padding: 0;
+  }
+  .container {
+    padding: 0;
+    width: 1200px;
+    background: url('/src/img/lol/index/box-bg.jpg');
+    .block-1 {
+      height: 33px;
+      width: 100%;
+      float: left;
+      background: linear-gradient(to top, #252525, #343434);
+      padding: 6px 0 0 9px;
+      span {
+        color: #fff;
+        font: 16px/16px @roboto-regular;
+        margin: 0 12px;
+        red {
+          color: #ff0000;
+        }
+      }
+    }
+    .block-2 {
+      width: 100%;
+      height: 415px;
+      float: left;
+      position:relative;
+      button {
+        position:absolute;
+        bottom:50px;
+        right:50px;
+        margin: 0 0 0 15px;
+        height: 57px;
+        width: 259px;
+        border: none;
+        border-radius: 4px;
+        background: linear-gradient(to top, #b90405 0%, #b90405 35%, #cb2b2a 59%, #cb2b2a 100%);
+        color: #fff;
+        text-shadow: 1px 1px 2px #000;
+        font: 20px/57px @roboto-regular;
+        text-transform: uppercase;
+        &:hover, &:focus {
+          background: linear-gradient(to top, #cd0001 0%, #cd0001 17%, #ec3536 56%, #e21e1c 100%);
+          outline: none;
+        }
+      }
+      .box-shadow {
+        width:1169px;
+        height:352px;
+        top:20px;
+        left:15px;
+        position:absolute;
+        -webkit-box-shadow: 0px 7px 16px 0px rgba(50, 50, 50, 0.55);
+        -moz-box-shadow: 0px 7px 16px 0px rgba(50, 50, 50, 0.55);
+        box-shadow: 0px 7px 16px 0px rgba(50, 50, 50, 0.55);
+      }
+      .slider {
+        width: 1170px;
+      }
+      .slider-container {
+        position: relative;
+        overflow: hidden;
+        width: 1170px;
+        height:395px;
+        margin: 20px auto 0;
+      }
+      .slider {
+        position: relative;
+        width: 9999px;
+      }
+      .slider:before,
+      .slider:after {
+        display: table;
+        content: ' ';
+      }
+      .slider:after {
+        clear: both;
+      }
+      .slider .slide {
+        position: relative;
+        float: left;
+        margin: 0;
+        padding: 0;
+        .absoluteLink {
+          position: absolute;
+          font:12px/12px @roboto-regular;
+          color:#fff;
+          text-decoration: underline;
+          opacity: 0.8;
+          &:hover {
+            opacity: 1;
+          }
+        }
+        .absoluteLink-1 {
+          top:245px;
+          right:530px;
+        }
+        .absoluteLink-2 {
+          top:245px;
+          right:530px;
+        }
+        .absoluteLink-3 {
+          top:245px;
+          right:530px;
+        }
+      }
+      .slider .slide img {
+        border:1px solid #999;
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+      .act,
+      #prev > span,
+      #next > span,
+      #slider-nav > a {
+        background: url(../images/arrows.png) no-repeat;
+      }
+      #next > span,
+      #prev > span {
+        display: block;
+        width: 16px;
+        height: 24px;
+      }
+      /* Arrows */
+      #next > span {
+        background-position: -20px 0;
+      }
+      #prev > span {
+        background-position: 0 0;
+      }
+      #next,
+      #prev {
+        position: absolute;
+        top: 50%;
+        margin-top: -20px;
+        padding: 10px 15px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border-radius: 5px;
+        background: rgba(0, 0, 0, .39);
+        filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#99000000', endColorstr='#99000000'); /* ie8 */
+        -o-user-select: none;
+      }
+      #prev {
+        left: 10px;
+      }
+      #next {
+        right: 10px;
+      }
+      .caption {
+        position: absolute;
+        bottom: 0;
+        display: block;
+        width: 100%;
+        padding: 0 10px 30px;
+        color: #fff;
+        background: rgba(0,0,0,.8);
+        background: -webkit-linear-gradient(bottom, rgba(0,0,0, .8), transparent 100%);
+        background: linear-gradient(to top, rgba(0,0,0, .8), transparent 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#99000000', endColorstr='#99000000'); /* ie8 */
+      }
+      .caption a {
+        display: block;
+        color: #fff;
+      }
+      .slider-nav {
+        line-height: 30px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        /*background: #323232;*/
+        /*opacity: .9;*/
+        filter: alpha(opacity=90); /* ie8 */
+      }
+      .slider-nav a {
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        margin: 0 5px;
+        -webkit-transition: background .5s ease;
+        -moz-transition: background .5s ease;
+        -o-transition: background .5s ease;
+        transition: background .5s ease;
+        border: 1px solid transparent;
+        background: #272727;
+        cursor:pointer;
+      }
+      .slider-nav .active {
+        width: 13px;
+        height: 13px;
+        border: 1px solid #fff;
+        background: #c02828;
+      }
+      @media (max-width: 580px) {
+        .caption {
+          display: none;
+        }
+      }
+    }
+    .block-4 {
+      width: 100%;
+      height: 270px;
+      float: left;
+      margin: 4px 0 0 0;
+      .left-col {
+        float: left;
+        width: 550px;
+        height: 247px;
+        .banner {
+          margin: 0 0 0 30px;
+          background: url('/src/img/lol/index/block-3-left-bg.jpg') no-repeat;
+          display: block;
+          width: 490px;
+          height: 247px;
+          border: 2px solid #d0d0d0;
+          border-radius: 2px;
+          -webkit-box-shadow: 0px 7px 16px 0px rgba(50, 50, 50, 0.75);
+          -moz-box-shadow: 0px 7px 16px 0px rgba(50, 50, 50, 0.75);
+          box-shadow: 0px 7px 16px 0px rgba(50, 50, 50, 0.75);
+          h2 {
+            font: 30px/30px @roboto-bold;
+            color: #fff;
+            text-align: center;
+            text-transform: uppercase;
+            margin: 38px auto 0;
+          }
+          h3 {
+            font: 14px/20px @roboto-regular;
+            width: 382px;
+            color: #fff;
+            text-align: center;
+            margin: 20px auto 25px;
+          }
+          .btn-and-input {
+            text-align: center;
+            input {
+              width: 185px;
+              height: 39px;
+              border: none;
+              border-radius: 4px;
+              font: 14px/39px @roboto-regular;
+              text-transform: uppercase;
+              text-align: center;
+              &:focus {
+                outline: none;
+                border: none;
+              }
+            }
+            .bad-code {
+              border:3px solid red;
+            }
+            button {
+              margin: 0 0 0 15px;
+              height: 39px;
+              width: 177px;
+              border: none;
+              border-radius: 4px;
+              background: linear-gradient(to top, #b90405 0%, #b90405 35%, #cb2b2a 59%, #cb2b2a 100%);
+              color: #fff;
+              text-shadow: 1px 1px 2px #000;
+              font: 14px/39px @roboto-regular;
+              text-transform: uppercase;
+              &:hover, &:focus {
+                background: linear-gradient(to top, #cd0001 0%, #cd0001 17%, #ec3536 56%, #e21e1c 100%);
+                outline: none;
+              }
+            }
+          }
+        }
+      }
+      .right-col {
+        float: left;
+        width: 650px;
+        height: 247px;
+        margin: 0;
+        padding: 0 0 0 15px;
+        ul {
+          margin: 0;
+          padding: 0;
+          li {
+            width: 596px;
+            list-style: none;
+            margin: 0 0 9px 0;
+            border-radius: 4px;
+            -webkit-box-shadow: 0px 7px 16px 0px rgba(50, 50, 50, 0.75);
+            -moz-box-shadow: 0px 7px 16px 0px rgba(50, 50, 50, 0.75);
+            box-shadow: 0px 7px 16px 0px rgba(50, 50, 50, 0.75);
+            .item {
+              height: 51px;
+              .icon {
+                float: left;
+                border: 2px solid #d0d0d0;
+                margin:1px;
+                i {
+                  width:45px;
+                  height: 45px;
+                }
+              }
+              .desc {
+                float: left;
+                padding: 0 0 0 30px;
+                span {
+                  font: 14px/51px @roboto-regular;
+                }
+              }
+            }
+            &:nth-child(1) {
+              border: 2px solid #fff;
+              .item {
+                background: rgba(39, 39, 39, 100%);
+                .icon {
+                  i {
+                    opacity:1;
+                  }
+                }
+              }
+              .desc {
+                span {
+                  color: rgba(255,255,255,1);
+                }
+              }
+            }
+            &:nth-child(2) {
+              border: 2px solid rgba(214, 214, 214, 92%);
+              .item {
+                background: rgba(39, 39, 39, 100%);
+                .icon {
+                  i {
+                    opacity:0.9;
+                  }
+                }
+              }
+              .desc {
+                span {
+                  color: rgba(255,255,255,0.9);
+                }
+              }
+            }
+            &:nth-child(3) {
+              border: 2px solid rgba(214, 214, 214, 86%);
+              .item {
+                background: rgba(39, 39, 39, 100%);
+                .icon {
+                  i {
+                    opacity:0.8;
+                  }
+                }
+              }
+              .desc {
+                span {
+                  color: rgba(255,255,255,0.8);
+                }
+              }
+            }
+            &:nth-child(4) {
+              border: 2px solid rgba(214, 214, 214, 68%);
+              .item {
+                background: rgba(39, 39, 39, 100%);
+                .icon {
+                  i {
+                    opacity:0.7;
+                  }
+                }
+              }
+            }
+            .desc {
+              span {
+                color: rgba(255,255,255,0.7);
+              }
+            }
+          }
+        }
+      }
+      .spinBclokc {
+        background: rgba(0,0,0,5%);
+        padding:90px 0 0 290px;
+        width:630px;
+      }
+    }
+    .block-5 {
+      width: 100%;
+      height: 366px;
+      float: left;
+      margin: 20px 0 0 0;
+      background: url('/src/img/lol/index/block-5-bg.jpg');
+      .left-col {
+        float: left;
+        width: 50%;
+        .box {
+          background: rgba(0, 0, 0, 54%);
+          width: 480px;
+          height: 264px;
+          margin: 54px 0 0 30px;
+          h3 {
+            font: 16px/16px @roboto-regular;
+            text-transform: uppercase;
+            color: #fff;
+            padding: 38px 0 0 54px;
+          }
+          .clock {
+            display: inline-block;
+            width: 100%;
+            height:100px;
+            margin:0 auto!important;
+            padding:0 10px;
+            .flip-clock-label {
+              display:none;
+            }
+          }
+          .days {
+            display: inline-block;
+            width: 100%;
+            .onethird {
+              float: left;
+              width: 33.33%;
+              text-align: center;
+              span {
+                font: 12px/12px @roboto-regular;
+                text-transform: uppercase;
+                color: #fff;
+              }
+            }
+          }
+          .bot {
+            margin: 10px 0 0 0;
+            text-align: center;
+            h3 {
+              display: inline;
+              font: 17px/17px @roboto-regular;
+              text-transform: none;
+              color: #fff;
+              margin: 0;
+              padding: 0;
+            }
+            button {
+              margin: 0 0 0 16px;
+              height: 39px;
+              width: 177px;
+              border: none;
+              border-radius: 4px;
+              background: linear-gradient(to top, #117900, #2f9905);
+              color: #fff;
+              text-shadow: 1px 1px 2px #000;
+              font: 14px/39px @roboto-regular;
+              text-transform: uppercase;
+              &:hover, &:focus {
+                background: linear-gradient(to top, #117900, #35ba00);
+                outline: none;
+              }
+            }
+            .disable {
+              filter: grayscale(100%);
+            }
+          }
+        }
+      }
+      .right-col {
+        float: left;
+        width: 50%;
+        padding: 0 0 0 102px;
+        h1 {
+          font: 48px/48px @roboto-bold;
+          color: #fff;
+          text-shadow: 2px 2px 4px #000;
+          text-transform: uppercase;
+          margin: 57px 0 0 0;
+        }
+        h4 {
+          font: 12px/12px @roboto-regular;
+          color: #fff;
+          margin: 5px 0 28px 5px;
+        }
+        ul {
+          margin: 0 0 0 5px;
+          padding: 0;
+          li {
+            list-style: none;
+            font: 14px/14px @roboto-regular;
+            color: #fff;
+            margin: 10px 0;
+          }
+        }
+        h5 {
+          margin: 28px 0 0 5px;
+          a {
+            font: 12px/12px @roboto-regular;
+            color: #fff;
+            text-decoration: underline;
+            opacity: 0.8;
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
+        .btn-area {
+          text-align: right;
+          padding: 0 98px 0 0;
+          button {
+            margin: 0 0 0 16px;
+            height: 57px;
+            width: 259px;
+            border: none;
+            border-radius: 4px;
+            background: linear-gradient(to top, #b90405 0%, #b90405 34%, #cb2b2a 59%, #cb2b2a 100%);
+            color: #fff;
+            text-shadow: 1px 1px 2px #000;
+            font: 20px/57px @roboto-regular;
+            text-transform: uppercase;
+            -webkit-box-shadow: 0px 0px 30px 0px rgba(50, 50, 50, 0.57);
+            -moz-box-shadow:    0px 0px 30px 0px rgba(50, 50, 50, 0.57);
+            box-shadow:         0px 0px 30px 0px rgba(50, 50, 50, 0.57);
+            &:hover, &:focus {
+              background: linear-gradient(to top, #cd0001 0%, #cd0001 17%, #ec3536 56%, #e21e1c 100%);
+              outline: none;
+            }
+            &:disabled {
+              filter: grayscale(100%);
+              &:hover {
+                background: linear-gradient(to top, #b90405 0%, #b90405 34%, #cb2b2a 59%, #cb2b2a 100%);
+                filter: grayscale(100%);
+              }
+            }
+          }
+        }
+      }
+
+    }
+    .block-6 {
+      width: 100%;
+      height: 267px;
+      float: left;
+      padding: 35px 19px 0;
+      ul {
+        margin: 0;
+        padding: 0;
+        .item {
+          display: inline-block;
+          list-style: none;
+          background: #1c1c1e;
+          width: 218px;
+          height: 225px;
+          border: 2px solid #d0d0d0;
+          border-radius: 2px;
+          -webkit-box-shadow: 0px 0px 27px 0px rgba(50, 50, 50, 0.75);
+          -moz-box-shadow: 0px 0px 27px 0px rgba(50, 50, 50, 0.75);
+          box-shadow: 0px 0px 27px 0px rgba(50, 50, 50, 0.75);
+          margin: 6px;
+          .meta {
+            text-align: center;
+            float: left;
+            width: 100%;
+            h3 {
+              margin: 15px 0 0 0;
+              font: 14px/14px @roboto-medium;
+              color: #fff;
+              text-transform: uppercase;
+            }
+            h4 {
+              margin: 10px 0 0 0;
+              font: 12px/12px @roboto-regular;
+              color: #ababab;
+              text-transform: none;
+            }
+          }
+          .prizepool {
+            float: left;
+            width: 80%;
+            border-bottom: 1px solid #5e5e5f;
+            margin: 18px 16px 0;
+            .title {
+              font: 14px/14px @roboto-regular;
+              color: #cfcfcf;
+              text-align: left;
+              display: inline-block;
+              width: 49%;
+              margin: 0 0 7px 0;
+            }
+            .value {
+              font: 14px/14px @roboto-bold;
+              color: #fff;
+              text-align: right;
+              display: inline-block;
+              width: 49%;
+              margin: 0 0 7px 0;
+
+            }
+          }
+          .players {
+            float: left;
+            width: 80%;
+            border-bottom: 1px solid #5e5e5f;
+            margin: 5px 16px 0;
+            .title {
+              font: 14px/14px @roboto-regular;
+              color: #cfcfcf;
+              text-align: left;
+              display: inline-block;
+              width: 49%;
+              margin: 0 0 7px 0;
+            }
+            .value {
+              font: 14px/14px @roboto-bold;
+              color: #fff;
+              text-align: right;
+              display: inline-block;
+              width: 49%;
+              margin: 0 0 7px 0;
+
+            }
+          }
+          .status {
+            text-align: center;
+            float: left;
+            width: 100%;
+            span {
+              padding: 4px 0 0 0;
+              width: 83px;
+              height: 23px;
+              display: block;
+              color: #fff;
+              margin: 9px auto;
+              font: 14px/14px @roboto-medium;
+              text-decoration:underline;
+            }
+            .regopen {
+              width:100%;
+            }
+          }
+          .btn-area {
+            text-align: center;
+            button {
+              height: 39px;
+              width: 177px;
+              border: none;
+              border-radius: 4px;
+              background: linear-gradient(to top, #b90405 0%, #b90405 34%, #cb2b2a, 59%, #cb2b2a 100%);
+              color: #fff;
+              text-shadow: 1px 1px 2px #000;
+              font: 14px/39px @roboto-regular;
+              text-transform: uppercase;
+              &:hover, &:focus {
+                background: linear-gradient(to top, #cd0001 0%, #cd0001 17%, #ec3536 56%, #e21e1c 100%);
+                outline: none;
+              }
+              &:disabled {
+                filter: grayscale(100%);
+                &:hover {
+                  background: linear-gradient(to top, #b90405 0%, #b90405 34%, #cb2b2a, 59%, #cb2b2a 100%);
+                  filter: grayscale(100%);
+                }
+              }
+            }
+          }
+        }
+        .item_last_call {
+          .status {
+            text-align: center;
+            float: left;
+            width: 100%;
+            span {
+              padding: 4px 0 0 0;
+              width: 83px;
+              height: 23px;
+              display: block;
+              background: #f6e900;
+              color: #000;
+              border-radius: 4px;
+              margin: 9px auto;
+              font: 14px/14px @roboto-medium;
+              -webkit-animation: miganie  2s infinite ease-in-out;
+              animation: miganie 1s infinite ease-in-out;
+              animation-direction: alternate;
+            }
+
+          }
+          .btn-area {
+            text-align: center;
+            button {
+              height: 39px;
+              width: 177px;
+              border: none;
+              border-radius: 4px;
+              background: linear-gradient(to top, #117900, #2f9905);
+              color: #fff;
+              text-shadow: 1px 1px 2px #000;
+              font: 14px/39px @roboto-regular;
+              text-transform: uppercase;
+              &:hover, &:focus {
+                background: linear-gradient(to top, #117900, #35ba00);
+                outline: none;
+              }
+            }
+          }
+        }
+      }
+    }
+    .block-7 {
+      width: 100%;
+      height: 212px;
+      float: left;
+      .text {
+        float: left;
+        width: 100%;
+        text-align: center;
+        h3 {
+          margin: 45px 0 30px 0;
+          font: 17px/17px @roboto-regular;
+          color: #000;
+          a {
+            color: #000;
+            text-decoration: underline;
+          }
+        }
+      }
+      .arrow {
+        float: left;
+        width: 100%;
+        text-align: center;
+
+      }
+      .line {
+        float: left;
+        width: 100%;
+        height: 67px;
+        margin: 0 auto;
+        text-align: center;
+        background: url('/src/img/lol/index/block-7-bg.png') repeat-x;
+        h3 {
+          font: 18px/67px @roboto-medium;
+          color: #fff;
+          text-transform: uppercase;
+          margin: 0;
+          padding: 0;
+
+        }
+      }
+    }
+    .block-8 {
+      width: 100%;
+      height: 410px;
+      float: left;
+      .left-col {
+        float: left;
+        width: 50%;
+        padding: 124px 18px 0 55px;
+        h2 {
+          font: 30px/30px @roboto-bold;
+          color: #000;
+          text-transform: uppercase;
+          margin: 0;
+        }
+        p {
+          margin: 34px 0 0 0;
+          font: 14px/16px @roboto-regular;
+          color: #000;
+        }
+        button {
+          margin: 41px 0 0 0;
+          height: 48px;
+          width: 219px;
+          border: none;
+          border-radius: 4px;
+          background: linear-gradient(to top, #b90405 0%, #b90405 34%, #cb2b2a 59%, #cb2b2a);
+          color: #fff;
+          text-shadow: 2px 2px 4px #000;
+          font: 14px/48px @roboto-regular;
+          text-transform: uppercase;
+          &:hover, &:focus {
+            background: linear-gradient(to top, #cd0001 0%, #cd0001 16%, #ec3536 56%, #e21e1c 100%);
+            outline: none;
+          }
+        }
+
+      }
+      .right-col {
+        float: left;
+        width: 50%;
+        text-align: center;
+        padding: 70px 0 0 0;
+
+      }
+    }
+    .block-9 {
+      width: 100%;
+      height: 410px;
+      float: left;
+      margin: 115px 0 0 0;
+      .left-col {
+        float: left;
+        width: 50%;
+        text-align: center;
+        img {
+          border: 2px solid #d9d9d9;
+          border-radius: 7px;
+          -webkit-box-shadow: 5px 5px 14px 0px rgba(50, 50, 50, 0.75);
+          -moz-box-shadow: 5px 5px 14px 0px rgba(50, 50, 50, 0.75);
+          box-shadow: 5px 5px 14px 0px rgba(50, 50, 50, 0.75);
+        }
+      }
+      .right-col {
+        float: left;
+        width: 50%;
+        padding: 10px 68px 0 30px;
+        h2 {
+          font: 30px/30px @roboto-bold;
+          color: #000;
+          text-transform: uppercase;
+          margin: 0;
+        }
+        p {
+          margin: 34px 0 0 0;
+          font: 14px/16px @roboto-regular;
+          color: #000;
+        }
+        button {
+          margin: 41px 0 0 0;
+          height: 48px;
+          width: 219px;
+          border: none;
+          border-radius: 4px;
+          background: linear-gradient(to top, #b90405 0%, #b90405 34%, #cb2b2a 59%, #cb2b2a);
+          color: #fff;
+          text-shadow: 2px 2px 4px #000;
+          font: 14px/48px @roboto-regular;
+          text-transform: uppercase;
+          &:hover, &:focus {
+            background: linear-gradient(to top, #cd0001 0%, #cd0001 16%, #ec3536 56%, #e21e1c 100%);
+            outline: none;
+          }
+        }
+      }
+    }
+    .block-10 {
+      width: 100%;
+      height: 100px;
+      float: left;
+      margin: 30px 0 0 0;
+      .left-col {
+        float: left;
+        width: 200px;
+        text-align: center;
+      }
+      .right-col {
+        float: left;
+        width: 1000px;
+        padding: 20px 80px 0 0;
+        p {
+          font: 14px/16px @roboto-regular;
+          color: #000;
+        }
+      }
+    }
+    .block-11 {
+      width: 100%;
+      height: 410px;
+      float: left;
+      margin: 60px 0 0 0;
+      .left-col {
+        float: left;
+        width: 50%;
+        text-align: center;
+        img {
+          border: 2px solid #d9d9d9;
+          border-radius: 7px;
+          -webkit-box-shadow: 5px 5px 14px 0px rgba(50, 50, 50, 0.75);
+          -moz-box-shadow: 5px 5px 14px 0px rgba(50, 50, 50, 0.75);
+          box-shadow: 5px 5px 14px 0px rgba(50, 50, 50, 0.75);
+        }
+      }
+      .right-col {
+        float: left;
+        width: 50%;
+        padding: 10px 68px 0 30px;
+        h2 {
+          font: 30px/30px @roboto-bold;
+          color: #000;
+          text-transform: uppercase;
+          margin: 0;
+        }
+        p {
+          margin: 34px 0 0 0;
+          font: 14px/16px @roboto-regular;
+          color: #000;
+        }
+        button {
+          margin: 41px 0 0 0;
+          height: 48px;
+          width: 219px;
+          border: none;
+          border-radius: 4px;
+          background: linear-gradient(to top, #b90405 0%, #b90405 34%, #cb2b2a 59%, #cb2b2a);
+          color: #fff;
+          text-shadow: 2px 2px 4px #000;
+          font: 14px/48px @roboto-regular;
+          text-transform: uppercase;
+          &:hover, &:focus {
+            background: linear-gradient(to top, #cd0001 0%, #cd0001 16%, #ec3536 56%, #e21e1c 100%);
+            outline: none;
+          }
+        }
+      }
+    }
+    .block-12 {
+      width: 100%;
+      height: 650px;
+      float: left;
+      margin: 60px 0 0 0;
+      .title {
+        width: 100%;
+        float: left;
+        text-align:left;
+        h2 {
+          font: 30px/30px @roboto-bold;
+          color: #000;
+          text-transform: uppercase;
+          margin: 0 0 0 59px;
+        }
+        p {
+          margin: 40px 110px 0 59px;
+          font: 14px/16px @roboto-regular;
+          color: #000;
+        }
+      }
+      .controls {
+        width: 100%;
+        float: left;
+        margin:50px 0 0 0;
+        ul {
+          margin: 0 0 0 53px;
+          padding: 0;
+          li {
+            list-style:none;
+            display:inline-block;
+            margin:0 9px 0 0;
+            cursor:pointer;
+            .square {
+              display:inline-block;
+              width:11px;
+              height:11px;
+              background: #272727;
+              margin:0 3px 0 0;
+              border:1px solid #272727;
+            }
+            .text {
+              font: 14px/14px @roboto-regular;
+              display:inline-block;
+              color: #000;
+            }
+            &:hover {
+              .square {
+                background: #c02828;
+                border:1px solid #fff;
+              }
+              .text {
+                text-decoration: underline;
+              }
+            }
+          }
+          .active {
+            .square {
+              background: #c02828;
+              border:1px solid #fff;
+            }
+          }
+        }
+      }
+      .box {
+        float:left;
+        width:100%;
+        height:370px;
+        .fon {
+          background: #252525;
+          margin:20px 50px;
+          height:370px;
+          .left-col {
+            float:left;
+            width:350px;
+            height:370px;
+            text-align:center;
+            border-right:2px solid #3b3b3b;
+            img {
+              width:348px;
+
+            }
+          }
+          .right-col {
+            float:left;
+            width:750px;
+            height:370px;
+            .avatars {
+              float:left;
+              height:320px;
+              width:100%;
+              padding:54px 0 0 30px;
+              .item {
+                float:left;
+                width:113px;
+                height:113px;
+                margin:12px;
+                img {
+                  width:113px;
+                  height:113px;
+                }
+              }
+            }
+            .ranks {
+              float:left;
+              height:50px;
+              width:100%;
+              text-align:right;
+              padding:12px 0 0 0;
+              ul {
+                margin:0 62px 0 0;
+                padding:0;
+                li {
+                  margin:0 0 0 25px;
+                  display:inline-block;
+                  list-style: none;
+                  font: 14px/14px @roboto-regular;
+                  color: #fff;
+
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .block-13 {
+      width: 100%;
+      height: 350px;
+      float: left;
+      margin: 40px 0 0 0;
+      padding:0 0 0 55px;
+      h2 {
+        font: 30px/30px @roboto-bold;
+        color: #000;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      p {
+        margin: 30px 0 0 0;
+        font: 14px/16px @roboto-regular;
+        color: #000;
+      }
+      button {
+        margin: 41px 0 0 0;
+        height: 48px;
+        width: 219px;
+        border: none;
+        border-radius: 4px;
+        background: linear-gradient(to top, #b90405 0%, #b90405 34%, #cb2b2a 59%, #cb2b2a);
+        color: #fff;
+        text-shadow: 2px 2px 4px #000;
+        font: 14px/48px @roboto-regular;
+        text-transform: uppercase;
+        &:hover, &:focus {
+          background: linear-gradient(to top, #cd0001 0%, #cd0001 16%, #ec3536 56%, #e21e1c 100%);
+          outline: none;
+        }
+      }
+      a {
+        display: block;
+        text-align:center;
+        margin: 41px 0 0 0;
+        height: 48px;
+        width: 219px;
+        border: none;
+        border-radius: 4px;
+        background: linear-gradient(to top, #b90405 0%, #b90405 34%, #cb2b2a 59%, #cb2b2a);
+        color: #fff;
+        text-shadow: 2px 2px 4px #000;
+        font: 14px/48px @roboto-regular;
+        text-transform: uppercase;
+        &:hover, &:focus {
+          text-decoration: none;
+          background: linear-gradient(to top, #cd0001 0%, #cd0001 16%, #ec3536 56%, #e21e1c 100%);
+          outline: none;
+        }
+      }
+    }
+  }
+}

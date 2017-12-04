@@ -1,0 +1,17 @@
+<div class="reportPopover">
+    <div ng-repeat="row in ::getReportsByUserId(matchApplication.user.id) track by row.report.id">
+        <ul>
+            <li>Тип: {{ ::row.report.type }}</li>
+            <li>Описание: {{ ::row.report.description }}</li>
+            <li>Время: {{ ::(row.report.createTime | date:"dd.MM.yyyy | H:mm:ss") }}</li>
+            <li>От: {{ ::matchUsers[row.report.issuer].name }}, {{ ::(row.report.createdBy|createdBy) }}</li>
+            <li>Файлы:
+                <a class="underline" target="_blank"
+                   ng-href="//{{ ::baseSiteUrl }}{{ ::file }}"
+                   ng-repeat="file in row.files"
+                   ng-bind="::($index + 1)"></a>
+            </li>
+        </ul>
+        <hr />
+    </div>
+</div>

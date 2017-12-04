@@ -1,0 +1,30 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Статус</th>
+            <th>Валюта</th>
+            <th>buyInUserStatus</th>
+            <th>Кол-во матчей</th>
+            <th>Кол-во ребаев</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="tournament in vm.tournaments track by tournament.id" ng-class="{ 'danger': tournament.disqualified }">
+            <td ng-bind="::tournament.tournament.id"></td>
+            <td ng-bind="::tournament.status"></td>
+            <td ng-bind="::tournament.buyInCurrency"></td>
+            <td ng-bind="::tournament.buyInUserStatus"></td>
+            <td ng-bind="::tournament.matchCount"></td>
+            <td ng-bind="::tournament.rebuyCount"></td>
+            <td>
+                <button class="btn btn-danger"
+                        ng-click="vm.disqualify(tournament)"
+                        ng-disabled="tournament.disqualified">
+                    Исключить
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

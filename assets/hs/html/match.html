@@ -1,0 +1,429 @@
+<div class="b-gross-brd mbot0">
+    <div class="b-gross-brd_cnt ptop0">
+    <!---------------------------- Начало страницы подготовки к матчу ----------------------------------->
+    <div ng-controller="matchStart" class="b-gross-brd_cnt-content mall0">
+        <div ng-if="status == 'CREATED' || status == 'STARTED'">
+            <div class="b-match-header">
+                <div class="b-match-header-list">
+                    <span>{{'MATCH__MEMBER_LIST'|i18n}}</span>
+                </div>
+                <div class="b-match-header-results">
+                    <span>{{'MATCH__RESULTS'|i18n}}</span>
+                </div>
+            </div>
+            <div class="b-match-players">
+                <div class="b-match-players-dires b-match-players-list">
+                    <h3 class="title">{{'MATCH__TEAM'|i18n}} 1</h3>
+                    <ul >
+                        <li ng-repeat="user in myTeam">
+                            <div class="b-match-player">
+                                <div class="b-match-player-avatar">
+                                    <div class="avatar-border">
+                                        <img ng-src="/src/img/avatars/{{user.avatar_id}}.jpg">
+                                    </div>
+
+                                </div>
+                                <div ng-show="user.rank" class="b-match-player-meta">
+                                    <div class="username">
+                                        <span>{{user.name}}</span>
+                                    </div>
+                                    <div class="usermeta">
+                                        <a  class="gotolk" href="#"><img src="/src/img/lol/match-user-gotolk.png"/></a>
+                                        <img class="rating" ng-src="/src/img/lol-ranking/rank{{user.rank}}.png"/>
+                                    </div>
+                                </div>
+
+                                <div ng-show="!user.rank" class="b-match-player-meta">
+                                    <div class="username vertcenter">
+                                        <span>{{user.name}}</span>
+                                    </div>
+                                </div>
+
+                                <div id="ready{{user.name}}" ng-show="user.is_ready" class="b-match-player-ready">
+                                    <span>{{'MATCH__READY'|i18n}}</span>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+
+                <div ng-if="!allUsersAccept" class="b-match-players-vstimer">
+                    <div ng-show="addSometime" class="addtimer">
+                        <span class="addtitle">{{'MATCH__EXTRA_TIME'|i18n}}:</span><br/>
+                    </div>
+                    <div ng-class="{'vs-mtop90' : !addSometime}" class="vs">
+                        <span ng-hide="addSometime" class="timer"><span class="set_min">{{mins}}</span> : <span class="set_sec">{{secs}}</span></span>
+                        <span ng-show="addSometime" class="timer"><span class="set_min">{{addmins}}</span> : <span class="set_sec">{{addsecs}}</span></span>
+                    </div>
+                    <div>
+                        <button ng-click="userReady()" ng-class="{'btn-red__none-active' : iAmReady==true}" class="btn-red push-ready-match-window" type="button">{{'MATCH__READY'|i18n}}</button>
+                    </div>
+                    <div class="invite-cost">
+                        <p tooltip-placement="top" uib-tooltip="{{'MATCH__ACCEPTED_RATE__TOOLTIP'|i18n}}" class="text">{{'MATCH__ACCEPTED_RATE'|i18n}}</p>
+                        <p class="cost">{{bet}} <img src="/src/img/lol/icon-points.png"/></p>
+                    </div>
+                </div>
+                <div ng-if="allUsersAccept" class="b-match-players-vstimer">
+                    <div ng-show="matchStartedInfo" class="descriptoion">
+                        <h4>{{'MATCH__ALL_MEMBERS_TO_FIGHT'|i18n}}</h4>
+                        <hr/>
+                        <ol class="maintextol">
+                            <li>{{'MATCH__COPY_AND_PASTE_LINK'|i18n}} <br/>{{'MATCH__COPY_AND_PASTE_LINK_PATH'|i18n}}</li>
+                            <li>{{'MATCH__JOIN_TO_TEAM'|i18n}}</li>
+                            <li>{{'MATCH__START_GAME_NOTICE'|i18n}}</li>
+                        </ol>
+                        <h3>{{'MATCH__START_GAME_WARNING'|i18n}}</h3>
+                    </div>
+                    <div ng-show="!matchStartedInfo" class="allbuttons">
+                        <div class="winorlose">
+                            <button ng-click="matchFinish(0)" class="btn-red">{{'MATCH__MATCH_FINISHED'|i18n}}</button>
+                        </div>
+                        <!--<div class="matchnotstart">-->
+                            <!--<button class="btn-blue-small">Матч не состоялся</button>-->
+                        <!--</div>-->
+
+                    </div>
+                </div>
+                <div class="b-match-players-radiant b-match-players-list">
+                    <h3 class="title">{{'MATCH__TEAM'|i18n}} 2</h3>
+                    <ul>
+                        <li ng-repeat="user in enemyTeam">
+                            <div class="b-match-player">
+                                <div class="b-match-player-avatar">
+                                    <div class="avatar-border">
+                                        <img ng-src="/src/img/avatars/{{user.avatar_id}}.jpg">
+                                    </div>
+                                </div>
+                                <div ng-show="user.rank" class="b-match-player-meta">
+                                    <div class="username">
+                                        <span>{{user.name}}</span>
+                                    </div>
+                                    <div class="usermeta">
+                                        <a  class="gotolk" href="#"><img src="/src/img/lol/match-user-gotolk.png"/></a>
+                                        <img class="rating" ng-src="/src/img/lol-ranking/rank{{user.rank}}.png"/>
+                                    </div>
+                                </div>
+
+                                <div ng-show="!user.rank" class="b-match-player-meta">
+                                    <div class="username vertcenter">
+                                        <span>{{user.name}}</span>
+                                    </div>
+                                </div>
+
+                                <div id="ready{{user.name}}" ng-show="user.is_ready" class="b-match-player-ready">
+                                    <span>{{'MATCH__READY'|i18n}}</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="b-match-footer">
+                <div class="b-match-footer-title">
+                    <div class="b-match-footer-title-chat">
+                        <span ng-show="!allUsersAccept">{{'MATCH__TEAM_CHAT'|i18n}}</span>
+                        <span ng-show="allUsersAccept">{{'MATCH__MATCH_LINK'|i18n}}</span>
+                    </div>
+                    <div class="b-match-footer-title-game">
+                        <span>{{'MATCH__GAME_DEFINITION'|i18n}}</span>
+                    </div>
+                </div>
+                <div class="b-match-footer-body">
+                    <div ng-show="!allUsersAccept" class="b-match-footer-body-chat">
+                        <div class="b-match-footer-body-chat-area">
+                            <!--<div class="b-match-footer-body-chat-area-msg">
+                                <a class="from">Эмилия Редхард: </a><span class="msg">Привет) ты на ком будешь гамать?</span>
+                            </div>-->
+                        </div>
+                        <div class="b-match-footer-body-chat-submit">
+                            <input type="text" placeholder="{{'MATCH__INOUT_YOUR_MSG_PLACEHOLDER'|i18n}}">
+                            <button class="btn-grey-sm">{{'MATCH__INOUT_YOUR_SEND_MSH_BTN_CAPTION'|i18n}}</button>
+                        </div>
+                    </div>
+                    <div ng-show="allUsersAccept" class="b-match-footer-body-chat">
+                        <div class="b-match-footer-body-chat-getlink">
+                            <!--<a id="cplink" ng-click="getGameLink()" ng-class="{'mtop10': showcopyarea}" class="btn-red get-link-button-match" >Получить ссылку</a>-->
+                            <div ng-controller="AlertTemp">
+                            <button href="javascript:void(0)" ng-click="getGameLink()" ng-class="{'mtop10': showcopyarea}" class="btn-red get-link-button-match" id="cplink" data-clipboard-target="getInviteGameLink">Получить ссылку</button>
+
+                                <script type="text/ng-template" id="copy-complate.html">
+                                    <div class="modal-air">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title">{{'MATCH__MESSAGE_MODULE_TITLE'|i18n}}</h3>
+                                            <i class="genericon genericon-close modal-close" ng-click="cancel()"></i>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{'MATCH__LINK_COPIED'|i18n}}
+                                        </div>
+                                    </div>
+                                </script>
+                            </div>
+                            <!--<input ng-show="showcopyarea" id="getInviteGameLink" value="{{linkurl}}"></input>-->
+                             <span ng-show="showcopyarea" id="getInviteGameLink" class="white" style="word-wrap:break-word;">{{linkurl}}</span>
+                            <p ng-show="showcopyarea">{{'MATCH__PASTE_LINK_TO_FIELD'|i18n}}:<span class="white">{{'MATCH__PAST_LINK_FIELD_PATH'|i18n}}</span></p>
+                            <p ng-show="showcopyarea">{{'MATCH__ENTER_AND_WAIT_MATCH_START'|i18n}}</p>
+                        </div>
+                    </div>
+                    <div class="b-match-footer-body-game">
+                        <div class="b-match-footer-game-desc">
+                            <ul>
+                                <li><span class="name">{{'MATCH__MAP'|i18n}}: </span><span>{{playmap}}</span></li>
+                                <li><span class="name">{{'MATCH__SIZE_MAP'|i18n}}: </span><span>{{format}}</span></li>
+                                <li><span class="name">{{'MATCH__PLAY_MODE'|i18n}}: </span><span>{{rezim}}</span></li>
+                                <li><span class="name">{{'MATCH__QUERY_TYPE'|i18n}}: </span><span>{{'MATCH__GAME_WITH_STACK'|i18n}}</span></li>
+                                <li><span class="name">{{'MATCH__SERVER_NAME'|i18n}}: </span><span>EU West</span></li>
+                            </ul>
+                        </div>
+                        <div class="b-match-footer-game-img">
+                            <img src="/src//img/maps/1.png"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---------------------------- Начало страницы результатов ----------------------------------->
+    <div ng-controller="matchResult" class="b-gross-brd_cnt-content" >
+        <div ng-if="status == 'FINISHED'">
+            <!-- start Страница матча -->
+            <div class="b-matchresult-header">
+                <div class="b-matchresult-header-list">
+                    <span>список участников</span>
+                </div>
+                <div class="b-matchresult-header-results">
+                    <span>результаты</span>
+                </div>
+            </div>
+            <div class="b-matchresult-players">
+                <div class="b-matchresult-players-info">
+                    <div class="type"><p class="title">{{'MATCH_RESULT__MODE'|i18n}}</p><p class="name">{{'MATCH_RESULT__TOURNAMENT'|i18n}}</p></div>
+                    <div class="map"><p class="title">{{'MATCH_RESULT__MAP'|i18n}}</p><p class="name">{{'MATCH_RESULT__SUMMONER_RIFT'|i18n}}</p></div>
+                    <div class="map"><p class="title">{{'MATCH_RESULT__GAME_TIME'|i18n}}</p><p class="name">{{'MATCH_RESULT__UNKNOWN'|i18n}}</p></div>
+
+                </div>
+                <div class="b-matchresult-players-result">
+                    <div class="victory-finished">
+                        <span>{{'MATCH_RESULT__PENDING_RESULT'|i18n}}</span>
+                    </div>
+                    <div class="info-finished">
+                        <div class="left">
+                            <p class="title">{{'MATCH_RESULT__YOUR_RATE'|i18n}}</p>
+                            <p class="colvo">{{bet}}</p>
+                        </div>
+                    </div>
+                    <div class="text-finished">
+                        <p class="title">{{'MATCH_RESULT__RATE_FROZEN'|i18n}}</p>
+                        <p class="text">{{'MATCH_RESULT__NOTICE_1'|i18n}}</p>
+                        <p class="title">{{'MATCH_RESULT__NOTICE_2'|i18n}}</p>
+                        <p class="text">{{'MATCH_RESULT__NOTICE_3'|i18n}}</p>
+                    </div>
+
+                </div>
+                <div class="b-matchresult-players-list">
+                    <div class="myteam">
+                        <span class="title">{{'MATCH_RESULT__YOUR_TEAM'|i18n}}</span>
+                        <ul>
+                            <li ng-repeat="user in myTeam">
+                                <div class="user">
+                                    <div class="avatar">
+                                        <img ng-src="/src/img/avatars/{{user.avatar_id}}.jpg">
+                                    </div>
+                                    <div class="name">{{user.name}}</div>
+                                    <div class="gotolk">
+                                        <a href="#"><img src="/src/img/lol/match-user-gotolk.png"></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="enemyteam">
+                        <span class="title">{{'MATCH_RESULT__ENEMY_TEAM'|i18n}}</span>
+                        <ul>
+                            <li ng-repeat="user in enemyTeam">
+                                <div class="user">
+                                    <div class="avatar">
+                                        <img ng-src="/src/img/avatars/{{user.avatar_id}}.jpg">
+                                    </div>
+                                    <div class="name">{{user.name}}</div>
+                                    <div class="gotolk">
+                                        <a href="#"><img src="/src/img/lol/match-user-gotolk.png"></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="b-matchresult-footer">
+                <div class="b-matchresult-footer-title">
+                    <div class="b-matchresult-footer-title-chat">
+                        <span>Общий чат</span>
+                    </div>
+                    <div class="b-matchresult-footer-title-achievements">
+                        <div class="b-matchresult-footer-title-left">
+                            <span>{{'MATCH_RESULT__RECEIVED_ACHIEVES'|i18n}}</span>
+                        </div>
+                        <div class="b-matchresult-footer-title-right">
+                            <span>{{'MATCH__RESULT__ACHIEVE_PROGRESS'|i18n}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="b-matchresult-footer-body">
+                    <div class="b-matchresult-footer-body-chat">
+                        <div class="b-matchresult-footer-body-chat-getlink">
+                            <a id="copeLinkToBoofer" ng-click="lookplayurl=true" ng-class="{'mtop10': lookplayurl}" class="btn-red get-link-button-match">{{'REFERAL__GET_LINK'|i18n}}</a>
+                            <!--<input ng-show="lookplayurl" id="getInviteGameLink" value="{{playurl}}"></input>-->
+                            <span ng-show="lookplayurl" id="getInviteGameLink1" class="white" style="word-wrap:break-word;">{{playurl}}</span>
+                            <p ng-show="lookplayurl">Вставь ее в поле: <span class="white">{{'MATCH__PAST_LINK_FIELD_PATH'|i18n}}</span></p>
+                            <p ng-show="lookplayurl">{{'MATCH__ENTER_AND_WAIT_MATCH_START'|i18n}}</p>
+                        </div>
+                    </div>
+                    <div class="b-matchresult-footer-body-game">
+                        <div class="b-matchresult-footer-body-game-comingsoon">
+                            <i class="fa fa-spinner fa-spin fa-4x"></i>
+                        </div>
+                        <div class="b-matchresult-footer-body-game-buttons">
+                            <button ng-click="closeResultWindow()" class="btn-red-small">{{'MATCH__CLOSE'|i18n}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!------------------------------------- Если мы получили результаты, то... -------------------------------------->
+        <div ng-controller="matchResult"  class="b-gross-brd_cnt-content" >
+            <div ng-if="status == 'COMPLITED'">
+            <!-- start Страница матча -->
+            <div class="b-matchresult-header">
+                <div class="b-matchresult-header-list">
+                    <span>{{'MATCH_RESULT__MEMBER_LIST'|i18n}}</span>
+                </div>
+                <div class="b-matchresult-header-results">
+                    <span>{{'MATCH__RESULTS'|i18n}}</span>
+                </div>
+            </div>
+            <div class="b-matchresult-players">
+                <div class="b-matchresult-players-info">
+                    <div class="type"><p class="title">{{'MATCH_RESULT__MODE'|i18n}}</p><p class="name">{{'MATCH_RESULT__TOURNAMENT'|i18n}}</p></div>
+                    <div class="map"><p class="title">{{'MATCH_RESULT__MAP'|i18n}}</p><p class="name">{{'MATCH_RESULT__SUMMONER_RIFT'|i18n}}</p></div>
+                    <div class="time"><p class="title">время игры</p><p class="name">{{playTime}}</p></div>
+
+                </div>
+                <div class="b-matchresult-players-result">
+                    <div class="victory">
+                        <span ng-if="mayBeWin">{{'MATCH_RESULT__VICTORY'|i18n}}</span>
+                        <span ng-if="!mayBeWin">{{'MATCH_RESULT__DEFEAT'|i18n}}</span>
+                    </div>
+                    <div class="info">
+                        <div class="left">
+                            <p class="title">{{'MATCH_RESULT__YOUR_RESULT'|i18n}}</p>
+                            <p class="colvo">{{betaward}}</p>
+                        </div>
+                    </div>
+                    <div class="experience">
+                        <p class="title">{{'MATCH_RESULT_CHANGING_EXPERIENCE'|i18n}}</p>
+                        <div class="bar">
+                            <div class="progress-line">
+                                <div ng-hide="borderleft==1" ng-class="{'nomarginline' : borderleft==1}" class="progress-bar was" style="width:{{exp}}%">
+                                </div>
+                                <div ng-class="{'bordered' : borderleft==1}" class="progress-bar will" style="width:{{exp_delta}}%">
+                                    <!--todo: исправить?-->
+                                </div>
+                                <div class="lvlcount">
+                                    <span>{{currentlvl}} lvl</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="b-matchresult-players-list">
+                    <div class="myteam">
+                        <span class="title">{{'MATCH_RESULT__YOUR_TEAM'|i18n}}</span>
+                        <ul>
+                            <li ng-repeat="user in myTeam">
+                                <div class="user">
+                                    <!--<div class="icon">
+                                        <img ng-src="img/heroes/42.png">
+                                    </div>-->
+                                    <div class="avatar">
+                                        <img ng-src="/src/img/avatars/{{user.avatar_id}}.jpg">
+                                    </div>
+                                    <div class="name">{{user.name}}</div>
+                                    <div class="gotolk">
+                                        <a href="#"><img src="/src/img/lol/match-user-gotolk.png"></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="enemyteam">
+                        <span class="title">{{'MATCH_RESULT__ENEMY_TEAM'|i18n}}</span>
+                        <ul>
+                            <li ng-repeat="user in enemyTeam">
+                                <div class="user">
+                                    <!--<div class="icon">
+                                        <img src="img/heroes/42.png">
+                                    </div>-->
+                                    <div class="avatar">
+                                        <img ng-src="/src/img/avatars/{{user.avatar_id}}.jpg">
+                                    </div>
+                                    <div class="name">{{user.name}}</div>
+                                    <div class="gotolk">
+                                        <a href="#"><img src="/src/img/lol/match-user-gotolk.png"></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="b-matchresult-footer">
+                <div class="b-matchresult-footer-title">
+                    <div class="b-matchresult-footer-title-chat">
+                        <span>{{'MATCH_RESULT__PUBLIC_CHAT'|i18n}}</span>
+                    </div>
+                    <div class="b-matchresult-footer-title-achievements">
+                        <div class="b-matchresult-footer-title-left">
+                            <span>{{'MATCH_RESULT__RECEIVED_ACHIEVES'|i18n}}</span>
+                        </div>
+                        <div class="b-matchresult-footer-title-right">
+                            <span>{{'MATCH__RESULT__ACHIEVE_PROGRESS'|i18n}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="b-matchresult-footer-body">
+                    <div class="b-matchresult-footer-body-chat">
+                        <div class="b-matchresult-footer-body-chat-area">
+                            <!--<div class="b-matchresult-footer-body-chat-area-msg">
+                                <a class="from">Эмилия Редхард: </a><span class="msg">yuiyuiyuiyuiy</span>
+                            </div>-->
+                        </div>
+                        <div class="b-matchresult-footer-body-chat-submit">
+                            <input type="text" placeholder="{{'MATCH__INOUT_YOUR_MSG_PLACEHOLDER'|i18n}}">
+                            <button class="btn-grey-sm">{{'PUBLIC__SEND'|i18n}}</button>
+                        </div>
+                    </div>
+                    <div class="b-matchresult-footer-body-game">
+                        <div class="b-matchresult-footer-body-game-comingsoon">
+                            <i class="fa fa-spinner fa-spin fa-4x"></i>
+                        </div>
+                        <div class="b-matchresult-footer-body-game-buttons">
+                            <button ng-click="closeResultWindow()" class="btn-red-small">{{'MATCH__CLOSE'|i18n}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!----------------------------------------- Конец блока с полными результатами --------------------->
+    </div>
+<!------------------ Конец страницы результатов --------------------->
+    </div>
+</div>

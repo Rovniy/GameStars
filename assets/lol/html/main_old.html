@@ -1,0 +1,295 @@
+<div id="middle" class="index-page">
+    <div class="container-fluid b-index-1">
+        <div class="container">
+            <div class="main-title-div">
+                <h1 class="main-title">{{'INDEX_BLOCK_1_H1_TOP_1'| translate}}<br/>{{'INDEX_BLOCK_1_H1_TOP_2'| translate}}</h1>
+            </div>
+
+            <div class="block-button">
+                <div class="block block-1">
+                    <h4>{{'INDEX_BLOCK_1_BLOCK_1_TITLE'| translate}}</h4>
+                    <h2>{{vm.timer | duration}}</h2>
+                    <a class="btn-index btn"
+                       track-event-by-click track-category="mainv3" track-action="top-get-bonus"
+                       ng-class="{'disabled': vm.timer === 0}"
+                       ng-click="vm.openSignupModal()">{{'INDEX_BLOCK_1_BLOCK_1_BUTTON'| translate}}</a>
+                </div>
+                <div class="block block-2">
+                    <h2>{{'INDEX_BLOCK_1_BLOCK_2_TITLE'| translate}}</h2>
+                    <h3>{{'INDEX_BLOCK_1_BLOCK_2_TEXT'| translate}}</h3>
+                    <a href="/cashgames" track-event-by-click track-category="mainv3" track-action="top-instant" class="btn-index">{{'INDEX_BLOCK_1_BLOCK_2_BUTTON'| translate}}</a>
+                </div>
+                <div class="block block-3">
+                    <h3>{{'INDEX_BLOCK_1_BLOCK_3_TITLE'| translate}}</h3>
+                    <div class="cols2">
+                        <div class="col-lg-7">
+                            <h4>$100</h4>
+                        </div>
+                        <div class="col-lg-5">
+                            <h4>{{'INDEX_BLOCK_1_BLOCK_3_PRIZEPOOL'| translate}}</h4>
+                        </div>
+                    </div>
+                    <a class="btn-index" ng-click="vm.openSignupModal()" track-event-by-click track-category="mainv3" track-action="top-get-10-bonus">{{'INDEX_BLOCK_1_BLOCK_3_BUTTON'| translate}}</a>
+                </div>
+                <div class="block block-4">
+                    <div class="header-div">
+                        <h3>{{'INDEX_BLOCK_1_BLOCK_4_TITLE'| translate}}</h3>
+                    </div>
+                    <div class="cols2">
+                        <div class="col-lg-4">
+                            <h4>$1000</h4>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="wdth">
+                                <h4>{{'INDEX_BLOCK_1_BLOCK_4_PRIZEPOOL'| translate}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-div">
+                        <a class="btn-index" ng-click="vm.openSignupModal()" track-event-by-click track-category="mainv3" track-action="top-get-welcome-bonus">{{'INDEX_BLOCK_1_BLOCK_4_BUTTON'| translate}}</a>
+                    </div>
+
+                </div>
+                <div class="block block-5">
+                    <h2>$50 000</h2>
+                    <h3>{{'INDEX_BLOCK_1_BLOCK_5_META'| translate}}</h3>
+<!--
+                    <a class="btn-index" href="http://satellites.gamestars.gg" target="_blank">{{'INDEX_BLOCK_1_BLOCK_5_BUTTON'| translate}}</a>
+-->
+                    <form ng-hide="vm.collectEmailOk" style="margin-top:25px;">
+                        <input style="vertical-align: top;" type="text" ng-model="vm.collectEmailForm" class="inputEmailArea" placeholder="Enter email">
+                        <button style="vertical-align: top; margin:0 auto 15px;" type="submit" ng-click="vm.collectEmail(vm.collectEmailForm)" class="btn-index">Get in touch</button>
+                    </form>
+                    <h4 style="margin-top:25px;" ng-show="vm.collectEmailOk">{{'INDEX_BLOCK_1_BLOCK_SEND_EMAIL'| translate}}</h4>
+                </div>
+            </div>
+            <div class="bottom-div">
+                <div class="col-lg-4 bl-1">
+                    <h3>30%</h3>
+                    <h4>{{'INDEX_BLOCK_1_BOT_1_TEXT'| translate}}</h4>
+                </div>
+                <div class="col-lg-4 bl-2">
+                    <h3>$10 000</h3>
+                    <h4>{{'INDEX_BLOCK_1_BOT_2_TEXT'| translate}}</h4>
+                </div>
+                <div class="col-lg-4 bl-3">
+                    <h3>1800+</h3>
+                    <h4>{{'INDEX_BLOCK_1_BOT_3_TEXT'| translate}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="next-header">
+            <div class="horizontal-line"></div>
+            <div class="container">
+                <h2>{{"INDEX_BLOCK_1_BOT_HEADER"|translate}}</h2>
+            </div>
+            <div class="horizontal-line"></div>
+        </div>
+    </div>
+    <div class="container-fluid b-index-3">
+        <div class="container">
+            <h2>{{'INDEX_BLOCK_3_HOW_TO_PLAY'|translate}}</h2>
+            <h4>{{'INDEX_BLOCK_3_6_STEPS'|translate}}</h4>
+            <div class="block">
+                <div class="inner">
+                    <div class="item item1">
+                        <div class="link">
+                            <a href="" ng-click="vm.openSignupModal()" track-event-by-click track-category="mainv3" track-action="how-to-play-reg">{{'INDEX_BLOCK_3_STEP_1'|translate}}</a>
+                        </div>
+
+                        <div class="circle">
+                            1
+                        </div>
+                    </div>
+                    <div class="item item2">
+                        <span>{{'INDEX_BLOCK_3_STEP_2'|translate}}</span>
+                        <div class="circle">
+                            2
+                        </div>
+                    </div>
+                    <div class="item item3">
+                        <span>{{'INDEX_BLOCK_3_STEP_3'|translate}}</span>
+                        <div class="circle">
+                            3
+                        </div>
+                    </div>
+                    <div class="item item4">
+                        <span>{{'INDEX_BLOCK_3_STEP_4'|translate}}</span>
+                        <div class="circle">
+                            4
+                        </div>
+                    </div>
+                    <div class="item item5">
+                        <span>{{'INDEX_BLOCK_3_STEP_5'|translate}}</span>
+                        <div class="circle">
+                            5
+                        </div>
+                    </div>
+                    <div class="item item6">
+                        <span>{{'INDEX_BLOCK_3_STEP_6'|translate}}</span>
+                        <div class="circle">
+                            6
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3>{{'INDEX_BLOCK_3_PROMO'|translate}}</h3>
+            <a href="http://satellites.gamestars.gg/" target="_blank" class="btn-index" track-event-by-click track-category="mainv3" track-action="cta_under_50k">{{'INDEX_BLOCK_3_REGISTER'|translate}}</a>
+        </div>
+        <div class="next-header">
+            <div class="horizontal-line"></div>
+            <div class="container">
+                <h2>{{'INDEX_BLOCK_3_FEATURES_H2'|translate}}</h2>
+                <h4>{{'INDEX_BLOCK_3_FEATURES_H4'|translate}}</h4>
+                <div class="list">
+                    <div class="item item1">
+                        <div class="block-img">
+                            <img src="/src/img/lol/index/b-index-3-item1.png"/>
+                        </div>
+                        <div class="block-text">
+                            <p>{{'INDEX_BLOCK_3_FEATURES_ITEM_1'|translate}}</p>
+                        </div>
+                    </div>
+                    <div class="item item2">
+                        <div class="block-img">
+                            <img src="/src/img/lol/index/b-index-3-item2.png"/>
+                        </div>
+                        <div class="block-text">
+                            <p>{{'INDEX_BLOCK_3_FEATURES_ITEM_2'|translate}}</p>
+                        </div>
+                    </div>
+                    <div class="item item3">
+                        <div class="block-img">
+                            <img src="/src/img/lol/index/b-index-3-item3.png"/>
+                        </div>
+                        <div class="block-text">
+                            <p>{{'INDEX_BLOCK_3_FEATURES_ITEM_3'|translate}}</p>
+                        </div>
+                    </div>
+                    <div class="item item4">
+                        <div class="block-img">
+                            <img src="/src/img/lol/index/b-index-3-item4.png"/>
+                        </div>
+                        <div class="block-text">
+                            <p>{{'INDEX_BLOCK_3_FEATURES_ITEM_4'|translate}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="horizontal-line"></div>
+        </div>
+    </div>
+    <div class="container-fluid b-index-4">
+        <div class="container">
+            <h2>{{'INDEX_BLOCK_4_H2'|translate}}</h2>
+            <h4>{{'INDEX_BLOCK_4_H4'|translate}}</h4>
+            <div class="block">
+                <div class="inner">
+                    <div class="item">
+                        <div class="avatar">
+                            <img src="/src/img/lol/index/avatar1.jpg"/>
+                        </div>
+                        <div class="name">
+                            <span>Dorofeeva</span>
+                            <img src="/src/img/lol-ranking/rankR3.png"/>
+                        </div>
+                        <div class="meta">
+                            <p>{{'INDEX_BLOCK_4_HERO_1_TEXT'|translate}}</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="avatar">
+                            <img src="/src/img/lol/index/avatar2.jpg"/>
+                        </div>
+                        <div class="name">
+                            <span>E5  RizZe</span>
+                            <img src="/src/img/lol-ranking/rankR2.png"/>
+                        </div>
+                        <div class="meta">
+                            <p>{{'INDEX_BLOCK_4_HERO_2_TEXT'|translate}}</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="avatar">
+                            <img src="/src/img/lol/index/avatar3.jpg"/>
+                        </div>
+                        <div class="name">
+                            <span>Foksler</span>
+                            <img src="/src/img/lol-ranking/rankR4.png"/>
+                        </div>
+                        <div class="meta">
+                            <p>{{'INDEX_BLOCK_4_HERO_3_TEXT'|translate}}</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="avatar">
+                            <img src="/src/img/lol/index/avatar4.jpg"/>
+                        </div>
+                        <div class="name">
+                            <span>Neletrion</span>
+                            <img src="/src/img/lol-ranking/rankR2.png"/>
+                        </div>
+                        <div class="meta">
+                            <p>{{'INDEX_BLOCK_4_HERO_4_TEXT'|translate}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="line">
+            <h2>{{'INDEX_BLOCK_4_PROMO'|translate}}</h2>
+            <h3>{{'INDEX_BLOCK_4_PROMO_TEXT'|translate}}</h3>
+        </div>
+        <div class="next-header">
+            <div class="horizontal-line"></div>
+            <div class="container">
+                <h2>{{'INDEX_BLOCK_4_BOT_H2'|translate}}</h2>
+            </div>
+            <div class="horizontal-line"></div>
+        </div>
+    </div>
+    <div class="container-fluid b-index-5">
+        <div class="container">
+            <div class="block">
+                <div class="part">
+                    <div class="item">
+                        <h4>{{'INDEX_BLOCK_5_ITEM1_HEAD'|translate}}</h4>
+                        <p ng-bind-html="'INDEX_BLOCK_5_ITEM1_TEXT'|translate"></p>
+                    </div>
+                    <div class="item">
+                        <h4>{{'INDEX_BLOCK_5_ITEM3_HEAD'|translate}}</h4>
+                        <p>{{'INDEX_BLOCK_5_ITEM3_TEXT'|translate}}</p>
+                    </div>
+                    <div class="item">
+                        <h4>{{'INDEX_BLOCK_5_ITEM5_HEAD'|translate}}</h4>
+                        <p>{{'INDEX_BLOCK_5_ITEM5_TEXT'|translate}}</p>
+                    </div>
+                </div>
+                <div class="part">
+                    <div class="item">
+                        <h4>{{'INDEX_BLOCK_5_ITEM6_HEAD'|translate}}</h4>
+                        <p>{{'INDEX_BLOCK_5_ITEM6_TEXT'|translate}}</p>
+                    </div>
+                    <div class="item">
+                        <h4>{{'INDEX_BLOCK_5_ITEM7_HEAD'|translate}}</h4>
+                        <p>{{'INDEX_BLOCK_5_ITEM7_TEXT'|translate}}</p>
+                    </div>
+                    <div class="item">
+                        <h4>{{'INDEX_BLOCK_5_ITEM4_HEAD'|translate}}</h4>
+                        <p ng-bind-html="'INDEX_BLOCK_5_ITEM4_TEXT'|translate"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid b-index-6">
+        <h3>{{'INDEX_BLOCK_6_H3'|translate}}</h3>
+        <h4>{{'INDEX_BLOCK_6_H4_TOP'|translate}}<br/>{{'INDEX_BLOCK_6_H4_BOT'|translate}}</h4>
+        <button class="btn-index" onclick="carrotquest.open()"
+                data-elevio-module="articles"
+                track-event-by-click track-category="mainv2" track-action="cta_footer_support">
+            {{'INDEX_BLOCK_6_BUTTON'|translate}}
+        </button>
+        <h4 class="bottom">{{'INDEX_BLOCK_6_BOT_TEXT_TOP'|translate}}<br/>{{'INDEX_BLOCK_6_BOT_TEXT_BOT'|translate}}</h4>
+    </div>
+</div>

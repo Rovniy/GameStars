@@ -1,0 +1,462 @@
+<!-- start Middle-->
+<!--<div style="font-size: xx-large; color: red">42-->
+    <!--<div ng-bind-html="tournResult.conditions"></div>-->
+<!--</div>-->
+
+<div id="middle" ng-controller="tournaments" >
+
+    <div class="b-top-substrate" >
+        <div ng-if="tournResult.tournament_info.status !== 'FINISH'" class="b-top-substrate_cnt">
+            <!-- start Пользователь НЕ в турнире NONE -->
+            <div class="b-action-tourn" ng-if="tournCurrentUser.status == 'NONE' || !tournCurrentUser.status || tournCurrentUser.status == 'JOIN' || tournCurrentUser.status == 'OUT' ">
+                <div class="b-title-s">
+                    {{tournResult.tournament_info.name}}
+                </div>
+                <div class="b-action-tourn_features b-action-tourn_features__x4 b-action-tourn_features__art-pick">
+                    <div class="b-action-tourn_features_item">
+                        <div class="b-action-tourn_features_item_head">
+                            {{'TOURNAMENT__START_STACK'|i18n}}
+                        </div>
+                        <div class="b-action-tourn_features_item_val">
+                            {{tournResult.tournament_info.start_stack}}
+                        </div>
+                    </div>
+                    <div class="b-action-tourn_features_item">
+                        <div class="b-action-tourn_features_item_head">
+                            {{'TOURNAMENT__AWARD_FUND'|i18n}}
+                        </div>
+                        <div class="b-action-tourn_features_item_val">
+                            {{tournResult.award_fund|curForm:tournResult.award_type}}
+                        </div>
+                    </div>
+                    <div class="b-action-tourn_features_item">
+                        <div class="b-action-tourn_features_item_head">
+                            {{'TOURNAMENT__BUY_IN'|i18n}}
+                        </div>
+                        <div class="b-action-tourn_features_item_val">
+                            {{tournResult.tournament_info.buy_in|curForm:tournResult.tournament_info.buy_in_type}}
+
+                    </div>
+                    <div class="b-action-tourn_features_item">
+                        <div class="b-action-tourn_features_item_head">
+                            {{'TOURNAMENT__ACTIVE_MEMBERS'|i18n}}
+                        </div>
+                        <div class="b-action-tourn_features_item_val">
+                            {{tournResult.stats.active_members}}
+                        </div>
+                    </div>
+                </div>
+                <div class="b-action-tourn_end-enter" ng-controller="sliderCtr" ng-if="tournResult.tournament_info.status == 'PRE_REG'">
+                    <div class="b-action-tourn_end-enter_title">
+                        {{'TOURNAMENT__REG_DEADLINE'|i18n}}
+                    </div>
+                    <div class="b-action-tourn_end-enter_timer">
+                        <div class="timer-cell">
+                            <div class="timer-cell_value">{{startcountdown.days}} </div>
+                            {{'TOURNAMENT__DEADLINE_DAYS'|i18n}}
+                        </div>
+                        <div class="timer-cell timer-cell__seporator">
+                            :
+                        </div>
+                        <div class="timer-cell">
+                            <div class="timer-cell_value">{{startcountdown.hours}}</div>
+                            {{'TOURNAMENT__DEADLINE_HOURS'|i18n}}
+                        </div>
+                        <div class="timer-cell timer-cell__seporator">
+                            :
+                        </div>
+                        <div class="timer-cell">
+                            <div class="timer-cell_value">{{startcountdown.minutes}}</div>
+                            {{'TOURNAMENT__REG_DEADLINE_MINS'|i18n}}
+                        </div>
+                    </div>
+                </div>
+                <div class="b-action-tourn_end-enter" ng-controller="sliderCtr" ng-if="tournResult.tournament_info.status == 'POST_REG'">
+                    <div class="b-action-tourn_end-enter_title">
+                        {{'TOURNAMENT__LATER_REG'|i18n}}
+                    </div>
+                    <div class="b-action-tourn_end-enter_timer">
+                        <div class="timer-cell">
+                            <div class="timer-cell_value">{{regcountdown.days}} </div>
+                            {{'TOURNAMENT__DEADLINE_DAYS'|i18n}}
+
+                        </div>
+                        <div class="timer-cell timer-cell__seporator">
+                            :
+                        </div>
+                        <div class="timer-cell">
+                            <div class="timer-cell_value">{{regcountdown.hours}}</div>
+                            {{'TOURNAMENT__DEADLINE_HOURS'|i18n}}
+
+                        </div>
+                        <div class="timer-cell timer-cell__seporator">
+                            :
+                        </div>
+                        <div class="timer-cell">
+                            <div class="timer-cell_value">{{regcountdown.minutes}}</div>
+                            {{'TOURNAMENT__REG_DEADLINE_MINS'|i18n}}
+                        </div>
+                    </div>
+                </div>
+                <div class="b-action-tourn_end-enter" ng-controller="sliderCtr" ng-if="tournResult.tournament_info.status == 'START'">
+                    <div class="b-action-tourn_end-enter_title">
+                        {{'TOURNAMENT__REG_DEADLINE'|i18n}}
+                    </div>
+                    <div class="b-action-tourn_end-enter_timer">
+                        <div class="timer-cell">
+                            <div class="timer-cell_value">{{'TOURNAMENT__REG_FINISHED'|i18n}}</div>
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="tournResult.tournament_info.status = 'INACTIVE'" class="b-action-tourn_end-enter" ng-controller="sliderCtr">
+                    <div class="b-action-tourn_end-enter_title">
+                        {{'MAIN__REG_START'|i18n}}
+                    </div>
+                    <div class="b-action-tourn_end-enter_timer">
+                        <div class="timer-cell">
+                            <div class="timer-cell_value">{{'TOURNAMENT_TIME_BOMB__DATE'|i18n}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="tournResult.tournament_info.status = 'INACTIVE'" ng-controller="AlertTempText">
+                    <button class="btn-red" disabled='disabled'>
+                        {{'TOURNAMENT__TAKE_PART'|i18n}}
+                    </button>
+                </div>
+
+                <div ng-controller="AlertTempText">
+                    <div ng-if="tournResult.tournament_info.status != 'INACTIVE'">
+                        <button class="btn-red" disabled='disabled' ng-if="tournResult.start_countdown < 1 && tournResult.reg_countdown < 1">
+                            {{'TOURNAMENT__TAKE_PART'|i18n}}
+                        </button>
+                        <button class="btn-red" ng-click="userProfie?joinTournament():modal('md', 'signup.html')" ng-if="tournResult.start_countdown > 1 || tournResult.reg_countdown > 1">
+                            {{'TOURNAMENT__TAKE_PART'|i18n}}
+                        </button>
+                    </div>
+                    <!--<div ng-if="!userProfie">-->
+                        <!--<button class="btn-red" ng-click="modal('md', 'signup.html')">-->
+                            <!--{{'TOURNAMENT__TAKE_PART'|i18n}}-->
+                        <!--</button>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <!-- end Пользователь НЕ в турнире NONE -->
+
+            <!-- start Пользователь в турнире ACTIVE -->
+            <div class="b-action-tourn" ng-if="tournCurrentUser.status == 'ACTIVE'">
+                <div class="b-title-s">
+                    {{tournResult.tournament_info.name}}
+                </div>
+                <div class="b-action-tourn_features b-action-tourn_features__art-pick b-action-tourn_features__art-pick__mar">
+                    <div class="b-action-tourn_features_item">
+                        <div class="b-action-tourn_features_item_head">
+                            {{'TOURNAMENT__USER_STACK'|i18n}}
+                        </div>
+                        <div class="b-action-tourn_features_item_val" tooltip-placement="bottom" uib-tooltip="{{'TOURNAMENT__STACK_TOOLTIP'|i18n}}">
+                            {{userProfie.stack}}
+                        </div>
+                    </div>
+                    <div class="b-action-tourn_features_item">
+                        <div class="b-action-tourn_features_item_head">
+                            {{'TOURNAMENT__ACTIVE_MEMBERS'|i18n}}
+                        </div>
+                        <div class="b-action-tourn_features_item_val">
+                            <!--{{tournResult.stats.active_members - tournResult.stats.out_members}} /--> {{tournResult.stats.active_members}}
+                        </div>
+                    </div>
+                    <div class="b-action-tourn_features_item">
+                        <div class="b-action-tourn_features_item_head">
+                            {{'TOURNAMENT__AVG'|i18n}}
+                        </div>
+                        <div class="b-action-tourn_features_item_val" tooltip-placement="bottom" uib-tooltip={{'TOURNAMENT__AVG_STACK_TOOLTIP'|i18n}} >
+                            {{tournResult.stats.avg_stack}}
+                        </div>
+                    </div>
+                </div>
+                <div class="b-selection-rates" ng-controller="sliderCtr">
+                    <div class="b-selection-rates_exchange-sp" ng-click="modal('md', 'exchange-sp.html')">
+                        {{'TOURNAMENT__BUY_EXTRA_STACK'|i18n}}
+                    </div>
+                    <div class="b-selection-rates_title" tooltip-placement="bottom" uib-tooltip={{'TOURNAMENT__YOUR_RATE_TOOLTIP'|i18n}}>
+                        {{'TOURNAMENT__YOUR_RATE'|i18n}}
+                    </div>
+
+                    <div class="sliderCnt">
+                        <div id="defSli">
+                        </div>
+                                    <span ng-bind="tournResult.tournament_info.blind_min" class="slider-min">
+                                    </span>
+                                    <span ng-bind="tournResult.tournament_info.blind_max" class="slider-max">
+                                    </span>
+                    </div>
+                </div>
+                <div>
+                    <!--<button class="btn-red" disabled="disabled" ng-if="tournResult.tournament_info.status == 'REG' || tournResult.tournament_info.status == 'FINISH' " tooltip-placement="top" uib-tooltip="Турнир еще не начался">-->
+                    <!--Играть-->
+                    <!--</button>-->
+                    <button ng-click="apply();" class="btn-red play-button-tournament" ng-disabled="!playBtn">
+                        {{'TOURNAMENT__PLAY'|i18n}}
+                    </button>
+                    <!--<button ng-click="apply();" class="btn-red play-button-tournament" disabled="disabled">-->
+                    <!--Играть-->
+                    <!--</button>-->
+                </div>
+            </div>
+            <!-- end Пользователь в турнире ACTIVE -->
+        </div>
+
+        <div ng-if="tournResult.tournament_info.status == 'FINISH'" class="b-top-substrate_cnt">
+            <div class="b-action-tourn">
+                <div class="b-title-s">
+                    НОВОГОДНИЙ ТУРНИР ЗАКОНЧИЛСЯ
+                </div>
+                <div>
+                    <a href="https://gs7.typeform.com/to/oV8YDE"  data-mode="1" target="_blank" class="btn-red typeform-share" style="margin-top:50px">
+                        пройти опрос
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="b-gross-brd" ng-controller="AlertTemp">
+        <div class="b-gross-brd_cnt">
+            <!-- start  -->
+            <div class="b-conditions-tour">
+                <img ng-src="/src/img/tournaments/lol/{{params.id}}.png" class="b-conditions-tour-img"/>
+                <div class="b-conditions-tour_structure" ng-class="{ 'b-conditions-tour_structure__non-enter' : (tournResult.tournament_info.status == 'PRE_REG' || tournResult.tournament_info.status == 'INACTIVE') }">
+                    <!-- start Турнир НЕ начался -->
+                    <div ng-if="tournResult.tournament_info.status == 'PRE_REG' || tournResult.tournament_info.status == 'INACTIVE'">
+                        <div class="b-conditions-tour_subtitle">
+                            {{'TOURNAMENT__PLAY'|i18n}}
+                        </div>
+                        <div class="b-conditions-tour_structure_max-date-rate">
+                            {{tournDateStart}} <span class="b-conditions-tour_structure_max-date-rate_region" ng-hide="!tournDateStart">МСК</span>
+                        </div>
+                    </div>
+                    <!-- end Турнир НЕ начался -->
+                    <!-- start Турнир начался -->
+                    <div ng-if="tournResult.tournament_info.status == 'START'">
+                        <div class="b-conditions-tour_subtitle">
+                            {{'TOURNAMENT__STRUCTURE'|i18n}}
+                        </div>
+                        <div class="b-conditions-tour_structure_max-date-rate">
+                            <div ng-if="tournResult.blind_countdown > 0">
+                                <div class="b-conditions-tour_structure_max-date-rate_head">
+                                    <div class="b-conditions-tour_structure_max-date-rate_head_title">До повышения</div>
+                                    {{'TOURNAMENT__MIN_RATE'|i18n}}
+                                </div>
+                                <div class="b-conditions-tour_structure_max-date-rate_time">
+                                    <div class="b-conditions-tour_structure_max-date-rate_time_number">{{blindcountdown.hours}}</div>
+                                    {{'TOURNAMENT__DEADLINE_HOURS'|i18n}}
+
+                                </div>
+                                <div class="b-conditions-tour_structure_max-date-rate_time">
+                                    <div class="b-conditions-tour_structure_max-date-rate_time_number">{{blindcountdown.minutes}}</div>
+                                    {{'TOURNAMENT__DEADLINE_MINS'|i18n}}
+
+                                </div>
+                            </div>
+                            <div ng-if="tournResult.blind_countdown <= 0">
+                                <div class="b-conditions-tour_structure_max-date-rate_head__active">
+                                    {{'TOURNAMENT__GOES'|i18n}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end Турнир начался -->
+                    <!-- start Турнир закончился -->
+                    <div ng-if="tournResult.tournament_info.status == 'FINISH'">
+                        <div class="b-conditions-tour_subtitle">
+                            {{'TOURNAMENT__STRUCTURE'|i18n}}
+                        </div>
+                        <div class="b-conditions-tour_structure_max-date-rate_head__active">
+                            {{'TOURNAMENT__FINISHED'|i18n}}
+                        </div>
+                    </div>
+                    <!-- end Турнир закончился -->
+
+                    <!-- start Даты турниров -->
+                    <div class="b-conditions-tour_structure_list">
+                        <div class="b-conditions-tour_structure_list_head">
+                            <div class="b-conditions-tour_structure_list_head_title">{{'TOURNAMENT__DATES'|i18n}}</div>
+                            <div class="b-conditions-tour_structure_list_head_title">{{'TOURNAMENT__MIN_RATE'|i18n}}</div>
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" ng-repeat="data in tournResult.blind_calendar" ng-class="{ 'swiper-slide__current' : data.active }">
+                                    <span>{{data.text}}</span>
+                                    {{data.min}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end Даты турниров -->
+                </div>
+
+                <div ng-if="tournResult.tournament_info.status !== 'FINISH'" class="b-conditions-tour_rules">
+                    <div class="b-conditions-tour_rules_cnt">
+                        <div class="b-conditions-tour_rules_title">
+                            {{'TOURNAMENT__CONDITIONS'|i18n}}
+                        </div>
+                        <!-- это удлатьи нафиг -->
+                        <div ng-bind-html="tournResult.conditions"></div>
+                        <div class="b-conditions-tour_rules_link">
+                            <a href="#/tournament-rules">{{'TOURNAMENT__FULL_LIST_RULES'|i18n}}</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="tournResult.tournament_info.status == 'FINISH'" class="b-conditions-tour_rules">
+                    <div class="b-conditions-tour_rules_cnt">
+                        <div class="b-conditions-tour_rules_title">
+                            {{'TOURNAMENT__THANKS'|i18n}}
+                        </div>
+                        <h4 style="color:#fff; text-align:center">
+                            Мы благодарны каждому из Вас за активное участие в нашем первом тестовом турнире! За новогодние праздники нам удалось с вашей помощью значительно улучшить сервис всего нашего сайта, выявить и поправить множество багов.<br/><br/>
+                            Было проведено более 300 матчей<br/>
+                            Зарегистрированно участников 529<br/>
+                            Было обработано 2342 обращения в службу поддержки<br/><br/>
+                            Со всеми победителями турнира мы свяжемся по почте, указанной при регистрации.
+
+                        </h4>
+                    </div>
+                </div>
+                <!-- start Призовой фонд -->
+                <div class="b-conditions-tour_prize-fund">
+                    <div class="b-conditions-tour_subtitle">
+                        {{'TOURNAMENT__CURRENT_PRICE_FUND'|i18n}}
+                    </div>
+                    <div class="b-conditions-tour_prize-fund_number">
+                        {{tournResult.award_fund|curForm:tournResult.award_type}}
+                    </div>
+                    <div class="b-conditions-tour_prize-fund_info">
+                        {{'TOURNAMENT__PAYMENT_PROCEDURE'|i18n}}<i ng-click="modal('md', 'info-payments.html')"></i>
+                    </div>
+                    <div class="b-conditions-tour_prize-fund_place">
+                        {{'TOURNAMENT__AWARD_COUNT'|i18n}}
+                        <div class="b-conditions-tour_prize-fund_place_number">
+                            {{tournResult.award_count}}
+                        </div>
+                    </div>
+                    <div class="b-conditions-tour_prize-fund_swiper">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" ng-repeat="place in tournResult.award_list">
+                                    <span>{{place.position}} место</span>
+                                    ${{place.award}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end Призовой фонд -->
+            </div>
+            <!-- end а-->
+
+            <!-- start Турнирный стек -->
+            <div class="b-tour-stack"  ng-if="tournResult.tournament_info.status == 'START'">
+                <div class="b-tour-stack_title">
+                    <i class="b-tour-stack_title_t-icon"></i>турнирный стек<i class="b-tour-stack_title_info" ng-click="modal('md', 'info-stack.html')"></i>
+                </div>
+                <div class="b-action-tourn_features">
+                    <div class="b-action-tourn_features_item">
+                        <div class="b-action-tourn_features_item_val">
+                            {{tournResult.stats.max_stack}}
+                        </div>
+                        <div class="b-action-tourn_features_item_head">
+                            {{'TOURNAMENT__MAX'|i18n}}
+                        </div>
+                    </div>
+                    <div class="b-action-tourn_features_item">
+                        <div class="b-action-tourn_features_item_val">
+                            {{tournResult.stats.avg_stack}}
+                        </div>
+                        <div class="b-action-tourn_features_item_head">
+                            {{'TOURNAMENT__AVG'|i18n}}
+                        </div>
+                    </div>
+                    <div class="b-action-tourn_features_item">
+                        <div class="b-action-tourn_features_item_val">
+                            {{tournResult.stats.min_stack}}
+                        </div>
+                        <div class="b-action-tourn_features_item_head">
+                            {{'TOURNAMENT__MIN'|i18n}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end Турнирный стек -->
+
+            <!-- start Таблица рейтинга -->
+            <div class="b-rating-table">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            {{'TOURNAMENT__PARTICIPANTS'|i18n}}
+                            <!--Участники-->
+                        </th>
+                        <th>{{'TOURNAMENT__RATING'|i18n}}</th>
+                        <th>{{'TOURNAMENT__MATCH_QUANTITY'|i18n}}</th>
+                        <th>
+                            <!--Количество фишек-->
+                            {{'TOURNAMENT__QUANTITY_STACK'|i18n}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- start Пользователь в турнире ACTIVE -->
+                    <tr class="tr-current-user" ng-if="tournCurrentUser.status == 'ACTIVE'">
+                        <td>
+                                        <span class="b-rating-table_number">
+                                            <span class="b-rating-table_number_cnt">{{tournCurrentUser.ladder}}</span>
+                                        </span>
+                            <span class="b-rating-table_name">{{userProfie.userData.name}}</span>
+                        </td>
+                        <td class="b-rating-table_emblem">
+                            <img ng-src="/src/img/ranking/emblem-{{tournCurrentUser.rank}}.png" alt="" />
+                        </td>
+                        <td>
+                            {{tournCurrentUser.matchCount}}
+                        </td>
+                        <td>
+                            {{tournCurrentUser.stackCount}}
+                        </td>
+                    </tr>
+                    <!-- end Пользователь в турнире ACTIVE -->
+                    <tr ng-repeat="player in tournListUsers.players | limitTo : tournListUsersLimit">
+                        <td>
+                                        <span class="b-rating-table_number">
+                                            <span class="b-rating-table_number_cnt">{{$index+1}}</span>
+                                        </span>
+                            <span class="b-rating-table_name">{{player.name}}</span>
+                        </td>
+                        <td class="b-rating-table_emblem">
+                            <img ng-src="/src/img/ranking/emblem-{{player.rank}}.png" alt="" />
+                        </td>
+                        <td>
+                            {{player.matchCount}}
+                        </td>
+                        <td>
+                            {{player.stackCount}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="b-rating-table_footer">
+                                <span class="b-rating-table_footer_btn-more" ng-hide="tournListUsersLimit >= tournListUsers.players.length" ng-click="tournListUsersLimit = tournListUsersLimit + 10">
+                                </span>
+                </div>
+            </div>
+            <!-- end Таблица рейтинга -->
+        </div>
+    </div>
+
+</div>
+<!-- end Middle -->

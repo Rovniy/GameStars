@@ -1,0 +1,94 @@
+body {
+    background: url('http://lol.gamestars.gg/src/img/lol/bg.jpg') 50% 0 no-repeat #0A0E0F!important;
+    background-size: cover!important;
+    padding-top: 24px!important;
+}
+
+div.bottom-menu-inverse {
+    background-color: #212121!important;
+}
+
+#features {
+    background: rgba(0, 0, 0, .85)!important;
+    box-shadow: 0 0 50px 8px rgba(60, 60, 160, .6)!important;
+    margin-bottom: 70px!important;
+}
+
+div.alert.transaction-details {
+    display: none!important;
+}
+
+section.amount-holder {
+    background: transparent!important;
+}
+
+div.container header h3 {
+    color: #fff!important;
+}
+
+div.container header h6 {
+    color: #fff!important;
+}
+
+p.lead {
+    color: #fff!important;
+}
+
+#totalAmount {
+    margin: 0!important;
+    padding: 0!important;
+    font-size: 46px!important;
+}
+
+a.btn.btn-primary.btn-sg.btnBack {
+    background-color: #e37a72!important;
+    color: #fff!important;
+}
+
+.btn {
+    background-color: #e37a72!important;
+}
+
+.btn.btn-inverse {
+    transition: none!important;
+    text-transform: uppercase!important;
+    cursor: pointer!important;
+    background: url('http://lol.gamestars.gg/src/img/lol/index/btn-index.png') #e37a72 0 0!important;
+    /* Old browsers */
+    border: 0!important;
+    font-weight: 300!important;
+    border-radius: 0!important;
+    width: 351px!important;
+    height: 54px!important;
+    padding: 16px!important;
+    margin: 25px auto 0!important;
+    display: block!important;
+    color: #fff!important;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .5)!important;
+}
+
+.btn.btn-inverse:hover, .btn.btn-inverse:active {
+    background: url('http://lol.gamestars.gg/src/img/lol/index/btn-index.png') #e37a72 0 -54px!important;
+    /* Old browsers */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 1)!important;
+    text-decoration: none!important;
+    color: #fff!important;
+    outline: none!important;
+}
+
+.dropdown-menu li.selected > a {
+    background: #e37a72!important;
+}
+
+.dropdown-menu li.selected > a:hover {
+    background: #DD5E55!important;
+}
+
+#topLogo {
+    width: 500px!important;
+    max-width: 500px!important;
+    height: 319px!important;
+    position: absolute!important;
+    left: 50px!important;
+    float: none!important;
+}

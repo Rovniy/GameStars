@@ -1,0 +1,103 @@
+<div ng-controller="transactions" class="addUserMoney">
+    <h3>Начисление средств</h3>
+    <form ng-hide='allOK' role="form">
+        <div class="form-group">
+            <input disabled="disabled" class="form-control" type="text" ng-model="userName" placeholder="Имя пользователя"/>
+        </div>
+        <div class="form-group">
+            <select class="form-control" ng-model="userAwardType">
+                <option value="penalty">Наказание</option>
+                <option value="recalculation">Пересчет фишек</option>
+                <option value="bonus">Бонус</option>
+                <option value="transferAward">Выдача награды за турнир</option>
+                <option value="withdrow">Вывод средств</option>
+            </select>
+        </div>
+        <div ng-show="userAwardType == 'penalty'">
+            <div class="form-group">
+                <select class="form-control" ng-model="penaltyType">
+                    <option value="tournamentGame">Турнирная игра</option>
+                    <option value="nonTournament">Игра вне турнира</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input ng-show="penaltyType == 'tournamentGame'" class="form-control" type="text" ng-model="tournamentGameID" placeholder="ID турнира"/>
+            </div>
+            <div class="form-group">
+                <input ng-show="penaltyType == 'tournamentGame'" class="form-control" type="text" ng-model="tournamentGameChips" placeholder="Количество фишек"/>
+            </div>
+            <div class="form-group">
+                <select ng-show="penaltyType == 'nonTournament'" class="form-control" ng-model="nonTournamentCurrency" placeholder="Тип счета">
+                    <option value="MAIN">VIP счет</option>
+                    <option value="BONUS">Бонусный счет</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input ng-show="penaltyType == 'nonTournament'" class="form-control" type="text" ng-model="nonTournamentValue" placeholder="Сколько снять (SP иил центы)"/>
+            </div>
+        </div>
+        <div ng-show="userAwardType == 'recalculation'">
+            <div class="form-group">
+                <select class="form-control" ng-model="recalculationType">
+                    <option value="recalculationPlus">Пополнение</option>
+                    <option value="recalculationMinus">Снятие</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" ng-model="recalculationID" placeholder="ID турнира"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" ng-model="tournamentGameChips" placeholder="Количество фишек"/>
+            </div>
+        </div>
+        <div ng-show="userAwardType == 'bonus'">
+            <div class="form-group">
+                <select class="form-control" ng-model="bonusType">
+                    <option value="bonusTour">Турнирная игра</option>
+                    <option value="bonusNon">Игра вне турнира</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input ng-show="bonusType == 'bonusTour'" class="form-control" type="text" ng-model="bonusID" placeholder="ID турнира"/>
+            </div>
+            <div class="form-group">
+                <input ng-show="bonusType == 'bonusTour'" class="form-control" type="text" ng-model="bonusChips" placeholder="Количество фишек"/>
+            </div>
+            <!--<div class="form-group">-->
+                <!--<select ng-show="bonusType == 'bonusNon'" class="form-control" ng-model="bonusCurrency" placeholder="Тип счета">-->
+                    <!--<option value="MAIN">VIP счет</option>-->
+                    <!--<option value="BONUS">Бонусный счет</option>-->
+                <!--</select>-->
+            <!--</div>-->
+            <div class="form-group">
+                <input ng-show="bonusType == 'bonusNon'" class="form-control" type="text" ng-model="bonusValue" placeholder="Введи сумму пополнения (SP иил центы)"/>
+            </div>
+        </div>
+        <div ng-show="userAwardType == 'transferAward'">
+            <div class="form-group">
+                <input class="form-control" type="text" ng-model="transferAwardID" placeholder="ID турнира"/>
+            </div>
+            <div class="form-group">
+                <select class="form-control" ng-model="transferAwardType" placeholder="Тип счета">
+                    <option value="MAIN">VIP счет</option>
+                    <option value="BONUS">Бонусный счет</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input  class="form-control" type="text" ng-model="transferAwardValue" placeholder="Введи сумму вознаграждения (SP или центы)"/>
+            </div>
+        </div>
+        <div ng-show="userAwardType == 'withdrow'">
+            <div class="form-group">
+                <input  class="form-control" type="text" ng-model="withdrowValue" placeholder="Введи сумму для вывода (в центах) "/>
+            </div>
+        </div>
+        <button class="btn btn-success" ng-click="addSomeMoney()">Отправить запрос</button>
+    </form>
+    <div ng-show="allOK == 'ok'">
+        <h3 class="red">Молодец! =)</h3>
+    </div>
+    <div ng-show="allOK == 'error'">
+        <h3 class="red">Ошибка</h3>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div ng-controller="ReAcceptBitController as vm" class="accept-modal-background">
+    <div>
+        <div class="accept-modal-header">
+            <h3 class="accept-modal-title">{{'REACCEPT__TITLE' | translate}}</h3>
+        </div>
+        <div class="accept-modal-body">
+            <div class="accept-modal-body-content">
+                <div class="accept-modal-body-content-question">
+                    <span>{{'REACCEPT__QUESTION' | translate}}</span>
+                </div>
+                <div class="accept-modal-body-content-buttons">
+                    <button ng-click="vm.accept()" class="btn-red-vs accept-modal-body-content-buttons-accept">{{'REACCEPT__WANT' | translate}}</button>
+                    <button ng-click="vm.cancel()" class="btn-blue-vs accept-modal-body-content-buttons-decline">{{'REACCEPT__NOT_WANT' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

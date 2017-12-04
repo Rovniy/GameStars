@@ -1,0 +1,34 @@
+<div ng-controller="SlideEngineController as vm">
+    <div class="firstSession" ng-if="vm.visible">
+        <div class="firstSession-main">
+            <div class="window">
+                <span ng-click="vm.closeSession()" class="closer"><i class="fa fa-close"></i></span>
+                <div class="fist-hero">
+                    <img ng-show="vm.hero1.active" ng-class="{'current': !vm.hero1.dis}" ng-style="vm.hero1.duration" ng-src="/src/img/lol/firstsession/hero1.png"/>
+                    <div ng-show="vm.send1.active" ng-class="{'active': !vm.send1.dis}" ng-style="vm.send1.duration" class="dialog dialog-window">
+                        <p>{{vm.send1.text}}</p>
+                    </div>
+                </div>
+                <div class="second-hero">
+                    <img ng-show="vm.hero2.active" ng-class="{'current': !vm.hero2.dis}" ng-style="vm.hero2.duration" ng-src="/src/img/lol/firstsession/hero2.png"/>
+                    <div ng-show="vm.send2.active" ng-class="{'active': !vm.send2.dis}" ng-style="vm.send2.duration" class="dialog dialog-window">
+                        <p>{{vm.send2.text}}</p>
+                    </div>
+                </div>
+                <div ng-style="vm.listText.textDuration" class="user-msg">
+                    <ul>
+                        <li ng-repeat="row in vm.listText.textArray">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-circle fa-stack-1x"></i>
+                        </span>
+                            <span ng-show="::(row.action === 'slide')" ng-click="vm.nextSlide(row.id)" class="text" ng-bind="::row.text" track-event-by-click track-category="fsession" track-action="next-slide"></span>
+                            <span ng-show="::(row.action == 'close')" ng-click="vm.closeSession()" class="text" ng-bind="::row.text" track-event-by-click track-category="fsession" track-action="close"></span>
+                            <span ng-show="::(row.action == 'link')" ng-click="vm.goSomePage(row.id)" class="text" ng-bind="::row.text" track-event-by-click track-category="fsession" track-action="page"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

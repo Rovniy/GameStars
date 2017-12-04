@@ -1,0 +1,18 @@
+<div class="page-title">
+    <span class="title">Правила турниров</span>
+    <div class="description">просмотр и редактирование правил турниров</div>
+</div>
+<div class="row ta-center">
+    <h3>Выбери язык для правки</h3>
+    <button ng-click="getRules('RU')" class="btn btn-success">Русский</button>
+    <button ng-click="getRules('EN')" class="btn btn-success">Английский</button>
+    <button ng-click="getRules('FR')" class="btn btn-success">Французский</button>
+</div>
+<div class="row">
+    <textarea name="rulesEditor" id="rulesEditor" rows="10" cols="200">
+        {{rulesText}}
+    </textarea>
+    <script>
+        CKEDITOR.replace( 'rulesEditor' );
+    </script>
+</div>

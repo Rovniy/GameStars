@@ -1,0 +1,74 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'HEADER__LOGIN' | translate}}</h3>
+    <i class="genericon genericon-close modal-close loginclose" ng-click="$dismiss()"></i>
+</div>
+<form name="loginForm" novalidate>
+    <div class="modal-body"  style="padding-bottom: 10px" >
+        <div class="modal-air" >
+            <fieldset ng-disabled="modal.loading">
+                <div class="animate-hide modal-body-content">
+                    <div class="form-group" ng-class="{ 'has-error' : loginForm.loginEmail.$invalid && loginForm.loginEmail.$dirty }">
+                        <label class="control-label ">
+                            <i class="form-group_icon genericon genericon-mail"></i>
+                            <input type="email" class="form-control loginemail" placeholder="{{'PUBLIC__EMAIL_PLACEHOLDER' | translate}}"
+                                   name='loginEmail'
+                                   ng-model="modal.loginEmail"
+                                   validate-email required>
+                        </label>
+                        <div class="form-group_message-error">
+                            {{'LOGIN__INPUT_CORRECT_EMAIL' | translate}}
+                        </div>
+                    </div>
+
+                    <div class="form-group mbot10" ng-class="{ 'has-error' :  (loginForm.loginPass.$invalid-pattern) && (loginForm.loginPass.$dirty) }">
+                        <label class="control-label">
+                            <i class="form-group_icon genericon genericon-key"></i>
+                            <input type="password" class="form-control" placeholder="{{'PUBLIC__PASSWORD_PLACEHOLDER' | translate}}"  ng-model="modal.loginPass" minlength="8" maxlength="16"  name='loginPass' required>
+                        </label>
+                        <div class="forgot-password">
+                            <a id="to_restore_pass" href ng-click="modal.openPwdRestore()">{{'LOGIN__RESTORE_PASSWORD' | translate}}</a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="complate-buttons ta-center">
+                    <button autofocus id="login" class="btn-red" type="submit"
+                            ng-click="modal.login()"
+                            ng-disabled="!loginForm.$valid || modal.loading">
+                        <span ng-hide="modal.loading">{{'LOGIN__LOGIN_BTN_CAPTION' | translate}}</span>
+                        <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="modal.loading"></i>
+                    </button>
+                </div>
+            </fieldset>
+
+            <div class="ta-center loginError" ng-show="modal.error === 'UserUnverifiedException'">
+                {{'LOGIN__VERIFICATION_NEED_MSG' | translate}}
+            </div>
+
+            <div class="ta-center loginError" ng-show="modal.error === 'UserUnverifiedException'">
+                {{'LOGIN__INPUT_CORRECT_PASS' | translate}}
+            </div>
+
+            <div class="ta-center loginError" ng-show="modal.status === 400">
+                <!--UserNotFoundException-->
+                {{'LOGIN__LOGIN_OR_PASS_WRONG' | translate}}
+            </div>
+
+            <hr />
+
+            <div class="social-container ta-center">
+                <button class="btn btn-social-icon btn-facebook" ng-click="modal.externalLogin('facebook')" track-event-by-click track-category="social" track-action="signin-fb">
+                    <span class="fa fa-facebook"></span>
+                    <!--<span translate="LOGIN__WITH" translate-value-name="Facebook"></span>-->
+                </button>
+
+                <button class="btn btn-social-icon btn-twitch" ng-click="modal.externalLogin('twitch')" track-event-by-click track-category="social" track-action="signin-tw">
+                    <span class="fa fa-twitch"></span>
+                    <!--<span translate="LOGIN__WITH" translate-value-name="Twitch"></span>-->
+                </button>
+            </div>
+
+        </div>
+    </div>
+</form>

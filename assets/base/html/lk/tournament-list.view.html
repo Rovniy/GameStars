@@ -1,0 +1,89 @@
+<div class="tournament-list-component">
+    <div class="data-tournament"
+         ng-repeat="row in ::$ctrl.tournaments | orderBy: row.startDate">
+        <div class="row data-title"
+             ng-class="::$ctrl.getTitleClass(row)"
+             ng-click="$ctrl.onClick(row)">
+            <div class="col-lg-9 data-game-lol">
+                <img ng-src="/src/img/base/game-icon/lol.png"/>
+                <span>{{::row.gameRegion.regionName}} - {{::row.name}} - {{::row.awardFund | currencyUnit:row.awardType}}</span>
+            </div>
+            <div class="col-lg-3 data-status">
+                <span ng-if="::(row.status === 'PRE_REG')">{{'LK__REG_OPEN' | translate}}</span>
+                <span ng-if="::(row.status === 'START' || row.status === 'POST_REG')">{{'LK__IN_PROGRESS' | translate}}</span>
+                <span ng-if="::(row.status === 'FINISH')">{{'LK__ENDED' | translate}}</span>
+            </div>
+        </div>
+        <div class="row data-body" ng-click="$ctrl.onClick(row)">
+            <div class="col-lg-3 data-body-desc">
+                <ul>
+                    <li class="grey">{{'LK__CURRENT_STATUS' | translate}}</li>
+                    <li class="grey">{{'LK__START' | translate}}</li>
+                </ul>
+            </div>
+            <div class="col-lg-3 data-body-data">
+                <ul>
+                    <li>
+                        <span ng-if="::(row.status === 'PRE_REG')">{{'LK__REG_OPEN' | translate}}</span>
+                        <span ng-if="::(row.status === 'START' || row.status === 'POST_REG')">{{'LK__IN_PROGRESS' | translate}}</span>
+                        <span ng-if="::(row.status === 'FINISH')">{{'LK__ENDED' | translate}}</span>
+                    </li>
+                    <li>{{::row.startDate | date:'dd.MM.yyyy'}}-{{::row.endDate | date:'dd.MM.yyyy'}}</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 data-body-text">
+                <ul>
+                    <li>
+                        <h4>{{::$ctrl.getTournamentChips(row)}}</h4>
+                        <p>{{'LK__CHIPS_AMOUNT' | translate}}</p>
+                    </li>
+                    <li>
+                        <h4>{{::(row.activeBlind.min || '--')}}</h4>
+                        <p>{{'LK__MIN_BET' | translate}}</p>
+                    </li>
+                    <li>
+                        <h4>{{::(row.activeBlind.min * row.activeBlind.maxRatio || '--')}}</h4>
+                        <p>{{'LK__MAX_BET' | translate}}</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="row data-billing">
+            <div class="controls-area">
+                <span ng-click="$ctrl.getTournamentBilling(row.id)">{{'LK__TRANSACTION_LIST' | translate}}</span>
+            </div>
+            <div class="list-area" ng-if="$ctrl.currentSectionSpinner === row.id">
+                <div class="table-div">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>{{'PAYMENT__CREATION_TIME' | translate}}</th>
+                            <th>{{'PAYMENT__EVENT' | translate}}</th>
+                            <th>{{'PAYMENT__REASON' | translate}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="row in ::$ctrl.transactions[row.id] track by row.transactionId">
+                            <td>{{::row.createTime | date:'dd.MM.yyyy | HH:mm'}}</td>
+                            <td>{{::row.deltaValue | transaction:row.currencyType:row.action}}</td>
+                            <td>
+                                {{row.event | event | translate}}
+                                <a href ng-if="::(row.event === 'RECALCULATION')"
+                                   uib-tooltip="{{'TRANSACTION_EVENT__RECALCULATION_TOOLTIP' | translate}}"
+                                   tooltip-placement="right">
+                                    <i class="fa fa-fw fa-question-circle"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="controls">
+                    <span ng-click="$ctrl.currentSectionSpinner = -1">{{'PAYMENT__HIDE_TABLE' | translate}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

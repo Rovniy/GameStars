@@ -1,0 +1,266 @@
+<!-- start Header -->
+<div class="header-div" ng-controller="HeaderController as vm">
+    <div class="left-side">
+        <a ng-href="//{{::vm.config.mainUrl}}/" class="logo">
+            <img src="/src/img/base/logo.png" alt="GameStars.gg" />
+        </a>
+        <div class="menu">
+            <a track-event-by-click track-category="click" track-action="top_menu_matches" href="/cashgames" class="menu_link">{{'PUBLIC__MATCHES_TITLE' | translate}}</a>
+            <a track-event-by-click track-category="click" track-action="top_menu_tournaments" href="/tournaments" class="menu_link">{{'PUBLIC__TOURNAMENTS_TITLE' | translate}}</a>
+            <a track-event-by-click track-category="click" track-action="top_menu_news" ng-href="{{::vm.config.newsUrl}}" class="menu_link">{{'PUBLIC__NEWS_TITLE' | translate}}</a>
+        </div>
+    </div>
+    <div ng-if="!vm.getUserProfile()" class="right-side">
+        <div class="register-button">
+            <div class="info">
+                <span>New user?</span>
+            </div>
+            <div class="button-area">
+                <button ng-click="vm.openSignupModal()">Open account</button>
+            </div>
+        </div>
+        <span class="user-help">
+            <a href="javascript:void($zopim.livechat.window.openPopout())">
+                <i class="fa fa-question"></i>
+            </a>
+        </span>
+        <span class="b-header_list-lang" uib-dropdown>
+            <a href id="simple-dropdown-lang" uib-dropdown-toggle>
+                <img  class="b-top-menu_lang" ng-src="/src/img/base/languages/lang_{{ vm.getCurrentLanguage() }}.png">
+            </a>
+            <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown-lang"
+                uib-dropdown-menu>
+                <li ng-repeat="lang in ::vm.config.languages" ng-if="lang !== appCtrl.getLanguage()">
+                    <img ng-click="vm.setLanguage(lang)" class="b-top-menu_lang" ng-src="/src/img/base/languages/lang_{{ ::lang }}.png">
+                </li>
+            </ul>
+        </span>
+        <div class="enter-form">
+            <div class="forms">
+                <form>
+                    <fieldset ng-disabled="vm.loading">
+                        <input ng-disabled="vm.loading" ng-class="{'error': vm.error.type}" ng-model="vm.loginEmail" type="text" class="username" placeholder="email">
+                        <input ng-disabled="vm.loading" ng-class="{'error': vm.error.type}" ng-model="vm.loginPass" type="password" class="pass" placeholder="password">
+                        <button class="btn-header-enter" ng-click="vm.login()" type="submit">
+                            <span ng-hide="vm.loading">Log In</span>
+                            <i class="fa fa-spin fa-spinner ng-animate-disabled" ng-show="vm.loading"></i>
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="notice-area">
+                <div class="left-area">
+                    <span ng-show="vm.error.type === 'UserUnverifiedException'">{{'LOGIN__VERIFICATION_NEED_MSG' | translate}}</span>
+                    <span ng-show="vm.error.type === 'UserUnverifiedException'"> {{'LOGIN__INPUT_CORRECT_PASS' | translate}}</span>
+                    <span ng-show="vm.error.type === 'UserNotFoundException'">{{'LOGIN__LOGIN_OR_PASS_WRONG' | translate}}</span>
+                </div>
+                <div class="right-area">
+                    <a href ng-click="vm.openPwdRestore()">Forgot Password?</a>
+                </div>
+            </div>
+        </div>
+        <!-- Середина для поиска матча-->
+        <div ng-if="vm.getUserProfile()" class="menu_reserve">
+            <div ng-controller='FindTheGameNowController as vm'>
+                <div ng-if="vm.isTimerVisible()" class="b-top-menu_reserve-box">
+                    <div class="b-top-menu_reserve-box-find">
+                        <span class="b-top-menu_reserve-box-find-desc">{{'HEADER__SEARCH_MATCH' | translate}}</span>
+                        <a href class="b-top-menu_reserve-box-find-close" ng-click="vm.disapply()"></a>
+                    </div>
+                    <!--<div class="b-top-menu_reserve-box-find-bottom">
+                        <span class="b-top-menu_reserve-box-find-desc">RU 5x5 100SP SOLO</span>
+                    </div>-->
+                    <div class="b-top-menu_reserve-box-find-bottom">
+                        <div class="b-top-menu_reserve-box-was">
+                            <span class="title">{{'HEADER__EXPIRED' | translate}}:</span>
+                            <span class="countmin" ng-bind="vm.getTimerValue()"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end Середина для поиска матча -->
+    </div>
+    <div ng-if="vm.getUserProfile()" ng-mouseleave="vm.showVipInfo = false" class="right-side zeroPadding">
+        <div class="my-morda-div">
+            <div class="avatar b-user-bar_ava">
+                <i class="ava-img-small i-avatar" ng-class="vm.getAvatarClass()" ng-click="vm.toggleAvatars()"></i>
+                <span class="level-man" ng-bind="vm.getUserProfile().level"></span>
+                <div class="change-avatar-header" ng-show="vm.isAvatarsVisible">
+                    <ul>
+                        <li ng-repeat="id in ::vm.avatars">
+                            <i class="i-avatar avatar-{{id}}" ng-click="vm.selectAvatar(id)"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="meta">
+                <div class="topInfo">
+                    <div class="userName" ng-click="vm.openConnectAccountModal()">
+                        <span>{{vm.getUserProfile().userData.name}}</span>
+                    </div>
+                    <div class="money" ng-mouseenter="vm.showVipInfo = vm.isVipStatus()">
+                        <span class="vip" ng-show="vm.isVipStatus()">
+                                <img src="/src/img/icon-vip.png" />
+                        </span>
+                        <span><i class="fa fa-dollar"></i> {{vm.getUserRealpoints()}}</span>
+                    </div>
+                </div>
+                <div class="bottomInfo">
+                    <a href ng-click="vm.openPaymentModal()" class="shop"><i class="fa fa-cart-arrow-down"></i></a>
+                    <a href="/lk/main" class="lichn"><i class="fa fa-user"></i></a>
+                    <a href ng-click="vm.logout()" class="exit"><i class="fa fa-sign-out"></i></a>
+
+                    <div class="balance" ng-if="vm.isVipStatus()" ng-show="vm.showVipInfo">
+                        <div class="balance-row">
+                            <a href="/bonus-faq" uib-tooltip="{{'LK__BONUS_DESCRIPTION' | translate}}" tooltip-placement="right" tooltip-append-to-body="true"><i class="fa fa-fw fa-info-circle"></i></a>
+                            <span>{{'HEADER__VIP_BALANCE' | translate}}</span>
+                            <strong>{{vm.getUserRealpointsVip() | currencyUnit}}</strong>
+                        </div>
+                        <hr />
+                        <div class="balance-row">
+                            <a href="/bonus-faq" uib-tooltip="{{'LK__BONUS_DESCRIPTION' | translate}}" tooltip-placement="right" tooltip-append-to-body="true"><i class="fa fa-fw fa-info-circle"></i></a>
+                            <span>{{'HEADER__BONUS_BALANCE' | translate}}</span>
+                            <strong>{{vm.getUserRealpointsBonus() | currencyUnit}}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span data-elevio-module="articles" class="user-help">
+            <i class="fa fa-question"></i>
+        </span>
+
+        <span class="b-header_list-lang" uib-dropdown>
+            <a href id="simple-dropdown-lang" uib-dropdown-toggle>
+                <img  class="b-top-menu_lang" ng-src="/src/img/base/languages/lang_{{ vm.getCurrentLanguage() }}.png">
+            </a>
+            <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown-lang"
+                uib-dropdown-menu>
+                <li ng-repeat="lang in ::vm.config.languages" ng-if="lang !== appCtrl.getLanguage()">
+                    <img ng-click="vm.setLanguage(lang)" class="b-top-menu_lang" ng-src="/src/img/base/languages/lang_{{ ::lang }}.png">
+                </li>
+            </ul>
+        </span>
+
+        <!-- Середина для поиска матча-->
+        <div ng-if="vm.getUserProfile()" class="menu_reserve">
+            <div ng-controller='FindTheGameNowController as vm'>
+                <div ng-if="vm.isTimerVisible()" class="b-top-menu_reserve-box">
+                    <div class="b-top-menu_reserve-box-find">
+                        <span class="b-top-menu_reserve-box-find-desc">{{'HEADER__SEARCH_MATCH' | translate}}</span>
+                        <a href class="b-top-menu_reserve-box-find-close" ng-click="vm.disapply()"></a>
+                    </div>
+                    <!--<div class="b-top-menu_reserve-box-find-bottom">
+                        <span class="b-top-menu_reserve-box-find-desc">RU 5x5 100SP SOLO</span>
+                    </div>-->
+                    <div class="b-top-menu_reserve-box-find-bottom">
+                        <div class="b-top-menu_reserve-box-was">
+                            <span class="title">{{'HEADER__EXPIRED' | translate}}:</span>
+                            <span class="countmin" ng-bind="vm.getTimerValue()"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end Середина для поиска матча -->
+    </div>
+
+</div>
+<!-- end Header -->
+
+
+
+<!--
+<div ng-if="vm.getUserProfile()" ng-mouseleave="vm.showVipInfo = false" class="right-side zeroPadding">
+    <div class="my-morda-div">
+        <div class="ava">
+            <i class="ava-img-small i-avatar" ng-class="vm.getAvatarClass()" ng-click="vm.toggleAvatars()"></i>
+            <span class="b-user-bar_rating" ng-bind="vm.getUserProfile().level"></span>
+            <div class="change-avatar-header" ng-show="vm.isAvatarsVisible">
+                <ul>
+                    <li ng-repeat="id in ::vm.avatars">
+                        <i class="i-avatar avatar-{{id}}" ng-click="vm.selectAvatar(id)"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="info">
+            <div class="top clearfix">
+                <div class="name" style="cursor: pointer;" ng-click="vm.openConnectAccountModal()">
+                    <span>{{vm.getUserProfile().userData.name}}</span>
+                </div>
+                <div class="points" ng-mouseenter="vm.showVipInfo = vm.isVipStatus()">
+                            <span class="vip" ng-show="vm.isVipStatus()">
+                                <img src="/src/img/icon-vip.png" />
+                            </span>
+                            <span class="item icon-points">
+                                <i class="fa fa-dollar"></i> {{vm.getUserRealpoints()}}
+                            </span>
+                </div>
+            </div>
+
+            <div class="btn-group bottom" >
+                <a href="/lk/payments" class="btn buy"><i class="fa fa-cart-arrow-down"></i></a>
+                <a href="/lk/main" class="btn b-user-bar_info_lk"><i class="fa fa-user"></i></a>
+                &lt;!&ndash;<button class="btn b-user-bar_info_star"></button>&ndash;&gt;
+                <button class="btn b-user-bar_info_exit" ng-click="vm.logout()"><i class="fa fa-sign-out"></i></button>
+            </div>
+        </div>
+
+        <div class="balance"
+             ng-if="vm.isVipStatus()"
+             ng-show="vm.showVipInfo">
+            <div class="balance-row">
+                <a href="/bonus-faq" uib-tooltip="{{'LK__BONUS_DESCRIPTION' | translate}}" tooltip-placement="right" tooltip-append-to-body="true"><i class="fa fa-fw fa-info-circle"></i></a>
+                <span>{{'HEADER__VIP_BALANCE' | translate}}</span>
+                <strong>{{vm.getUserRealpointsVip() | currencyUnit}}</strong>
+            </div>
+            <hr />
+            <div class="balance-row">
+                <a href="/bonus-faq" uib-tooltip="{{'LK__BONUS_DESCRIPTION' | translate}}" tooltip-placement="right" tooltip-append-to-body="true"><i class="fa fa-fw fa-info-circle"></i></a>
+                <span>{{'HEADER__BONUS_BALANCE' | translate}}</span>
+                <strong>{{vm.getUserRealpointsBonus() | currencyUnit}}</strong>
+            </div>
+        </div>
+    </div>
+
+        <span class="user-help">
+            <i class="fa fa-question"></i>
+        </span>
+
+        <span class="b-header_list-lang" uib-dropdown>
+            <a href id="simple-dropdown-lang" uib-dropdown-toggle>
+                <img  class="b-top-menu_lang" ng-src="/src/img/base/languages/lang_{{ vm.getCurrentLanguage() }}.png">
+            </a>
+            <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown-lang"
+                uib-dropdown-menu>
+                <li ng-repeat="lang in ::vm.config.languages" ng-if="lang !== appCtrl.getLanguage()">
+                    <img ng-click="vm.setLanguage(lang)" class="b-top-menu_lang" ng-src="/src/img/base/languages/lang_{{ ::lang }}.png">
+                </li>
+            </ul>
+        </span>
+
+    &lt;!&ndash; Середина для поиска матча&ndash;&gt;
+    <div ng-if="vm.getUserProfile()" class="menu_reserve">
+        <div ng-controller='FindTheGameNowController as vm'>
+            <div ng-if="vm.isTimerVisible()" class="b-top-menu_reserve-box">
+                <div class="b-top-menu_reserve-box-find">
+                    <span class="b-top-menu_reserve-box-find-desc">{{'HEADER__SEARCH_MATCH' | translate}}</span>
+                    <a href class="b-top-menu_reserve-box-find-close" ng-click="vm.disapply()"></a>
+                </div>
+                &lt;!&ndash;<div class="b-top-menu_reserve-box-find-bottom">
+                    <span class="b-top-menu_reserve-box-find-desc">RU 5x5 100SP SOLO</span>
+                </div>&ndash;&gt;
+                <div class="b-top-menu_reserve-box-find-bottom">
+                    <div class="b-top-menu_reserve-box-was">
+                        <span class="title">{{'HEADER__EXPIRED' | translate}}:</span>
+                        <span class="countmin" ng-bind="vm.getTimerValue()"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    &lt;!&ndash; end Середина для поиска матча &ndash;&gt;
+</div>-->

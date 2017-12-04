@@ -1,0 +1,21 @@
+<div ng-controller="LkShopController as vm">
+    <div class="box-title">
+        <h3>{{'LK__SHOP' | translate}}</h3>
+    </div>
+    <div class="row shop-content">
+        <div ng-repeat="row in ::vm.shopItems" class="col-lg-4 shop-item">
+            <h3 class="shop-item-total">{{::(row.starpoints + row.starpoints * row.bonusPercent)}} SP</h3>
+            <h3 class="shop-item-result">{{::row.starpoints}} StarPoints</h3>
+            <p class="shop-item-sp-bonus">+ {{::(row.starpoints * row.bonusPercent)}} {{'LK__SP_BONUS' | translate}}</p>
+            <img src="/src/img/base/sp-logo-large.png" alt="SP-logo"/>
+            <p class="shop-item-cost"> ${{::row.totalCost}}</p>
+            <div class="shop-buy-button">
+                <button ng-click="vm.openBuyModal(row.starpoints)" class="btn-red tryBuySpButton">{{'LK__BUY_SP' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--modalBuyStarpoints-->
+<!--payment-->

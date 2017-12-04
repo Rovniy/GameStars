@@ -1,0 +1,124 @@
+<!-- start Middle-->
+<div id="middle" ng-controller="NewsController as vm">
+    <div class="b-gross-brd" ng-repeat="newsItem in ::vm.news">
+        <div class="b-gross-brd_cnt">
+            <div class="news-content">
+                <!-- Центральный блок с контентом -->
+                <div class="news-content-newscol">
+                    <div class="news-content-newscol-cover">
+                        <img src="/src/img/news/14-01-2016.jpg">
+                    </div>
+                    <div class="news-content-newscol-title">
+                        <h3 class="news-content-newscol-title-h3">
+                            {{newsItem.title | translate}}
+                            <!--здесь будет текст статьи или новости здесь будет текст статьи или новости здесь будет текст статьи или новости здесь будет текст статьи или новости здесь будет текст статьи или новости здесь будет текст статьи или новости здесь будет текст статьи или новости здесь будет текст статьи или новости здесь будет текст статьи или новости здесь будет текст статьи или новости-->
+                        </h3>
+                        <span> <i class="fa fa-calendar"> </i> {{newsItem.date | translate}}</span>
+                        <!--<span class="pleft10"><i class="fa fa-heart"></i> 1500</span>-->
+                        <!--<span class="pleft10"><i class="fa fa-commenting"></i> 5</span>-->
+                    </div>
+                    <div class="news-content-newscol-text">
+                        <div class="news-content-newscol-text-content">
+                            <!--<hr/>-->
+                            <div ng-include="'/src/lang/'+appCtrl.getLanguage()+'/news_1_content.html'"></div>
+
+                        </div>
+                    </div>
+                    <!--<div class="news-content-newscol-comments">-->
+                    <!--<div class="news-content-newscol-comments-title">-->
+                    <!--<h3>Комментарии (0)</h3>-->
+                    <!--<hr/>-->
+                    <!--<div class="news-content-newscol-comments-body">-->
+                    <!--&lt;!&ndash;Здесь будут комментарии&ndash;&gt;-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <!-- Сайдбар с новстями -->
+                <div class="news-content-sidebar">
+                    <!--<div class="news-content-sidebar-block">-->
+                    <!--<div class="news-content-sidebar-block-title">-->
+                    <!--<h3>Похожие новости</h3>-->
+                    <!--</div>-->
+                    <!--<div class="news-content-sidebar-block-body">-->
+                    <!--<ul>-->
+                    <!--<li>-->
+                    <!--<div class="news-content-sidebar-block-body-name">-->
+                    <!--<a href="#">Название новости номер один</a>-->
+                    <!--</div>-->
+                    <!--<div class="news-content-sidebar-block-body-subtitle">-->
+                    <!--<span>5</span>-->
+                    <!--<span> комментариев,</span>-->
+                    <!--<span>04.12.2015</span>-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<div class="news-content-sidebar-block-body-name">-->
+                    <!--<a href="#">Название новости номер один</a>-->
+                    <!--</div>-->
+                    <!--<div class="news-content-sidebar-block-body-subtitle">-->
+                    <!--<span>5</span>-->
+                    <!--<span> комментариев</span>-->
+                    <!--<span>04.12.2015</span>-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<div class="news-content-sidebar-block-body-name">-->
+                    <!--<a href="#">Название новости номер один</a>-->
+                    <!--</div>-->
+                    <!--<div class="news-content-sidebar-block-body-subtitle">-->
+                    <!--<span>5</span>-->
+                    <!--<span> комментариев</span>-->
+                    <!--<span>04.12.2015</span>-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <div class="news-content-sidebar-block">
+                        <div class="news-content-sidebar-block-title">
+                            <h3>{{'NEWS__LAST_NEWS_TITLE' | translate}}</h3>
+                        </div>
+                        <div class="news-content-sidebar-block-body">
+                            <ul>
+                                <li ng-repeat="newsItem in ::vm.news">
+                                    <div class="news-content-sidebar-block-body-name">
+                                        <a ng-href="{{::newsItem.url}}">{{newsItem.title | translate}}</a>
+                                    </div>
+                                    <!--<div class="news-content-sidebar-block-body-subtitle">-->
+                                    <!--<span>5</span>-->
+                                    <!--<span> комментариев,</span>-->
+                                    <span>{{newsItem.date | translate}}</span>
+                                    <!--</div>-->
+                                </li>
+                                <!--<li>-->
+                                <!--<div class="news-content-sidebar-block-body-name">-->
+                                <!--<a href="#">Название новости номер один</a>-->
+                                <!--</div>-->
+                                <!--<div class="news-content-sidebar-block-body-subtitle">-->
+                                <!--<span>5</span>-->
+                                <!--<span> комментариев</span>-->
+                                <!--<span>04.12.2015</span>-->
+                                <!--</div>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                <!--<div class="news-content-sidebar-block-body-name">-->
+                                <!--<a href="#">Название новости номер один</a>-->
+                                <!--</div>-->
+                                <!--<div class="news-content-sidebar-block-body-subtitle">-->
+                                <!--<span>5</span>-->
+                                <!--<span> комментариев</span>-->
+                                <!--<span>04.12.2015</span>-->
+                                <!--</div>-->
+                                <!--</li>-->
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Middle -->

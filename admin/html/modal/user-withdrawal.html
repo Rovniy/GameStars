@@ -1,0 +1,26 @@
+<div class="modal-body">
+    <form name="form" novalidate>
+        <h2>Доступно: ${{::modal.max}}</h2>
+
+        <div class="form-group">
+            <div class="input-group" ng-class="{ 'has-error': form.$invalid }">
+                <span class="input-group-addon">$</span>
+                <input type="number" class="form-control" name="amount" placeholder="Amount in dollars"
+                       min="0" max="{{::modal.max}}" required
+                       ng-model="modal.amount">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-success"
+                    ng-disabled="form.$invalid || modal.loading"
+                    ng-click="modal.submit()">
+                ОК <i class="fa fa-spin fa-spinner" ng-show="modal.loading"></i>
+            </button>
+        </div>
+
+        <div class="alert alert-danger" ng-show="modal.error">
+            {{modal.error}}
+        </div>
+    </form>
+</div>

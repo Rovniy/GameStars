@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'PAYMENT__DEPOSITING' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<div ng-controller="PaymentsModalController" class="modal-body modalPayment">
+    <div ng-hide="payVisa">
+        <h3>{{'PAYMENT__CHOOSE_SUM' | translate}} <red>{{'PAYMENT__CHOOSE_SUM2' | translate}}</red></h3>
+        <div class="row currency" ng-class="{'disableded': buttonsDisable || someMoney.length > 0}">
+            <div class="item">
+                <button class="btn" ng-model="radioXZ" ng-click="dollars=radioXZ; buttonsDisable = false; someMoney = ''; showList = true;" uib-btn-radio="200"><span>$2</span></button>
+            </div>
+            <div class="item">
+                <button class="btn" ng-model="radioXZ" ng-click="dollars=radioXZ; buttonsDisable = false;; someMoney = ''; showList = true;" uib-btn-radio="500"><span>$5</span></button>
+            </div>
+            <div class="item">
+                <button class="btn" ng-model="radioXZ" ng-click="dollars=radioXZ; buttonsDisable = false;; someMoney = ''; showList = true;" uib-btn-radio="1000"><span>$10</span></button>
+            </div>
+        </div>
+        <h3>{{'PAYMENT__CHOOSE_ANY_SUM' | translate}}</h3>
+        <div class="row someCurrency" ng-class="{'disableded': someMoney.length == 0}">
+            <span>$</span>
+            <input type="text" placeholder="Enter money" ng-change="showList=false" ng-model="someMoney"/>
+            <button ng-disabled="someMoney.length == 0" class="btn" ng-click="checkSomeMoney();">{{'PAYMENT__CONFIR_BUTTON' | translate}}</button>
+        </div>
+        <div ng-show="showList">
+            <div class="row bulletpoints" track-event-by-click track-category="billing" track-action="deposit_popup_bonus_deselected">
+                <input type="radio" ng-model="dollars" ng-value="dollars">{{'PAYMENT__PART1' | translate}} ${{(dollars/100).toFixed(2)}} {{'PAYMENT__PART2' | translate}} ${{(dollars/100).toFixed(2)}} {{'PAYMENT__PART3' | translate}}<Br>
+                <input type="radio" ng-model="dollars" ng-value="dollars*1.5">{{'PAYMENT__PART4' | translate}} ${{(dollars/100*1.5).toFixed(2)}} {{'PAYMENT__PART5' | translate}} ${{(dollars/100*1.5).toFixed(2)}} {{'PAYMENT__PART3' | translate}}<Br>
+                <input type="radio" ng-model="dollars" ng-value="dollars*2">{{'PAYMENT__PART4' | translate}} ${{(dollars/100*2).toFixed(2)}} {{'PAYMENT__PART5' | translate}} ${{(dollars/100*2).toFixed(2)}} {{'PAYMENT__PART3' | translate}}<Br>
+            </div>
+        </div>
+
+        <div ng-show="showList" class="row allsum">
+            <h4>{{'PAYMENT__YOU_WILL_BE_CHARGED' | translate}} ${{(dollars/100).toFixed(2)}}</h4>
+            <h3>{{'PAYMENT__TOTAL_DEPOSIT' | translate}} <strong>${{(dollars/100*2).toFixed(2)}}</strong></h3>
+        </div>
+
+        <div ng-show="showList">
+            <gs-payment providers="paypal, epg, psc" amount="dollars" purchase-type="REAL_POINTS" on-submit="goPayFromModal(provider)"></gs-payment>
+        </div>
+
+    </div>
+</div>

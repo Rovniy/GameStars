@@ -1,0 +1,183 @@
+            <!-- start Middle-->
+            <div id="middle" >
+
+                <div class="b-top-substrate" >
+                    <div class="b-top-substrate_cnt">
+
+                        <div class="b-action-tourn">
+                            <div class="b-title-s">
+                                {{'TOURNAMENT_TIME_BOMB__TITLE'|i18n}}
+                            </div>
+                            <div class="b-action-tourn_features b-action-tourn_features__art-pick3">
+                                <div class="b-action-tourn_features_item">
+                                    <div class="b-action-tourn_features_item_head">
+                                       {{'TOURNAMENT__AWARD_FUND'|i18n}}
+                                    </div>
+                                    <div class="b-action-tourn_features_item_val">
+                                        $500
+                                    </div>
+                                </div>
+                                <div class="b-action-tourn_features_item">
+                                    <div class="b-action-tourn_features_item_head">
+                                        {{'TOURNAMENT__BUY_IN'|i18n}}
+                                    </div>
+                                    <div class="b-action-tourn_features_item_val">
+                                        $1
+                                    </div>
+                                </div>
+                                <div class="b-action-tourn_features_item">
+                                    <div class="b-action-tourn_features_item_head">
+                                        {{'TOURNAMENT_TIME_BOMB__MEMBERS'|i18n}}
+                                    </div>
+                                    <div class="b-action-tourn_features_item_val b-action-tourn_features_item_val__long">
+                                        {{'TOURNAMENT_TIME_BOMB__NOT_LIMITED'|i18n}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="b-action-tourn_end-enter" ng-controller="sliderCtr">
+                                <div class="b-action-tourn_end-enter_title">
+                                    {{'MAIN__REG_START'|i18n}}
+                                </div>
+                                <div class="b-action-tourn_end-enter_timer">
+                                    <div class="timer-cell">
+                                        <div class="timer-cell_value">{{'TOURNAMENT_TIME_BOMB__DATE'|i18n}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-controller="AlertTempText">
+                                <button class="btn-red" disabled='disabled'>
+                                    {{'TOURNAMENT__TAKE_PART'|i18n}}
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="b-gross-brd" style="min-height: 0;" ng-controller="AlertTemp">
+                    <div class="b-gross-brd_cnt" style="min-height: 0;">
+                        <!-- start  -->
+                        <div class="b-conditions-tour">
+                            <div class="b-conditions-tour_structure b-conditions-tour_structure__non-enter">
+                                <!-- start Турнир НЕ начался -->
+                                <div>
+                                    <div class="b-conditions-tour_subtitle">
+                                        {{'TOURNAMENT_TIME_BOMB__TOURNAMENT_START'|i18n}}
+                                    </div>
+                                    <div class="b-conditions-tour_structure_max-date-rate">
+                                        <!--20 ЯНВАРЯ 2016-->
+                                        {{'TOURNAMENT_TIME_BOMB__DATE'|i18n}}
+                                        <!--todo: внедрить универсальный способ перевода-->
+                                    </div>
+                                </div>
+                                <!-- end Турнир НЕ начался -->
+
+                                <!-- start Даты турниров -->
+
+                                <div class="b-conditions-tour_structure_list">
+                                    <div class="b-conditions-tour_structure_list_head">
+                                        <div class="b-conditions-tour_structure_list_head_title">{{'TOURNAMENT__DATES'|i18n}}</div>
+                                        <div class="b-conditions-tour_structure_list_head_title">{{'TOURNAMENT__MIN_RATE'|i18n}}</div>
+                                    </div>
+                                    <div class="swiper-container swiper-container-vertical" style="margin: 0; height: auto;">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                                                <!--todo: внедрить универсальный способ перевода-->
+
+                                                <span style="width: 114px;">15 февраля</span>
+                                                50-250
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <span style="width: 114px;">16 февраля</span>
+                                                100-500
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <span style="width: 114px;">17 февраля</span>
+                                                200-1000
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <span style="width: 114px;">18 февраля</span>
+                                                400-2000
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <span style="width: 114px;">19 февраля</span>
+                                                800-4000
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <span style="width: 114px;">20 февраля</span>
+                                                1600-8000
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- end Даты турниров -->
+                            </div>
+
+                            <div class="b-conditions-tour_rules">
+                                <div class="b-conditions-tour_rules_cnt">
+                                    <div class="b-conditions-tour_rules_title">
+                                        <!--Условия турнира-->
+                                        {{'TOURNAMENT__CONDITIONS'|i18n}}
+                                    </div>
+                                    <ul>
+                                        <li style="margin-bottom: 5px; line-height: 15px; font-size: 14px;">
+                                            {{'TOURNAMENT_TIME_BOMB__TOURNAMENT_CONDITION_1'|i18n}}
+                                        </li>
+                                        <li style="margin-bottom: 5px; line-height: 15px; font-size: 14px;">
+                                            {{'TOURNAMENT_TIME_BOMB__TOURNAMENT_CONDITION_2'|i18n}}
+                                        </li>
+                                        <li style="margin-bottom: 5px; line-height: 15px; font-size: 14px;">
+                                            {{'TOURNAMENT_TIME_BOMB__TOURNAMENT_CONDITION_3'|i18n}}
+                                        </li>
+                                        <li style="margin-bottom: 5px; line-height: 15px; font-size: 14px;">
+                                            {{'TOURNAMENT_TIME_BOMB__TOURNAMENT_CONDITION_4'|i18n}}
+                                        </li>
+                                        <li style="margin-bottom: 5px; line-height: 15px; font-size: 14px;">
+                                            {{'TOURNAMENT_TIME_BOMB__TOURNAMENT_CONDITION_5'|i18n}}
+                                        </li>
+                                        <li style="margin-bottom: 5px; line-height: 15px; font-size: 14px;">
+                                            {{'TOURNAMENT_TIME_BOMB__TOURNAMENT_CONDITION_6'|i18n}}
+                                        </li>
+                                        <li style="margin-bottom: 5px; line-height: 15px; font-size: 14px;">
+                                            {{'TOURNAMENT_TIME_BOMB__TOURNAMENT_CONDITION_7'|i18n}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- start Призовой фонд -->
+                            <div class="b-conditions-tour_prize-fund">
+                                <div class="b-conditions-tour_subtitle">
+                                    {{'TOURNAMENT_TIME_BOMB__CURRENT_PRICE_FUND'|i18n}}
+                                </div>
+                                <div class="b-conditions-tour_prize-fund_number">
+                                    $500
+                                </div>
+                                <div class="b-conditions-tour_prize-fund_info">
+                                    {{'TOURNAMENT_TIME_BOMB__PAYMENT_PROCEDURE'|i18n}}<i ng-click="modal('md', 'info-payments.html')"></i>
+                                </div>
+                                <div class="b-conditions-tour_prize-fund_place">
+                                    {{'TOURNAMENT_TIME_BOMB__TOURNAMENT__AWARD_COUNT'|i18n}}
+                                    <div class="b-conditions-tour_prize-fund_place_number">
+                                        50
+                                    </div>
+                                </div>
+                                <div class="b-conditions-tour_prize-fund_swiper">
+                                    <div class="swiper-container" style="height: 100px; margin-top: 18px;">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide" style="font-size: 12px; line-height: 12px;">
+                                                {{'TOURNAMENT_TIME_BOMB__REWARD_MATCH_RULES'|i18n}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end Призовой фонд -->
+                        </div>
+                        <!-- end -->
+
+                    </div>
+                </div>
+
+            </div>

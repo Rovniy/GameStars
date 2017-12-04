@@ -1,0 +1,612 @@
+.b-matchresult-header {
+  width:100%;
+  height:61px;
+  border-bottom:1px solid #3c3d48;
+  .b-matchresult-header-list {
+    width:50%;
+    text-align:center;
+    float:left;
+    padding:10px 0 16px;
+    background: rgb(48, 49, 57);
+    background: -webkit-linear-gradient(0deg, rgb(37, 38, 46) 0%, rgb(20, 21, 31) 100%);
+    background: -o-linear-gradient(0deg, rgb(37, 38, 46) 0%, rgb(20, 21, 31) 100%);
+    background: -ms-linear-gradient(0deg, rgb(37, 38, 46) 0%, rgb(20, 21, 31) 100%);
+    background: linear-gradient(0deg, rgb(37, 38, 46) 0%, rgb(20, 21, 31) 100%);
+    span {
+      text-transform: uppercase;
+      font-size:24px;
+      color:#62656b;
+    }
+  }
+  .b-matchresult-header-results {
+    width:50%;
+    text-align:center;
+    float:left;
+    padding:10px 0 16px;
+    background: rgb(48, 49, 57);
+    background: -webkit-linear-gradient(0deg, rgb(48, 49, 57) 0%, rgb(33, 33, 42) 100%);
+    background: -o-linear-gradient(0deg, rgb(48, 49, 57) 0%, rgb(33, 33, 42) 100%);
+    background: -ms-linear-gradient(0deg, rgb(48, 49, 57) 0%, rgb(33, 33, 42) 100%);
+    background: linear-gradient(0deg, rgb(48, 49, 57) 0%, rgb(33, 33, 42) 100%);
+    span {
+      text-transform: uppercase;
+      font-size:24px;
+      color:#d5c092;
+    }
+  }
+}
+.b-matchresult-players {
+  background:url('@{src-url}/img/@{dir}/math-bg-pic.png') no-repeat 0 0 ;
+  background-size:cover;
+  height:376px;
+  width:100%;
+  .b-matchresult-players-info {
+    width:214px;
+    float:left;
+    height:376px;
+    background:rgba(45,46,55,50%) url('@{src-url}/img/@{dir}/matchresult-info-bg.png') no-repeat 100% 0 ;
+    text-align:center;
+    .type {
+      width:100%;
+      height:100px;
+      padding:30px 0 0;
+      .title {
+        color:#f2d9a2;
+        text-transform: uppercase;
+        font: 14px/14px @font-main-bold;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+      }
+      .name {
+        color:#f2ce7c;
+        text-transform: uppercase;
+        font: 18px/18px @font-main-bold;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+      }
+    }
+    .map {
+      width:100%;
+      height:132px;
+      padding:30px 0 0;
+      .title {
+        color:#f2d9a2;
+        text-transform: uppercase;
+        font: 14px/14px @font-main-bold;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+      }
+      .name {
+        color:#f2ce7c;
+        text-transform: uppercase;
+        font: 18px/18px @font-main-bold;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+      }
+    }
+    .time {
+      width:100%;
+      height:145px;
+      padding:30px 0 0;
+      .title {
+        color:#f2d9a2;
+        text-transform: uppercase;
+        font: 14px/14px @font-main-bold;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+      }
+      .name {
+        color:#f2ce7c;
+        text-transform: uppercase;
+        font: 34px/34px @font-main-bold;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+      }
+    }
+  }
+  .b-matchresult-players-list {
+    width:276px;
+    float:left;
+    height:376px;
+    background:rgba(45,46,55,50%) url('@{src-url}/img/@{dir}/matchresult-info-bg.png') no-repeat 0 0 ;
+    .myteam {
+      width:100%;
+      height:190px;
+      text-align:center;
+      .title {
+        font:14px/14px @font-main-bold;
+        color:#f2d9a2;
+        text-transform: uppercase;
+      }
+      ul {
+        margin:0;
+        padding:0;
+        li {
+          list-style: none;
+          padding:4px 0;
+          .user {
+            width:100%;
+            height:24px;
+            padding:0 0 0 18px;
+            .icon {
+              float:left;
+              height:24px;
+              width:24px;
+              img {
+                border:1px solid #9e8357;
+                width:20px;
+                height:20px;
+                margin:1px;
+              }
+            }
+            .avatar {
+              float:left;
+              height:24px;
+              width:24px;
+              margin-left:4px;
+              img {
+                border:1px solid #9e8357;
+                width:20px;
+                height:20px;
+                margin:1px;
+              }
+            }
+            .name {
+              float:left;
+              height:24px;
+              width:167px;
+              color:#c7c7c8;
+              text-align:left;
+              padding:3px 0 0 10px;
+              font:14px/14px @font-main;
+              text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+            }
+            .gotolk {
+              float:left;
+              height:24px;
+              width:23px;
+              a {
+                text-decoration: none;
+                opacity:0.8;
+                margin:1px;
+                &:hover {
+                  opacity:1;
+                  text-decoration: none;
+                }
+                img {
+                  width: 21px;
+                  height: 21px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .enemyteam {
+      width:100%;
+      height:190px;
+      text-align:center;
+      .title {
+        font:14px/14px @font-main-bold;
+        color:#f2d9a2;
+        text-transform: uppercase;
+      }
+      ul {
+        margin:0;
+        padding:0;
+        li {
+          list-style: none;
+          padding:4px 0;
+          .user {
+            width:100%;
+            height:24px;
+            padding:0 0 0 18px;
+            .icon {
+              float:left;
+              height:24px;
+              width:24px;
+              img {
+                border:1px solid #9e8357;
+                width:20px;
+                height:20px;
+                margin:1px;
+              }
+            }
+            .avatar {
+              float:left;
+              height:24px;
+              width:24px;
+              margin-left:4px;
+              img {
+                border:1px solid #9e8357;
+                width:20px;
+                height:20px;
+                margin:1px;
+              }
+            }
+            .name {
+              float:left;
+              height:24px;
+              width:167px;
+              color:#c7c7c8;
+              text-align:left;
+              padding:3px 0 0 10px;
+              font:14px/14px @font-main;
+              text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+            }
+            .gotolk {
+              float:left;
+              height:24px;
+              width:23px;
+              a {
+                text-decoration: none;
+                opacity:0.8;
+                margin:1px;
+                &:hover {
+                  opacity:1;
+                  text-decoration: none;
+                }
+                img {
+                  width: 21px;
+                  height: 21px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+  .b-matchresult-players-result {
+    float:left;
+    height:376px;
+    width:586px;
+    text-align:center;
+    margin-left:63px;
+    .victory {
+      width:100%;
+      height:103px;
+      padding-top:22px;
+      background:url('@{src-url}/img/@{dir}/matchresult-victory-bg.png') no-repeat 50% 100% ;
+      span {
+        font:50px/50px @font-main-bold;
+        color:#eaca8b;
+        text-transform: uppercase;
+        text-shadow: 0px 0px 30px rgba(150, 20, 20, 1);
+      }
+    }
+    .victory-finished {
+      width:100%;
+      height:104px;
+      padding-top:22px;
+      background:url('@{src-url}/img/@{dir}/matchresult-victory-bg.png') no-repeat 50% 100% ;
+      span {
+        font:35px/55px @font-main-bold;
+        color:#eaca8b;
+        text-transform: uppercase;
+        text-shadow: 0px 0px 30px rgba(150, 20, 20, 1);
+      }
+    }
+    .info-finished {
+      width:589px;
+      height:80px;
+      .left {
+        width:370px;
+        height:80px;
+        float:left;
+        text-align:center;
+        background:url('@{src-url}/img/@{dir}/icon-points.png') no-repeat 90% 72% ;
+        .title {
+          font:14px/14px @font-main-bold;
+          color:#f2d9a2;
+          text-transform: uppercase;
+          text-align:right;
+          padding:10px 35px 0 0;
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+        }
+        .colvo {
+          color:#f2cb78;
+          text-align:right;
+          padding-right:60px;
+          font:34px/34px @font-main-bold;
+          text-transform: uppercase;
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+        }
+      }
+      .right {
+        width:321px;
+        height:120px;
+        float:left;
+        padding:15px 0 0 50px;
+        text-align:left;
+      }
+    }
+    .info {
+      width:589px;
+      height:120px;
+      .left {
+        width:370px;
+        height:120px;
+        float:left;
+        text-align:center;
+        background:url('@{src-url}./img/@{dir}/icon-points.png') no-repeat 90% 60% ;
+        .title {
+          font:14px/14px @font-main-bold;
+          color:#f2d9a2;
+          text-transform: uppercase;
+          text-align:right;
+          padding:27px 25px 0 0;
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+        }
+        .colvo {
+          color:#f2cb78;
+          text-align:right;
+          padding-right:60px;
+          font:34px/34px @font-main-bold;
+          text-transform: uppercase;
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+        }
+      }
+      .right {
+        width:321px;
+        height:120px;
+        float:left;
+        padding:15px 0 0 50px;
+        text-align:left;
+      }
+    }
+    .text-finished {
+      width:88%;
+      color:#fff;
+      .title {
+        font:14px/14px @font-main-bold;
+        color:#f2d9a2;
+        text-transform: uppercase;
+        text-align:center;
+        padding:10px 35px 0 0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+      }
+      .text {
+        font:14px/14px @font-main-bold;
+        color:#f2d9a2;
+        text-align:center;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+      }
+    }
+    .experience {
+      width:100%;
+      height:154px;
+      .title {
+        font:14px/14px @font-main-bold;
+        color:#f2d9a2;
+        text-transform: uppercase;
+        text-align:center;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+      }
+      .bar {
+        width:415px;
+        height:25px;
+        margin:10px 0 0 85px;
+        .progress-line {
+          height:23px;
+          background-color: rgba(18,18,18,80%);
+          border:1px solid #f2cb78;
+          border-radius:25px;
+          position:relative;
+          .bordered {
+            -moz-border-radius-topleft: 17px;
+            -webkit-border-top-left-radius: 17px;
+            border-top-left-radius: 17px;
+            -moz-border-radius-bottomleft: 17px;
+            -webkit-border-bottom-left-radius: 17px;
+            border-bottom-left-radius: 17px;
+            margin:2px 0 2px 2px!important;
+          }
+          .nomarginline {
+            margin:0px!important;
+          }
+          .progress-bar {
+            background: linear-gradient(to bottom, #5b4e97 0px, #100a2d 100%);
+            box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15) inset;
+            color: #fff;
+            float: left;
+            font-size: 12px;
+            height: 17px;
+            line-height: 20px;
+            text-align: center;
+            transition: width 0.6s ease 0s;
+            width: 0;
+          }
+          .was {
+            background-repeat: repeat-x;
+            background: linear-gradient(to bottom, #5b4e97 0px, #231854 100%);
+            margin:2px 0 2px 2px;
+            -moz-border-radius-topleft: 17px;
+            -webkit-border-top-left-radius: 17px;
+            border-top-left-radius: 17px;
+            -moz-border-radius-bottomleft: 17px;
+            -webkit-border-bottom-left-radius: 17px;
+            border-bottom-left-radius: 17px;
+          }
+          .will {
+            background-repeat: repeat-x;
+            background: linear-gradient(to bottom, #784a9e 0px, #3b1c5a 100%);
+            margin:2px 2px 2px 0;
+            -moz-border-radius-topright: 17px;
+            -webkit-border-top-right-radius: 17px;
+            border-top-right-radius: 17px;
+            -moz-border-radius-bottomright: 17px;
+            -webkit-border-bottom-right-radius: 17px;
+            border-bottom-right-radius: 17px;
+          }
+          .lvlcount {
+            position:absolute;
+            top:0;
+            left:48%;
+            span {
+              font:14px/14px @font-main-bold;
+              color:#fff;
+            }
+          }
+        }
+      }
+      .score {
+        width:100%;
+        height:104px;
+        background:url('@{src-url}/img/@{dir}/matchresult-victory-bg.png') no-repeat 50% 0 ;
+        padding-top:10px;
+        margin-top:10px;
+        .title {
+          font:14px/14px @font-main-bold;
+          color:#f2d9a2;
+          text-transform: uppercase;
+          text-align:center;
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+        }
+        .name {
+          color:#f2ce7c;
+          text-transform: uppercase;
+          font: 40px/40px @font-main-bold;
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+        }
+      }
+
+
+    }
+
+  }
+  .b-matchresult-players-radiant {
+    width:465px;
+    float:left;
+    height:376px;
+  }
+}
+.b-matchresult-footer-title {
+  width:100%;
+  height:43px;
+  border-top:1px solid #716b59;
+  border-bottom:1px solid #716b59;
+  background: url('@{src-url}/img/@{dir}/match-footer-title.png');
+  background-size:100%;
+  color:#d5c092;
+  font-size:20px;
+  .b-matchresult-footer-title-chat {
+    width:50%;
+    float:left;
+    text-align:center;
+    padding:3px 0 9px;
+    border-right:2px solid #22232c;
+  }
+  .b-matchresult-footer-title-achievements {
+    width:50%;
+    float:left;
+    text-align:center;
+    padding:3px 0 9px;
+    .b-matchresult-footer-title-left {
+      width:50%;
+      float:left;
+    }
+    .b-matchresult-footer-title-right {
+      width:50%;
+      float:left;
+    }
+  }
+}
+.b-matchresult-footer-body {
+  border-top:1px solid #292a33;
+  height:194px;
+  .b-matchresult-footer-body-chat {
+    width:50%;
+    height:190px;
+    float:left;
+    border-right:2px solid #22232c;
+    .b-matchresult-footer-body-chat-area {
+      width:100%;
+      height:137px;
+      background: rgb(48, 49, 57);
+      background: -webkit-linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+      background: -o-linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+      background: -ms-linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+      background: linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+      .b-matchresult-footer-body-chat-area-msg {
+        width:100%;
+        min-height:12px;
+        padding:1px 10px 1px 10px;
+        a {
+          font: 14px/14px BeaufortforLOL-Bold;
+          color:#fcde9d;
+        }
+        span {
+          color:#fff;
+        }
+      }
+
+    }
+    .b-matchresult-footer-body-chat-submit {
+      width:100%;
+      height:53px;
+      border:0px;
+      background: #151620;
+      padding:9px 0 0 10px;
+      border-top:1px solid #262730;
+      input {
+        width:415px;
+        border:2px solid #23252c;
+        border-radius:5px;
+        color:#5b5b5b;
+        padding:4px 9px;
+        font-size:16px;
+      }
+      button {
+        margin-left:11px;
+      }
+    }
+    .b-matchresult-footer-body-chat-getlink {
+      width:100%;
+      height:100%;
+      background: rgb(48, 49, 57);
+      background: -webkit-linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+      background: -o-linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+      background: -ms-linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+      background: linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+      text-align:center;
+      //padding-top:15px;
+      .mtop10 {
+        margin-top:10px;
+      }
+      a {
+        margin-top:50px;
+      }
+      p {
+        font: 18px/18px @font-main;
+        color:#666;
+      }
+      .white {
+        color:#fff;
+      }
+      input {
+        width:90%;
+        color:#000;
+        margin:5px 0;
+      }
+
+    }
+  }
+  .b-matchresult-footer-body-game {
+    width:50%;
+    height:190px;
+    float:left;
+    background:rgba(21,23,30, 90%);
+    .b-matchresult-footer-body-game-comingsoon {
+      width:569px;
+      height:143px;
+      text-align:center;
+      padding-top:40px;
+    }
+    .b-matchresult-footer-body-game-buttons {
+      width:569px;
+      padding:5px 8px 0 0;
+      height:46px;
+      text-align:right;
+      background:#151620;
+      border-top:1px solid #262730;
+    }
+  }
+
+}

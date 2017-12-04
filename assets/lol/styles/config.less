@@ -1,0 +1,24 @@
+@src-url: '/src'; //Адрес сервера хранения данных
+@dir: 'lol';
+@font-main: "BeaufortforLOL"; //Шрифт по умолчанию
+@font-main-bold: "BeaufortforLOL-Bold"; //Жирный шрифт по умолчанию
+@font-semi: "Open-Sans"; //Дополнительный строгий шрифт
+@roboto-light: "RobotoLight"; //Дополнительный строгий шрифт
+@roboto-regular: "RobotoRegular"; //Дополнительный строгий шрифт
+@roboto-medium: "RobotoMedium"; //Дополнительный строгий шрифт
+@roboto-bold: "RobotoBold"; //Дополнительный строгий шрифт
+
+//********************************* MIXIN
+.gold-light-color {
+  color: #e2cfa4;
+}
+
+.gold-color {
+  text-shadow: 1px 0 5px #000;
+  color: #f2cb78;
+}
+
+//Верхняя текстура тела страницы
+.cfg-b-gross-brd_cnt-info {
+  background: #dedede url('@{src-url}/img/@{dir}/frame-textures-sprite.jpg') no-repeat;
+}

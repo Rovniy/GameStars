@@ -1,0 +1,40 @@
+<form name="form" novalidate>
+    <div class="card">
+        <div class="big">
+            <input type="text" placeholder="0000 0000 0000 0000" name="cardNumber"
+                   ng-model="$ctrl.cardNumber" cc-number gs-format-card />
+        </div>
+        <div class="semi">
+            <input ng-model="$ctrl.firstName" placeholder="FIRSTNAME" ng-required="true"/>
+            <input ng-model="$ctrl.lastName" placeholder="LASTNAME" ng-required="true"/>
+        </div>
+        <div class="smallarea"
+             ng-class="{ 'invalid-exp': !!form.$error.ccExp && form.month.$touched && form.year.$touched }"
+             cc-exp>
+            <div class="small">
+                <input class="mounth" placeholder="MOUNTH" name="month"
+                       ng-model="$ctrl.month" cc-exp-month/>
+            </div>
+            <div class="small">
+                <span>/</span>
+            </div>
+            <div class="small">
+                <input class="year" placeholder="YEAR" name="year"
+                       ng-model="$ctrl.year" cc-exp-year/>
+            </div>
+            <div class="small">
+                <input class="cvn" placeholder="CVN/CVN2 CODE" name="cvn"
+                       ng-model="$ctrl.cvn" cc-cvc/>
+            </div>
+        </div>
+    </div>
+
+    <div class="buttonArea ta-center">
+        <button class="btn-red"
+                ng-click="$ctrl.submit()"
+                ng-disabled="!form.$valid || $ctrl.loading">{{'PAYMENT__CONTINUE' | translate}}</button>
+    </div>
+    <div class="onerror">
+        <h3 ng-if="$ctrl.error">{{'FORM__ERROR_DEFAULT' | translate}}</h3>
+    </div>
+</form>

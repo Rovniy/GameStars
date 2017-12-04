@@ -1,0 +1,632 @@
+<div class="b-gross-brd mbot0">
+    <div class="b-gross-brd_cnt ptop0">
+        <!---------------------------- Начало страницы подготовки к матчу ----------------------------------->
+        <div class="b-gross-brd_cnt-content mall0" ng-if="status === 'CREATED' || status === 'STARTED'">
+            <div class="b-match-header">
+                <div class="b-match-header-list">
+                    <span>{{'MATCH__MEMBER_LIST' | translate}}</span>
+                </div>
+                <div class="b-match-header-results">
+                    <span>{{'MATCH__RESULTS' | translate}}</span>
+                </div>
+            </div>
+            <div class="b-match-players">
+                <div class="b-match-players-dires b-match-players-list">
+                    <h3 class="title">{{'MATCH__TEAM' | translate}} 1</h3>
+                    <ul >
+                        <li ng-repeat="user in myTeam">
+                            <div class="b-match-player" ng-class="{ 'player-ready': user.is_ready }">
+                                <div class="b-match-player-avatar">
+                                    <div class="avatar-border">
+                                        <img ng-src="/src/img/avatars/{{user.avatar_id}}.jpg">
+                                    </div>
+
+                                </div>
+                                <div ng-show="user.rank" class="b-match-player-meta">
+                                    <div class="username">
+                                        <span>{{::user.name}}</span>
+                                    </div>
+                                    <div class="usermeta">
+                                        <a class="gotolk ng-hide" href="javascipt:void(0)"><img src="/src/img/lol/match-user-gotolk.png"/></a>
+                                        <gs-rank-img class="rating" rank="user.rank"></gs-rank-img>
+                                    </div>
+                                </div>
+
+                                <div ng-show="!user.rank" class="b-match-player-meta">
+                                    <div class="username vertcenter">
+                                        <span>{{::user.name}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="b-match-player-ready">
+                                    <span>{{'MATCH__READY' | translate}}</span>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+
+                <div ng-if="!allUsersAccept" class="b-match-players-vstimer">
+                    <div ng-show="addSometime" class="addtimer">
+                        <span class="addtitle">{{'MATCH__EXTRA_TIME' | translate}}:</span><br/>
+                    </div>
+                    <div ng-class="{'vs-mtop90' : !addSometime}" class="vs">
+                        <span ng-hide="addSometime" class="timer"><span class="set_min" ng-bind="mins"></span> : <span class="set_sec" ng-bind="secs"></span></span>
+                        <span ng-show="addSometime" class="timer"><span class="set_min" ng-bind="addmins"></span> : <span class="set_sec" ng-bind="addsecs"></span></span>
+                    </div>
+                    <div>
+                        <button class="btn-red push-ready-match-window" type="button"
+                                ng-click="userReady()" ng-disabled="iAmReady" >{{'MATCH__READY' | translate}}</button>
+                    </div>
+                    <div class="invite-cost">
+                        <p tooltip-placement="top" uib-tooltip="{{'MATCH__ACCEPTED_RATE__TOOLTIP' | translate}}" class="text">{{'MATCH__ACCEPTED_RATE' | translate}}</p>
+                        <p ng-if="betType == 'TOURNAMENT_POINTS'" class="cost">{{bet}} <img src="/src/img/lol/icon-points.png"/></p>
+                        <p ng-if="betType == 'STAR_POINTS'" class="cost">{{bet}} <img src="/src/img/base/icon-currency.png"/></p>
+                        <p ng-if="betType == 'REAL_POINTS'" class="cost"> {{bet|currencyUnit}} </p>
+                    </div>
+                </div>
+                <div ng-if="allUsersAccept" class="b-match-players-vstimer">
+                    <div class="descriptoion">
+                        <h4>{{'MATCH__ALL_MEMBERS_TO_FIGHT' | translate}}</h4>
+                        <h4>{{'MATCH__TIMEOUT' | translate}}</h4>
+                        <hr/>
+                        <ol class="maintextol">
+                            <li>{{'MATCH__COPY_AND_PASTE_LINK' | translate}} <br/>{{'MATCH__COPY_AND_PASTE_LINK_PATH' | translate}}</li>
+                            <li>{{'MATCH__JOIN_TO_TEAM' | translate}}</li>
+                            <li>{{'MATCH__START_GAME_NOTICE' | translate}}</li>
+                            <li>{{'MATCH__TIMEOUT_NOTICE' | translate}}</li>
+                        </ol>
+                        <!--<h3>{{'MATCH__START_GAME_WARNING' | translate}}</h3>-->
+                        <!-- Это кнопка завершения матча -->
+                        <button ng-show="showButtonEndMatch" class="btn-red push-ready-match-window" id="buttonFinishLobby" type="button"
+                                ng-click="matchFinish(0)">{{'MATCH__MATCH_FINISHED' | translate}}</button>
+                    </div>
+                </div>
+                <div class="b-match-players-radiant b-match-players-list">
+                    <h3 class="title">{{'MATCH__TEAM' | translate}} 2</h3>
+                    <ul>
+                        <li ng-repeat="user in enemyTeam">
+                            <div class="b-match-player" ng-class="{ 'player-ready': user.is_ready }">
+                                <div class="b-match-player-avatar">
+                                    <div class="avatar-border">
+                                        <img ng-src="/src/img/avatars/{{user.avatar_id}}.jpg">
+                                    </div>
+                                </div>
+                                <div ng-show="user.rank" class="b-match-player-meta">
+                                    <div class="username">
+                                        <span>{{::user.name}}</span>
+                                    </div>
+                                    <div class="usermeta">
+                                        <a  class="gotolk ng-hide" href="javascipt:void(0)"><img src="/src/img/lol/match-user-gotolk.png"/></a>
+                                        <gs-rank-img class="rating" rank="user.rank"></gs-rank-img>
+                                    </div>
+                                </div>
+
+                                <div ng-show="!user.rank" class="b-match-player-meta">
+                                    <div class="username vertcenter">
+                                        <span>{{::user.name}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="b-match-player-ready">
+                                    <span>{{'ACCEPT_WINDOW__READY' | translate}}</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="b-match-footer">
+                    <div class="b-match-footer-title">
+                        <div class="b-match-footer-title-chat">
+                            <span ng-show="!allUsersAccept">{{'MATCH__TEAM_CHAT' | translate}}</span>
+                            <span ng-show="allUsersAccept">{{'MATCH__MATCH_LINK' | translate}}</span>
+                        </div>
+                        <div class="b-match-footer-title-game">
+                            <span>{{'MATCH__GAME_DEFINITION' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="b-match-footer-body">
+                        <div ng-show="!allUsersAccept" ng-controller="chatSystem" class="b-match-footer-body-chat">
+                            <div id="matchChatArea" class="b-match-footer-body-chat-area">
+                                <div ng-repeat="row in matchChatMsg" class="b-match-footer-body-chat-area-msg">
+                                    <span class="date">{{row.date | date:'HH:mm:ss'}}</span>
+                                    <a href="javascript:;;" class="from">{{row.sender}}:</a>
+                                    <span class="msg">{{row.text}}</span>
+                                </div>
+                            </div>
+                            <div class="b-match-footer-body-chat-submit">
+                                <form>
+                                    <input autofocus ng-model="inputMatchChatMsg" type="text" placeholder="{{'MATCH__INOUT_YOUR_MSG_PLACEHOLDER' | translate}}">
+                                    <button ng-hide="sendingMsg"  ng-disabled="sendingMsg" type="submit" ng-click="msgManager(room_id, inputMatchChatMsg, 'CHAT_MESSAGE');inputMatchChatMsg =''" class="btn-grey-sm">{{'MATCH__INOUT_YOUR_SEND_MSH_BTN_CAPTION' | translate}}</button>
+                                    <button ng-show="sendingMsg" type="submit" disabled="disabled" class="btn-grey-sm"><i class="fa fa-spin fa-spinner"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                        <div ng-show="allUsersAccept" class="b-match-footer-body-chat">
+                            <div class="b-match-footer-body-chat-getlink">
+                                <button id="copyGameLink" class="btn-red get-link-button-match"
+                                        ng-hide="showcopyarea"
+                                        ng-click="onCopyGameLinkClick()">{{'REFERAL__GET_LINK' | translate}}</button>
+                                <span class="white" style="word-wrap:break-word;"
+                                      ng-show="showcopyarea">{{linkurl}}</span>
+                                <p class="mtop10" ng-show="showcopyarea">{{'MATCH__PASTE_LINK_TO_FIELD' | translate}}: <span class="white">{{'MATCH__PAST_LINK_FIELD_PATH' | translate}}</span></p>
+                                <p ng-show="showcopyarea">{{'MATCH__ENTER_AND_WAIT_MATCH_START' | translate}}</p>
+                            </div>
+                        </div>
+                        <div class="b-match-footer-body-game">
+                            <div class="b-match-footer-game-desc">
+                                <ul>
+                                    <li><span class="name">{{'MATCH__MAP' | translate}}: </span><span> {{playmap|translate}}</span></li>
+                                    <li><span class="name">{{'MATCH__SIZE_MAP' | translate}}: </span><span> {{format}}x{{format}}</span></li>
+                                    <li><span class="name">{{'MATCH__PLAY_MODE' | translate}}: </span><span> {{rezim|translate}}</span></li>
+                                    <li><span class="name">{{'MATCH__QUERY_TYPE' | translate}}: </span><span> {{'MATCH__GAME_WITH_STACK' | translate}}</span></li>
+                                    <li><span class="name">{{'MATCH__SERVER_NAME' | translate}}: </span><span> {{regionGame.regionName || 'lol-server'}}</span></li>
+                                </ul>
+                            </div>
+                            <div class="b-match-footer-game-img">
+                                <img ng-src="/src/img/maps/1.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <!---------------------------- Начало страницы результатов ----------------------------------->
+        <div ng-controller="MatchResultController" ng-if="status === 'FINISHED'" class="b-gross-brd_cnt-content" >
+            <!-- start Страница матча -->
+            <div class="b-matchresult-header">
+                <div class="b-matchresult-header-list">
+                    <span>{{'MATCH__MEMBER_LIST' | translate}}</span>
+                </div>
+                <div class="b-matchresult-header-results">
+                    <span>{{'MATCH_RESULT__RESULTS' | translate}}</span>
+                </div>
+            </div>
+            <div class="b-matchresult-players">
+                <div class="b-matchresult-players-info">
+                    <div class="type"><p class="title">{{'MATCH_RESULT__MODE' | translate}}</p><p class="name">{{matchMode | translate}}</p></div>
+                    <div class="map"><p class="title">{{'MATCH_RESULT__MAP' | translate}}</p><p class="name">{{'MATCH_RESULT__SUMMONER_RIFT' | translate}}</p></div>
+                    <div class="map"><p class="title">{{'MATCH_RESULT__GAME_TIME' | translate}}</p><p class="name">{{'MATCH_RESULT__UNKNOWN' | translate}}</p></div>
+
+                </div>
+                <div class="b-matchresult-players-result">
+                    <div class="victory-finished">
+                        <span>{{'MATCH_RESULT__PENDING_RESULT' | translate}}</span>
+                        <div class="text-finished">
+                            <p class="text">{{'MATCH_RESULT__NOTICE_0' | translate}}</p>
+                        </div>
+                    </div>
+                    <div class="info-finished">
+                        <div class="left">
+                            <p class="title">{{'MATCH_RESULT__YOUR_RATE' | translate}}</p>
+                            <!--<p class="colvo">{{bet}}</p>-->
+                            <p ng-if="betType == 'TOURNAMENT_POINTS'" class="colvo">{{bet}} <img src="/src/img/lol/icon-points.png"/></p>
+                            <p ng-if="betType == 'STAR_POINTS'" class="colvo">{{bet}} <img src="/src/img/base/icon-currency.png"/></p>
+                            <p ng-if="betType == 'REAL_POINTS'" class="colvo"> {{bet|currencyUnit}} </p>
+                        </div>
+                    </div>
+                    <div class="text-finished">
+                        <p class="title">{{'MATCH_RESULT__RATE_FROZEN' | translate}}</p>
+                        <p class="text">{{'MATCH_RESULT__NOTICE_1' | translate}}</p>
+                        <p class="title">{{'MATCH_RESULT__NOTICE_2' | translate}}</p>
+                        <p class="text">{{'MATCH_RESULT__NOTICE_3' | translate}}</p>
+                    </div>
+
+                </div>
+                <div class="b-matchresult-players-list">
+                    <div class="myteam">
+                        <span class="title">{{'MATCH_RESULT__YOUR_TEAM' | translate}}</span>
+                        <ul>
+                            <li ng-repeat="user in myTeam">
+
+                                <div class="user">
+                                    <div class="avatar">
+                                        <img ng-src="/src/img/avatars/{{user.avatar_id}}.jpg">
+                                    </div>
+                                    <div class="name">{{::user.name}}</div>
+                                    <div class="gotolk ng-hide">
+                                        <a href="javascipt:void(0)"><img src="/src/img/lol/match-user-gotolk.png"></a>
+                                    </div>
+
+                                    <a href style="color: darkred"
+                                       ng-hide="user.id === userProfile.userData.id"
+                                       ng-click="openIssueModal(user.player_id, user.name)">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="enemyteam">
+                        <span class="title">{{'MATCH_RESULT__ENEMY_TEAM' | translate}}</span>
+                        <ul>
+                            <li ng-repeat="user in enemyTeam">
+                                <div class="user">
+                                    <div class="avatar">
+                                        <img ng-src="/src/img/avatars/{{user.avatar_id}}.jpg">
+                                    </div>
+                                    <div class="name">{{::user.name}}</div>
+                                    <div class="gotolk ng-hide">
+                                        <a href="javascript:void(0);"><img src="/src/img/lol/match-user-gotolk.png"></a>
+                                    </div>
+                                    <a href style="color: darkred" ng-click="openIssueModal(user.player_id, user.name)">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                    </a>
+                                    <!--<i class="fa fa-flag"></i>-->
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="b-matchresult-footer">
+                <div class="b-matchresult-footer-title">
+                    <div class="b-matchresult-footer-title-chat">
+                        <span>{{'MATCH_RESULT__PUBLIC_CHAT' | translate}}</span>
+                    </div>
+                    <div class="b-matchresult-footer-title-achievements">
+                        <div class="b-matchresult-footer-title-left">
+                            <span>{{'MATCH_RESULT__RECEIVED_ACHIEVES' | translate}}</span>
+                        </div>
+                        <div class="b-matchresult-footer-title-right">
+                            <span>{{'MATCH__RESULT__ACHIEVE_PROGRESS' | translate}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="b-matchresult-footer-body">
+                    <div ng-show="!allUsersAccept" ng-controller="chatSystem" class="b-matchresult-footer-body-chat">
+                        <div id="matchChatArea" class="b-matchresult-footer-body-chat-area">
+                            <div ng-repeat="row in matchChatMsg" class="b-matchresult-footer-body-chat-area-msg">
+                                <span class="date">{{row.date | date:'HH:mm:ss'}}</span>
+                                <a href="javascript:;;" class="from">{{row.sender}}:</a>
+                                <span class="msg">{{row.text}}</span>
+                            </div>
+                        </div>
+                        <div class="b-matchresult-footer-body-chat-submit">
+                            <form>
+                                <input autofocus ng-model="inputMatchChatMsg" type="text" placeholder="{{'MATCH__INOUT_YOUR_MSG_PLACEHOLDER' | translate}}">
+                                <button ng-hide="sendingMsg"  ng-disabled="sendingMsg" type="submit" ng-click="msgManager(room_id, inputMatchChatMsg, 'CHAT_MESSAGE'); inputMatchChatMsg = ''" class="btn-grey-sm">{{'MATCH__INOUT_YOUR_SEND_MSH_BTN_CAPTION' | translate}}</button>
+                                <button ng-show="sendingMsg" type="submit" disabled="disabled" class="btn-grey-sm"><i class="fa fa-spin fa-spinner"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="b-matchresult-footer-body-game">
+                            <div class="b-matchresult-footer-body-game-banner">
+                                <div class="banner-title">
+                                    <p>{{'INVITE_FRIEND__TEXT1' | translate}}</p>
+                                </div>
+
+                                <div class="banner-body">
+                                    <p>{{'INVITE_FRIEND__TEXT2' | translate}}</p>
+                                    <p class="large">{{'INVITE_FRIEND__TEXT3' | translate}}</p>
+                                    <p>{{'INVITE_FRIEND__TEXT4' | translate}}</p>
+                                </div>
+
+                                <div class="banner-footer">
+                                    <a href="/referal" class="btn-green" ng-click="closeResultWindow()">{{'INVITE_FRIEND__TEXT5' | translate}}</a>
+                                </div>
+                        </div>
+                        <div class="b-matchresult-footer-body-game-buttons">
+                            <button ng-click="closeResultWindow()" class="btn-red-small">{{'MATCH__CLOSE' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!------------------------------------- Если мы получили результаты, то... -------------------------------------->
+        <div ng-controller="MatchResultController" ng-if="status === 'COMPLITED' || status === 'HAVE_GOT_STATISTIC'" class="b-gross-brd_cnt-content" >
+            <!-- start Страница матча -->
+            <div class="b-matchresult-header">
+                <div class="b-matchresult-header-list">
+                    <span>{{'MATCH_RESULT__MEMBER_LIST' | translate}}</span>
+                </div>
+                <div class="b-matchresult-header-results">
+                    <span>{{'MATCH__RESULTS' | translate}}</span>
+                </div>
+            </div>
+            <div class="b-matchresult-players">
+                <div class="b-matchresult-players-info">
+                    <div class="type"><p class="title">{{'MATCH_RESULT__MODE' | translate}}</p><p class="name">{{matchMode | translate}}</p></div>
+                    <div class="map"><p class="title">{{'MATCH_RESULT__MAP' | translate}}</p><p class="name">{{'MATCH_RESULT__SUMMONER_RIFT' | translate}}</p></div>
+                    <div class="time"><p class="title">{{'MATCH_RESULT__GAME_TIME' | translate}}</p><p class="name">{{playTime}}</p></div>
+
+                </div>
+                <div class="b-matchresult-players-result">
+                    <div class="victory">
+                        <span ng-if="mayBeWin === true">{{'MATCH_RESULT__VICTORY' | translate}}</span>
+                        <span ng-if="mayBeWin === false">{{'MATCH_RESULT__DEFEAT' | translate}}</span>
+                    </div>
+                    <div class="info">
+                        <div class="left">
+                            <p class="title">{{'MATCH_RESULT__YOUR_RESULT' | translate}}</p>
+                            <!--<p class="colvo">{{betaward}}</p>-->
+                            <p ng-if="betType == 'TOURNAMENT_POINTS'" class="colvo">{{betaward}} <img src="/src/img/lol/icon-points.png"/></p>
+                            <p ng-if="betType == 'STAR_POINTS'" class="colvo">{{betaward}} <img src="/src/img/base/icon-currency.png"/></p>
+                            <p ng-if="betType == 'REAL_POINTS'" class="colvo"> {{betaward | currencyUnit}} </p>
+                        </div>
+                    </div>
+                    <div class="experience">
+                        <p class="title">{{'MATCH_RESULT_CHANGING_EXPERIENCE' | translate}}</p>
+                        <div class="bar">
+                            <div class="progress-line">
+                                <div ng-hide="borderleft==1" ng-class="{'nomarginline' : borderleft==1}" class="progress-bar was" style="width:{{exp}}%">
+                                    <!--todo: исправить-->
+                                </div>
+                                <div ng-class="{'bordered' : borderleft==1}" class="progress-bar will" style="width:{{exp_delta}}%">
+                                    <!--todo: исправить?-->
+                                </div>
+                                <div class="lvlcount">
+                                    <span>{{currentlvl}} lvl</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-red" ng-click="closeResultWindow()">{{'MATCH__CLOSE' | translate}}</button>
+                    </div>
+                </div>
+                <div class="b-matchresult-players-list">
+                    <div class="myteam">
+                        <span class="title">{{'MATCH_RESULT__YOUR_TEAM' | translate}}</span>
+                        <ul>
+                            <li ng-repeat="row in myTeam">
+                                <div class="user">
+                                    <!--<div class="icon">
+                                        <img ng-src="img/heroes/42.png">
+                                    </div>-->
+                                    <div class="avatar">
+                                        <img ng-src="/src/img/avatars/{{row.avatar_id}}.jpg">
+                                    </div>
+                                    <div class="name">{{row.name}}</div>
+                                    <div class="gotolk ng-hide">
+                                        <a href="javascript:void(0);"><img src="/src/img/lol/match-user-gotolk.png"></a>
+                                    </div>
+                                    <a href style="color: darkred"
+                                       ng-hide="row.id===userProfile.userData.id"
+                                       ng-click="openIssueModal(row.player_id, row.name)">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="enemyteam">
+                        <span class="title">{{'MATCH_RESULT__ENEMY_TEAM' | translate}}</span>
+                        <ul>
+                            <li ng-repeat="row in enemyTeam">
+                                <div class="user">
+                                    <!--<div class="icon">
+                                        <img src="img/heroes/42.png">
+                                    </div>-->
+                                    <div class="avatar">
+                                        <img ng-src="/src/img/avatars/{{row.avatar_id}}.jpg">
+                                    </div>
+                                    <div class="name">{{row.name}}</div>
+                                    <div class="gotolk ng-hide">
+                                        <a href="javascript:void(0);"><img src="/src/img/lol/match-user-gotolk.png"></a>
+                                    </div>
+                                    <a href style="color: darkred" ng-click="openIssueModal(row.player_id, row.name)">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="b-matchresult-footer">
+                <div class="b-matchresult-footer-title">
+                    <div class="b-matchresult-footer-title-chat">
+                        <span>{{'MATCH_RESULT__PUBLIC_CHAT' | translate}}</span>
+                    </div>
+                    <div class="b-matchresult-footer-title-achievements">
+                        <div class="b-matchresult-footer-title-left">
+                            <span>{{'MATCH_RESULT__RECEIVED_ACHIEVES' | translate}}</span>
+                        </div>
+                        <div class="b-matchresult-footer-title-right">
+                            <span>{{'MATCH__RESULT__ACHIEVE_PROGRESS' | translate}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="b-matchresult-footer-body">
+                    <div ng-show="!allUsersAccept" ng-controller="chatSystem" class="b-matchresult-footer-body-chat">
+                        <div id="matchChatArea" class="b-matchresult-footer-body-chat-area">
+                            <div ng-repeat="row in matchChatMsg" class="b-matchresult-footer-body-chat-area-msg">
+                                <span class="date">{{row.date | date:'HH:mm:ss'}}</span>
+                                <a href="javascript:;;" class="from">{{row.sender}}:</a>
+                                <span class="msg">{{row.text}}</span>
+                            </div>
+                        </div>
+                        <div class="b-matchresult-footer-body-chat-submit">
+                            <form>
+                                <input autofocus ng-model="inputMatchChatMsg" type="text" placeholder="{{'MATCH__INOUT_YOUR_MSG_PLACEHOLDER' | translate}}">
+                                <button ng-hide="sendingMsg"  ng-disabled="sendingMsg" type="submit" ng-click="msgManager(room_id, inputMatchChatMsg, 'CHAT_MESSAGE'); inputMatchChatMsg = ''" class="btn-grey-sm">{{'MATCH__INOUT_YOUR_SEND_MSH_BTN_CAPTION' | translate}}</button>
+                                <button ng-show="sendingMsg" type="submit" disabled="disabled" class="btn-grey-sm"><i class="fa fa-spin fa-spinner"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="b-matchresult-footer-body-game">
+                        <div class="b-matchresult-footer-body-game-banner">
+                            <div class="banner-title">
+                                <p>{{'INVITE_FRIEND__TEXT1' | translate}}</p>
+                            </div>
+
+                            <div class="banner-body">
+                                <p>{{'INVITE_FRIEND__TEXT2' | translate}}</p>
+                                <p class="large">{{'INVITE_FRIEND__TEXT3' | translate}}</p>
+                                <p>{{'INVITE_FRIEND__TEXT4' | translate}}</p>
+                            </div>
+
+                            <div class="banner-footer">
+                                <a href="/referal" class="btn-green" ng-click="closeResultWindow()">{{'INVITE_FRIEND__TEXT5' | translate}}</a>
+                            </div>
+                        </div>
+                        <div class="b-matchresult-footer-body-game-buttons">
+                            <button ng-click="closeResultWindow()" class="btn-red-small">{{'MATCH__CLOSE' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!------------------------------------- Если мы получили результаты, то... -------------------------------------->
+        <div ng-controller="MatchResultController" ng-if="status === 'DESTROYED'" class="b-gross-brd_cnt-content" >
+            <!-- start Страница матча -->
+            <div class="b-matchresult-header">
+                <div class="b-matchresult-header-list">
+                    <span>{{'MATCH_RESULT__MEMBER_LIST' | translate}}</span>
+                </div>
+                <div class="b-matchresult-header-results">
+                    <span>{{'MATCH__RESULTS' | translate}}</span>
+                </div>
+            </div>
+            <div class="b-matchresult-players">
+                <div class="b-matchresult-players-info">
+                    <div class="type"><p class="title">{{'MATCH_RESULT__MODE' | translate}}</p><p class="name">{{matchMode | translate}}</p></div>
+                    <div class="map"><p class="title">{{'MATCH_RESULT__MAP' | translate}}</p><p class="name">{{'MATCH_RESULT__SUMMONER_RIFT' | translate}}</p></div>
+                    <div class="time"><p class="title">{{'MATCH_RESULT__GAME_TIME' | translate}}</p><p class="name">00:00</p></div>
+                </div>
+                <div class="b-matchresult-players-result">
+                    <div class="victory">
+                        <span>{{'MATCH_RESULT__CANCEL' | translate}}</span>
+                    </div>
+                    <div class="info">
+                        <div class="match-cancel-info">
+                            <h3>{{'MATCH_RESULT__CANCEL_REASON'|translate}}</h3>
+                            <div ng-switch="::cancel_reason">
+                                <h4 ng-switch-when="NOT_STARTED_IN_LOBBY">{{'MATCH_RESULT__CANCEL_REASON_NOT_STARTED_IN_LOBBY' | translate}}</h4>
+                                <h4 ng-switch-when="STARTED_WRONG_TEAM_SIZE">{{'MATCH_RESULT__CANCEL_REASON_STARTED_WRONG_TEAM_SIZE' | translate}}</h4>
+                                <h4 ng-switch-when="NOT_STARTED_BAN">{{'MATCH_RESULT__CANCEL_REASON_NOT_STARTED_BAN' | translate}}</h4>
+                                <h4 ng-switch-when="NOT_STARTED_QUIT">{{'MATCH_RESULT__CANCEL_REASON_NOT_STARTED_QUIT' | translate}}</h4>
+                                <h4 ng-switch-when="NOT_STARTED_WAIT_PLAYERS_TIMEOUT">{{'MATCH_RESULT__CANCEL_REASON_NOT_STARTED_WAIT_PLAYERS_TIMEOUT' | translate}}</h4>
+                                <h4 ng-switch-when="NOT_STARTED_TIMEOUT">{{'MATCH_RESULT__CANCEL_REASON_NOT_STARTED_TIMEOUT' | translate}}</h4>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn-red" ng-click="closeResultWindow()">{{'MATCH__CLOSE' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="b-matchresult-players-list">
+                    <div class="myteam">
+                        <span class="title">{{'MATCH_RESULT__YOUR_TEAM' | translate}}</span>
+                        <ul>
+                            <li ng-repeat="row in myTeam">
+                                <div class="user">
+                                    <!--<div class="icon">
+                                        <img ng-src="img/heroes/42.png">
+                                    </div>-->
+                                    <div class="avatar">
+                                        <img ng-src="/src/img/avatars/{{row.avatar_id}}.jpg">
+                                    </div>
+                                    <div class="name">{{row.name}}</div>
+                                    <div class="gotolk ng-hide">
+                                        <a href="javascript:void(0);"><img src="/src/img/lol/match-user-gotolk.png"></a>
+                                    </div>
+                                    <!--<a href style="color: darkred"
+                                       ng-hide="row.id===userProfile.userData.id"
+                                       ng-click="openIssueModal(row.player_id, row.name)">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                    </a>-->
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="enemyteam">
+                        <span class="title">{{'MATCH_RESULT__ENEMY_TEAM' | translate}}</span>
+                        <ul>
+                            <li ng-repeat="row in enemyTeam">
+                                <div class="user">
+                                    <!--<div class="icon">
+                                        <img src="img/heroes/42.png">
+                                    </div>-->
+                                    <div class="avatar">
+                                        <img ng-src="/src/img/avatars/{{row.avatar_id}}.jpg">
+                                    </div>
+                                    <div class="name">{{row.name}}</div>
+                                    <div class="gotolk ng-hide">
+                                        <a href="javascript:void(0);"><img src="/src/img/lol/match-user-gotolk.png"></a>
+                                    </div>
+                                    <!--<a href style="color: darkred" ng-click="openIssueModal(row.player_id, row.name)">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                    </a>-->
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="b-matchresult-footer">
+                <div class="b-matchresult-footer-title">
+                    <div class="b-matchresult-footer-title-chat">
+                        <span>{{'MATCH_RESULT__PUBLIC_CHAT' | translate}}</span>
+                    </div>
+                    <div class="b-matchresult-footer-title-achievements">
+                        <div class="b-matchresult-footer-title-left">
+                            <span>{{'MATCH_RESULT__RECEIVED_ACHIEVES' | translate}}</span>
+                        </div>
+                        <div class="b-matchresult-footer-title-right">
+                            <span>{{'MATCH__RESULT__ACHIEVE_PROGRESS' | translate}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="b-matchresult-footer-body">
+                    <div ng-show="!allUsersAccept" ng-controller="chatSystem" class="b-matchresult-footer-body-chat">
+                        <div id="matchChatArea" class="b-matchresult-footer-body-chat-area">
+                            <div class="b-matchresult-footer-body-chat-area-msg">
+                                <a href="javascript:;;" class="from">System:</a>
+                                <span class="msg">{{'MATCH_CANCELED_CHAT_TEXT1'|translate}}</span>
+                            </div>
+                            <div class="b-matchresult-footer-body-chat-area-msg">
+                                <a href="javascript:;;" class="from">System:</a>
+                                <span class="msg">{{'MATCH_CANCELED_CHAT_TEXT2'|translate}}</span>
+                            </div>
+                            <div class="b-matchresult-footer-body-chat-area-msg">
+                                <a href="javascript:;;" class="from">System:</a>
+                                <span class="msg">{{'MATCH_CANCELED_CHAT_TEXT3'|translate}}</span>
+                            </div>
+                            <div class="b-matchresult-footer-body-chat-area-msg">
+                                <a href="javascript:;;" class="from">System:</a>
+                                <span class="msg">{{'MATCH_CANCELED_CHAT_TEXT4'|translate}}</span>
+                            </div>
+                        </div>
+                        <div class="b-matchresult-footer-body-chat-submit">
+                            <form>
+                                <input autofocus disabled="disable" type="text" placeholder="{{'MATCH__INOUT_YOUR_MSG_PLACEHOLDER' | translate}}">
+                                <!--
+                                                                    <button ng-hide="sendingMsg"  ng-disabled="sendingMsg" type="submit" ng-click="msgManager(room_id, inputMatchChatMsg, 'CHAT_MESSAGE'); inputMatchChatMsg = ''" class="btn-grey-sm">{{'MATCH__INOUT_YOUR_SEND_MSH_BTN_CAPTION' | translate}}</button>
+                                -->
+                                <button type="submit" disabled="disabled" class="btn-grey-sm"><i class="fa fa-spin fa-spinner"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="b-matchresult-footer-body-game">
+                            <div class="b-matchresult-footer-body-game-banner">
+                                <div class="banner-title">
+                                    <p>{{'INVITE_FRIEND__TEXT1' | translate}}</p>
+                                </div>
+
+                                <div class="banner-body">
+                                    <p>{{'INVITE_FRIEND__TEXT2' | translate}}</p>
+                                    <p class="large">{{'INVITE_FRIEND__TEXT3' | translate}}</p>
+                                    <p>{{'INVITE_FRIEND__TEXT4' | translate}}</p>
+                                </div>
+
+                                <div class="banner-footer">
+                                    <a href="/referal" class="btn-green" ng-click="closeResultWindow()">{{'INVITE_FRIEND__TEXT5' | translate}}</a>
+                                </div>
+                        </div>
+                        <div class="b-matchresult-footer-body-game-buttons">
+                            <button ng-click="closeResultWindow()" class="btn-red-small">{{'MATCH__CLOSE' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!----------------------------------------- Конец блока с полными результатами --------------------->
+    </div>
+</div>

@@ -1,0 +1,325 @@
+<!-- start Middle-->
+<div id="middle">
+    <div class="b-gross-brd">
+        <div class="b-gross-brd_cnt">
+            <div class="b-section b-section_width_auto tourList">
+                <div class="row tourList-servers">
+                    <ul>
+                        <li ng-repeat="row in ::vm.regions"
+                            ng-click="vm.selectServer(row.regionId)"
+                            ng-class="{ 'checked': vm.isServerChecked(row.regionId) }">
+                            <span class="server-checked fa-stack fa-lg">
+                                <i class="fa fa-circle-o fa-stack-2x"></i>
+                                <i class="fa fa-check fa-stack-1x"></i>
+                            </span>
+                            <i class="server-unchecked fa fa-circle-o"></i>
+                            <span class="text" ng-bind="::row.regionName"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tourList-controls row">
+                    <div class="col-lg-8">
+                        <div class="tourList-controls-filters">
+                            <div class="tourList-controls-filters-title">
+                                <span>{{'TOURS_FILTERS' | translate}}</span>
+                            </div>
+                            <div class="tourList-controls-filters-change">
+                                <ul>
+                                    <!--<li ng-click="vm.globalFilter.status = '!FINISH'" ng-class="{'active': vm.globalFilter.status == '!FINISH'}">
+                                        <span>{{'TOURS_FILTERS_IN_PROGRESS'|translate}}</span>
+                                    </li>
+                                    <li ng-click="vm.globalFilter.status = 'FINISH'" ng-class="{'active': vm.globalFilter.status == 'FINISH'}">
+                                        <span>{{'TOURS_FILTERS_FINISHED'|translate}}</span>
+                                    </li>
+                                    <li class="separator">
+                                        <span>|</span>
+                                    </li>-->
+                                    <li ng-click="vm.globalFilter.class = '';vm.checkList()" ng-class="{'active': vm.globalFilter.class == ''}">
+                                        <span>{{'TOURS_FILTERS_ALL' | translate}}</span>
+                                    </li>
+                                    <li ng-click="vm.globalFilter.class = 'NORMAL';vm.checkList()" ng-class="{'active': vm.globalFilter.class == 'NORMAL'}">
+                                        <span>{{'TOURS_FILTERS_REGULAR' | translate}}</span>
+                                    </li>
+                                    <li ng-click="vm.globalFilter.class = 'SIT_AND_GO';vm.checkList()" ng-class="{'active': vm.globalFilter.class == 'SIT_AND_GO'}">
+                                        <span>{{'TOURS_FILTERS_SIT_AND_GO' | translate}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="tourList-controls-sortby">
+                            <div class="tourList-controls-sortby-title">
+                                <span>{{'TOURS_SORT_BY' | translate}}</span>
+                            </div>
+                            <div class="tourList-controls-sortby-change">
+                                <ul>
+                                    <li ng-click="vm.globalFilter.sort.currentSort = 'awardFund'; vm.globalFilter.sort.reverse = !vm.globalFilter.sort.reverse" ng-class="{'active': vm.globalFilter.sort.currentSort == 'awardFund'}">
+                                        <span>{{'TOURS_SORT_BY_PRIZE_FUND' | translate}}</span>
+                                        <i ng-show="vm.globalFilter.sort.reverse && vm.globalFilter.sort.currentSort == 'awardFund'" class="fa fa-caret-down"></i>
+                                        <i ng-show="!vm.globalFilter.sort.reverse && vm.globalFilter.sort.currentSort == 'awardFund'" class="fa fa-caret-up"></i>
+                                        <i ng-show="vm.globalFilter.sort.currentSort !== 'awardFund'" class="fa bg-color fa-caret-up"></i>
+                                    </li>
+                                    <li ng-click="vm.globalFilter.sort.currentSort = 'tournamentType.buyIn'; vm.globalFilter.sort.reverse = !vm.globalFilter.sort.reverse" ng-class="{'active': vm.globalFilter.sort.currentSort == 'tournamentType.buyIn'}">
+                                        <span>{{'TOURS_SORT_BY_BUY_IN' | translate}}</span>
+                                        <i ng-show="vm.globalFilter.sort.reverse && vm.globalFilter.sort.currentSort == 'tournamentType.buyIn'" class="fa fa-caret-down"></i>
+                                        <i ng-show="!vm.globalFilter.sort.reverse && vm.globalFilter.sort.currentSort == 'tournamentType.buyIn'" class="fa fa-caret-up"></i>
+                                        <i ng-show="vm.globalFilter.sort.currentSort !== 'tournamentType.buyIn'" class="fa bg-color fa-caret-up"></i>
+                                    </li>
+                                    <li ng-click="vm.globalFilter.sort.currentSort = 'regStartDate'; vm.globalFilter.sort.reverse = !vm.globalFilter.sort.reverse" ng-class="{'active': vm.globalFilter.sort.currentSort == 'regStartDate'}">
+                                        <span>{{'TOURS_SORT_BY_DATE' | translate}}</span>
+                                        <i ng-show="vm.globalFilter.sort.reverse && vm.globalFilter.sort.currentSort == 'regStartDate'" class="fa fa-caret-down"></i>
+                                        <i ng-show="!vm.globalFilter.sort.reverse && vm.globalFilter.sort.currentSort == 'regStartDate'" class="fa fa-caret-up"></i>
+                                        <i ng-show="vm.globalFilter.sort.currentSort !== 'regStartDate'" class="fa bg-color fa-caret-up"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tourList-catName row">
+                    <h2>{{'TOURNAMENTS_LIST_CAT_PLAY_NOW'| translate}}</h2>
+                </div>
+                <div class="tourList-items row">
+                    <div ng-if="(row.status == 'START' || row.status == 'POST_REG' || row.tournamentClass == 'SIT_AND_GO')" class="tourList-items-item" style="background: url('/src/img/tournaments/lol/{{::row.coverPictureId}}-cover.jpg')"
+                         ng-repeat="row in vm.tournaments | filter:{tournamentClass:vm.globalFilter.class} | filter:vm.filterByServer | orderBy:vm.globalFilter.sort.currentSort:vm.globalFilter.sort.reverse track by row.id">
+                        <a ng-href="/tournament/{{::appCtrl.config.template}}/{{::row.id}}">
+                            <div class="tourList-items-item-shadowbg">
+                                <div class="tourList-items-item-shadowbg-meta">
+                                    <span class="tourList-items-item-shadowbg-meta-server badge"
+                                          ng-class="::{'badge-euw':row.gameRegion.regionId =='EUW', 'badge-nordic':row.gameRegion.regionId =='EUNE', 'badge-ru':row.gameRegion.regionId =='RU'}"
+                                          ng-bind="::row.gameRegion.regionId"></span>
+                                    <span ng-if="::(row.tournamentClass === 'NORMAL')" class="tourList-items-item-shadowbg-meta-timestart">| {{row.startDate | date:'dd MMMM'}}</span>
+                                    <span ng-if="::(row.tournamentClass === 'NORMAL')" class="tourList-items-item-shadowbg-meta-time">{{row.startDate | date:'HH:mm'}}</span>
+                                    <span ng-if="::(row.tournamentClass === 'SIT_AND_GO')" class="tourList-items-item-shadowbg-meta-time">| {{'TOURNAMENT__GAMERS' | translate}}: {{row.activeMembers}}/{{row.tournamentSettings.startMemberCount}}</span>
+                                </div>
+                                <div class="tourList-items-item-shadowbg-title">
+                                    <h3 ng-bind="::row.name"></h3>
+                                </div>
+                                <div class="tourList-items-item-shadowbg-prize">
+                                    <h4 class="award-size">{{::row.awardFund | currencyUnit:row.awardType:true}}</h4>
+                                    <hr />
+                                    <h4 ng-if="buyin.isDefault" ng-repeat="buyin in row.buyIns">$ {{buyin.value/100}} {{'TOURS_SORT_BY_BUY_IN'|translate}}</h4>
+                                </div>
+                                <div class="tourList-items-item-shadowbg-register">
+                                    <p ng-if="::(row.status === 'INACTIVE')" class="tourList-items-item-shadowbg-register-start">{{'TOUR_LIST__REG_START_ON' | translate}}</p>
+                                    <p ng-if="::(row.status === 'INACTIVE')" class="tourList-items-item-shadowbg-register-date">{{::row.regStartDate | date:'dd.MM HH:mm'}}</p>
+
+                                    <p ng-if="::(row.status === 'PRE_REG')" class="tourList-items-item-shadowbg-register-start">{{'TOUR_LIST__REG_IS_OPEN_SMALL' | translate}}</p>
+                                    <p ng-if="::(row.status === 'PRE_REG')" class="tourList-items-item-shadowbg-register-date">{{'TOUR_LIST__REG_IS_OPEN_BIG' | translate}}</p>
+
+                                    <p ng-if="::(row.status === 'POST_REG')" class="tourList-items-item-shadowbg-register-start">{{'TOUR_LIST__POST_REG_IS_OPEN_SMALL' | translate}}</p>
+                                    <p ng-if="::(row.status === 'POST_REG')" class="tourList-items-item-shadowbg-register-date">{{'TOUR_LIST__POST_REG_IS_OPEN_BIG'|translate}}</p>
+
+                                    <p ng-if="::(row.status === 'START')" class="tourList-items-item-shadowbg-register-start">{{'TOUR_LIST__START_IS_OPEN_SMALL' | translate}}</p>
+                                    <p ng-if="::(row.status === 'START')" class="tourList-items-item-shadowbg-register-date">{{'TOUR_LIST__START_IS_OPEN_BIG' | translate}}</p>
+
+                                    <p ng-if="::(row.status === 'FINISH')" class="tourList-items-item-shadowbg-register-start">{{'TOURNAMENT__STATUS_FINISH_HEADER' | translate}}</p>
+                                    <p ng-if="::(row.status === 'FINISH')" class="tourList-items-item-shadowbg-register-date">{{'TOURNAMENT__STATUS_FINISH' | translate}}</p>
+
+                                    <p class="tourList-items-item-shadowbg-register-part">{{'MATCH__MEMBER_LIST' | translate}}: {{::row.activeMembers}}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="tourList-items-item cashgames">
+                        <a ng-href="/cashgames" track-event-by-click track-category="click" track-action="tournaments2instant">
+                            <div class="tourList-items-item-shadowbg">
+                                <div class="tourList-items-item-shadowbg-meta">
+                                    <span class="tourList-items-item-shadowbg-meta-server">{{'TOURNAMENTS_LIST_CASH_TITLE'|translate}}</span>
+                                </div>
+                                <div class="tourList-items-item-shadowbg-title">
+                                    <h3>{{'TOURNAMENTS_LIST_CASH_MAIN'|translate}}</h3>
+                                </div>
+                                <div class="tourList-items-item-shadowbg-prize">
+                                </div>
+                                <div class="tourList-items-item-shadowbg-register">
+                                    <p>{{'TOURNAMENTS_LIST_CASH_BOTTOM'|translate}}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="tourList-items-item invite-friend-banner">
+                        <a ng-href="/referal">
+                            <div class="tourList-items-item-shadowbg">
+                                <div class="banner-title">
+                                    <p>{{'INVITE_FRIEND__TEXT1' | translate}}</p>
+                                </div>
+
+                                <div class="banner-body">
+                                    <p>{{'INVITE_FRIEND__TEXT2' | translate}}</p>
+                                    <p class="large">{{'INVITE_FRIEND__TEXT3' | translate}}</p>
+                                    <p>{{'INVITE_FRIEND__TEXT4' | translate}}</p>
+                                </div>
+
+                                <div class="banner-footer">
+                                    <p>{{'INVITE_FRIEND__TEXT5' | translate}}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div ng-hide="vm.todayCounter === 0" class="tourList-catName row">
+                    <h2>{{'TOURNAMENTS_LIST_CAT_DAYLI'| translate}}</h2>
+                </div>
+                <div ng-hide="vm.todayCounter === 0" class="tourList-items row">
+                    <div ng-if="(row.startDate < vm.laterToday && row.status == 'PRE_REG' && row.tournamentClass !== 'SIT_AND_GO')" class="tourList-items-item" style="background: url('/src/img/tournaments/lol/{{::row.coverPictureId}}-cover.jpg')"
+                         ng-repeat="row in vm.tournaments | filter:{tournamentClass:vm.globalFilter.class} | filter:vm.filterByServer | orderBy:vm.globalFilter.sort.currentSort:vm.globalFilter.sort.reverse track by row.id">
+                        <a ng-href="/tournament/{{appCtrl.config.template}}/{{row.id}}">
+                            <div class="tourList-items-item-shadowbg">
+                                <div class="tourList-items-item-shadowbg-meta">
+                                    <span class="tourList-items-item-shadowbg-meta-server badge"
+                                          ng-class="::{'badge-euw':row.gameRegion.regionId =='EUW', 'badge-nordic':row.gameRegion.regionId =='EUNE', 'badge-ru':row.gameRegion.regionId =='RU'}"
+                                          ng-bind="::row.gameRegion.regionId"></span>
+                                    <span ng-if="::(row.tournamentClass === 'NORMAL')" class="tourList-items-item-shadowbg-meta-timestart">| {{::row.startDate | date:'dd MMMM'}}</span>
+                                    <span ng-if="::(row.tournamentClass === 'NORMAL')" class="tourList-items-item-shadowbg-meta-time">{{::row.startDate | date:'HH:mm'}}</span>
+                                    <span ng-if="::(row.tournamentClass === 'SIT_AND_GO')" class="tourList-items-item-shadowbg-meta-time">| {{'TOURNAMENT__GAMERS' | translate}}: {{::row.activeMembers}}/{{::row.tournamentSettings.startMemberCount}}</span>
+                                </div>
+                                <div class="tourList-items-item-shadowbg-title">
+                                    <h3 ng-bind="::row.name"></h3>
+                                </div>
+                                <div class="tourList-items-item-shadowbg-prize">
+                                    <h4 class="award-size">{{::row.awardFund | currencyUnit:row.awardType:true}}</h4>
+                                    <hr />
+                                    <h4 ng-if="buyin.isDefault" ng-repeat="buyin in row.buyIns">$ {{buyin.value/100}} {{'TOURS_SORT_BY_BUY_IN'|translate}}</h4>
+                                </div>
+                                <div class="tourList-items-item-shadowbg-register">
+                                    <p ng-if="::(row.status === 'INACTIVE')" class="tourList-items-item-shadowbg-register-start">{{'TOUR_LIST__REG_START_ON' | translate}}</p>
+                                    <p ng-if="::(row.status === 'INACTIVE')" class="tourList-items-item-shadowbg-register-date">{{::row.regStartDate | date:'dd.MM HH:mm'}}</p>
+
+                                    <p ng-if="::(row.status === 'PRE_REG')" class="tourList-items-item-shadowbg-register-start">{{'TOUR_LIST__REG_IS_OPEN_SMALL' | translate}}</p>
+                                    <p ng-if="::(row.status === 'PRE_REG')" class="tourList-items-item-shadowbg-register-date">{{'TOUR_LIST__REG_IS_OPEN_BIG'|translate}}</p>
+
+                                    <p ng-if="::(row.status === 'POST_REG')" class="tourList-items-item-shadowbg-register-start">{{'TOUR_LIST__POST_REG_IS_OPEN_SMALL' | translate}}</p>
+                                    <p ng-if="::(row.status === 'POST_REG')" class="tourList-items-item-shadowbg-register-date">{{'TOUR_LIST__POST_REG_IS_OPEN_BIG'|translate}}</p>
+
+                                    <p ng-if="::(row.status === 'START')" class="tourList-items-item-shadowbg-register-start">{{'TOUR_LIST__START_IS_OPEN_SMALL' | translate}}</p>
+                                    <p ng-if="::(row.status === 'START')" class="tourList-items-item-shadowbg-register-date">{{'TOUR_LIST__START_IS_OPEN_BIG' | translate}}</p>
+
+                                    <p ng-if="::(row.status === 'FINISH')" class="tourList-items-item-shadowbg-register-start">{{'TOURNAMENT__STATUS_FINISH_HEADER' | translate}}</p>
+                                    <p ng-if="::(row.status === 'FINISH')" class="tourList-items-item-shadowbg-register-date">{{'TOURNAMENT__STATUS_FINISH' | translate}}</p>
+
+                                    <p class="tourList-items-item-shadowbg-register-part">{{'MATCH__MEMBER_LIST' | translate}}: {{::row.activeMembers}}</p>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+                <div ng-hide="vm.weeklyCounter === 0" class="tourList-catName row">
+                    <h2>{{'TOURNAMENTS_LIST_CAT_WEEKLY'| translate}}</h2>
+                </div>
+                <div ng-hide="vm.weeklyCounter === 0" class="tourList-items row">
+                    <div ng-if="(row.startDate < vm.thisWeek && row.startDate > vm.laterToday) && row.status === 'PRE_REG' && row.tournamentClass !== 'SIT_AND_GO'" class="tourList-items-item" style="background: url('/src/img/tournaments/lol/{{::row.coverPictureId}}-cover.jpg')"
+                         ng-repeat="row in vm.tournaments | filter:{status:vm.globalFilter.status, tournamentClass:vm.globalFilter.class} | filter:vm.filterByServer | orderBy:vm.globalFilter.sort.currentSort:vm.globalFilter.sort.reverse track by row.id">
+                        <a ng-href="/tournament/{{::appCtrl.config.template}}/{{::row.id}}">
+                            <div class="tourList-items-item-shadowbg">
+                                <div class="tourList-items-item-shadowbg-meta">
+                                    <span class="tourList-items-item-shadowbg-meta-server badge"
+                                          ng-class="::{'badge-euw':row.gameRegion.regionId =='EUW', 'badge-nordic':row.gameRegion.regionId =='EUNE', 'badge-ru':row.gameRegion.regionId =='RU'}"
+                                          ng-bind="::row.gameRegion.regionId"></span>
+                                    <span ng-if="::(row.tournamentClass === 'NORMAL')" class="tourList-items-item-shadowbg-meta-timestart">| {{::row.startDate | date:'dd MMMM'}}</span>
+                                    <span ng-if="::(row.tournamentClass === 'NORMAL')" class="tourList-items-item-shadowbg-meta-time">{{::row.startDate | date:'HH:mm'}}</span>
+                                    <span ng-if="::(row.tournamentClass === 'SIT_AND_GO')" class="tourList-items-item-shadowbg-meta-time">| {{'TOURNAMENT__GAMERS' | translate}}: {{::row.activeMembers}}/{{::row.tournamentSettings.startMemberCount}}</span>
+                                </div>
+                                <div class="tourList-items-item-shadowbg-title">
+                                    <h3 ng-bind="::row.name"></h3>
+                                </div>
+                                <div class="tourList-items-item-shadowbg-prize">
+                                    <h4 class="award-size">{{::row.awardFund | currencyUnit:row.awardType:true}}</h4>
+                                    <hr />
+                                    <h4 ng-if="buyin.isDefault" ng-repeat="buyin in row.buyIns">$ {{buyin.value/100}} {{'TOURS_SORT_BY_BUY_IN'|translate}}</h4>
+                                </div>
+                                <div class="tourList-items-item-shadowbg-register">
+                                    <p ng-if="::(row.status === 'INACTIVE')" class="tourList-items-item-shadowbg-register-start">{{'TOUR_LIST__REG_START_ON' | translate}}</p>
+                                    <p ng-if="::(row.status === 'INACTIVE')" class="tourList-items-item-shadowbg-register-date">{{::row.regStartDate | date:'dd.MM HH:mm'}}</p>
+
+                                    <p ng-if="::(row.status === 'PRE_REG')" class="tourList-items-item-shadowbg-register-start">{{'TOUR_LIST__REG_IS_OPEN_SMALL' | translate}}</p>
+                                    <p ng-if="::(row.status === 'PRE_REG')" class="tourList-items-item-shadowbg-register-date">{{'TOUR_LIST__REG_IS_OPEN_BIG'|translate}}</p>
+
+                                    <p ng-if="::(row.status === 'POST_REG')" class="tourList-items-item-shadowbg-register-start">{{'TOUR_LIST__POST_REG_IS_OPEN_SMALL' | translate}}</p>
+                                    <p ng-if="::(row.status === 'POST_REG')" class="tourList-items-item-shadowbg-register-date">{{'TOUR_LIST__POST_REG_IS_OPEN_BIG'|translate}}</p>
+
+                                    <p ng-if="::(row.status === 'START')" class="tourList-items-item-shadowbg-register-start">{{'TOUR_LIST__START_IS_OPEN_SMALL' | translate}}</p>
+                                    <p ng-if="::(row.status === 'START')" class="tourList-items-item-shadowbg-register-date">{{'TOUR_LIST__START_IS_OPEN_BIG' | translate}}</p>
+
+                                    <p ng-if="::(row.status === 'FINISH')" class="tourList-items-item-shadowbg-register-start">{{'TOURNAMENT__STATUS_FINISH_HEADER' | translate}}</p>
+                                    <p ng-if="::(row.status === 'FINISH')" class="tourList-items-item-shadowbg-register-date">{{'TOURNAMENT__STATUS_FINISH' | translate}}</p>
+
+                                    <p class="tourList-items-item-shadowbg-register-part">{{'MATCH__MEMBER_LIST' | translate}}: {{::row.activeMembers}}</p>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="tournament-banner row">
+                    <a href="http://satellites.gamestars.gg/" target="_blank" track-event-by-click track-category="click" track-action="tournaments2satellite">
+                        <img src="/src/img/lol/tourBanner.jpg">
+                    </a>
+                </div>
+                <div class="tourList-table row">
+                    <table class="tour-list">
+                        <thead>
+                            <tr>
+                                <th >
+                                    {{'MAIN__SERVER' | translate}}
+                                </th>
+                                <th >
+                                    {{'MAIN__NAME' | translate}}
+                                </th>
+                                <th class="left-air">
+                                    {{'MAIN__DATE' | translate}}
+                                </th>
+                                <th class="left-air">
+                                    {{'MAIN__PRIZE_FUND' | translate}}
+                                </th>
+                                <th>
+                                    {{'MAIN__STATUS' | translate}}
+                                </th>
+                                <th>
+                                    {{'MAIN__PARTICIPANTS' | translate}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <tr class="b-tournament-list_tr"
+                                ng-repeat="row in vm.tournaments | filter:{tournamentClass:vm.globalFilter.class} | filter:vm.filterByServer | orderBy:'-endDate' | limitTo:100 track by row.id"
+                                ng-click="vm.onRowClick(row.id)">
+                                <td>
+                                    {{::row.gameRegion.regionId}}
+                                </td>
+                                <td>
+                                    {{::row.name}}
+                                </td>
+                                <td ng-if="::(row.tournamentClass !== 'SIT_AND_GO')">
+                                    {{::row.startDate | date:'dd.MM HH:mm'}} - {{::row.endDate | date:'dd.MM HH:mm'}}
+                                </td>
+                                <td ng-if="::(row.tournamentClass === 'SIT_AND_GO')"
+                                    translate="TOURNAMENT__START_N_REGISTERED"
+                                    translate-value-count="{{::row.tournamentSettings.startMemberCount}}">
+                                <td style="text-align: center!important;">
+                                    {{::row.awardFund | currencyUnit:row.awardType:true}}
+                                </td>
+                                <td>
+                                    <span ng-if="::(row.status !== 'INACTIVE')">{{row.status | matchStatus | translate}}</span>
+                                    <span ng-if="::(row.status === 'INACTIVE')">{{'TOUR_LIST__REG_START_ON' | translate}} {{::row.regStartDate | date:'dd.MM HH:mm'}}</span>
+                                </td>
+                                <td>
+                                    <span ng-show="::(row.status !== 'INACTIVE')">
+                                        {{::(row.members || '-')}}
+                                    </span>
+                                    <span ng-show="::(row.status === 'INACTIVE')">
+                                        --
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Middle -->

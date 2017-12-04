@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h3 class="modal-title" ng-bind="'MODAL_CONFIRM_HEADER'|translate"></h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<div class="modal-body modalPayment ConfirmMyBetOrBan">
+    <div>
+        <div class="accept-modal-body-content-question">
+            <p ng-bind-html="'MODAL_CONFIRM_BET_TEXT1'|translate"></p>
+        </div>
+        <div class="checkbox-confirm-and-remember ta-center checkbox">
+            <label>
+                <input type="checkbox" ng-model="modal.checkboxRememberAcceptBet"> {{'MODAL_CONFIRM_BET_CHECKBOX' | translate}}
+            </label>
+        </div>
+        <div class="confirm-and-remember-button ta-center">
+            <button ng-click="modal.AcceptBet()" class="btn-red" ng-bind="'MODAL_CONFIRM_BET_BUTTON'|translate"></button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,448 @@
+.cashGames {
+  width: 1100px;
+  margin: 0 auto;
+  background: none;
+  padding-top: 21px;
+
+  .controlPanel {
+    position: relative;
+    .regionSelector {
+      background: #291e1c;
+      border: 1px solid #493636;
+      border-radius: 5px;
+      padding: 6px;
+      margin-bottom: 20px;
+
+      .inner {
+        background: #291b19;
+        border: 4px solid #16110e;
+        outline: 1px solid #493636;
+        ul {
+          margin: 0;
+          padding: 0;
+          li {
+            padding: 0 31px;
+            list-style: none;
+            display: inline;
+            button {
+              font: 14px/14px @font-main;
+              background: none;
+              border: none;
+              color: #9f8e69;
+              text-transform: uppercase;
+              margin: 0;
+              padding: 6px;
+              &:hover, &:focus {
+                border: 0;
+                outline: 0;
+              }
+            }
+          }
+          .active {
+            border: 0;
+            outline: 0;
+            button {
+              color: #f2d9a2;
+              font-weight: bold;
+              &:hover, &:focus {
+                border: 0;
+                outline: 0;
+              }
+            }
+          }
+        }
+      }
+
+    }
+    .gameSelector {
+      margin-bottom: 20px;
+
+      .buttons-selector {
+        float: left;
+        width: 20%;
+        height: 132px;
+        background: none;
+        display: block;
+        .selector {
+          width: 100%;
+          text-align: left;
+          button {
+            width: 96%;
+            transition: 0s;
+            height: 66px;
+            margin: 5px auto;
+            background: linear-gradient(to top, #16110f 0%, #2b1e19 100%);
+            border-radius: 5px;
+            border: 2px solid #463334;
+            font: 20px/20px @font-main-bold;
+            color: #ffd880;
+            &:hover, &:focus {
+              outline: 0;
+            }
+          }
+          button[disabled] {
+            color: #999;
+          }
+          .active {
+            border: 2px solid #f2d9a2;
+            background: url('/src/img/lol/cashGames-selector-bg.png') #201510 no-repeat;
+            outline: 0;
+          }
+          .nonmargin {
+            margin: 0 0 5px 0;
+          }
+        }
+      }
+      .typebox {
+        float: left;
+        width: 80%;
+        height: 142px;
+        background: #201510;
+        border: 2px solid #493636;
+        border-radius: 5px;
+        .part {
+          float: left;
+          width: 50%;
+          text-align: center;
+          h3 {
+            font: 20px/20px @font-main-bold;
+            color: #ffd880;
+            margin: 10px 0;
+          }
+          .selector {
+            width: 95%;
+            margin: 0 auto;
+            border: 2px solid #463334;
+            border-radius: 5px;
+            padding: 0 5px;
+            background: #16110e;
+            ul {
+              padding: 3px 0;
+              margin: 0;
+              li {
+                list-style: none;
+                .btnSelector {
+                  width: 100%;
+                  background: transparent;
+                  border: 0;
+                  border-radius: 5px;
+                  outline: 0;
+                  font: 16px/16px @font-main;
+                  color: #ffd880;
+                  text-transform: uppercase;
+                }
+                .active {
+                  background: linear-gradient(to right, #2c1d1a 0%, #492923 100%);
+                }
+              }
+            }
+          }
+        }
+        .betType {
+          button {
+            height: 40px;
+          }
+        }
+        .bet {
+          .selector {
+            button {
+              height: 27px;
+            }
+          }
+        }
+        .queue {
+          .selector {
+            button {
+              height: 27px;
+            }
+          }
+        }
+      }
+    }
+    .disabler {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+
+  .opacityZeroVife {
+    opacity: 0.5
+  }
+
+  .preConfig {
+    margin: 0 0 10px 0;
+    .item {
+      width: 20%;
+      float: left;
+      .itemData {
+        width: 170px;
+        margin: 10px auto;
+        border: 2px solid #2a2e38;
+        border-radius: 5px;
+        color: #fff;
+        text-transform: uppercase;
+        cursor: pointer;
+        .title {
+          font: 12px/12px @font-semi;
+          background: #16181c;
+          border-bottom: 2px solid #3e4146;
+          padding: 7px 15px;
+          height: 26px;
+        }
+        .itemBody {
+          font: 16px/16px @font-semi;
+          font-weight: bold;
+          padding: 10px 15px;
+          text-align: center;
+          background: linear-gradient(to top, #17181c 0%, #26282e 100%);
+        }
+        &:hover {
+          border: 2px solid #7a644d;
+          .title {
+            border-bottom: 2px solid #7a644d;
+          }
+
+        }
+      }
+    }
+  }
+
+  &-intro {
+    color: #fff;
+    font-family: BeaufortforLOL;
+    margin-bottom: 15px;
+
+    &__left {
+      width: 700px;
+      float: left;
+      margin-left: 30px;
+      margin-top: 30px;
+
+      h1 {
+        font-family: BeaufortforLOL-Bold;
+        font-weight: 900;
+        font-size: 52px;
+        margin: 0 0 30px 0;
+        text-transform: uppercase;
+      }
+
+      p {
+        font-size: 16px;
+        margin-bottom: 30px;
+      }
+
+      ul {
+        padding-left: 20px;
+      }
+    }
+
+    &__right {
+      float: right;
+      position: relative;
+
+      & > .banner-bg {
+        background: url("/src/img/lol/vote-banner.jpg") no-repeat;
+        width: 333px;
+        height: 270px;
+        cursor: pointer;
+
+        &:hover {
+          & > .banner-bg-shadow {
+            background: rgba(0,0,0,0);
+          }
+        }
+
+        & > .banner-bg-shadow {
+          background: rgba(0,0,0,.2);
+          width: 100%;
+          height: 100%;
+          transition: .5s;
+        }
+
+        .banner-title{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          text-align: center;
+          font-family: BeaufortforLOL-Bold;
+          text-transform: uppercase;
+          padding-top: 48px;
+
+          .banner-title-stripe{
+            background-color: rgba(0, 0, 0, .8);
+            padding: 20px 0;
+            margin-bottom: 17px;
+
+            p{
+              font-size: 18px;
+              line-height: 18px;
+              margin-bottom: 4px;
+            }
+
+            h2{
+              margin: 0;
+              font-size: 28px;
+              line-height: 29px;
+            }
+          }
+
+          .title-top {
+            margin-bottom: 32px;
+            font-size: 18px;
+            line-height: 18px;
+          }
+
+          .title-bottom {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .banner-bottom-text{
+        margin-top: 20px;
+        color: #7a7a7a;
+        text-align: center;
+
+        a{
+          color: #7a7a7a;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .time-notification{
+    text-align: center;
+    margin-bottom: 15px;
+    color: #dec794;
+    text-transform: uppercase;
+    font: 14px/14px @font-main;
+  }
+
+  .row-server-buttons{
+    padding: 0 100px;
+
+    .col-server-buttons{
+      padding: 0;
+
+      .counter-search {
+        margin-bottom: 20px;
+        text-align: center;
+
+        h2 {
+          margin: 10px 0 10px 0;
+          color: #f9cb65;
+          text-transform: uppercase;
+          font: 50px/50px @font-main;
+          font-weight: bold;
+        }
+
+        h3 {
+          margin: 0 0 10px 0;
+          color: #dec794;
+          text-transform: uppercase;
+          font: 16px/16px @font-main;
+        }
+
+        h4 {
+          margin: 0 0 5px 0;
+          color: #dec794;
+          text-transform: uppercase;
+          font: 14px/14px @font-main;
+        }
+      }
+
+      .game-button {
+        padding: 20px 40px;
+      }
+    }
+  }
+}
+
+.b-tour-chatarea-chat {
+  background: #1f1f29;
+  .b-tour-chatarea-chat-area {
+    width: 100%;
+    max-height: 137px;
+    height: 137px;
+    display: block;
+    overflow-y: scroll;
+    background: rgb(48, 49, 57);
+    background: -webkit-linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+    background: -o-linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+    background: -ms-linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+    background: linear-gradient(0deg, rgb(21, 21, 30) 0%, rgb(12, 12, 20) 100%);
+    .b-tour-chatarea-chat-area-msg {
+      width: 100%;
+      min-height: 12px;
+      padding: 1px 10px 1px 10px;
+      line-height: 1;
+      a {
+        font: 14px/14px @font-main-bold;
+        color: #fcde9d;
+      }
+      span {
+        color: #fff;
+      }
+      .myMsg {
+        color: #34F3ED;
+      }
+    }
+  }
+  .b-tour-chatarea-chat-chat-submit {
+    width: 100%;
+    height: 53px;
+    border: 0px;
+    background: #151620;
+    padding: 9px 0 0 10px;
+    border-top: 1px solid #262730;
+    input {
+      width: 990px;
+      border: 2px solid #23252c;
+      border-radius: 5px;
+      color: #5b5b5b;
+      padding: 4px 9px;
+      font-size: 16px;
+      &:focus {
+        outline: 0;
+        border: 2px solid #23252c;
+      }
+    }
+    button {
+
+      margin-left: 11px;
+    }
+  }
+}
+
+.cashgame-banner {
+  margin: 0;
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  img {
+    opacity: 0.8;
+    max-width: 100%;
+    transition: 0.5s;
+  }
+  a {
+    &:hover {
+      img {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05);
+      }
+    }
+    &:focus {
+      outline: 0;
+      border: 0;
+    }
+  }
+
+}

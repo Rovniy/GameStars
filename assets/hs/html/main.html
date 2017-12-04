@@ -1,0 +1,332 @@
+    <!-- start Middle-->
+    <div class="p-main" id="middle" ng-controller="AlertTempText">
+        <div class="b-main-nav b-grid-col">
+            <div class="b-section">
+                <div class="b-grid-col_x2 b-grid-col_y2">
+                    <div ng-controller="mainPageSlider">
+                        <uib-carousel interval="myInterval" template-url="src/html/tpl/carousele.html">
+                            <uib-slide ng-repeat="slide in slides" active="slide.active" index="slide.id">
+                               <a href="{{slide.link}}">
+                                   <img ng-src="{{slide.image}}" style="margin:auto; width:100%; height:100%">
+                                   <div class="b-main-nav_item_text">
+                                       <div class="b-main-nav_item_title">
+                                           {{slide.header}}
+                                       </div>
+                                       <div class="b-main-nav_item_subtitle">
+                                           {{slide.text}}
+                                       </div>
+                                   </div>
+                               </a>
+                            </uib-slide>
+
+                        </uib-carousel>
+                    </div>
+                </div>
+
+                <div ng-hide="userProfie">
+                    <div ng-controller='ModalTemp'>
+                        <div class="b-main-nav_item b-grid-col_x1 b-grid-col_y1" style="background-image: url(/src/img/hs/main-nav_pic07.jpg)" ng-if="!userProfie.options.isGameAccountLinked" ng-click="modal('md', 'signup.html')">
+                            <div class="b-main-nav_item_text">
+                                <div class="b-main-nav_item_title">
+                                    {{'MAIN__GO_REG'|i18n}}
+                                </div>
+                                <div class="b-main-nav_item_subtitle">
+                                    {{'MAIN__GO_REG_TEXT'|i18n}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="userProfie">
+                <div ng-controller='ModalTemp'>
+                    <div class="b-main-nav_item b-grid-col_x1 b-grid-col_y1" style="background-image: url(/src/img/hs/main-nav_pic02.jpg)" ng-if="!userProfie.options.isGameAccountLinked" ng-click="modal('md', 'connect-account.html')">
+                        <div class="b-main-nav_item_text">
+                            <div class="b-main-nav_item_title">
+                                {{'MAIN__ADD_LOL_SENTENCE'|i18n}}
+                            </div>
+                            <div class="b-main-nav_item_subtitle">
+                                {{'MAIN__DOWNLOAD_CLIENT_NOTICE'|i18n}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href='#/starclient' class="b-main-nav_item b-grid-col_x1 b-grid-col_y1" style="background-image: url(/src/img/hs/main-nav_pic04.jpg)" ng-if="userProfie.options.isGameAccountLinked">
+                    <div class="b-main-nav_item_text">
+                        <div class="b-main-nav_item_title">
+                            {{'MAIN__DOWNLOAD_CLIENT_SENTENCE'|i18n}}
+                        </div>
+                        <div class="b-main-nav_item_subtitle">
+                            {{'MAIN__DOWNLOAD_CLIENT_NOTICE'|i18n}}
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div ng-controller='ModalTemp' class="b-main-invite-friend-div">
+                    <a ng-if="!userProfie" href="javascript:void(0)" ng-click="modal('md', 'signup.html')" class="b-main-nav_item b-grid-col_x1 b-grid-col_y1" style="background-image: url(/src/img/hs/main-nav_pic03.jpg)">
+                        <div class="b-main-nav_item_text">
+                            <div class="b-main-nav_item_title">
+                                {{'MAIN__INVITE_FRIEND_SENTENCE'|i18n}}
+                            </div>
+                            <div class="b-main-nav_item_subtitle">
+                                {{'MAIN__INVITE_FRIEND_NOTICE'|i18n}}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <a ng-if="userProfie" href="#/referal" class="b-main-nav_item b-grid-col_x1 b-grid-col_y1" style="background-image: url(/src/img/hs/main-nav_pic03.jpg)">
+                    <div class="b-main-nav_item_text">
+                        <div class="b-main-nav_item_title">
+                            {{'MAIN__INVITE_FRIEND_SENTENCE'|i18n}}
+                        </div>
+                        <div class="b-main-nav_item_subtitle">
+                            {{'MAIN__INVITE_FRIEND_NOTICE'|i18n}}
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="b-main-block">
+            <div class="b-main_hide-section" >
+                {{'PUBLIC__TOURNAMENTS_TITLE'|i18n}}
+            </div>
+            <div class="b-section">
+                <div class="b-main_tournament-list">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th width="90px">
+                            </th>
+                            <th width="220px">
+                                {{'MAIN__DATE'|i18n}}
+                                <!--Дата проведения-->
+                            </th>
+                            <th width="250px">
+                                {{'MAIN__PRIZE_FUND'|i18n}}
+                            </th>
+                            <th>
+                                {{'MAIN__STATUS'|i18n}}
+                                <!--Статус-->
+                            </th>
+                            <th width="70px">
+
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="b-tournament-list_tr" onClick="window.location.href = '#/tournament/hs/1'" style="cursor: pointer;">
+                            <td>
+                                <img src="/src/img/base/game-icon/hearthstone.png" />
+                            </td>
+                            <td>
+                                29.12.15-10.01.16
+                            </td>
+                            <td>
+                                $2016
+                            </td>
+                            <td>
+                                {{'MAIN__TOURNAMENT_FINISHED'|i18n}}
+                            </td>
+                            <td>
+                                            <span class="b-main_tournament-list_add">
+
+                                            </span>
+                            </td>
+                        </tr>
+                        <tr class="b-tournament-list_tr" onClick="window.location.href = '#/tournament/hs/2'" style="cursor: pointer;">
+                            <td>
+                                <img src="/src/img/base/game-icon/hearthstone.png"/>
+                            </td>
+                            <td>
+                                13.02.16-14.02.16
+                            </td>
+                            <td>
+                                $200
+                            </td>
+                            <td>
+                                {{'MAIN__REG_START'|i18n}} 11.02.16
+                            </td>
+                            <td>
+                                            <span class="b-main_tournament-list_add">
+
+                                            </span>
+                            </td>
+                        </tr>
+                        <tr class="b-tournament-list_tr" onClick="window.location.href = '#/tournamentTimeBomb'" style="cursor: pointer;">
+                            <td>
+                                <img src="/src/img/base/game-icon/hearthstone.png"/>
+                            </td>
+                            <td>
+                                15.02.16-21.02.16
+                            </td>
+                            <td>
+                                $500
+                            </td>
+                            <td>
+                                {{'MAIN__REG_START'|i18n}} 11.02.16
+                            </td>
+                            <td>
+                                            <span class="b-main_tournament-list_add">
+
+                                            </span>
+                            </td>
+                        </tr>
+                        <tr class="b-tournament-list_tr">
+                            <td>
+                                <img src="/src/img/base/game-icon/hearthstone.png"/>
+                            </td>
+                            <td>
+                                05.03.16-07.03.16
+                            </td>
+                            <td>
+                                $400
+                            </td>
+                            <td>
+                                {{'MAIN__REG_START'|i18n}} 25.02.16
+                            </td>
+                            <td>
+                                            <span class="b-main_tournament-list_add">
+
+                                            </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="b-main_hide-section" >
+                {{'PUBLIC__NEWS_TITLE'|i18n}}
+            </div>
+            <div class="b-section-news-block">
+                <img class="b-main_hide-section-vorgen" src="/src/img/hs/news-vorgen.png"/>
+                <img class="b-main_hide-section-troll" src="/src/img/hs/news-troll.png"/>
+                <div class="b-section-news">
+                    <div class="b-section-news-data">
+                        <ul>
+                            <li>
+                                <div class="b-section-news-data-item">
+                                    <div class="image">
+                                        <img src="/src/img/news/hs-27-01-2016.jpg"/>
+                                    </div>
+                                    <div class="title">
+                                        <h3>
+                                            Заголовок
+                                        </h3>
+                                    </div>
+                                    <div class="text">
+                                        <span>Начался двадцать второй рейтинговый сезон Hearthstone — и в нем, как водится, можно заработать новую рубашку для карт...</span>
+                                    </div>
+                                    <div class="meta">
+                                        <div class="meta-detail">
+                                            <ul>
+                                                <li><i class="fa fa-commenting-o"></i></li>
+                                                <li><span>17</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="meta-detail">
+                                            <ul>
+                                                <li><i class="fa fa-eye"></i></li>
+                                                <li><span>2016</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="meta-detail">
+                                            <ul>
+                                                <li><i class="fa fa-heart"></i></li>
+                                                <li><span>20</span></li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="b-section-news-data-item">
+                                    <div class="image">
+                                        <img src="/src/img/news/hs-27-01-2016.jpg"/>
+                                    </div>
+                                    <div class="title">
+                                        <h3>
+                                            Заголовок
+                                        </h3>
+                                    </div>
+                                    <div class="text">
+                                        <span>Начался двадцать второй рейтинговый сезон Hearthstone — и в нем, как водится, можно заработать новую рубашку для карт...</span>
+                                    </div>
+                                    <div class="meta">
+                                        <div class="meta-detail">
+                                            <ul>
+                                                <li><i class="fa fa-commenting-o"></i></li>
+                                                <li><span>17</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="meta-detail">
+                                            <ul>
+                                                <li><i class="fa fa-eye"></i></li>
+                                                <li><span>2016</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="meta-detail">
+                                            <ul>
+                                                <li><i class="fa fa-heart"></i></li>
+                                                <li><span>20</span></li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="b-section-news-data-item">
+                                    <div class="image">
+                                        <img src="/src/img/news/hs-27-01-2016.jpg"/>
+                                    </div>
+                                    <div class="title">
+                                        <h3>
+                                            Заголовок
+                                        </h3>
+                                    </div>
+                                    <div class="text">
+                                        <span>Начался двадцать второй рейтинговый сезон Hearthstone — и в нем, как водится, можно заработать новую рубашку для карт...</span>
+                                    </div>
+                                    <div class="meta">
+                                        <div class="meta-detail">
+                                            <ul>
+                                                <li><i class="fa fa-commenting-o"></i></li>
+                                                <li><span>17</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="meta-detail">
+                                            <ul>
+                                                <li><i class="fa fa-eye"></i></li>
+                                                <li><span>2016</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="meta-detail">
+                                            <ul>
+                                                <li><i class="fa fa-heart"></i></li>
+                                                <li><span>20</span></li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+
+
+
+                        </ul>
+                    </div>
+                    <div class="b-section-news-button">
+                        <a href="{{config.newsUrl}}" class="b-section-news-button-btn">{{'MAIN__ALL_NEWS'|i18n}}</a>
+
+                    </div>
+                </div>
+            </div>
+            <!--<div class="b-main_hide-section" tooltip-placement="top" uib-tooltip={{'PUBLIC__BEGIN_WAY_TOOLTIP'|i18n}}>
+                {{'PUBLIC__FORUM_TITLE'|i18n}}
+            </div>
+            <div class="b-main_hide-section" tooltip-placement="top" uib-tooltip={{'PUBLIC__BEGIN_WAY_TOOLTIP'|i18n}}>
+                {{'PUBLIC__STREAMERS_TITLE'|i18n}}
+            </div>-->
+        </div>
+    </div>
+    <!-- end Middle -->

@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'PAYMENT__DEPOSITING' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<div ng-controller="PaymentsModalController" class="modal-body modalPayment">
+    <div ng-hide="payVisa">
+        <h3>{{'PAYMENT__CHOOSE_SUM:' | translate}}</h3>
+        <div class="row currency">
+            <div class="item">
+                <button class="btn" ng-model="radioXZ" ng-click="dollars=radioXZ" uib-btn-radio="200"><span>$2</span></button>
+            </div>
+            <div class="item">
+                <button class="btn" ng-model="radioXZ" ng-click="dollars=radioXZ" uib-btn-radio="500"><span>$5</span></button>
+            </div>
+            <div class="item">
+                <button class="btn" ng-model="radioXZ" ng-click="dollars=radioXZ" uib-btn-radio="1000"><span>$10</span></button>
+            </div>
+        </div>
+        <div ng-show="radioXZ == 200" class="row bulletpoints" track-event-by-click track-category="billing" track-action="deposit_popup_bonus_deselected">
+            <input type="radio" ng-model="dollars" value="200">{{'PAYMENT__CONTINUE_WITH_ORIGINAL' | translate}}<Br>
+            <input type="radio" ng-model="dollars" value="500">{{'PAYMENT__ADD_5' | translate}}<Br>
+            <input type="radio" ng-model="dollars" value="1000">{{'PAYMENT__ADD_10' | translate}}<Br>
+        </div>
+        <div ng-show="radioXZ == 500" class="row bulletpoints" track-event-by-click track-category="billing" track-action="deposit_popup_bonus_selected2">
+            <input type="radio" ng-model="dollars" value="500">{{'PAYMENT__CONTINUE_WITH_5' | translate}}<Br>
+            <input type="radio" ng-model="dollars" value="1000">{{'PAYMENT__ADD_10' | translate}}<Br>
+            <input type="radio" ng-model="dollars" value="1500">{{'PAYMENT__ADD_15' | translate}}<Br>
+        </div>
+        <div ng-show="radioXZ == 1000" class="row bulletpoints" track-event-by-click track-category="billing" track-action="deposit_popup_bonus_selected3">
+            <input type="radio" ng-model="dollars" value="1000">{{'PAYMENT__CONTINUE_WITH_10' | translate}}<Br>
+            <input type="radio" ng-model="dollars" value="1500">{{'PAYMENT__ADD_15' | translate}}<Br>
+            <input type="radio" ng-model="dollars" value="2000">{{'PAYMENT__ADD_20' | translate}}<Br>
+        </div>
+        <div ng-show="dollars" class="row allsum">
+            <h4>{{'PAYMENT__YOU_WILL_BE_CHARGED' | translate}} ${{dollars/100}}</h4>
+            <h3>{{'PAYMENT__TOTAL_DEPOSIT' | translate}} <strong>${{dollars == 200 ? dollars/100 : dollars/100*2}}</strong></h3>
+        </div>
+
+        <gs-payment providers="paypal, epg, psc" amount="dollars" purchase-type="REAL_POINTS" on-submit="goPayFromModal(provider)"></gs-payment>
+
+    </div>
+</div>

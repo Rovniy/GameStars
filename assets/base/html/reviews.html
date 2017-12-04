@@ -1,0 +1,21 @@
+<div id="middle">
+<!-- start Middle-->
+<div class="b-gross-brd">
+    <div class="b-gross-brd_cnt">
+        <div class="b-main-block_title">
+            {{'FOOTER__REVIEWS' | translate}}
+            <div class="hr-gold">
+            </div>
+        </div>
+        <div class="reviewsList">
+            <ul>
+                <li ng-repeat="row in ::vm.reviews">
+                    <h3>{{::row.name}} <small> | {{::row.rank}}</small></h3>
+                    <p>{{row.text | translate}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- end Middle -->
+</div>

@@ -1,0 +1,267 @@
+<div id="middle" class="index-page">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="block-1">
+                <span>Prize pool: <red>$ {{vm.statistics.pool}}</red></span>
+                <span>Players online: <red>{{vm.statistics.online}}</red></span>
+                <span>Winners last week:  <red>{{vm.statistics.winners}}</red></span>
+            </div>
+            <div class="block-2">
+                <div class="box-shadow"></div>
+                <div class="slider-container" id="caption-slide">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="/src/img/lol/index/slider/1.jpg" alt="">
+                            <a href smooth-scroll-to="cashgames" class="absoluteLink absoluteLink-1">Find out more</a>
+                            <button ng-click="vm.openSignupModal()">Register now</button>
+                        </div>
+                        <div class="slide">
+                            <img src="/src/img/lol/index/slider/2.jpg" alt="">
+                            <a href smooth-scroll-to="winrealmoney" class="absoluteLink absoluteLink-2">Find out more</a>
+                            <button ng-click="vm.openSignupModal()">Register now</button>
+                        </div>
+                        <div class="slide">
+                            <img src="/src/img/lol/index/slider/3.jpg" alt="">
+                            <a href smooth-scroll-to="anyskill" class="absoluteLink absoluteLink-3">Find out more</a>
+                            <button ng-click="vm.openSignupModal()">Register now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block-4">
+                <div class="left-col">
+                    <div class="banner">
+                        <h2>Enter promo-code here</h2>
+                        <h3>Do you have our secret cipher? Lucky you! Type it here and get your prize! Don’t forget to tell your friends about it.<br/>They deserve some GameStars prizes too!</h3>
+                        <div class="btn-and-input">
+                            <input ng-class="{'bad-code': vm.badCode}" ng-model="promoCode" type="text" placeholder="PROMO-CODE">
+                            <button ng-click="vm.checkPromoCode(promoCode)">Send code</button>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="vm.activity" class="right-col">
+                    <ul>
+                        <li ng-repeat="row in vm.activity | limitTo: 4 track by row.id">
+                            <div class="item">
+                                <div class="icon">
+                                    <i class="i-avatar avatar-{{row.avatarId}}"></i>
+                                </div>
+                                <div class="desc">
+                                    <span ng-if="row.userEventType == 'REGISTRATION_ON_PLATFORM'">{{row.username}} registers on GameStars</span>
+                                    <span ng-if="row.userEventType == 'JOIN_TOURNAMENT'">{{row.username}} joins a tournament</span>
+                                    <span ng-if="row.userEventType == 'DEPOSIT_MONEY'">{{row.username}} deposits {{(row.additional/100).toFixed(2)}} and receive bonus {{(row.additional/100).toFixed(2)}}</span>
+                                    <span ng-if="row.userEventType == 'APPLY_EFFECT'">{{row.username}} applies a buff</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div ng-show="!vm.activity" class="right-col spinBclokc">
+                    <i class="fa fa-spin fa-spinner fa-5x"></i>
+                </div>
+            </div>
+            <div class="block-5">
+                <div class="left-col">
+                    <div class="box">
+                        <h3>Your welcome bonus expires in:</h3>
+                        <div class="clock"></div>
+                        <div class="days">
+                            <div class="onethird">
+                                <span>Hours</span>
+                            </div>
+                            <div class="onethird">
+                                <span>Minutes</span>
+                            </div>
+                            <div class="onethird">
+                                <span>Seconds</span>
+                            </div>
+                        </div>
+                        <div class="bot">
+                            <h3>Use It For a Quick Victory!</h3>
+                            <button ng-disabled="vm.timerEnded" ng-class="{'disable': vm.timerEnded}" ng-click="vm.openSignupModal()">Get bonus</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-col">
+                    <h1>Cash games</h1>
+                    <h4>Quick matches for money with players of your rank</h4>
+                    <ul>
+                        <li>Perfect for 1-2 quick excellent games</li>
+                        <li>You can receive your prize immediatly after the victory</li>
+                        <li>Available 24/7 (most matches are at 5-9 p.m.)</li>
+                    </ul>
+                    <h5><a href smooth-scroll-to="cashgames">Find out more</a></h5>
+                    <div class="btn-area">
+                        <button ng-click="vm.openSignupModal()">Register now</button>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="vm.serversInfo" class="block-6">
+                <ul>
+                    <li ng-repeat="(key,row) in vm.serversInfo track by row.id" class="item" ng-class="{'item_last_call': row.tags.indexOf('last_call') > -1, 'item_vip': row.tags.indexOf('vip') > -1}">
+                        <div class="meta">
+                            <h3 ng-bind="row.name"></h3>
+                            <h4>{{::row.beginTime.hour}}:{{::row.beginTime.minute}} - {{::row.endTime.hour}}:{{::row.endTime.minute}} ({{::row.startDate | date:'dd.MM'}}-{{::row.endDate | date:'dd.MM'}})</h4>
+                        </div>
+                        <div class="prizepool">
+                            <h3 class="title">Prize pool:</h3>
+                            <h3 class="value">$ {{::(row.awardFund / 100).toFixed(2)}}</h3>
+                        </div>
+                        <div class="players">
+                            <h3 class="title">Players:</h3>
+                            <h3 class="value">{{::row.activeMembers}}</h3>
+                        </div>
+                        <div class="status">
+                            <span ng-if="row.tags.indexOf('last_call') > -1">Last call</span>
+                            <span ng-if="row.tags.indexOf('last_call') < 0" class="regopen">Registration open</span>
+                        </div>
+                        <div class="btn-area">
+                            <button ng-disabled="row.tags.indexOf('vip') > -1"  ng-click="vm.autoJoinInTournament(row)">
+                                <span ng-if="::(row.buyIns[0].value !== 0)">$ {{::(row.buyIns[0].value / 100).toFixed(2)}} buy-in</span>
+                                <span ng-if="::(row.buyIns[0].value == 0)">Free buy-in</span>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="block-7">
+                <div class="text">
+                    <h3><a href ng-click="vm.openSignupModal()">Register</a> to get full access to the Tournaments calendar</h3>
+                </div>
+                <div class="arrow">
+                    <img src="/src/img/lol/index/block-7-arrow.png"/>
+                </div>
+                <div class="line">
+                    <h3>Tips for a quick victory - below!</h3>
+                </div>
+            </div>
+            <div class="block-8">
+                <div class="left-col">
+                    <h2>ESPORTS Tournaments for <br/>non-professional players</h2>
+                    <p>GameStars – is your way to eSports! Here you can play in tournaments.
+                        For money! And here you can win. How? Many people think that only pro-gamers can win in tournaments. Hardcore pro-gamers with tough teams. GameStars tournaments are open for all non-professional players! Everyone has a fair chance to win on GameStars. Everyone will have a good team on GameStars. And everyone can make big money on GameStars.</p>
+                    <button id="cashgames" ng-click="vm.openSignupModal()">Register now</button>
+                </div>
+                <div class="right-col">
+                    <img src="/src/img/lol/index/block-8-graphic.png"/>
+                </div>
+            </div>
+            <div class="block-9">
+                <div class="left-col">
+                    <img src="/src/img/lol/index/block-9-img.jpg"/>
+                </div>
+                <div class="right-col">
+                    <h2>Win right now<br/>in a good company
+                    </h2>
+                    <p>Usual tournaments have tight schedules. GameStars tournaments don’t.
+                        You can play here any time you like. We have tournaments every day and Cash Games 24/7. You’ll be pleasantly surprised with our community.
+                        All our matches are for money. So our players are serious people who are interested in teamwork – not in trolling or flaming. And our investigation team is always vigilant – we punish toxic players quickly and effectively.<br/><br/>So – give it a try! You can win cash and make a name for yourself in eSports right now!</p>
+                    <button ng-click="vm.openSignupModal()">Register now</button>
+                </div>
+            </div>
+            <div class="block-10" id="winrealmoney">
+                <div class="left-col">
+                    <img src="/src/img/lol/index/block-10-logo.png"/>
+                </div>
+                <div class="right-col">
+                    <p>GameStars matchmaking is the unique tool for making all matches fair. It matches only players with equal rating and skill together.
+                        No team has an obvious advantage on GameStars. We takes all matches very seriously. GameStars is constantly monitoring them to ensure fair play in tournaments and cash games alike.</p>
+                </div>
+            </div>
+            <div class="block-11">
+                <div class="left-col">
+                    <img src="/src/img/lol/index/block-11-img.jpg"/>
+                </div>
+                <div class="right-col">
+                    <h2>How to make money<br/>on GameStars?</h2>
+                    <p>You can make money on GameStars in two ways.
+                        Do you like to win quick money in 1-2 games? Then check out our Cash Games! You can receive your winnings right after your victory. They are available all day long. It’s the ideal variant for evening relaxation.<br/>Do you like to win BIG money after A LOT of battles? Then try our tournaments. There are many players in each of them – so you’ll have many rivals and many good fights. Tournaments have truly HUGE prize pools. And – let’s admit it – it’s unbelievably pleasant to take the first place.</p>
+                    <button ng-click="vm.openSignupModal()">Register now</button>
+                </div>
+            </div>
+            <div class="block-12" id="anyskill">
+                <div class="title">
+                    <h2>Our winners</h2>
+                    <p>GameStars is the worldwide eSports tournament platform for non-professional gamers. People from all over the world are winning here. And more than 70% of them аге Bronze, Silver and Gold. So – everyone can win money here. Our matchmaking makes games fair and our rules make them free of trolls. Only your skill and your desire to win will matter.</p>
+                </div>
+                <div class="controls">
+                    <ul>
+                        <li ng-click="vm.chartIndex = 1" ng-class="{'active':vm.chartIndex == 1}">
+                            <span class="square"></span>
+                            <span class="text">By country</span>
+                        </li>
+                        <li ng-click="vm.chartIndex = 2" ng-class="{'active':vm.chartIndex == 2}">
+                            <span class="square"></span>
+                            <span class="text">By age</span>
+                        </li>
+                        <li ng-click="vm.chartIndex = 3" ng-class="{'active':vm.chartIndex == 3}">
+                            <span class="square"></span>
+                            <span class="text">By rating</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <div class="fon">
+                        <div class="left-col">
+                            <img ng-src="/src/img/lol/index/block-12-img-{{vm.chartIndex}}.png"/>
+                        </div>
+                        <div class="right-col">
+                            <div class="avatars">
+                                <div class="item">
+                                    <img src="/src/img/lol/index/avatars/1.jpg"/>
+                                </div>
+                                <div class="item">
+                                    <img src="/src/img/lol/index/avatars/2.jpg"/>
+                                </div>
+                                <div class="item">
+                                    <img src="/src/img/lol/index/avatars/3.jpg"/>
+                                </div>
+                                <div class="item">
+                                    <img src="/src/img/lol/index/avatars/4.jpg"/>
+                                </div>
+                                <div class="item">
+                                    <img src="/src/img/lol/index/avatars/5.jpg"/>
+                                </div>
+                                <div class="item">
+                                    <img src="/src/img/lol/index/avatars/6.jpg"/>
+                                </div>
+                                <div class="item">
+                                    <img src="/src/img/lol/index/avatars/7.jpg"/>
+                                </div>
+                                <div class="item">
+                                    <img src="/src/img/lol/index/avatars/8.jpg"/>
+                                </div>
+                                <div class="item">
+                                    <img src="/src/img/lol/index/avatars/9.jpg"/>
+                                </div>
+                                <div class="item">
+                                    <img src="/src/img/lol/index/avatars/10.jpg"/>
+                                </div>
+                            </div>
+                            <div class="ranks">
+                                <ul>
+                                    <li>Gold</li>
+                                    <li>Silver</li>
+                                    <li>Bronze</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block-13">
+                <h2>Help for our users</h2>
+                <p>If you have any questions about tournaments, accounts, money prizes, etc. – please, contact our Support.<br/>
+                    We know how important their help can be. No question will be left unanswered.
+                </p>
+                <p>GameStars Support works 24/7. Its mission is to help you anytime and in any case.<br/>
+                    Also you can find some answers yourself in our FAQ.
+                </p>
+<!--
+                <button ng-if="vm.getUserProfile()" data-elevio-module="articles" track-event-by-click track-category="mainv2" track-action="cta_footer_support">Contact support</button>
+-->
+                <a ng-if="!vm.getUserProfile()"  href="javascript:void($zopim.livechat.window.openPopout())" track-event-by-click track-category="mainv2" track-action="cta_footer_support">Contact support</a>
+            </div>
+        </div>
+    </div>
+</div>

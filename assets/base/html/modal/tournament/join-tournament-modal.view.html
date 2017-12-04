@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'TOURNAMENT__JOIN_MODAL_TITLE' | translate}}</h3>
+    <i class="genericon genericon-close modal-close" ng-click="$dismiss()"></i>
+</div>
+<div class="modal-body tournament-join-modal">
+    <h2 class="text-center">{{'TOURNAMENT__CHOOSE_BUY_IN' | translate}}</h2>
+    <div class="row form-group currency">
+        <div class="col-xs-6" ng-repeat="buyIn in ::modal.buyInList | orderBy:'-isDefault':true">
+            <div class="item">
+                <button class="btn btn-block" ng-model="modal.buyIn" uib-btn-radio="buyIn">{{::buyIn.value | currencyUnit:buyIn.currencyType}}</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-xs-12">
+            <span>{{modal.getCurrencyDescription() | translate}}</span>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <button class="btn-red"
+                ng-click="modal.submit()"
+                ng-disabled="!modal.buyIn"
+                translate="TOURNAMENT__APPLY_CURRENCY"
+                translate-value-amount="{{modal.getAmountLabel()}}">
+        </button>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+{
+  "data": [
+    [
+      {
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"You won! Good! You are a great hero indeed!",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": false,
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"You won! Good! You are a great hero indeed!",
+        "send1Active": true,
+        "send1Dis": true,
+        "send2Text":"A bloody killer! We like such people on Shadow Isles!",
+        "send2Active": true,
+        "send2Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero2Active": true,
+        "hero2Dis": true,
+        "send2Text":"A bloody killer! We like such people on Shadow Isles!",
+        "send2Active": true,
+        "send2Dis": true,
+        "hero1Active": true,
+        "hero1Dis": false,
+        "send1Text":"No, no. This hero fights for the light. Go ahead and win further on!",
+        "send1Active": true,
+        "send1Dis": false,
+
+        "duration": 4
+      },
+      {
+        "hero1Active": true,
+        "hero1Dis": true,
+        "send1Text":"No, no. This hero fights for the light. Go ahead and win further on!",
+        "send1Active": true,
+        "send1Dis": true,
+
+        "send2Text":"Hit the jackpot and play more!",
+        "send2Active": true,
+        "send2Dis": false,
+        "hero2Active": true,
+        "hero2Dis": false,
+
+        "duration": 1
+      },
+      {
+        "duration": 1,
+        "textArray": [
+          {
+            "text":"Thank you, champs! ",
+            "action": "close",
+            "id": "0"
+          }
+        ]
+      }
+
+    ]
+  ]
+}

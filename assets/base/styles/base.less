@@ -1,0 +1,266 @@
+html, body {
+  font-family: @font-main;
+  padding: 0!important;
+  margin: 0!important;
+  min-width: 1200px;
+  height: 100%;
+}
+
+body {
+  background-size: 100% auto;
+}
+
+#noty_topLeft_layout_container {
+  top:74px!important;
+}
+
+#wrap {
+  padding:74px 0 0 0;
+  min-height: 100%;
+}
+
+.zopim {
+  display: none;
+}
+
+.mleft100 {
+  margin-left: 100px;
+}
+
+.mtop10 {
+  margin-top: 10px !important;
+}
+
+.mainfont {
+  font: 14px/14px @font-semi;
+}
+
+.mtop0 {
+  margin-top: 0 !important;
+}
+
+*[disabled] {
+  cursor: not-allowed !important;
+  color: #999 !important;
+}
+
+// Colors
+.gray-color {
+  color: #818181;
+}
+
+.gold-color {
+  text-shadow: 1px 0 5px #000;
+  color: #f2cb78;
+}
+
+.gold-light-color {
+  color: #e2cfa4;
+}
+
+.color-green {
+  color: green;
+}
+
+.color-red {
+  color: red;
+}
+
+.bg-black {
+  background: #181515 !important;
+}
+
+.padding-null {
+  padding: 0 !important;
+}
+
+.b-top-alert {
+  color: #fff;
+  font: 14px @font-semi;
+  line-height: 40px;
+  text-align: center;
+
+  background: #c42c2b; /* Old browsers */
+  background: -moz-linear-gradient(top,  #c42c2b 0%, #b31a1c 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #c42c2b 0%,#b31a1c 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #c42c2b 0%,#b31a1c 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c42c2b', endColorstr='#b31a1c',GradientType=0 ); /* IE6-9 */
+
+  a {
+    color: #fff;
+    text-decoration: underline;
+    margin-left: 20px;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.loginError {
+  margin-top: 5px;
+  font: 14px/14px @font-semi;
+  color: red;
+}
+
+// Icons
+.icon-currency {
+  &:before {
+    content: '';
+    background: url('@{src-url}/img/@{dir}/icon-currency.png') no-repeat 50% 40%;
+    width: 21px;
+    height: 25px;
+    background-size: 100% auto;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+/*.icon-points{
+  &:before{
+    content: '';
+    background: url('@{src-url}/img/@{dir}/icon-points.png') no-repeat 50% 40%;
+    width: 20px; height: 20px;
+    background-size: 100% auto;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}*/
+/* ---- [ Main containers ] ----
+*/
+.rulesbg i {
+  display: block;
+  font-size: 11px;
+}
+
+.rulesbg img {
+  max-width: 100%;
+}
+
+// вертикальное центрирование
+.v-align {
+  display: flex;
+  align-items: center;
+}
+
+.ta-center {
+  text-align: center;
+}
+
+// контейнер ширины контенте
+.b-section {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+// верхний тёмный блок
+.b-top-substrate {
+  height: 349px;
+  background: rgba(0, 0, 0, 0.54);
+  border-bottom: 1px solid rgba(175, 174, 174, 0.31);
+}
+
+.b-top-substrate_cnt {
+  text-align: center;
+  margin: 0 auto;
+  top: 50%;
+  position: relative;
+  transform: translateY(-50%);
+  /*background: url(../img/art-pick01.png) no-repeat bottom left;*/
+  &__x44 {
+    width: 440px;
+  }
+  &__x80 {
+    width: 800px;
+  }
+}
+
+.b-gross-brd_cnt-content {
+  position: relative;
+  z-index: 2;
+  margin: 0 1px 0 2px;
+  padding: 2px 0 0 0;
+}
+
+/* ---- [ Elements ] ----
+*/
+
+// Заголовки [ s, m, x, xl ]
+.b-title-s {
+  font-family: @font-main-bold;
+  font-size: 28px;
+  line-height: 32px;
+  text-transform: uppercase;
+  .gold-color;
+}
+
+.b-title-m {
+  font-family: @font-main-bold;
+  font-size: 45px;
+  //line-height: 52px;
+  line-height: 62px; //todo: сделать нормальное отображение соглашения
+  text-transform: uppercase;
+  .gold-color;
+  &__mar-bott {
+    margin-bottom: 38px;
+  }
+}
+
+// стиль таблицы
+.b-table-type {
+  position: relative;
+  z-index: 2;
+  thead {
+    tr {
+      th {
+        font-weight: normal;
+        font-size: 20px;
+        text-align: center;
+        background: url('@{src-url}/img/@{dir}/table-taring-th.png') repeat-x;
+        height: 45px;
+        border-bottom: 1px solid #716b59;
+        border-top: 1px solid #716b59;
+        border-right: 2px solid rgba(198, 199, 199, 0.06);
+        vertical-align: middle;
+        padding: 0;
+        .gold-color;
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Заголовок с углами <  >
+.b-cornered-title {
+  background: url('@{src-url}/img/@{dir}/title-bg01.png');
+  width: 332px;
+  height: 48px;
+  text-align: center;
+  line-height: 48px;
+  margin: 0 auto 20px;
+  span {
+    font-family: @font-main-bold;
+    font-size: 38px;
+    text-transform: uppercase;
+    .gold-color;
+  }
+}
+
+.grey-bg {
+  background: #333 !important;
+}
+
+#middle {
+  float: left;
+  width: 100%;
+}

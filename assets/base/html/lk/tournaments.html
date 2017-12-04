@@ -1,0 +1,12 @@
+<div class="box-title">
+    <h3>{{'LK__MY_TOURNAMENTS' | translate}}</h3>
+</div>
+<div ng-controller="TournamentsPageController" class="box-content">
+
+    <gs-tournament-list ng-if="tournamentsData" tournaments="tournamentsData"></gs-tournament-list>
+
+    <div ng-if="!tournamentsData">
+        <h2 class="ta-center errorTournament">{{'LK__NOT_PARTICIPATED_IN_TAURNAMENT' | translate}}</h2>
+    </div>
+
+</div>
